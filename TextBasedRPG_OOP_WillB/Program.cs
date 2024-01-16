@@ -10,6 +10,15 @@ namespace TextBasedRPG_OOP_WillB
     {
         static void Main(string[] args)
         {
+            Player player = new Player();
+            Enemy enemy = new Enemy();
+
+            DisplayMap map = new DisplayMap();
+
+            while (true)
+            {
+
+            }
         }
     }
 }

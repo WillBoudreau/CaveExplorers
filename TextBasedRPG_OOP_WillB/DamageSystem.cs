@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    struct PlayerPOS
+    internal class DamageSystem
     {
-        public int x; 
-        public int y;
-    }
-    internal class Player
-    {
-
+        public DamageSystem() 
+        {
+            
+        }
     }
 }

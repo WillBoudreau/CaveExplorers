@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    struct PlayerPOS
+    struct EnemyPOS
     {
-        public int x; 
+        public int x;
         public int y;
     }
-    internal class Player
+    internal class Enemy
     {
-
+     
     }
 }

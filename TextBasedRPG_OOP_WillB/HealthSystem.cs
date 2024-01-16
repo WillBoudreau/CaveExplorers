@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    struct PlayerPOS
+    internal class HealthSystem
     {
-        public int x; 
-        public int y;
-    }
-    internal class Player
-    {
+        public int health = 100;
+        public HealthSystem(int health)
+        {
+            this.health = health;
 
+        }
     }
 }
