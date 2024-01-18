@@ -60,7 +60,6 @@ namespace TextBasedRPG_OOP_WillB
             {
                 map.MapChar[i] = map.Mapstr[i].ToCharArray();
             }
-
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    struct EnemyPOS
+    struct EnemyVals
     {
         public int x;
         public int y;
