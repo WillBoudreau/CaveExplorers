@@ -48,7 +48,15 @@ namespace TextBasedRPG_OOP_WillB
                     case 'w':
                         PlayerPOS(0, -1);
                         break;
-
+                    case 'a':
+                        PlayerPOS(-1, 0);
+                        break;
+                    case 's':
+                        PlayerPOS(0,1);
+                        break;
+                    case 'd':
+                        PlayerPOS(1, 0);
+                        break;
                 }
 
             }
@@ -60,6 +68,10 @@ namespace TextBasedRPG_OOP_WillB
             position.y += y;
             position.Playerturn = true;
 
+        }
+        static char IsTileValid(int x, int y)
+        {
+            return '1'; 
         }
     }
 }

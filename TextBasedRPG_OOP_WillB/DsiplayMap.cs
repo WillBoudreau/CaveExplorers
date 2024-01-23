@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,50 +17,46 @@ namespace TextBasedRPG_OOP_WillB
     }
     internal class DisplayMap
     {
-        Map map = new Map();
-        public DisplayMap() 
+        Map map;
+        
+        public DisplayMap(string path) 
         {
-            for(int i = 0; i < map.MapChar.Length; i++)
+            MapArray(path);
+        }
+        public void MapArray(string path) 
+        {
+            map.Mapstr = File.ReadAllLines(path);
+            int Mapx = map.Mapstr.Length;
+            int Mapy = map.Mapstr[0].Length;
+            map.MapChar = new char[Mapy][];
+            for (int i = 0; i < Mapy; i++) 
             {
-                for(int k = 0; k < map.MapChar[i].Length; k++)
+                map.MapChar[i] = map.Mapstr[i].ToCharArray();
+            }
+        }
+        public void ShowMap()
+        {
+            for(int i = 0; i < map.MapChar.Length; i++) 
+            {
+                for(int j = 0;j < map.MapChar[i].Length; j++)
                 {
-                    Console.SetCursorPosition(k, i);
-                    switch (map.MapChar[i][k])
+                    Console.SetCursorPosition(j, i);
+                    switch (map.MapChar[i][j])
                     {
                         case '#':
                             Console.BackgroundColor = ConsoleColor.Gray;
-                            Console.Write(map.MapChar[i][k]);
+                            Console.Write(map.MapChar[i][j]);
                             break;
                         case '+':
                             Console.BackgroundColor = ConsoleColor.Red;
-                            Console.Write(map.MapChar[i][k]);
+                            Console.WriteLine(map.MapChar[i][j]);
                             break;
                         case '.':
                             Console.BackgroundColor = ConsoleColor.DarkGreen;
-                            Console.Write(map.MapChar[i][k]);
-                            break;
-                        case '*':
-                            Console.BackgroundColor = ConsoleColor.Yellow;
-                            Console.Write(map.MapChar[i][k]);
+                            Console.Write(map.MapChar[i][j]);
                             break;
                     }
                 }
-            }
-        }
-    }
-    internal class MapArray
-    {
-        public MapArray()
-        {
-            Map map = new Map();
-            map.path = @"Map.txt";
-            map.Mapstr = File.ReadAllLines(map.path);
-            int MapY = map.Mapstr.Length;
-            int MapX = map.Mapstr[0].Length;
-            map.MapChar = new char[MapY][];
-            for(int i = 0; i < MapY; i++)
-            {
-                map.MapChar[i] = map.Mapstr[i].ToCharArray();
             }
         }
     }

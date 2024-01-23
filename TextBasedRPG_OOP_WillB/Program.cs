@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,13 +14,8 @@ namespace TextBasedRPG_OOP_WillB
         {
             Player player = new Player();
             Enemy enemy = new Enemy();
-
-            DisplayMap map = new DisplayMap();
-
-            while (true)
-            {
-
-            }
+            string path = @"Map.txt";
+            DisplayMap map = new DisplayMap(path);
         }
     }
 }
