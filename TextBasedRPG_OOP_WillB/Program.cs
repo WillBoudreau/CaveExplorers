@@ -12,13 +12,17 @@ namespace TextBasedRPG_OOP_WillB
     {
         static void Main(string[] args)
         {
-            Player player = new Player();
-            Enemy enemy = new Enemy();
-            string path = @"Map.txt";
-            DisplayMap map = new DisplayMap(path);
-            map.ShowMap();
-            player.DisplayPlayer();
-            Console.ReadKey();
+            while(true)
+            {
+                Player player = new Player();
+                Enemy enemy = new Enemy();
+                string path = @"Map.txt";
+                DisplayMap map = new DisplayMap(path);
+                map.ShowMap();
+                player.DisplayPlayer();
+                player.PlayerPOSMove();
+
+            }
         }
     }
 }
