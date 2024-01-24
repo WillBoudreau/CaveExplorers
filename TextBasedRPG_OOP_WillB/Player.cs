@@ -69,9 +69,10 @@ namespace TextBasedRPG_OOP_WillB
             position.Playerturn = true;
 
         }
-        static char IsTileValid(int x, int y)
+        public void DisplayPlayer()
         {
-            return '1'; 
+            Console.SetCursorPosition(1,1);
+            Console.Write('*');
         }
     }
 }

@@ -28,20 +28,18 @@ namespace TextBasedRPG_OOP_WillB
             map.Mapstr = File.ReadAllLines(path);
             int Mapx = map.Mapstr.Length;
             int Mapy = map.Mapstr[0].Length;
-            map.MapChar = new char[Mapy][];
-            for (int i = 0; i < Mapy; i++) 
+            map.MapChar = new char[Mapx][];
+            for (int i = 0; i < Mapx; i++) 
             {
-                Console.WriteLine(map.Mapstr.Length);
                 map.MapChar[i] = map.Mapstr[i].ToCharArray();
-                Console.WriteLine();
-                Console.WriteLine(i);
+                Console.WriteLine(map.Mapstr[i].ToCharArray());
             }
         }
         public void ShowMap()
         {
-            for(int i = 0; i < map.MapChar.Length; i++) 
+            for (int i = 0; i < map.MapChar.Length; i++)
             {
-                for(int j = 0;j < map.MapChar[i].Length; j++)
+                for (int j = 0; j < map.MapChar[i].Length; j++)
                 {
                     Console.SetCursorPosition(j, i);
                     switch (map.MapChar[i][j])

@@ -16,6 +16,9 @@ namespace TextBasedRPG_OOP_WillB
             Enemy enemy = new Enemy();
             string path = @"Map.txt";
             DisplayMap map = new DisplayMap(path);
+            map.ShowMap();
+            player.DisplayPlayer();
+            Console.ReadKey();
         }
     }
 }
