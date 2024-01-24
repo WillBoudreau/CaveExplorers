@@ -18,7 +18,7 @@ namespace TextBasedRPG_OOP_WillB
     internal class Player
     {
         PlayerVals player = new PlayerVals();
-        DamageSystem Combat = new DamageSystem();
+        DisplayMap map = new DisplayMap();
         public static char Input()
         {
             ConsoleKeyInfo key = Console.ReadKey(true);
@@ -68,11 +68,19 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void PlayerPOS(int x, int y)
         {
-            PlayerVals position = new PlayerVals();
-            position.x += x;
-            position.y += y;
-            position.Playerturn = true;
+            player.x += x;
+            player.y += y;
+            player.Playerturn = true;
+            switch(map.IsTileValid(player.x, player.y)) 
+            {
+                case '.':
+                break;
+                case '#':
+                    player.x -= x;
+                    player.y -= y;
+                    break;
 
+            }
         }
         public void DisplayPlayer()
         {

@@ -15,9 +15,10 @@ namespace TextBasedRPG_OOP_WillB
         public string[] Mapstr;
         public char[][] MapChar;
     }
-    internal class DisplayMap
+    internal class Displaymap
     {
         Map map;
+        Player player;
         
         public DisplayMap(string path) 
         {
@@ -59,6 +60,10 @@ namespace TextBasedRPG_OOP_WillB
                     }
                 }
             }
+        }
+        public char IsTileValid(int x, int y)
+        {
+            return map.MapChar[y][x];
         }
     }
 }
