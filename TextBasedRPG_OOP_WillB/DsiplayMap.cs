@@ -31,7 +31,10 @@ namespace TextBasedRPG_OOP_WillB
             map.MapChar = new char[Mapy][];
             for (int i = 0; i < Mapy; i++) 
             {
+                Console.WriteLine(map.Mapstr.Length);
                 map.MapChar[i] = map.Mapstr[i].ToCharArray();
+                Console.WriteLine();
+                Console.WriteLine(i);
             }
         }
         public void ShowMap()
