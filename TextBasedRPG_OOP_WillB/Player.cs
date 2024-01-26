@@ -18,7 +18,15 @@ namespace TextBasedRPG_OOP_WillB
     internal class Player
     {
         PlayerVals player = new PlayerVals();
-        DisplayMap map = new DisplayMap();
+        Map mapVals = new Map();
+        Displaymap map;
+        public Player(Displaymap map) 
+        {
+            this.map = map;
+            player.x = 3;
+            player.y = 3;
+            player.Playerturn = true;
+        }
         public static char Input()
         {
             ConsoleKeyInfo key = Console.ReadKey(true);
@@ -45,10 +53,9 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void PlayerPOSMove()
         {
-            PlayerVals pos = new PlayerVals();
-            if(pos.Playerturn == true)
+            if(player.Playerturn == true)
             {
-                switch (Player.Input())
+                switch (Input())
                 {
                     case 'w':
                         PlayerPOS(0, -1);
@@ -79,14 +86,14 @@ namespace TextBasedRPG_OOP_WillB
                     player.x -= x;
                     player.y -= y;
                     break;
+                case '+':
+                    break;
 
             }
         }
         public void DisplayPlayer()
-        {
-            player.StartX = 1;
-            player.StartY = 1;
-            Console.SetCursorPosition(player.StartX,player.StartY);
+        { 
+            Console.SetCursorPosition(player.x,player.y);
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.Write('$');

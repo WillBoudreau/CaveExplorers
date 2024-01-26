@@ -17,24 +17,19 @@ namespace TextBasedRPG_OOP_WillB
     }
     internal class Displaymap
     {
-        Map map;
-        Player player;
-        
-        public DisplayMap(string path) 
+        Map map = new Map();
+        public void MapArray() 
         {
-            MapArray(path);
-        }
-        public void MapArray(string path) 
-        {
-            map.Mapstr = File.ReadAllLines(path);
+            map.path = @"Map.txt";
+            map.Mapstr = File.ReadAllLines(map.path);
             int Mapx = map.Mapstr.Length;
             int Mapy = map.Mapstr[0].Length;
             map.MapChar = new char[Mapx][];
             for (int i = 0; i < Mapx; i++) 
             {
                 map.MapChar[i] = map.Mapstr[i].ToCharArray();
-                Console.WriteLine(map.Mapstr[i].ToCharArray());
             }
+            ShowMap();
         }
         public void ShowMap()
         {

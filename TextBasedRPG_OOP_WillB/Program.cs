@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace TextBasedRPG_OOP_WillB
 {
@@ -12,15 +13,15 @@ namespace TextBasedRPG_OOP_WillB
     {
         static void Main(string[] args)
         {
-            while(true)
+            Displaymap map = new Displaymap();
+            Player player = new Player(map);
+            PlayerVals playerVals = new PlayerVals();
+            while (true)
             {
-                Player player = new Player();
-                Enemy enemy = new Enemy();
-                string path = @"Map.txt";
-                DisplayMap map = new DisplayMap(path);
-                map.ShowMap();
+                map.MapArray();
                 player.DisplayPlayer();
                 player.PlayerPOSMove();
+                playerVals.Playerturn = true;
 
             }
         }
