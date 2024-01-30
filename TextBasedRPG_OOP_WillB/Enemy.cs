@@ -8,8 +8,6 @@ namespace TextBasedRPG_OOP_WillB
 {
     struct EnemyVals
     {
-        public int x;
-        public int y;
         public int StartX;
         public int StartY;
         public bool Enemyturn;
@@ -18,30 +16,33 @@ namespace TextBasedRPG_OOP_WillB
     {
         EnemyVals enemy = new EnemyVals();
         Map mapVals = new Map();
+        Entity entity = new Entity();
         Displaymap map;
+
         public Enemy(Displaymap map)
         {
             this.map = map;
-            enemy.x = 3;
-            enemy.y = 3;
+            entity.x = 15;
+            entity.y = 15;
             enemy.Enemyturn = true;
         }
-        public static char Input()
+        public static char EnemyInput()
         {
-            ConsoleKeyInfo key = Console.ReadKey(true);
-            if (key.KeyChar == 'w')
+            Random rnd = new Random();
+           int Move =  rnd.Next(1, 4);
+            if (Move == 1)
             {
                 return 'w';
             }
-            else if (key.KeyChar == 'a')
+            else if (Move == 2)
             {
                 return 'a';
             }
-            else if (key.KeyChar == 's')
+            else if (Move == 3)
             {
                 return 's';
             }
-            else if (key.KeyChar == 'd')
+            else if (Move == 4)
             {
                 return 'd';
             }
@@ -54,7 +55,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             if (enemy.Enemyturn == true)
             {
-                switch (Input())
+                switch (EnemyInput())
                 {
                     case 'w':
                         EnemyPOS(0, -1);
@@ -74,28 +75,28 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void EnemyPOS(int x, int y)
         {
-            enemy.x += x;
-            enemy.y += y;
+            entity.x += x;
+            entity.y += y;
             enemy.Enemyturn = true;
-            switch (map.IsTileValid(enemy.x, enemy.y))
+            switch (map.IsTileValid(entity.x, entity.y))
             {
                 case '.':
                     break;
                 case '#':
-                    enemy.x -= x;
-                    enemy.y -= y;
+                    entity.x -= x;
+                    entity.y -= y;
                     break;
                 case '+':
                     break;
 
             }
         }
-        public void DisplayPlayer()
+        public void DisplayEnemy()
         {
-            Console.SetCursorPosition(enemy.x, enemy.y);
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.BackgroundColor = ConsoleColor.Yellow;
-            Console.Write('$');
+            Console.SetCursorPosition(entity.x, entity.y);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.BackgroundColor = ConsoleColor.Gray;
+            Console.Write('E');
             Console.ResetColor();
         }
     }

@@ -20,7 +20,7 @@ namespace TextBasedRPG_OOP_WillB
             healthVals.enemyhp = health;
             healthVals.playerhp = health;
         }
-        public void GetHealth(int health)
+        public int GetHealth(int health)
         {
             return health;
         }

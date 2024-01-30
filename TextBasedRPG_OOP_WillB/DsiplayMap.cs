@@ -52,6 +52,10 @@ namespace TextBasedRPG_OOP_WillB
                             Console.BackgroundColor = ConsoleColor.DarkGreen;
                             Console.Write(map.MapChar[i][j]);
                             break;
+                        case 'H':
+                            Console.BackgroundColor = ConsoleColor.DarkGreen;
+                            Console.Write(map.MapChar[i][j]);
+                            break;
                     }
                 }
             }

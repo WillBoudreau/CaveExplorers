@@ -20,10 +20,10 @@ namespace TextBasedRPG_OOP_WillB
             {
                 if (player.Playerturn == true)
                 {
-                    if (player.x == enemy.x && player.y == enemy.y)
-                    {
-                        Console.WriteLine();
-                    }
+                    //if (player.x == enemy.x && player.y == enemy.y)
+                    //{
+                    //    Console.WriteLine();
+                    //}
                 }
 
             }

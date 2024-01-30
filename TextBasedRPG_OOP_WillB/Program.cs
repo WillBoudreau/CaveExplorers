@@ -16,13 +16,15 @@ namespace TextBasedRPG_OOP_WillB
             Displaymap map = new Displaymap();
             Player player = new Player(map);
             PlayerVals playerVals = new PlayerVals();
+            Enemy enemy = new Enemy(map);
             while (true)
             {
                 map.MapArray();
                 player.DisplayPlayer();
+                enemy.DisplayEnemy();
                 player.PlayerPOSMove();
+                enemy.EnemyPOSMove();
                 playerVals.Playerturn = true;
-                player.healthSys.GetHealth(100);
             }
         }
     }

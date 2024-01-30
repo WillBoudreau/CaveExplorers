@@ -49,6 +49,7 @@
     <Compile Include="Entity.cs" />
     <Compile Include="HealthSystem.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Position2D.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />

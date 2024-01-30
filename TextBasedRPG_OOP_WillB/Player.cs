@@ -9,22 +9,19 @@ namespace TextBasedRPG_OOP_WillB
 {
     struct PlayerVals
     {
-        public int x; 
-        public int y;
-        public int StartX;
-        public int StartY;
         public bool Playerturn;
     }
-    internal class Player
+    internal class Player:Entity
     {
         PlayerVals player = new PlayerVals();
         Map mapVals = new Map();
+        Entity entity = new Entity();
         Displaymap map;
         public Player(Displaymap map) 
         {
             this.map = map;
-            player.x = 3;
-            player.y = 3;
+            entity.x = 3;
+            entity.y = 3;
             player.Playerturn = true;
         }
         public static char Input()
@@ -75,16 +72,16 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void PlayerPOS(int x, int y)
         {
-            player.x += x;
-            player.y += y;
+            entity.x += x;
+            entity.y += y;
             player.Playerturn = true;
-            switch(map.IsTileValid(player.x, player.y)) 
+            switch(map.IsTileValid(entity.x, entity.y)) 
             {
                 case '.':
                 break;
                 case '#':
-                    player.x -= x;
-                    player.y -= y;
+                    entity.x -= x;
+                    entity.y -= y;
                     break;
                 case '+':
                     break;
@@ -93,7 +90,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void DisplayPlayer()
         { 
-            Console.SetCursorPosition(player.x,player.y);
+            Console.SetCursorPosition(entity.x,entity.y);
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.Write('$');
