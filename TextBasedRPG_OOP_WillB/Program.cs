@@ -22,7 +22,7 @@ namespace TextBasedRPG_OOP_WillB
                 player.DisplayPlayer();
                 player.PlayerPOSMove();
                 playerVals.Playerturn = true;
-
+                player.healthSys.GetHealth(100);
             }
         }
     }

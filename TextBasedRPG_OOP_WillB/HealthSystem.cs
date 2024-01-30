@@ -11,13 +11,26 @@ namespace TextBasedRPG_OOP_WillB
         public int enemyhp;
         public int playerhp;
     }
-    internal class HealthSystem
+    internal class HealthSys
     {
-        public int health = 100;
-        public HealthSystem(int health)
+        public int health = 5;
+        HealthVals healthVals = new HealthVals();
+        public void SetHealth()
         {
-            this.health = health;
+            healthVals.enemyhp = health;
+            healthVals.playerhp = health;
         }
-
+        public void GetHealth(int health)
+        {
+            return health;
+        }
+        public void Heal(int hp)
+        {
+            health += hp;
+        }
+        public void TakeDamage(int damage)
+        {
+            health -= damage;
+        }
     }
 }
