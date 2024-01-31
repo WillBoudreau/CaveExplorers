@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,11 @@ namespace TextBasedRPG_OOP_WillB
     {
         public int enemyhp;
         public int playerhp;
-        public int health = 5;
-        HealthVals healthVals = new HealthVals();
+        public int health;
+        public HealthSys()
+        {
+
+        }
         public void SetHealth()
         {
             enemyhp = health;
@@ -23,6 +27,7 @@ namespace TextBasedRPG_OOP_WillB
         public int GetHealth(int health)
         {
             this.health = health;
+            SetHealth();
             return health;
         }
         public void Heal(int hp)
@@ -30,7 +35,7 @@ namespace TextBasedRPG_OOP_WillB
             health += hp;
         }
         public void TakeDamage(int damage)
-        {
+        { 
             playerhp -= damage;
         }
     }

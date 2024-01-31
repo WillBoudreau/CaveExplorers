@@ -17,19 +17,29 @@ namespace TextBasedRPG_OOP_WillB
             Player player = new Player(map);
             PlayerVals playerVals = new PlayerVals();
             Enemy enemy = new Enemy(map);
-            Console.WriteLine("\n");
-            Console.WriteLine("\nPlayer Health | " + player.healthSys.GetHealth(3)+"\n");
+            player.healthSys.GetHealth(5);
             while (true)
             {
                 map.MapArray();
+                //Console.BackgroundColor = 
+                //Console.WriteLine("\nHello World");
                 player.DisplayPlayer();
                 enemy.DisplayEnemy();
                 player.PlayerPOSMove();
                 enemy.EnemyPOSMove();
-                playerVals.Playerturn = true;
-                Console.Clear();
+                if (playerVals.Playerturn == true)
+                {
+                    if (player.x == enemy.x && player.y == enemy.y)
+                    {
+                        player.healthSys.TakeDamage(1);
+                    }
+                }
                 Console.WriteLine(player.healthSys.playerhp);
-                Console.ReadKey();
+                //Console.ReadKey();
+                //Console.WriteLine(player.healthSys.playerhp);
+                //player.healthSys.TakeDamage(1);
+                //Console.WriteLine(player.healthSys.playerhp);
+                //Console.ReadKey();
             }
         }
 
