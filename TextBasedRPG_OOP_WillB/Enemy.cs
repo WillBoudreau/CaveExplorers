@@ -87,8 +87,13 @@ namespace TextBasedRPG_OOP_WillB
                     entity.y -= y;
                     break;
                 case '+':
+                    entity.x -= x;
+                    entity.y -= y;
                     break;
-
+                case '*':
+                    break;
+                case 'H':
+                    break;
             }
         }
         public void DisplayEnemy()

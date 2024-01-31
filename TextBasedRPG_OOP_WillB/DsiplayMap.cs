@@ -42,18 +42,27 @@ namespace TextBasedRPG_OOP_WillB
                     {
                         case '#':
                             Console.BackgroundColor = ConsoleColor.Gray;
+                            Console.ForegroundColor = ConsoleColor.Gray;
                             Console.Write(map.MapChar[i][j]);
                             break;
                         case '+':
                             Console.BackgroundColor = ConsoleColor.Red;
+                            Console.ForegroundColor = ConsoleColor.Black;
                             Console.WriteLine(map.MapChar[i][j]);
                             break;
                         case '.':
                             Console.BackgroundColor = ConsoleColor.DarkGreen;
+                            Console.ForegroundColor = ConsoleColor.DarkGreen;
                             Console.Write(map.MapChar[i][j]);
                             break;
                         case 'H':
                             Console.BackgroundColor = ConsoleColor.DarkGreen;
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write(map.MapChar[i][j]);
+                            break;
+                        case '*':
+                            Console.BackgroundColor = ConsoleColor.DarkYellow;
+                            Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.Write(map.MapChar[i][j]);
                             break;
                     }

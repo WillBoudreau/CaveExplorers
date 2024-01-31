@@ -16,6 +16,5 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Entity has spawned");
             healthSys = new HealthSys();
         }
-
     }
 }

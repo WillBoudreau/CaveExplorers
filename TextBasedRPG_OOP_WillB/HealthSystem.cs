@@ -8,20 +8,21 @@ namespace TextBasedRPG_OOP_WillB
 {
     struct HealthVals
     {
-        public int enemyhp;
-        public int playerhp;
     }
     internal class HealthSys
     {
+        public int enemyhp;
+        public int playerhp;
         public int health = 5;
         HealthVals healthVals = new HealthVals();
         public void SetHealth()
         {
-            healthVals.enemyhp = health;
-            healthVals.playerhp = health;
+            enemyhp = health;
+            playerhp = health;
         }
         public int GetHealth(int health)
         {
+            this.health = health;
             return health;
         }
         public void Heal(int hp)
@@ -30,7 +31,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void TakeDamage(int damage)
         {
-            health -= damage;
+            playerhp -= damage;
         }
     }
 }

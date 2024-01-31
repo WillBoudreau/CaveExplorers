@@ -17,6 +17,8 @@ namespace TextBasedRPG_OOP_WillB
             Player player = new Player(map);
             PlayerVals playerVals = new PlayerVals();
             Enemy enemy = new Enemy(map);
+            Console.WriteLine("\n");
+            Console.WriteLine("\nPlayer Health | " + player.healthSys.GetHealth(3)+"\n");
             while (true)
             {
                 map.MapArray();
@@ -25,7 +27,11 @@ namespace TextBasedRPG_OOP_WillB
                 player.PlayerPOSMove();
                 enemy.EnemyPOSMove();
                 playerVals.Playerturn = true;
+                Console.Clear();
+                Console.WriteLine(player.healthSys.playerhp);
+                Console.ReadKey();
             }
         }
+
     }
 }

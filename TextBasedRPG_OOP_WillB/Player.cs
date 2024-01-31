@@ -13,16 +13,16 @@ namespace TextBasedRPG_OOP_WillB
     }
     internal class Player:Entity
     {
-        PlayerVals player = new PlayerVals();
+        PlayerVals playerVals = new PlayerVals();
         Map mapVals = new Map();
-        Entity entity = new Entity();
+        Entity player = new Entity();
         Displaymap map;
         public Player(Displaymap map) 
         {
             this.map = map;
-            entity.x = 3;
-            entity.y = 3;
-            player.Playerturn = true;
+            player.x = 3;
+            player.y = 3;
+            playerVals.Playerturn = true;
         }
         public static char Input()
         {
@@ -50,7 +50,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void PlayerPOSMove()
         {
-            if(player.Playerturn == true)
+            if(playerVals.Playerturn == true)
             {
                 switch (Input())
                 {
@@ -72,25 +72,29 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void PlayerPOS(int x, int y)
         {
-            entity.x += x;
-            entity.y += y;
-            player.Playerturn = true;
-            switch(map.IsTileValid(entity.x, entity.y)) 
+            player.x += x;
+            player.y += y;
+            playerVals.Playerturn = true;
+            switch(map.IsTileValid(player.x, player.y)) 
             {
                 case '.':
                 break;
                 case '#':
-                    entity.x -= x;
-                    entity.y -= y;
+                    player.x -= x;
+                    player.y -= y;
                     break;
                 case '+':
+                    player.healthSys.TakeDamage(1);
+                    break;
+                case 'H':
+                    player.healthSys.Heal(1);
                     break;
 
             }
         }
         public void DisplayPlayer()
         { 
-            Console.SetCursorPosition(entity.x,entity.y);
+            Console.SetCursorPosition(player.x, player.y);
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.Write('$');
