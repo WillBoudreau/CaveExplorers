@@ -18,6 +18,10 @@ namespace TextBasedRPG_OOP_WillB
     internal class Displaymap
     {
         Map map = new Map();
+        public Displaymap() 
+        {
+            MapArray();
+        }
         public void MapArray() 
         {
             map.path = @"Map.txt";
@@ -68,6 +72,7 @@ namespace TextBasedRPG_OOP_WillB
                     }
                 }
             }
+            Console.ResetColor();
         }
         public char IsTileValid(int x, int y)
         {

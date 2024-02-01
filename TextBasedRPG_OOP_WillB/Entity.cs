@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
+    struct EntityVals
+    {
+        public string name;
+    }
     internal class Entity
     {
         public HealthSys healthSys;
@@ -13,7 +17,6 @@ namespace TextBasedRPG_OOP_WillB
         public int y;
         public Entity() 
         {
-            Console.WriteLine("Entity has spawned");
             healthSys = new HealthSys();
         }
     }

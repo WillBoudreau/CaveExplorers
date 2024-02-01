@@ -14,15 +14,14 @@ namespace TextBasedRPG_OOP_WillB
         static void Main(string[] args)
         {
             Displaymap map = new Displaymap();
-            Player player = new Player(map);
+            Player player = new Player();
             PlayerVals playerVals = new PlayerVals();
-            Enemy enemy = new Enemy(map);
+            Enemy enemy = new Enemy();
             player.healthSys.GetHealth(5);
-            while (true)
+            while (player.healthSys.playerhp > 0)
             {
                 map.MapArray();
-                //Console.BackgroundColor = 
-                //Console.WriteLine("\nHello World");
+                Console.WriteLine("\nPlayer Health: " + player.healthSys.playerhp + "| Player Damage: " + player.healthSys.damage); 
                 player.DisplayPlayer();
                 enemy.DisplayEnemy();
                 player.PlayerPOSMove();
@@ -34,14 +33,15 @@ namespace TextBasedRPG_OOP_WillB
                         player.healthSys.TakeDamage(1);
                     }
                 }
-                Console.WriteLine(player.healthSys.playerhp);
                 //Console.ReadKey();
                 //Console.WriteLine(player.healthSys.playerhp);
                 //player.healthSys.TakeDamage(1);
                 //Console.WriteLine(player.healthSys.playerhp);
                 //Console.ReadKey();
             }
+            Console.Clear();
+            Console.WriteLine("Game Over...Press any key to quit");
+            Console.ReadKey();
         }
-
     }
 }

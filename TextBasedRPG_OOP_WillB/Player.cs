@@ -10,16 +10,17 @@ namespace TextBasedRPG_OOP_WillB
     struct PlayerVals
     {
         public bool Playerturn;
+        public string name;
     }
     internal class Player:Entity
     {
         PlayerVals playerVals = new PlayerVals();
         Map mapVals = new Map();
         Entity player = new Entity();
-        Displaymap map;
-        public Player(Displaymap map) 
+        Displaymap map = new Displaymap();
+        public Player()
         {
-            this.map = map;
+            
             player.x = 3;
             player.y = 3;
             playerVals.Playerturn = true;
@@ -84,12 +85,11 @@ namespace TextBasedRPG_OOP_WillB
                     player.y -= y;
                     break;
                 case '+':
-                    player.healthSys.TakeDamage(1);
+                    healthSys.TakeDamage(1);
                     break;
                 case 'H':
-                    player.healthSys.Heal(1);
+                    healthSys.Heal(1);
                     break;
-
             }
         }
         public void DisplayPlayer()
@@ -97,7 +97,7 @@ namespace TextBasedRPG_OOP_WillB
             Console.SetCursorPosition(player.x, player.y);
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.BackgroundColor = ConsoleColor.Yellow;
-            Console.Write('$');
+            Console.Write('P');
             Console.ResetColor();
         }
     }

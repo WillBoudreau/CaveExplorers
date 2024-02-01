@@ -17,11 +17,10 @@ namespace TextBasedRPG_OOP_WillB
         EnemyVals enemy = new EnemyVals();
         Map mapVals = new Map();
         Entity entity = new Entity();
-        Displaymap map;
+        Displaymap map = new Displaymap();
 
-        public Enemy(Displaymap map)
+        public Enemy()
         {
-            this.map = map;
             entity.x = 15;
             entity.y = 15;
             enemy.Enemyturn = true;
@@ -29,7 +28,7 @@ namespace TextBasedRPG_OOP_WillB
         public static char EnemyInput()
         {
             Random rnd = new Random();
-           int Move =  rnd.Next(1, 4);
+           int Move =  rnd.Next(1,4);
             if (Move == 1)
             {
                 return 'w';
