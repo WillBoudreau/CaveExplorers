@@ -14,20 +14,21 @@ namespace TextBasedRPG_OOP_WillB
     }
     internal class Enemy:Entity
     {
-        EnemyVals enemy = new EnemyVals();
-        Map mapVals = new Map();
-        Entity entity = new Entity();
+        EnemyVals enemyVals = new EnemyVals();
+        Entity enemy = new Entity();
         Displaymap map = new Displaymap();
 
         public Enemy()
         {
-            entity.x = 15;
-            entity.y = 15;
-            enemy.Enemyturn = true;
+            enemyVals.StartX = 15;
+            enemyVals.StartY = 15;
+            enemy.x = enemyVals.StartX;
+            enemy.y = enemyVals.StartY;
+            enemyVals.Enemyturn = true;
         }
         public static char EnemyInput()
         {
-            Random rnd = new Random();
+           Random rnd = new Random();
            int Move =  rnd.Next(1,4);
             if (Move == 1)
             {
@@ -52,7 +53,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void EnemyPOSMove()
         {
-            if (enemy.Enemyturn == true)
+            if (enemyVals.Enemyturn == true)
             {
                 switch (EnemyInput())
                 {
@@ -74,34 +75,30 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void EnemyPOS(int x, int y)
         {
-            entity.x += x;
-            entity.y += y;
-            enemy.Enemyturn = true;
-            switch (map.IsTileValid(entity.x, entity.y))
+            enemy.x += x;
+            enemy.y += y;
+            enemyVals.Enemyturn = true;
+            switch (map.IsTileValid(enemy.x, enemy.y))
             {
                 case '.':
                     break;
                 case '#':
-                    entity.x -= x;
-                    entity.y -= y;
+                    enemy.x -= x;
+                    enemy.y -= y;
                     break;
                 case '+':
-                    entity.x -= x;
-                    entity.y -= y;
+                    enemy.x -= x;
+                    enemy.y -= y;
                     break;
                 case '*':
                     break;
                 case 'H':
                     break;
-                case 'P':
-                    entity.x -= x;
-                    entity.y -= y;
-                    break;
             }
         }
         public void DisplayEnemy()
         {
-            Console.SetCursorPosition(entity.x, entity.y);
+            Console.SetCursorPosition(enemy.x, enemy.y);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.BackgroundColor = ConsoleColor.Gray;
             Console.Write('E');

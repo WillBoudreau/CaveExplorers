@@ -16,6 +16,9 @@ namespace TextBasedRPG_OOP_WillB
             Displaymap map = new Displaymap();
             Player player = new Player();
             Enemy enemy = new Enemy();
+            EnemyVals enemyVals = new EnemyVals();
+            HealthSys healthSys = new HealthSys();
+            Entity entity = new Entity();
             player.healthSys.GetHealth(5);
             enemy.healthSys.GetHealth(5);
             player.healthSys.GetAttack(1);
@@ -23,21 +26,19 @@ namespace TextBasedRPG_OOP_WillB
             while (player.healthSys.playerhp > 0)
             {
                 map.MapArray();
-                Console.WriteLine("\nPlayer Health: " + player.healthSys.playerhp + "| Player Attack: " + player.healthSys.Attack); 
-                Console.WriteLine("Enemy Health: " + enemy.healthSys.enemyhp);
+                Console.WriteLine("\nPlayer Health: " + player.healthSys.playerhp + "| Player Attack: " + player.healthSys.Attack);
+                Console.WriteLine("Enemy Health:  " + enemy.healthSys.enemyhp + "| Enemy Attack: " + enemy.healthSys.Attack);
                 player.DisplayPlayer();
                 enemy.DisplayEnemy();
                 player.PlayerPOSMove();
                 enemy.EnemyPOSMove();
-                //Console.ReadKey();
-                //Console.WriteLine(player.healthSys.playerhp);
-                //player.healthSys.TakeDamage(1);
-                //Console.WriteLine(player.healthSys.playerhp);
-                //Console.ReadKey();
+                if(player.healthSys.playerhp <= 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Game Over...Press any key to quit");
+                    Console.ReadKey();
+                }
             }
-            Console.Clear();
-            Console.WriteLine("Game Over...Press any key to quit");
-            Console.ReadKey();
         }
     }
 }

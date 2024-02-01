@@ -16,10 +16,9 @@ namespace TextBasedRPG_OOP_WillB
         public DamageSystem damageSystem;
         public int x;
         public int y;
-        public Entity() 
+        public Entity()
         {
             this.healthSys = new HealthSys();
-            //this.damageSystem = new DamageSystem();
         }
     }
 }
