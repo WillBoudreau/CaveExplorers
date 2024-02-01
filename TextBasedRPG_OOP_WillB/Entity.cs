@@ -13,11 +13,13 @@ namespace TextBasedRPG_OOP_WillB
     internal class Entity
     {
         public HealthSys healthSys;
+        public DamageSystem damageSystem;
         public int x;
         public int y;
         public Entity() 
         {
-            healthSys = new HealthSys();
+            this.healthSys = new HealthSys();
+            //this.damageSystem = new DamageSystem();
         }
     }
 }

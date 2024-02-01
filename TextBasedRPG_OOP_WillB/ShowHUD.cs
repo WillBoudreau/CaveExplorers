@@ -15,7 +15,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             health = this.health.playerhp;
             entity = entity1.name;
-            damage = this.health.damage;
+            damage = this.health.Attack;
         }
     }
 }

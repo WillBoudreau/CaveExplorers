@@ -15,24 +15,20 @@ namespace TextBasedRPG_OOP_WillB
         {
             Displaymap map = new Displaymap();
             Player player = new Player();
-            PlayerVals playerVals = new PlayerVals();
             Enemy enemy = new Enemy();
             player.healthSys.GetHealth(5);
+            enemy.healthSys.GetHealth(5);
+            player.healthSys.GetAttack(1);
+            enemy.healthSys.GetAttack(1);
             while (player.healthSys.playerhp > 0)
             {
                 map.MapArray();
-                Console.WriteLine("\nPlayer Health: " + player.healthSys.playerhp + "| Player Damage: " + player.healthSys.damage); 
+                Console.WriteLine("\nPlayer Health: " + player.healthSys.playerhp + "| Player Attack: " + player.healthSys.Attack); 
+                Console.WriteLine("Enemy Health: " + enemy.healthSys.enemyhp);
                 player.DisplayPlayer();
                 enemy.DisplayEnemy();
                 player.PlayerPOSMove();
                 enemy.EnemyPOSMove();
-                if (playerVals.Playerturn == true)
-                {
-                    if (player.x == enemy.x && player.y == enemy.y)
-                    {
-                        player.healthSys.TakeDamage(1);
-                    }
-                }
                 //Console.ReadKey();
                 //Console.WriteLine(player.healthSys.playerhp);
                 //player.healthSys.TakeDamage(1);

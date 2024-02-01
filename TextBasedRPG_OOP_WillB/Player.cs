@@ -18,6 +18,7 @@ namespace TextBasedRPG_OOP_WillB
         Map mapVals = new Map();
         Entity player = new Entity();
         Displaymap map = new Displaymap();
+        Enemy enemy = new Enemy();
         public Player()
         {
             
@@ -76,10 +77,11 @@ namespace TextBasedRPG_OOP_WillB
             player.x += x;
             player.y += y;
             playerVals.Playerturn = true;
-            switch(map.IsTileValid(player.x, player.y)) 
+            Combat(x, y);
+            switch (map.IsTileValid(player.x, player.y))
             {
                 case '.':
-                break;
+                    break;
                 case '#':
                     player.x -= x;
                     player.y -= y;
@@ -99,6 +101,21 @@ namespace TextBasedRPG_OOP_WillB
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.Write('P');
             Console.ResetColor();
+        }
+        public void Combat(int x, int y)
+        {
+            if (playerVals.Playerturn == true)
+            {
+                if (player.x == enemy.x && player.y == enemy.y)
+                {
+                    healthSys.TakeDamage(player.healthSys.Attack);
+                }//<-- During the players trun Enemy 1 takes damage
+                if (player.x == enemy.x && player.y == enemy.y)
+                {
+                    player.x -= x;
+                    player.y -= y;
+                }//<-- Player cannot move on top of Enemy 1
+            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace TextBasedRPG_OOP_WillB
         public int enemyhp;
         public int playerhp;
         public int health;
-        public int damage;
+        public int Attack;
         public HealthSys()
         {
             
@@ -31,14 +31,25 @@ namespace TextBasedRPG_OOP_WillB
             SetHealth();
             return health;
         }
+        public int GetAttack(int attack)
+        {
+            this.Attack = attack;
+            return attack;
+
+        }
+        public void SetAttack()
+        {
+
+        }
         public void Heal(int hp)
         {
             health += hp;
         }
         public void TakeDamage(int damage)
         { 
-            this.damage = damage;
-            playerhp -= damage;
+            
+            //playerhp -= damage;
+            enemyhp -= damage;
             if(playerhp <= 0)
             {
                 playerhp = 0;
