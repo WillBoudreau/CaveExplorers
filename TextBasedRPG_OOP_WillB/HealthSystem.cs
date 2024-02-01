@@ -47,8 +47,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void TakeDamage(int damage)
         { 
-            
-            //playerhp -= damage;
+            playerhp -= damage;
             enemyhp -= damage;
             if(playerhp <= 0)
             {

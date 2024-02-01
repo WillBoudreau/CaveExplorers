@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace TextBasedRPG_OOP_WillB
         public bool Playerturn;
         public string name;
     }
-    internal class Player:Entity
+    internal class Player : Entity
     {
         PlayerVals playerVals = new PlayerVals();
         Map mapVals = new Map();
@@ -21,15 +22,17 @@ namespace TextBasedRPG_OOP_WillB
         Enemy enemy = new Enemy();
         public Player()
         {
-            
             player.x = 3;
             player.y = 3;
             playerVals.Playerturn = true;
+            Console.Clear();
+            Console.WriteLine(player.x + " " + player.y);
+            Console.ReadKey();
         }
         public static char Input()
         {
             ConsoleKeyInfo key = Console.ReadKey(true);
-            if(key.KeyChar == 'w')
+            if (key.KeyChar == 'w')
             {
                 return 'w';
             }
@@ -52,7 +55,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void PlayerPOSMove()
         {
-            if(playerVals.Playerturn == true)
+            if (playerVals.Playerturn == true)
             {
                 switch (Input())
                 {
@@ -63,7 +66,7 @@ namespace TextBasedRPG_OOP_WillB
                         PlayerPOS(-1, 0);
                         break;
                     case 's':
-                        PlayerPOS(0,1);
+                        PlayerPOS(0, 1);
                         break;
                     case 'd':
                         PlayerPOS(1, 0);
@@ -95,7 +98,7 @@ namespace TextBasedRPG_OOP_WillB
             }
         }
         public void DisplayPlayer()
-        { 
+        {
             Console.SetCursorPosition(player.x, player.y);
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.BackgroundColor = ConsoleColor.Yellow;
@@ -104,17 +107,11 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void Combat(int x, int y)
         {
-            if (playerVals.Playerturn == true)
+            Console.Clear();
+            Console.ReadKey();
+            if (player.x == enemy.x && player.y == enemy.y)
             {
-                if (player.x == enemy.x && player.y == enemy.y)
-                {
-                    healthSys.TakeDamage(player.healthSys.Attack);
-                }//<-- During the players trun Enemy 1 takes damage
-                if (player.x == enemy.x && player.y == enemy.y)
-                {
-                    player.x -= x;
-                    player.y -= y;
-                }//<-- Player cannot move on top of Enemy 1
+               healthSys.TakeDamage(1);
             }
         }
     }
