@@ -30,8 +30,8 @@ namespace TextBasedRPG_OOP_WillB
                 player.DisplayPlayer();
                 enemy.DisplayEnemy();
                 player.PlayerPOSMove();
-                player.AttackEnemy(enemy);
                 enemy.EnemyPOSMove();
+                player.AttackEnemy(enemy);
                 enemy.AttackPlayer(player);
             }
             Console.Clear();

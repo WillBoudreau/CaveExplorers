@@ -100,9 +100,11 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void AttackEnemy(Enemy enemy)
         {
-            if (Math.Abs(x - enemy.x) <= 1 && (y - enemy.y) <= 1)
+            if (Math.Abs(this.x - enemy.x) < 1 && (this.y - enemy.y) < 1)
             {
                 enemy.healthSys.TakeDamage(1);
+                this.x -= 0;
+                this.y -= 0;
             }
         }
     }

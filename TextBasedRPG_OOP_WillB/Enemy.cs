@@ -75,7 +75,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             this.x += x;
             this.y += y;
-            enemyVals.Enemyturn = true;  
+            enemyVals.Enemyturn = true;
             switch (map.IsTileValid(this.x, this.y))
             {
                 case '.':
@@ -104,7 +104,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void AttackPlayer(Player player)
         {
-            if(Math.Abs(this.x - player.x) <=1 && (this.y - player.y) <= 1)
+            if(Math.Abs(this.x - player.x) < 1 && (this.y - player.y) < 1)
             {
                 player.healthSys.TakeDamage(1);
             }

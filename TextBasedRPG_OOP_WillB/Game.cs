@@ -15,12 +15,13 @@ namespace TextBasedRPG_OOP_WillB
         EnemyVals enemyVals = new EnemyVals();
         public Game() 
         {
-            GameStart();
+
         }
         public void GameStart()
         {
             Console.WriteLine("Welcome to my Text Based RPG\nPress any key to begin");
             Console.ReadKey();
+            Console.Clear();
 
             while (player.healthSys.playerhp > 0)
             {
@@ -32,6 +33,8 @@ namespace TextBasedRPG_OOP_WillB
                 enemy.DisplayEnemy();
                 player.PlayerPOSMove();
                 enemy.EnemyPOSMove();
+                player.AttackEnemy(enemy);
+                enemy.AttackPlayer(player);
             }
             Console.Clear();
             Console.WriteLine("Game Over...Press any key to quit");
@@ -48,34 +51,6 @@ namespace TextBasedRPG_OOP_WillB
         {
             Console.WriteLine("\nPlayer Health: " + player.healthSys.playerhp + "| Player Attack: " + player.healthSys.Attack);
             Console.WriteLine("Enemy Health: " + enemy.healthSys.enemyhp + "| Enemy Attack: " + enemy.healthSys.Attack);
-        }
-        public void Combat(int x, int y)
-        {
-            if (playerVals.Playerturn)
-            {
-                if (Math.Abs(player.x - enemy.x) <= 1 && Math.Abs(player.y - enemy.y) <= 1)
-                {
-                    enemy.healthSys.TakeDamage(1);
-                    if (enemy.healthSys.enemyhp <= 0)
-                    {
-                        enemy.x = 0;
-                        enemy.y = 0;
-                    }
-                }
-            }
-            if (enemyVals.Enemyturn)
-            {
-                if (Math.Abs(enemy.x - player.x) <= 1 && Math.Abs(y - enemy.y) <= 1)
-                {
-                    enemy.healthSys.TakeDamage(1);
-                    if (enemy.healthSys.enemyhp <= 0)
-                    {
-                        enemy.x = 0;
-                        enemy.y = 0;
-
-                    }
-                }
-            }
         }
     }
 }
