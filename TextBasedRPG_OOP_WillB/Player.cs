@@ -16,18 +16,12 @@ namespace TextBasedRPG_OOP_WillB
     internal class Player : Entity
     {
         PlayerVals playerVals = new PlayerVals();
-        Map mapVals = new Map();
-        Entity player = new Entity();
         Displaymap map = new Displaymap();
-        Enemy enemy = new Enemy();
         public Player()
         {
-            player.x = 3;
-            player.y = 3;
+            x = 3;
+            y = 3;
             playerVals.Playerturn = true;
-            Console.Clear();
-            Console.WriteLine(player.x + " " + player.y);
-            Console.ReadKey();
         }
         public static char Input()
         {
@@ -77,17 +71,16 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void PlayerPOS(int x, int y)
         {
-            player.x += x;
-            player.y += y;
+            this.x += x;
+            this.y += y;
             playerVals.Playerturn = true;
-            Combat(x, y);
-            switch (map.IsTileValid(player.x, player.y))
+            switch (map.IsTileValid(this.x, this.y))
             {
                 case '.':
                     break;
                 case '#':
-                    player.x -= x;
-                    player.y -= y;
+                    this.x -= x;
+                    this.y -= y;
                     break;
                 case '+':
                     healthSys.TakeDamage(1);
@@ -99,19 +92,17 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void DisplayPlayer()
         {
-            Console.SetCursorPosition(player.x, player.y);
+            Console.SetCursorPosition(this.x, this.y);
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.Write('P');
             Console.ResetColor();
         }
-        public void Combat(int x, int y)
+        public void AttackEnemy(Enemy enemy)
         {
-            Console.Clear();
-            Console.ReadKey();
-            if (player.x == enemy.x && player.y == enemy.y)
+            if (Math.Abs(x - enemy.x) <= 1 && (y - enemy.y) <= 1)
             {
-               healthSys.TakeDamage(1);
+                enemy.healthSys.TakeDamage(1);
             }
         }
     }

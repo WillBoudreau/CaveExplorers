@@ -20,24 +20,24 @@ namespace TextBasedRPG_OOP_WillB
             enemy.healthSys.GetHealth(5);
             player.healthSys.GetAttack(1);
             enemy.healthSys.GetAttack(1);
-            while (player.healthSys.playerhp > 0)
+            while (player.healthSys.playerhp > 0 | enemy.healthSys.enemyhp > 0)
             {
                 map.MapArray();
                 Console.WriteLine("\nPlayer Health: " + player.healthSys.playerhp + "| Player Attack: " + player.healthSys.Attack); 
-                Console.WriteLine("Enemy Health: " + enemy.healthSys.enemyhp);
+                Console.WriteLine("Enemy Health: " + enemy.healthSys.enemyhp + "| Enemy Attack: "+enemy.healthSys.Attack);
+                Console.WriteLine(player.x + " "+  player.y);
+                Console.WriteLine(enemy.x + " "+ enemy.y);
                 player.DisplayPlayer();
                 enemy.DisplayEnemy();
                 player.PlayerPOSMove();
+                player.AttackEnemy(enemy);
                 enemy.EnemyPOSMove();
-                //Console.ReadKey();
-                //Console.WriteLine(player.healthSys.playerhp);
-                //player.healthSys.TakeDamage(1);
-                //Console.WriteLine(player.healthSys.playerhp);
-                //Console.ReadKey();
+                enemy.AttackPlayer(player);
             }
             Console.Clear();
             Console.WriteLine("Game Over...Press any key to quit");
             Console.ReadKey();
         }
+        
     }
 }

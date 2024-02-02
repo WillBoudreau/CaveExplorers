@@ -15,18 +15,14 @@ namespace TextBasedRPG_OOP_WillB
     internal class Enemy:Entity
     {
         EnemyVals enemyVals = new EnemyVals();
-        Map mapVals = new Map();
-        Entity enemy = new Entity();
         Displaymap map = new Displaymap();
+
 
         public Enemy()
         {
-            enemy.x = 15;
-            enemy.y = 15;
+            x = 15;
+            y = 15;
             enemyVals.Enemyturn = true;
-            Console.Clear();
-            Console.WriteLine(enemy.x + " " + enemy.y);
-            Console.ReadKey();
         }
         public static char EnemyInput()
         {
@@ -77,38 +73,41 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void EnemyPOS(int x, int y)
         {
-            enemy.x += x;
-            enemy.y += y;
-            enemyVals.Enemyturn = true;
-            switch (map.IsTileValid(enemy.x, enemy.y))
+            this.x += x;
+            this.y += y;
+            enemyVals.Enemyturn = true;  
+            switch (map.IsTileValid(this.x, this.y))
             {
                 case '.':
                     break;
                 case '#':
-                    enemy.x -= x;
-                    enemy.y -= y;
+                    this.x -= x;
+                    this.y -= y;
                     break;
                 case '+':
-                    enemy.x -= x;
-                    enemy.y -= y;
+                    this.x -= x;
+                    this.y -= y;
                     break;
                 case '*':
                     break;
                 case 'H':
                     break;
-                case 'P':
-                    enemy.x -= x;
-                    enemy.y -= y;
-                    break;
             }
         }
         public void DisplayEnemy()
         {
-            Console.SetCursorPosition(enemy.x, enemy.y);
+            Console.SetCursorPosition(this.x, this.y);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.BackgroundColor = ConsoleColor.Gray;
             Console.Write('E');
             Console.ResetColor();
+        }
+        public void AttackPlayer(Player player)
+        {
+            if(Math.Abs(this.x - player.x) <=1 && (this.y - player.y) <= 1)
+            {
+                player.healthSys.TakeDamage(1);
+            }
         }
     }
 }

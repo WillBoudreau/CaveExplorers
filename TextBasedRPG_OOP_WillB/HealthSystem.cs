@@ -37,10 +37,6 @@ namespace TextBasedRPG_OOP_WillB
             return attack;
 
         }
-        public void SetAttack()
-        {
-
-        }
         public void Heal(int hp)
         {
             health += hp;
@@ -52,6 +48,10 @@ namespace TextBasedRPG_OOP_WillB
             if(playerhp <= 0)
             {
                 playerhp = 0;
+            }
+            if(enemyhp <= 0)
+            {
+                enemyhp = 0;
             }
         }
     }

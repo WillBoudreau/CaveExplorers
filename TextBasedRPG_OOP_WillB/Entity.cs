@@ -13,7 +13,6 @@ namespace TextBasedRPG_OOP_WillB
     internal class Entity
     {
         public HealthSys healthSys;
-        public DamageSystem damageSystem;
         public int x;
         public int y;
         public Entity() 

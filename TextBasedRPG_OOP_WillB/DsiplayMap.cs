@@ -76,7 +76,14 @@ namespace TextBasedRPG_OOP_WillB
         }
         public char IsTileValid(int x, int y)
         {
-            return map.MapChar[y][x];
+            if (y >= 0 && y < map.MapChar.Length && x >= 0 && x < map.MapChar[y].Length)
+            {
+                return map.MapChar[y][x];
+            }
+            else
+            {
+                return ' ';
+            }
         }
     }
 }
