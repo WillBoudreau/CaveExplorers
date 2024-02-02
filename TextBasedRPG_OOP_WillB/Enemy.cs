@@ -17,12 +17,12 @@ namespace TextBasedRPG_OOP_WillB
     {
         EnemyVals enemyVals = new EnemyVals();
         Displaymap map = new Displaymap();
-        public bool EnemyActive = true;
         public Enemy()
         {
             x = 15;
             y = 15;
             enemyVals.Enemyturn = true;
+            enemyVals.EnemyActive = true;
         }
         public static char EnemyInput()
         {
@@ -51,8 +51,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void EnemyPOSMove()
         {
-            if (enemyVals.Enemyturn == true)
-            {
+            { 
                 switch (EnemyInput())
                 {
                     case 'w':
@@ -95,19 +94,25 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void DisplayEnemy()
         {
-            
+            if(enemyVals.EnemyActive == true)
+            {
                 Console.SetCursorPosition(this.x, this.y);
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.BackgroundColor = ConsoleColor.Gray;
                 Console.Write('E');
                 Console.ResetColor();
-            
+            }
+            else
+            {
+                
+            }
         }
         public void AttackPlayer(Player player)
         {
-            if(Math.Abs(this.x - player.x) <= 1 && Math.Abs(this.y - player.y) <= 1)
+            if(Math.Abs(this.x - player.x) == 1 && Math.Abs(this.y - player.y) == 1)
             {
                 player.healthSys.TakeDamage(1);
+                return;
             }
         }
     }

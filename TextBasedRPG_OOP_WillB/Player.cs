@@ -102,13 +102,23 @@ namespace TextBasedRPG_OOP_WillB
             if (Math.Abs(this.x - enemy.x) <= 1 && Math.Abs(this.y - enemy.y) <= 1)
             {
                 enemy.healthSys.TakeDamage(2);
-                if(enemy.healthSys.enemyhp <= 0)
+                
+                if (enemy.healthSys.enemyhp <= 0)
                 {
                     enemy.healthSys.enemyhp = 0;
-                    enemy.EnemyActive = false;
                 }
                 return;
             }
+            //if (Math.Abs(this.x - enemy2.x) <= 1 && Math.Abs(this.y - enemy2.y) <= 1)
+            //{
+            //    enemy2.healthSys.TakeDamage(2);
+                
+            //    if (enemy2.healthSys.enemyhp <= 0)
+            //    {
+            //        enemy2.healthSys.enemyhp = 0;
+            //    }
+            //    return;
+            //}
         }
     }
 }

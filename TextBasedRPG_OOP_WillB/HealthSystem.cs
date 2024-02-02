@@ -17,6 +17,8 @@ namespace TextBasedRPG_OOP_WillB
         public int playerhp;
         public int health;
         public int Attack;
+        EnemyVals enemy = new EnemyVals();
+        Enemy2Vals enemy2 = new Enemy2Vals();
         public HealthSys()
         {
             
@@ -55,10 +57,12 @@ namespace TextBasedRPG_OOP_WillB
             if(enemyhp <= 0)
             {
                 enemyhp = 0;
+                enemy.EnemyActive = false;
             }
             if(enemy2hp <= 0)
             {
                 enemy2hp = 0;
+                enemy2.Enemy2Active = false;
             }
         }
     }
