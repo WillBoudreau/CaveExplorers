@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="DsiplayMap.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="Enemy2.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="HealthSystem.cs" />

@@ -73,7 +73,6 @@ namespace TextBasedRPG_OOP_WillB
         {
             this.x += x;
             this.y += y;
-            playerVals.Playerturn = true;
             switch (map.IsTileValid(this.x, this.y))
             {
                 case '.':
@@ -100,11 +99,15 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void AttackEnemy(Enemy enemy)
         {
-            if (Math.Abs(this.x - enemy.x) < 1 && (this.y - enemy.y) < 1)
+            if (Math.Abs(this.x - enemy.x) <= 1 && Math.Abs(this.y - enemy.y) <= 1)
             {
-                enemy.healthSys.TakeDamage(1);
-                this.x -= 0;
-                this.y -= 0;
+                enemy.healthSys.TakeDamage(2);
+                if(enemy.healthSys.enemyhp <= 0)
+                {
+                    enemy.healthSys.enemyhp = 0;
+                    enemy.EnemyActive = false;
+                }
+                return;
             }
         }
     }

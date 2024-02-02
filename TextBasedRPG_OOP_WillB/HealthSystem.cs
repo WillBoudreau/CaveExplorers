@@ -13,6 +13,7 @@ namespace TextBasedRPG_OOP_WillB
     internal class HealthSys
     {
         public int enemyhp;
+        public int enemy2hp;
         public int playerhp;
         public int health;
         public int Attack;
@@ -24,6 +25,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             enemyhp = health;
             playerhp = health;
+            enemy2hp = health;
         }
         public int GetHealth(int health)
         {
@@ -45,6 +47,7 @@ namespace TextBasedRPG_OOP_WillB
         { 
             playerhp -= damage;
             enemyhp -= damage;
+            enemy2hp -= damage;
             if(playerhp <= 0)
             {
                 playerhp = 0;
@@ -52,6 +55,10 @@ namespace TextBasedRPG_OOP_WillB
             if(enemyhp <= 0)
             {
                 enemyhp = 0;
+            }
+            if(enemy2hp <= 0)
+            {
+                enemy2hp = 0;
             }
         }
     }
