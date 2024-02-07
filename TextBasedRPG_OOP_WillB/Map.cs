@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    struct Map
+    struct MapVals
     {
         public string path;
         public string[] Mapstr;
         public char[][] MapChar;
     }
-    internal class Displaymap
+    internal class Map
     {
-        Map map = new Map();
-        public Displaymap() 
+        MapVals map = new MapVals();
+        public Map() 
         {
             MapArray();
         }

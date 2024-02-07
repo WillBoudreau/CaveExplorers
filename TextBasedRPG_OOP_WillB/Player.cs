@@ -16,7 +16,6 @@ namespace TextBasedRPG_OOP_WillB
     internal class Player : Entity
     {
         PlayerVals playerVals = new PlayerVals();
-        Displaymap map = new Displaymap();
         public Player()
         {
             x = 3;
@@ -54,39 +53,19 @@ namespace TextBasedRPG_OOP_WillB
                 switch (Input())
                 {
                     case 'w':
-                        PlayerPOS(0, -1);
+                        POS(0, -1);
                         break;
                     case 'a':
-                        PlayerPOS(-1, 0);
+                        POS(-1, 0);
                         break;
                     case 's':
-                        PlayerPOS(0, 1);
+                        POS(0, 1);
                         break;
                     case 'd':
-                        PlayerPOS(1, 0);
+                        POS(1, 0);
                         break;
                 }
 
-            }
-        }
-        public void PlayerPOS(int x, int y)
-        {
-            this.x += x;
-            this.y += y;
-            switch (map.IsTileValid(this.x, this.y))
-            {
-                case '.':
-                    break;
-                case '#':
-                    this.x -= x;
-                    this.y -= y;
-                    break;
-                case '+':
-                    healthSys.TakeDamage(1);
-                    break;
-                case 'H':
-                    healthSys.Heal(1);
-                    break;
             }
         }
         public void DisplayPlayer()
@@ -109,16 +88,6 @@ namespace TextBasedRPG_OOP_WillB
                 }
                 return;
             }
-            //if (Math.Abs(this.x - enemy2.x) <= 1 && Math.Abs(this.y - enemy2.y) <= 1)
-            //{
-            //    enemy2.healthSys.TakeDamage(2);
-                
-            //    if (enemy2.healthSys.enemyhp <= 0)
-            //    {
-            //        enemy2.healthSys.enemyhp = 0;
-            //    }
-            //    return;
-            //}
         }
     }
 }

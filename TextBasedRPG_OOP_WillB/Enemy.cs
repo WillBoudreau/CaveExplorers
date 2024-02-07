@@ -16,7 +16,6 @@ namespace TextBasedRPG_OOP_WillB
     internal class Enemy:Entity
     {
         EnemyVals enemyVals = new EnemyVals();
-        Displaymap map = new Displaymap();
         public Enemy()
         {
             x = 15;
@@ -51,45 +50,23 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void EnemyPOSMove()
         {
-            { 
+            {
                 switch (EnemyInput())
                 {
                     case 'w':
-                        EnemyPOS(0, -1);
+                        POS(0, -1);
                         break;
                     case 'a':
-                        EnemyPOS(-1, 0);
+                        POS(-1, 0);
                         break;
                     case 's':
-                        EnemyPOS(0, 1);
+                        POS(0, 1);
                         break;
                     case 'd':
-                        EnemyPOS(1, 0);
+                        POS(1, 0);
                         break;
                 }
 
-            }
-        }
-        public void EnemyPOS(int x, int y)
-        {
-            this.x += x;
-            this.y += y;
-            switch (map.IsTileValid(this.x, this.y))
-            {
-                case '.':
-                    break;
-                case '#':
-                    this.x -= x;
-                    this.y -= y;
-                    break;
-                case '+':
-                    this.x -= x;
-                    this.y -= y;
-                    break;
-                case '*':
-                    break;
-                case 'H':
-                    break;
             }
         }
         public void DisplayEnemy()
