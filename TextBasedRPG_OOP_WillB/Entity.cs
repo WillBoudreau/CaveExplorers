@@ -13,40 +13,14 @@ namespace TextBasedRPG_OOP_WillB
     }
     internal class Entity
     {
-        Map map = new Map();
+        public Map map;
         public HealthSys healthSys;
         public int x;
         public int y;
         public Entity() 
         {
+            this.map = new Map();
             this.healthSys = new HealthSys();
-        }
-        public void POS(int x, int y)
-        {
-            this.x += x;
-            this.y += y;
-            Combat(x,y);
-            switch (map.IsTileValid(this.x, this.y))
-            {
-                case '.':
-                    break;
-                case '#':
-                    this.x -= x;
-                    this.y -= y;
-                    break;
-                case '+':
-                    healthSys.TakeDamage(1);
-                    break;
-                case 'H':
-                    healthSys.Heal(1);
-                    break;
-            }
-        }
-        public void Combat( int x, int y)
-        {
-            this.x += y;
-            this.y += y;
-            if
         }
     }
 }

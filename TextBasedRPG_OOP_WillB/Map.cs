@@ -85,5 +85,13 @@ namespace TextBasedRPG_OOP_WillB
                 return ' ';
             }
         }
+        //public void Combat(int x, int y)
+        //{
+        //    if(player.x == enemy.x && player.y == enemy.y)
+        //    {
+        //        player.TakeDamage(1);
+        //        enemy.TakeDamage(1);
+        //    }
+        //}
     }
 }

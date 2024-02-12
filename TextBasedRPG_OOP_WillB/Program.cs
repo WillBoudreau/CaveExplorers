@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -17,7 +18,7 @@ namespace TextBasedRPG_OOP_WillB
             Player player = new Player();
             Enemy enemy = new Enemy();
 
-            while (true)
+            while (player.healthSys.health > 0 || enemy.healthSys.health > 0)
             {
                 map.MapArray();
                 
@@ -30,22 +31,15 @@ namespace TextBasedRPG_OOP_WillB
                 player.PlayerPOSMove();
                 enemy.EnemyPOSMove();
 
-                
-                player.AttackEnemy(enemy);
-                enemy.AttackPlayer(player);
-                //if(player.healthSys.playerhp <= 0)
-                //{
-                //    Console.Clear();
-                //    Console.WriteLine("Game Over...Press any key to quit");
-                //    Console.ReadKey();
-                //}
-                //if(enemy.healthSys.enemyhp <= 0)
-                //{
-                //    Console.Clear();
-                //    Console.WriteLine("Congrats you win!...Press any key to quit");
-                //    Console.ReadKey();
-                //}
+                Console.Clear();
+                Console.WriteLine("Player hp: " + player.healthSys.health);
+                Console.WriteLine("Enemy hp: "+ enemy.healthSys.health);
+                Console.ReadKey();
             }
+            Console.Clear();
+            Console.WriteLine("Game Over");
+            Console.ReadKey();
+            
         }
         
     }

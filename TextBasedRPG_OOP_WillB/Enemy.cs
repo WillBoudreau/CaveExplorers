@@ -18,8 +18,9 @@ namespace TextBasedRPG_OOP_WillB
         EnemyVals enemyVals = new EnemyVals();
         public Enemy()
         {
-            x = 15;
-            y = 15;
+            x = 4;
+            y = 5;
+            healthSys.health = 0;
             enemyVals.Enemyturn = true;
             enemyVals.EnemyActive = true;
         }
@@ -69,9 +70,35 @@ namespace TextBasedRPG_OOP_WillB
 
             }
         }
+        public void POS(int x, int y)
+        {
+            this.x += x;
+            this.y += y;
+            switch (map.IsTileValid(this.x, this.y))
+            {
+                case '.':
+                    break;
+                case '#':
+                    this.x -= x;
+                    this.y -= y;
+                    break;
+                case '+':
+                    TakeDamage(1);
+                    break;
+            }
+        }
+        public void TakeDamage(int damage)
+        {
+            healthSys.health -= damage;
+            if (healthSys.health <= 0)
+            {
+                healthSys.health = 0;
+                enemyVals.EnemyActive = false;
+            }
+        }
         public void DisplayEnemy()
         {
-            if(enemyVals.EnemyActive == true)
+            if (enemyVals.EnemyActive == true)
             {
                 Console.SetCursorPosition(this.x, this.y);
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -81,15 +108,7 @@ namespace TextBasedRPG_OOP_WillB
             }
             else
             {
-                
-            }
-        }
-        public void AttackPlayer(Player player)
-        {
-            if(Math.Abs(this.x - player.x) == 1 && Math.Abs(this.y - player.y) == 1)
-            {
-                player.healthSys.TakeDamage(1);
-                return;
+
             }
         }
     }

@@ -2,25 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    struct PlayerVals
-    {
-        public bool Playerturn;
-        public string name;
-    }
+
     internal class Player : Entity
     {
-        PlayerVals playerVals = new PlayerVals();
+        public bool Playerturn = true;
         public Player()
         {
             x = 3;
             y = 3;
-            playerVals.Playerturn = true;
+            healthSys.health = 3;
         }
         public static char Input()
         {
@@ -48,7 +45,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void PlayerPOSMove()
         {
-            if (playerVals.Playerturn == true)
+            if (Playerturn == true)
             {
                 switch (Input())
                 {
@@ -65,7 +62,31 @@ namespace TextBasedRPG_OOP_WillB
                         POS(1, 0);
                         break;
                 }
-
+            }
+        }
+        public void POS(int x, int y)
+        {
+            this.x += x;
+            this.y += y;
+            switch (map.IsTileValid(this.x, this.y))
+            {
+                case '.':
+                    break;
+                case '#':
+                    this.x -= x;
+                    this.y -= y;
+                    break;
+                case '+':
+                    TakeDamage(1);
+                    break;
+            }
+        }
+        public void TakeDamage(int damage)
+        {
+            healthSys.health -= damage;
+            if (healthSys.health <= 0)
+            {
+                healthSys.health = 0;
             }
         }
         public void DisplayPlayer()
@@ -75,19 +96,6 @@ namespace TextBasedRPG_OOP_WillB
             Console.BackgroundColor = ConsoleColor.Yellow;
             Console.Write('P');
             Console.ResetColor();
-        }
-        public void AttackEnemy(Enemy enemy)
-        {
-            if (Math.Abs(this.x - enemy.x) <= 1 && Math.Abs(this.y - enemy.y) <= 1)
-            {
-                enemy.healthSys.TakeDamage(2);
-                
-                if (enemy.healthSys.enemyhp <= 0)
-                {
-                    enemy.healthSys.enemyhp = 0;
-                }
-                return;
-            }
         }
     }
 }
