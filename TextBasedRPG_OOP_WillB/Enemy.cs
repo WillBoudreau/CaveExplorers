@@ -20,8 +20,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             x = 4;
             y = 5;
-            healthSys.health = 0;
-            enemyVals.Enemyturn = true;
+            healthSys.health = 2;
             enemyVals.EnemyActive = true;
         }
         public static char EnemyInput()

@@ -17,7 +17,8 @@ namespace TextBasedRPG_OOP_WillB
             Map map = new Map();
             Player player = new Player();
             Enemy enemy = new Enemy();
-
+            Console.WriteLine(player.healthSys.health);
+            Console.ReadKey();
             while (player.healthSys.health > 0 || enemy.healthSys.health > 0)
             {
                 map.MapArray();
@@ -39,7 +40,6 @@ namespace TextBasedRPG_OOP_WillB
             Console.Clear();
             Console.WriteLine("Game Over");
             Console.ReadKey();
-            
         }
         
     }
