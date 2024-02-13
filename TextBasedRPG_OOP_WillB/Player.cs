@@ -18,6 +18,7 @@ namespace TextBasedRPG_OOP_WillB
             x = 3;
             y = 3;
             healthSys.health = 3;
+            damage = 3;
         }
         public static char Input()
         {
@@ -43,7 +44,7 @@ namespace TextBasedRPG_OOP_WillB
                 return 'e';
             }
         }
-        public void PlayerPOSMove()
+        public void PlayerPOSMove(Enemy enemy)
         {
             if (Playerturn == true)
             {
@@ -63,6 +64,7 @@ namespace TextBasedRPG_OOP_WillB
                         break;
                 }
             }
+            CombatMan.Combat(this, enemy);
         }
         public void POS(int x, int y)
         {
@@ -89,7 +91,7 @@ namespace TextBasedRPG_OOP_WillB
                 healthSys.health = 0;
             }
         }
-        public void DisplayPlayer()
+         public void DisplayPlayer()
         {
             Console.SetCursorPosition(this.x, this.y);
             Console.ForegroundColor = ConsoleColor.Magenta;
