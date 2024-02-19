@@ -14,6 +14,7 @@ namespace TextBasedRPG_OOP_WillB
     internal class HealthSys
     {
         public int health;
+        public int shield;
         public HealthSys()
         {
             health = 0;
@@ -24,6 +25,14 @@ namespace TextBasedRPG_OOP_WillB
             if(health > 5) 
             {
                 health = 5;
+            }
+        }
+        public void ShieldUp( int ShieldUp)
+        {
+            shield += ShieldUp;
+            if(shield > 5)
+            {
+                shield = 5;
             }
         }
     }

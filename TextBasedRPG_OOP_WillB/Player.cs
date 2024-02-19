@@ -21,7 +21,9 @@ namespace TextBasedRPG_OOP_WillB
             x = 3;
             y = 3;
             heal = 1;
+            shieldUp = 1;
             healthSys.health = 3;
+            healthSys.shield = 3;
             damage = 3;
         }
         public static char Input()
@@ -112,14 +114,24 @@ namespace TextBasedRPG_OOP_WillB
                     CollectorMan.CollectHealth();
                     healthSys.Heal(heal);
                     break;
+                case 'S':
+                    healthSys.ShieldUp(shieldUp);
+                    break;
             }
         }
         public void TakeDamage(int damage)
         {
-            healthSys.health -= damage;
-            if (healthSys.health <= 0)
+            if(healthSys.shield > 0)
             {
-                healthSys.health = 0;
+                healthSys.shield -= damage;
+            }
+            else
+            {
+                healthSys.health -= damage;
+                if (healthSys.health <= 0)
+                {
+                    healthSys.health = 0;
+                }
             }
         }
          public void DisplayPlayer()

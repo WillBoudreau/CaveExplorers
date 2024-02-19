@@ -37,6 +37,7 @@ namespace TextBasedRPG_OOP_WillB
             {
                 MapChar[i] = Mapstr[i].ToCharArray();
             }
+            
             ShowMap();
         }
         public void ShowMap()
@@ -81,6 +82,11 @@ namespace TextBasedRPG_OOP_WillB
                         case ')':
                             Console.BackgroundColor = ConsoleColor.Green;
                             Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write(MapChar[i][j]);
+                            break;
+                        case 'S':
+                            Console.BackgroundColor = ConsoleColor.DarkGreen;
+                            Console.ForegroundColor = ConsoleColor.Blue;
                             Console.Write(MapChar[i][j]);
                             break;
                     }
