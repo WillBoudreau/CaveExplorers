@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -72,7 +73,7 @@ namespace TextBasedRPG_OOP_WillB
         public void EnemyMoveCheck(int dx, int dy, Player player)
         {
             int EnemyNewX = x + dx;
-            int EnemyNewY = y +  dy;
+            int EnemyNewY = y + dy;
             if(EnemyNewX == player.x &&  EnemyNewY == player.y)
             {
                 player.TakeDamage(1);

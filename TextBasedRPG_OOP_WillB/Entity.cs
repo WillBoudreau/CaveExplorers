@@ -18,6 +18,7 @@ namespace TextBasedRPG_OOP_WillB
         public int y;
         public int heal;
         public int damage;
+        public int score;
         public Entity()
         {
             this.CombatMan = new CombatManager();

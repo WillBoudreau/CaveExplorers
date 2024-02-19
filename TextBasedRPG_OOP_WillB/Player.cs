@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace TextBasedRPG_OOP_WillB
 {
@@ -16,6 +17,7 @@ namespace TextBasedRPG_OOP_WillB
         public bool Attacked = false;
         public Player()
         {
+            score = 0;
             x = 3;
             y = 3;
             heal = 1;
@@ -72,7 +74,13 @@ namespace TextBasedRPG_OOP_WillB
         {
             int NewX = x + dx;
             int NewY = y + dy;
-            if(NewX == enemy.x && NewY == enemy.y)
+            char tile = map.IsTileValid(NewX, NewY);
+            if(tile=='*')
+            {
+                map.UpdateMapTile(NewX, NewY,'.');
+                score++;
+            }
+            else if(NewX == enemy.x && NewY == enemy.y)
             {
                 enemy.TakeDamage(damage);
             }
@@ -98,6 +106,7 @@ namespace TextBasedRPG_OOP_WillB
                     break;
                 case '*':
                     CollectorMan.CollectCoins();
+                    score++;
                     break;
                 case 'H':
                     CollectorMan.CollectHealth();

@@ -9,7 +9,7 @@ namespace TextBasedRPG_OOP_WillB
     internal class CollectorManager
     {
         List<char> Coins = new List<char>();
-        List<char> Health = new List<char>();
+        List<char>Health = new List<char>();
         public void CollectCoins()
         {
             Coins.Add('*');

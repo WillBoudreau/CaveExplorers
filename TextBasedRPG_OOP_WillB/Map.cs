@@ -9,73 +9,79 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    struct MapVals
-    {
-        public string path;
-        public string[] Mapstr;
-        public char[][] MapChar;
-    }
     internal class Map
     {
-        MapVals map = new MapVals();
-        public Map() 
+            public string path;
+             string[] Mapstr;
+            public char[][] MapChar;
+        public Map()
         {
             MapArray();
         }
-        public void MapArray() 
+        public void UpdateMapTile(int x, int y, char tile)
         {
-            map.path = @"Map.txt";
-            map.Mapstr = File.ReadAllLines(map.path);
-            int Mapx = map.Mapstr.Length;
-            int Mapy = map.Mapstr[0].Length;
-            map.MapChar = new char[Mapx][];
-            for (int i = 0; i < Mapx; i++) 
+            MapChar[y][x] = tile;
+            Console.SetCursorPosition(x, y);
+            Console.Write(tile);
+            ShowMap();
+            Console.ReadKey();
+        }
+        public void MapArray()
+        {
+            path = @"Map.txt";
+            Mapstr = File.ReadAllLines(path);
+            int Mapx = Mapstr.Length;
+            int Mapy = Mapstr[0].Length;
+            MapChar = new char[Mapx][];
+            for (int i = 0; i < Mapx; i++)
             {
-                map.MapChar[i] = map.Mapstr[i].ToCharArray();
+                MapChar[i] = Mapstr[i].ToCharArray();
             }
             ShowMap();
         }
         public void ShowMap()
         {
-            for (int i = 0; i < map.MapChar.Length; i++)
+            for (int i = 0; i < MapChar.Length; i++)
             {
-                for (int j = 0; j < map.MapChar[i].Length; j++)
+                for (int j = 0; j < MapChar[i].Length; j++)
                 {
                     Console.SetCursorPosition(j, i);
-                    switch (map.MapChar[i][j])
+                    switch (MapChar[i][j])
                     {
                         case '#':
                             Console.BackgroundColor = ConsoleColor.Gray;
                             Console.ForegroundColor = ConsoleColor.Gray;
-                            Console.Write(map.MapChar[i][j]);
+                            Console.Write(MapChar[i][j]);
                             break;
                         case '+':
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.ForegroundColor = ConsoleColor.Black;
-                            Console.WriteLine(map.MapChar[i][j]);
+                            Console.WriteLine(MapChar[i][j]);
                             break;
                         case '.':
                             Console.BackgroundColor = ConsoleColor.DarkGreen;
                             Console.ForegroundColor = ConsoleColor.DarkGreen;
-                            Console.Write(map.MapChar[i][j]);
+                            Console.Write(MapChar[i][j]);
                             break;
                         case 'H':
                             Console.BackgroundColor = ConsoleColor.DarkGreen;
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.Write(map.MapChar[i][j]);
+                            Console.Write(MapChar[i][j]);
                             break;
                         case '*':
                             Console.BackgroundColor = ConsoleColor.DarkYellow;
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.Write(map.MapChar[i][j]);
+                            Console.Write(MapChar[i][j]);
                             break;
                         case '(':
                             Console.BackgroundColor = ConsoleColor.Green;
-                            Console.ForegroundColor = ConsoleColor.DarkGreen;
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write(MapChar[i][j]);
                             break;
                         case ')':
-                            Console.BackgroundColor = ConsoleColor.Red;
+                            Console.BackgroundColor = ConsoleColor.Green;
                             Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write(MapChar[i][j]);
                             break;
                     }
                 }
@@ -84,14 +90,15 @@ namespace TextBasedRPG_OOP_WillB
         }
         public char IsTileValid(int x, int y)
         {
-            if (y >= 0 && y < map.MapChar.Length && x >= 0 && x < map.MapChar[y].Length)
+            if (y >= 0 && y < MapChar.Length && x >= 0 && x < MapChar[y].Length)
             {
-                return map.MapChar[y][x];
+                return MapChar[y][x];
             }
             else
             {
                 return ' ';
             }
         }
+
     }
 }
