@@ -17,7 +17,8 @@ namespace TextBasedRPG_OOP_WillB
             
             Map map = new Map();
             Player player = new Player();
-            Enemy enemy = new Enemy();
+            Enemy enemy = new Enemy(4, 4);
+            Enemy enemy2 = new Enemy(4, 3);
             while (player.healthSys.health > 0 || enemy.healthSys.health > 0)
             {
                 map.MapArray();
@@ -26,15 +27,17 @@ namespace TextBasedRPG_OOP_WillB
                 
                 player.DisplayPlayer();
                 enemy.DisplayEnemy();
+                enemy2.DisplayEnemy();
 
                 player.PlayerPOSMove(enemy);
-                enemy.EnemyPOSMove();
-
+                enemy.EnemyPOSMove(player);
+                enemy2.EnemyPOSMove(player);
                 
 
                 Console.Clear();
                 Console.WriteLine("Player hp: " + player.healthSys.health);
                 Console.WriteLine("Enemy hp: " + enemy.healthSys.health);
+                Console.WriteLine("Enemy2 hp: "+ enemy2.healthSys.health);
                 Console.ReadKey();
             }
             Console.Clear();

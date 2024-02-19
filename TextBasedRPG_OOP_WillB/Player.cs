@@ -13,10 +13,12 @@ namespace TextBasedRPG_OOP_WillB
     internal class Player : Entity
     {
         public bool Playerturn = true;
+        public bool Attacked = false;
         public Player()
         {
             x = 3;
             y = 3;
+            heal = 1;
             healthSys.health = 3;
             damage = 3;
         }
@@ -46,25 +48,38 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void PlayerPOSMove(Enemy enemy)
         {
-            if (Playerturn == true)
+            if (Playerturn == true && Attacked == false)
             {
                 switch (Input())
                 {
                     case 'w':
-                        POS(0, -1);
+                        MoveCheck(0, -1, enemy);
                         break;
                     case 'a':
-                        POS(-1, 0);
+                        MoveCheck(-1, 0,enemy);
                         break;
                     case 's':
-                        POS(0, 1);
+                        MoveCheck(0, 1, enemy);
                         break;
                     case 'd':
-                        POS(1, 0);
+                        MoveCheck(1, 0, enemy);
                         break;
                 }
             }
-            CombatMan.Combat(this, enemy);
+            Attacked = false;
+        }
+        public void MoveCheck(int dx, int dy,Enemy enemy)
+        {
+            int NewX = x + dx;
+            int NewY = y + dy;
+            if(NewX == enemy.x && NewY == enemy.y)
+            {
+                enemy.TakeDamage(damage);
+            }
+            else
+            {
+                POS(dx, dy);
+            }
         }
         public void POS(int x, int y)
         {
@@ -80,6 +95,13 @@ namespace TextBasedRPG_OOP_WillB
                     break;
                 case '+':
                     TakeDamage(1);
+                    break;
+                case '*':
+                    CollectorMan.CollectCoins();
+                    break;
+                case 'H':
+                    CollectorMan.CollectHealth();
+                    healthSys.Heal(heal);
                     break;
             }
         }

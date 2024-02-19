@@ -15,9 +15,14 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void Combat(Player player,Enemy enemy)
         {
-            if(player.x == enemy.x && player.y == enemy.y)
+            if(player.Playerturn == true)
             {
-                enemy.TakeDamage(player.damage);
+
+                if(player.x == enemy.x && player.y == enemy.y)
+                {
+                    player.Attacked = true;
+                    enemy.TakeDamage(player.damage);
+                }
             }
         }
     }

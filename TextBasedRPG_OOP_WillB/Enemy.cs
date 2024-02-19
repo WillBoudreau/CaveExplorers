@@ -16,10 +16,10 @@ namespace TextBasedRPG_OOP_WillB
     internal class Enemy:Entity
     {
         EnemyVals enemyVals = new EnemyVals();
-        public Enemy()
+        public Enemy(int StartX, int StartY)
         {
-            x = 4;
-            y = 5;
+            x = StartX;
+            y = StartY;
             healthSys.health = 2;
             enemyVals.EnemyActive = true;
         }
@@ -48,25 +48,38 @@ namespace TextBasedRPG_OOP_WillB
                 return 'e';
             }
         }
-        public void EnemyPOSMove()
+        public void EnemyPOSMove(Player player)
         {
             {
                 switch (EnemyInput())
                 {
                     case 'w':
-                        POS(0, -1);
+                        EnemyMoveCheck(0, -1, player);
                         break;
                     case 'a':
-                        POS(-1, 0);
+                        EnemyMoveCheck(-1,0,player);
                         break;
                     case 's':
-                        POS(0, 1);
+                        EnemyMoveCheck(0,1,player);
                         break;
                     case 'd':
-                        POS(1, 0);
+                        EnemyMoveCheck(1,0,player);
                         break;
                 }
 
+            }
+        }
+        public void EnemyMoveCheck(int dx, int dy, Player player)
+        {
+            int EnemyNewX = x + dx;
+            int EnemyNewY = y +  dy;
+            if(EnemyNewX == player.x &&  EnemyNewY == player.y)
+            {
+                player.TakeDamage(1);
+            }
+            else
+            {
+                POS(dx, dy);
             }
         }
         public void POS(int x, int y)

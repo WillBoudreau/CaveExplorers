@@ -21,6 +21,10 @@ namespace TextBasedRPG_OOP_WillB
         public void Heal( int Heal)
         {
             health += Heal;
+            if(health > 5) 
+            {
+                health = 5;
+            }
         }
     }
 }

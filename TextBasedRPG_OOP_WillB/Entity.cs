@@ -13,12 +13,15 @@ namespace TextBasedRPG_OOP_WillB
         public Map map;
         public HealthSys healthSys;
         public CombatManager CombatMan;
+        public CollectorManager CollectorMan;
         public int x;
         public int y;
+        public int heal;
         public int damage;
         public Entity()
         {
             this.CombatMan = new CombatManager();
+            this.CollectorMan = new CollectorManager();
             this.map = new Map();
             this.healthSys = new HealthSys();
         }
