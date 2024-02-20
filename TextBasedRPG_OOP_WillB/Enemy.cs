@@ -11,7 +11,7 @@ namespace TextBasedRPG_OOP_WillB
     {
         Grunt,
         Chaser,
-        //Runner,
+        Runner,
 
     }
     struct EnemyVals
@@ -43,9 +43,9 @@ namespace TextBasedRPG_OOP_WillB
                 case EnemType.Chaser:
                     enemyAvatar = 'C';
                     break;
-                    //case EnemType.Runner:
-                    //    enemyAvatar = 'R';
-                    //    break;
+                case EnemType.Runner:
+                    enemyAvatar = 'R';
+                    break;
             }
         }
         public void EnemyMove(Player player)
@@ -58,15 +58,32 @@ namespace TextBasedRPG_OOP_WillB
                 case EnemType.Chaser:
                     MoveChase(player);
                     break;
-                    //case EnemType.Runner:
-                    //    MoveRun(player);
-                    //    break;
+                case EnemType.Runner:
+                    MoveRun(player);
+                    break;
             }
+        }
+        public void MoveRun(Player player)
+        {
+            int dx = player.x + x;
+            int dy = player.y + y;
+            if (Math.Abs(dx) > Math.Abs(dy))
+            {
+                dx = Math.Sign(dx);
+                dy = 0;
+            }
+            else
+            {
+                dx = 0;
+                dy = Math.Sign(dy);
+            }
+            POS(dx, dy, player);
         }
         public void MoveRnd(Player player)
         {
             int Move = rnd.Next(1, 5);
-            int dx = 0, dy = 0;
+            int dx = 0, 
+                dy = 0;
             switch (Move)
             {
                 case 1:
@@ -82,6 +99,7 @@ namespace TextBasedRPG_OOP_WillB
                     dx = 1;
                     break;
             }
+            POS(dx, dy, player);
         }
         public void MoveChase(Player player)
         {
@@ -99,11 +117,6 @@ namespace TextBasedRPG_OOP_WillB
             }
             POS(dx, dy,player);
         }
-        public void EnemyCombatCheck(int dx, int dy, Player player)
-        {
-            int EnemyNewX = x + dx;
-            int EnemyNewY = y + dy;
-        }
         public void POS(int x, int y,Player player)
         {
             this.x += x;
@@ -117,7 +130,8 @@ namespace TextBasedRPG_OOP_WillB
                     this.y -= y;
                     break;
                 case '+':
-                    TakeDamage(1);
+                    this.x -= x;
+                    this.y -= y;
                     break;
             }
             if (this.x == player.x && this.y == player.y)
@@ -149,7 +163,8 @@ namespace TextBasedRPG_OOP_WillB
             }
             else
             {
-
+                this.x = 0;
+                this.y = 0;
             }
         }
     }

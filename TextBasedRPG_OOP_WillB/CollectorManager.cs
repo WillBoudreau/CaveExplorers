@@ -15,6 +15,7 @@ namespace TextBasedRPG_OOP_WillB
             Coins.Add('*');
             Console.Clear();
             Console.WriteLine("Coin Collected");
+            Console.ReadKey();
         }
         public void CollectHealth()
         {

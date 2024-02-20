@@ -89,7 +89,7 @@ namespace TextBasedRPG_OOP_WillB
                     break;
                 case '*':
                     CollectorMan.CollectCoins();
-                    map.UpdateMapTile(x, y, '.');
+                    map.UpdateMapTile(this.x, this.y, '.');
                     score++;
                     break;
                 case 'H':

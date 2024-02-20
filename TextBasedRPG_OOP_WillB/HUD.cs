@@ -20,8 +20,10 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Player Health: " + player.healthSys.health);
             Console.WriteLine("Player Shield: " + player.healthSys.shield);
             Console.WriteLine("Player Score: " + player.score);
+            Console.WriteLine("Player POS: "+ player.x +" "+player.y);
             Console.WriteLine("Enemy health: " + enemies[0].healthSys.health);
             Console.WriteLine("Enemy health: "+ enemies[1].healthSys.health);
+            Console.WriteLine("Enemy health: "+ enemies[2].healthSys.health);
         }
     }
 }

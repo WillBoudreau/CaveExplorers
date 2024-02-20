@@ -65,7 +65,7 @@ namespace TextBasedRPG_OOP_WillB
                             Console.Write(MapChar[i][j]);
                             break;
                         case 'H':
-                            Console.BackgroundColor = ConsoleColor.DarkGreen;
+                            Console.BackgroundColor = ConsoleColor.White;
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.Write(MapChar[i][j]);
                             break;
@@ -85,7 +85,7 @@ namespace TextBasedRPG_OOP_WillB
                             Console.Write(MapChar[i][j]);
                             break;
                         case 'S':
-                            Console.BackgroundColor = ConsoleColor.DarkGreen;
+                            Console.BackgroundColor = ConsoleColor.White;
                             Console.ForegroundColor = ConsoleColor.Blue;
                             Console.Write(MapChar[i][j]);
                             break;
