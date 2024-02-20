@@ -60,7 +60,7 @@ namespace TextBasedRPG_OOP_WillB
                         POS(0, -1, enemies);
                         break;
                     case 'a':
-                        POS(-1, 0,enemies);
+                        POS(-1, 0, enemies);
                         break;
                     case 's':
                         POS(0, 1, enemies);
@@ -72,7 +72,7 @@ namespace TextBasedRPG_OOP_WillB
             }
             Attacked = false;
         }
-        public void POS(int x, int y,List<Enemy>enemies)
+        public void POS(int x, int y, List<Enemy> enemies)
         {
             this.x += x;
             this.y += y;
@@ -100,6 +100,17 @@ namespace TextBasedRPG_OOP_WillB
                     healthSys.ShieldUp(shieldUp);
                     break;
             }
+            foreach (Enemy enemy in enemies)
+            {
+                if (this.x == enemy.x && this.y == enemy.y)
+                {
+                    enemy.TakeDamage(1);
+                    this.x -= x;
+                    this.y -= y;
+                    return;
+                }
+            }
+
         }
         public void TakeDamage(int damage)
         {

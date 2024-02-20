@@ -10,7 +10,7 @@ namespace TextBasedRPG_OOP_WillB
     enum EnemType
     {
         Grunt,
-        //Chaser,
+        Chaser,
         //Runner,
 
     }
@@ -40,12 +40,12 @@ namespace TextBasedRPG_OOP_WillB
                 case EnemType.Grunt:
                     enemyAvatar = 'G';
                     break;
-                //case EnemType.Chaser:
-                //    enemyAvatar = 'C';
-                //    break;
-                //case EnemType.Runner:
-                //    enemyAvatar = 'R';
-                //    break;
+                case EnemType.Chaser:
+                    enemyAvatar = 'C';
+                    break;
+                    //case EnemType.Runner:
+                    //    enemyAvatar = 'R';
+                    //    break;
             }
         }
         public void EnemyMove(Player player)
@@ -55,12 +55,12 @@ namespace TextBasedRPG_OOP_WillB
                 case EnemType.Grunt:
                     MoveRnd(player);
                     break;
-                //case EnemType.Chaser:
-                //    MoveChase(player);
-                //    break;
-                //case EnemType.Runner:
-                //    MoveRun(player);
-                //    break;
+                case EnemType.Chaser:
+                    MoveChase(player);
+                    break;
+                    //case EnemType.Runner:
+                    //    MoveRun(player);
+                    //    break;
             }
         }
         public void MoveRnd(Player player)
@@ -82,7 +82,6 @@ namespace TextBasedRPG_OOP_WillB
                     dx = 1;
                     break;
             }
-            EnemyMoveCheck(dx, dy, player);
         }
         public void MoveChase(Player player)
         {
@@ -98,22 +97,14 @@ namespace TextBasedRPG_OOP_WillB
                 dx = 0;
                 dy = Math.Sign(dy);
             }
-            EnemyMoveCheck(dx, dy, player);
+            POS(dx, dy,player);
         }
-        public void EnemyMoveCheck(int dx, int dy, Player player)
+        public void EnemyCombatCheck(int dx, int dy, Player player)
         {
             int EnemyNewX = x + dx;
             int EnemyNewY = y + dy;
-            if (EnemyNewX == player.x && EnemyNewY == player.y)
-            {
-                player.TakeDamage(1);
-            }
-            else
-            {
-                POS(dx, dy);
-            }
         }
-        public void POS(int x, int y)
+        public void POS(int x, int y,Player player)
         {
             this.x += x;
             this.y += y;
@@ -128,6 +119,13 @@ namespace TextBasedRPG_OOP_WillB
                 case '+':
                     TakeDamage(1);
                     break;
+            }
+            if (this.x == player.x && this.y == player.y)
+            {
+                player.TakeDamage(1);
+                this.x -= x;
+                this.y -= y;
+                return;
             }
         }
         public void TakeDamage(int damage)//Allows the enemies to take damage

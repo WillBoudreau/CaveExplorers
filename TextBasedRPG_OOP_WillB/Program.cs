@@ -17,13 +17,14 @@ namespace TextBasedRPG_OOP_WillB
 
             Map map = new Map();
             Player player = new Player();
-            Enemy enemy1 = new Enemy(4, 4, EnemType.Grunt);
-            //Enemy enemy2 = new Enemy(15,15, EnemType.Chaser);
-            List<Enemy> enemies = new List<Enemy> { enemy1};
+            Enemy enemy1 = new Enemy(5, 5, EnemType.Grunt);
+            Enemy enemy2 = new Enemy(15,15, EnemType.Chaser);
+            List<Enemy> enemies = new List<Enemy> { enemy1,enemy2};
             HUD hud = new HUD(player,enemies);
             map.MapArray();
             while (player.healthSys.health > 0 || enemy1.healthSys.health > 0)
             {
+                Console.Clear();
                 map.ShowMap();
                 hud.DisplayHUD();
                 Console.WriteLine("----------");
@@ -36,8 +37,7 @@ namespace TextBasedRPG_OOP_WillB
                     enemy.EnemyMove(player);
                 }
                 player.PlayerPOSMove(enemies);
-               
-                Console.ResetColor();
+                Console.Clear();
             }
             Console.Clear();
             Console.WriteLine("Game Over");
