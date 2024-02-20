@@ -12,7 +12,6 @@ namespace TextBasedRPG_OOP_WillB
         Grunt,
         Chaser,
         Runner,
-
     }
     struct EnemyVals
     {
@@ -24,7 +23,6 @@ namespace TextBasedRPG_OOP_WillB
     internal class Enemy : Entity
     {
         public EnemType enemType;
-        private List<Enemy> enemies;
         EnemyVals enemyVals = new EnemyVals();
         public char enemyAvatar { get; set; }
         Random rnd = new Random();

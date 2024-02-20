@@ -99,6 +99,12 @@ namespace TextBasedRPG_OOP_WillB
                 case 'S':
                     healthSys.ShieldUp(shieldUp);
                     break;
+                case '(':
+                    this.y += 2;
+                    break;
+                case ')':
+                    this.y += 2;
+                    break;
             }
             foreach (Enemy enemy in enemies)
             {
