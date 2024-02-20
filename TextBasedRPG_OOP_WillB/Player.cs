@@ -15,7 +15,8 @@ namespace TextBasedRPG_OOP_WillB
     {
         public bool Playerturn = true;
         public bool Attacked = false;
-        public Player()
+        private HUD hud;
+        public Player(HUD hud)
         {
             score = 0;
             x = 3;
@@ -25,6 +26,7 @@ namespace TextBasedRPG_OOP_WillB
             healthSys.health = 3;
             healthSys.shield = 3;
             damage = 3;
+            this.hud = hud;
         }
         public static char Input()
         {
@@ -118,6 +120,7 @@ namespace TextBasedRPG_OOP_WillB
                 if (this.x == enemy.x && this.y == enemy.y)
                 {
                     enemy.TakeDamage(1);
+                    hud.lastenemy(enemy);
                     this.x -= x;
                     this.y -= y;
                     return;

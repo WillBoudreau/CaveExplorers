@@ -10,24 +10,26 @@ namespace TextBasedRPG_OOP_WillB
     {
         Player player;
         List<Enemy> enemies;
+        Enemy LastSeen;
         public HUD(Player player,List<Enemy>enemies)
         {
             this.player = player;
             this.enemies = enemies;
-        } 
+        }
         public void DisplayHUD()
         {
             Console.WriteLine("Player Health: " + player.healthSys.health);
             Console.WriteLine("Player Shield: " + player.healthSys.shield);
             Console.WriteLine("Player Score: " + player.score);
-            Console.WriteLine("Player POS: "+ player.x +" "+player.y);
-            Console.WriteLine("Enemy health: " + enemies[0].healthSys.health);
-            Console.WriteLine("Enemy health: "+ enemies[1].healthSys.health);
-            Console.WriteLine("Enemy health: "+ enemies[2].healthSys.health);
+            Console.WriteLine("Player POS: " + player.x + " " + player.y);
+            if(LastSeen != null)
+            {
+                Console.WriteLine("Last Enemy encountered: " + LastSeen);
+            }
         }
-        //public void UpdateLog(CollectorManager Collect, )
-        //{
-
-        //}
+        public void lastenemy(Enemy enemy)
+        {
+            LastSeen = enemy;
+        }
     }
 }
