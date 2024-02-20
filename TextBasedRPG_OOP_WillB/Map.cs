@@ -23,8 +23,6 @@ namespace TextBasedRPG_OOP_WillB
             MapChar[y][x] = tile;
             Console.SetCursorPosition(x, y);
             Console.Write(tile);
-            ShowMap();
-            Console.ReadKey();
         }
         public void MapArray()
         {

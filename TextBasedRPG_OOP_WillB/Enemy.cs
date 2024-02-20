@@ -17,6 +17,7 @@ namespace TextBasedRPG_OOP_WillB
     {
         public int StartX;
         public int StartY;
+        public int enemDamage;
         public bool Enemyturn;
         public bool EnemyActive;
     }
@@ -51,12 +52,15 @@ namespace TextBasedRPG_OOP_WillB
             switch (enemType)
             {
                 case EnemType.Grunt:
+                    enemyVals.enemDamage = 1;
                     MoveRnd(player);
                     break;
                 case EnemType.Chaser:
+                    enemyVals.enemDamage = 2;
                     MoveChase(player);
                     break;
                 case EnemType.Runner:
+                    enemyVals.enemDamage = 1;
                     MoveRun(player);
                     break;
             }
@@ -134,7 +138,7 @@ namespace TextBasedRPG_OOP_WillB
             }
             if (this.x == player.x && this.y == player.y)
             {
-                player.TakeDamage(1);
+                player.TakeDamage(enemyVals.enemDamage);
                 this.x -= x;
                 this.y -= y;
                 return;
