@@ -97,12 +97,13 @@ namespace TextBasedRPG_OOP_WillB
                     break;
                 case 'H':
                     CollectorMan.CollectHealth();
-                    healthSys.Heal(heal);
                     map.UpdateMapTile(this.x, this.y, '.');
+                    healthSys.Heal(heal);
                     break;
                 case 'S':
-                    healthSys.ShieldUp(shieldUp);
+                    CollectorMan.CollectShield();
                     map.UpdateMapTile(this.x, this.y, '.');
+                    healthSys.ShieldUp(shieldUp);
                     break;
                 case '(':
                     this.y += 2;

@@ -10,18 +10,81 @@ namespace TextBasedRPG_OOP_WillB
     {
         List<char> Coins = new List<char>();
         List<char>Health = new List<char>();
+        List<char>Shield = new List<char>();
+        string UseItems;
         public void CollectCoins()
         {
             Coins.Add('*');
-            Console.Clear();
-            Console.WriteLine("Coin Collected");
+            Inventory();
             Console.ReadKey();
         }
         public void CollectHealth()
         {
             Health.Add('H');
+            Inventory();
+            Console.ReadKey();
+        }
+        public void CollectShield()
+        {
+            Shield.Add('S');
+            Inventory();
+            
+        }
+        public void RemoveCoins()
+        {
+            Coins.Remove(Coins[0]);
+            Inventory();
+        }
+        public void RemoveHealth()
+        {
+            Health.Remove(Health[0]);
+            Inventory();
+        }
+        public void RemoveShield()
+        {
+            Shield.Remove(Shield[0]);
+            Inventory();
+        }
+        public void Inventory()
+        {
             Console.Clear();
-            Console.WriteLine("Health Collected ");
+            Console.WriteLine("Shields availible:");
+            for( int i = 0; i < Shield.Count; i++)
+            {
+                Console.Write(Shield[i]);
+                Console.WriteLine();
+            }
+            Console.WriteLine("Health availible:");
+            for(int i = 0;i < Health.Count; i++)
+            {
+                Console.Write(Health[i]);
+                Console.WriteLine();
+            }
+            Console.WriteLine("Coins availible");
+            for (int i = 0; i < Coins.Count; i++)
+            {
+                Console.Write(Coins[i]);
+                Console.WriteLine();
+            }
+            Console.WriteLine("Which pickup would you like to use? or Close to go back");
+            UseItems = Console.ReadLine();
+            if(Coins.Count > 0 && UseItems == "Coins" || UseItems == "coins")
+            {
+                RemoveCoins();
+            }
+            if(Health.Count > 0 && UseItems == "Health"||UseItems == "health")
+            {
+                RemoveHealth();
+            }
+            if(Shield.Count > 0 && UseItems =="Shield"|| UseItems =="Shield")
+            {
+                RemoveShield();
+            }
+            if(UseItems == "Close" || UseItems =="close")
+            {
+                Console.WriteLine("Press any key to close");
+            }
+            Console.Clear();
         }
     }
 }

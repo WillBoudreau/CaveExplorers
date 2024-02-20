@@ -12,7 +12,7 @@ namespace TextBasedRPG_OOP_WillB
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Map map = new Map();
             Player player = new Player();
