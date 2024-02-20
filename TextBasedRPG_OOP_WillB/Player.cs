@@ -68,6 +68,9 @@ namespace TextBasedRPG_OOP_WillB
                     case 'd':
                         POS(1, 0, enemies);
                         break;
+                    case 'e':
+                        POS(0,0, enemies);
+                        break;
                 }
             }
             Attacked = false;
@@ -95,17 +98,20 @@ namespace TextBasedRPG_OOP_WillB
                 case 'H':
                     CollectorMan.CollectHealth();
                     healthSys.Heal(heal);
+                    map.UpdateMapTile(this.x, this.y, '.');
                     break;
                 case 'S':
                     healthSys.ShieldUp(shieldUp);
+                    map.UpdateMapTile(this.x, this.y, '.');
                     break;
                 case '(':
                     this.y += 2;
                     break;
                 case ')':
-                    this.y += 2;
+                    this.y -= 2;
                     break;
             }
+            map.UpdateMapTile(this.x - x, this.y - y, '.');
             foreach (Enemy enemy in enemies)
             {
                 if (this.x == enemy.x && this.y == enemy.y)
@@ -116,7 +122,6 @@ namespace TextBasedRPG_OOP_WillB
                     return;
                 }
             }
-
         }
         public void TakeDamage(int damage)
         {
@@ -126,6 +131,7 @@ namespace TextBasedRPG_OOP_WillB
             }
             else
             {
+                healthSys.shield = 0;
                 healthSys.health -= damage;
                 if (healthSys.health <= 0)
                 {

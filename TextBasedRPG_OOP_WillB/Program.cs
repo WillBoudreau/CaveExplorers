@@ -15,18 +15,18 @@ namespace TextBasedRPG_OOP_WillB
         static void Main(string[] args)
         {
             Map map = new Map();
-            map.MapArray();
             Player player = new Player();
             Enemy enemy1 = new Enemy(5, 5, EnemType.Grunt);
             Enemy enemy2 = new Enemy(15, 15, EnemType.Chaser);
             Enemy enemy3 = new Enemy(14, 14, EnemType.Runner);
             List<Enemy> enemies = new List<Enemy> { enemy1, enemy2,enemy3};
             HUD hud = new HUD(player, enemies);
+            map.MapArray();
             map.ShowMap();
-            while (player.healthSys.health > 0 || enemy1.healthSys.health > 0)
+            while (player.healthSys.health > 0)
             {
-                
-                map.ShowMap();
+                Console.ResetColor();
+                Console.WriteLine("\n");
                 hud.DisplayHUD();
                 Console.WriteLine("----------");
                 player.DisplayPlayer();
@@ -38,7 +38,6 @@ namespace TextBasedRPG_OOP_WillB
                     enemy.EnemyMove(player);
                 }
                 player.PlayerPOSMove(enemies);
-                Console.Clear();
                 Console.ResetColor();
             }
             Console.Clear();

@@ -25,5 +25,9 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Enemy health: "+ enemies[1].healthSys.health);
             Console.WriteLine("Enemy health: "+ enemies[2].healthSys.health);
         }
+        public void UpdateLog()
+        {
+
+        }
     }
 }

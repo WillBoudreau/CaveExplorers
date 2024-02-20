@@ -23,6 +23,7 @@ namespace TextBasedRPG_OOP_WillB
             MapChar[y][x] = tile;
             Console.SetCursorPosition(x, y);
             Console.Write(tile);
+            ShowMap();
         }
         public void MapArray()
         {
@@ -85,6 +86,11 @@ namespace TextBasedRPG_OOP_WillB
                         case 'S':
                             Console.BackgroundColor = ConsoleColor.White;
                             Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.Write(MapChar[i][j]);
+                            break;
+                        case '@':
+                            Console.BackgroundColor= ConsoleColor.DarkGray;
+                            Console.ForegroundColor= ConsoleColor.Magenta;
                             Console.Write(MapChar[i][j]);
                             break;
                     }
