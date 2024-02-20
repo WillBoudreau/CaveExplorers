@@ -9,16 +9,18 @@ namespace TextBasedRPG_OOP_WillB
     internal class HUD
     {
         Player player;
-        Enemy enemy;
-        public HUD(Player player, Enemy enemy)
+        List<Enemy> enemies;
+        public HUD(Player player,List<Enemy>enemies)
         {
             this.player = player;
-            this.enemy = enemy;
+            this.enemies = enemies;
         } 
         public void DisplayHUD()
         {
             Console.WriteLine("Player Health: " + player.healthSys.health);
             Console.WriteLine("Player Shield: " + player.healthSys.shield);
+            Console.WriteLine("Player Score: " + player.score);
+
         }
     }
 }

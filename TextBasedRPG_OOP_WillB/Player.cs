@@ -50,48 +50,29 @@ namespace TextBasedRPG_OOP_WillB
                 return 'e';
             }
         }
-        public void PlayerPOSMove(Enemy enemy)
+        public void PlayerPOSMove(List<Enemy> enemies)
         {
             if (Playerturn == true && Attacked == false)
             {
                 switch (Input())
                 {
                     case 'w':
-                        MoveCheck(0, -1, enemy);
+                        POS(0, -1, enemies);
                         break;
                     case 'a':
-                        MoveCheck(-1, 0,enemy);
+                        POS(-1, 0,enemies);
                         break;
                     case 's':
-                        MoveCheck(0, 1, enemy);
+                        POS(0, 1, enemies);
                         break;
                     case 'd':
-                        MoveCheck(1, 0, enemy);
+                        POS(1, 0, enemies);
                         break;
                 }
             }
             Attacked = false;
         }
-        public void MoveCheck(int dx, int dy,Enemy enemy)
-        {
-            int NewX = x + dx;
-            int NewY = y + dy;
-            char tile = map.IsTileValid(NewX, NewY);
-            if(tile=='*')
-            {
-                map.UpdateMapTile(NewX, NewY,'.');
-                score++;
-            }
-            else if(NewX == enemy.x && NewY == enemy.y)
-            {
-                enemy.TakeDamage(damage);
-            }
-            else
-            {
-                POS(dx, dy);
-            }
-        }
-        public void POS(int x, int y)
+        public void POS(int x, int y,List<Enemy>enemies)
         {
             this.x += x;
             this.y += y;
@@ -108,6 +89,7 @@ namespace TextBasedRPG_OOP_WillB
                     break;
                 case '*':
                     CollectorMan.CollectCoins();
+                    map.UpdateMapTile(x, y, '.');
                     score++;
                     break;
                 case 'H':

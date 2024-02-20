@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
+    enum EnemType
+    {
+        Grunt,
+        //Chaser,
+        //Runner,
+
+    }
     struct EnemyVals
     {
         public int StartX;
@@ -14,67 +21,90 @@ namespace TextBasedRPG_OOP_WillB
         public bool Enemyturn;
         public bool EnemyActive;
     }
-    internal class Enemy:Entity
+    internal class Enemy : Entity
     {
+        public EnemType enemType;
+        private List<Enemy> enemies;
         EnemyVals enemyVals = new EnemyVals();
-        public Enemy(int StartX, int StartY)
+        public char enemyAvatar { get; set; }
+        Random rnd = new Random();
+        public Enemy(int StartX, int StartY, EnemType enemType)
         {
             x = StartX;
             y = StartY;
             healthSys.health = 2;
             enemyVals.EnemyActive = true;
+            this.enemType = enemType;
+            switch (enemType)
+            {
+                case EnemType.Grunt:
+                    enemyAvatar = 'G';
+                    break;
+                //case EnemType.Chaser:
+                //    enemyAvatar = 'C';
+                //    break;
+                //case EnemType.Runner:
+                //    enemyAvatar = 'R';
+                //    break;
+            }
         }
-        public static char EnemyInput()
+        public void EnemyMove(Player player)
         {
-            Random rnd = new Random();
-           int Move =  rnd.Next(1,4);
-            if (Move == 1)
+            switch (enemType)
             {
-                return 'w';
+                case EnemType.Grunt:
+                    MoveRnd(player);
+                    break;
+                //case EnemType.Chaser:
+                //    MoveChase(player);
+                //    break;
+                //case EnemType.Runner:
+                //    MoveRun(player);
+                //    break;
             }
-            else if (Move == 2)
+        }
+        public void MoveRnd(Player player)
+        {
+            int Move = rnd.Next(1, 5);
+            int dx = 0, dy = 0;
+            switch (Move)
             {
-                return 'a';
+                case 1:
+                    dy = -1;
+                    break;
+                case 2:
+                    dx = -1;
+                    break;
+                case 3:
+                    dy = 1;
+                    break;
+                case 4:
+                    dx = 1;
+                    break;
             }
-            else if (Move == 3)
+            EnemyMoveCheck(dx, dy, player);
+        }
+        public void MoveChase(Player player)
+        {
+            int dx = player.x - x;
+            int dy = player.y - y;
+            if (Math.Abs(dx) > Math.Abs(dy))
             {
-                return 's';
-            }
-            else if (Move == 4)
-            {
-                return 'd';
+                dx = Math.Sign(dx);
+                dy = 0;
             }
             else
             {
-                return 'e';
+                dx = 0;
+                dy = Math.Sign(dy);
             }
-        }
-        public void EnemyPOSMove(Player player)
-        {
-            {
-                switch (EnemyInput())
-                {
-                    case 'w':
-                        EnemyMoveCheck(0, -1, player);
-                        break;
-                    case 'a':
-                        EnemyMoveCheck(-1,0,player);
-                        break;
-                    case 's':
-                        EnemyMoveCheck(0,1,player);
-                        break;
-                    case 'd':
-                        EnemyMoveCheck(1,0,player);
-                        break;
-                }
-
-            }
+            EnemyMoveCheck(dx, dy, player);
         }
         public void EnemyMoveCheck(int dx, int dy, Player player)
         {
             int EnemyNewX = x + dx;
             int EnemyNewY = y + dy;
-            if(EnemyNewX == player.x &&  EnemyNewY == player.y)
+            if (EnemyNewX == player.x && EnemyNewY == player.y)
             {
                 player.TakeDamage(1);
             }
@@ -100,7 +130,7 @@ namespace TextBasedRPG_OOP_WillB
                     break;
             }
         }
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage)//Allows the enemies to take damage
         {
             healthSys.health -= damage;
             if (healthSys.health <= 0)
@@ -109,14 +139,14 @@ namespace TextBasedRPG_OOP_WillB
                 enemyVals.EnemyActive = false;
             }
         }
-        public void DisplayEnemy()
+        public void DisplayEnemy()//Displays the enemies
         {
             if (enemyVals.EnemyActive == true)
             {
                 Console.SetCursorPosition(this.x, this.y);
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.BackgroundColor = ConsoleColor.Gray;
-                Console.Write('E');
+                Console.Write(enemyAvatar);
                 Console.ResetColor();
             }
             else
