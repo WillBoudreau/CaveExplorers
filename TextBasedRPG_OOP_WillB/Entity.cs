@@ -22,10 +22,12 @@ namespace TextBasedRPG_OOP_WillB
         public int shieldUp;
         public Entity()
         {
+            
             this.CombatMan = new CombatManager();
             this.CollectorMan = new CollectorManager();
             this.map = new Map();
             this.healthSys = new HealthSys();
+            healthSys.health = 0;
         }
        
     }

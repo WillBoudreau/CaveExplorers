@@ -133,10 +133,13 @@ namespace TextBasedRPG_OOP_WillB
             if(healthSys.shield > 0)
             {
                 healthSys.shield -= damage;
+                if(healthSys.shield < 0)
+                {
+                    healthSys.shield = 0;
+                }
             }
             else
             {
-                healthSys.shield = 0;
                 healthSys.health -= damage;
                 if (healthSys.health <= 0)
                 {

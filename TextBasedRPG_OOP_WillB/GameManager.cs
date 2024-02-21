@@ -10,6 +10,7 @@ namespace TextBasedRPG_OOP_WillB
     {
         Map map;
         Player player;
+        Enemy enemy;
         Enemy enemy1;
         Enemy enemy2;
         Enemy enemy3;
@@ -27,10 +28,6 @@ namespace TextBasedRPG_OOP_WillB
             enemies = new List<Enemy> { enemy1, enemy2, enemy3, enemy4};
             hud = new HUD(player, enemies);
             Player.hud = hud;
-        }
-        public void GameInitialization()
-        {
-
         }
         public void GameLoop()
         {
@@ -59,6 +56,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             Console.Clear();
             Console.WriteLine("Game Over");
+            hud.EndScreen(enemy);
             Console.ReadKey();
 
         }

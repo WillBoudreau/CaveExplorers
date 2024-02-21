@@ -7,10 +7,6 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    struct HealthVals
-    {
-
-    }
     internal class HealthSys
     {
         public int health;

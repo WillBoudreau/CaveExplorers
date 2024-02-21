@@ -32,10 +32,10 @@ namespace TextBasedRPG_OOP_WillB
         public string name;
         public Enemy(int StartX, int StartY, EnemType enemType)
         {
+            healthSys.health = 0;
             damage = enemyVals.enemDamage;
             x = StartX;
             y = StartY;
-            healthSys.health = 2;
             enemyVals.EnemyActive = true;
             this.enemType = enemType;
             switch (enemType)
@@ -43,18 +43,22 @@ namespace TextBasedRPG_OOP_WillB
                 case EnemType.Grunt:
                     enemyAvatar = 'G';
                     name = "Grunt";
+                    healthSys.health += 2;
                     break;
                 case EnemType.Chaser:
                     enemyAvatar = 'C';
                     name = "Chaser";
+                    healthSys.health += 1;
                     break;
                 case EnemType.Runner:
                     enemyAvatar = 'R';
                     name = "Runner";
+                    healthSys.health += 2;
                     break;
                 case EnemType.Boss:
                     enemyAvatar = 'B';
                     name = "Boss";
+                    healthSys.health += 3;
                     break;
             }
         }
@@ -166,6 +170,19 @@ namespace TextBasedRPG_OOP_WillB
                     this.x -= x;
                     this.y -= y;
                     break;
+                case 'H':
+                    this.x -= x;
+                    this.y -= y;
+                    break;
+                case 'S':
+                    this.x -= x;
+                    this.y -= y;
+                    break;
+                case '*':
+                    this.x -= x;
+                    this.y -= y;
+                    break;
+
             }
             if (this.x == player.x && this.y == player.y)
             {

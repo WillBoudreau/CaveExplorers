@@ -24,7 +24,6 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Player Shield: " + player.healthSys.shield);
             Console.WriteLine("Player Score: " + player.score);
             Console.WriteLine("Player POS: " + player.x + " " + player.y);
-            UpdateLog();
             if(LastSeen != null)
             {
                 Console.WriteLine("Last Enemy encountered: " + LastSeen +"\n" + LastSeen +" Damage "+ LastSeenDamage + "\n" + LastSeen+ " Health "+LastSeenHealth);
@@ -36,15 +35,17 @@ namespace TextBasedRPG_OOP_WillB
             LastSeenHealth = enemy.healthSys.health;
             LastSeenDamage = enemy.enemDamage;
         }
-        public void UpdateLog()
+        public void EndScreen(Enemy enemy)
         {
-            if(player.x == player.x - 1)
+            Console.WriteLine("You where killed by a " + enemy.name);
+            Console.WriteLine("Tip:");
+            if(LastSeen =="Grunt")
             {
-                Console.WriteLine("Player was moved to the Left");
+                Console.WriteLine("The Grunt moves in random directions randomly, try to corner it's escape");
             }
-            if(player.y == player.y - 1)
+            if(LastSeen =="Chaser")
             {
-
+                Console.WriteLine("The Chaser will chase after you, the only way to win is to stand your ground");
             }
         }
     }
