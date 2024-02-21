@@ -26,7 +26,7 @@ namespace TextBasedRPG_OOP_WillB
             enemy3 = new Enemy(14, 14, EnemType.Runner);
             enemy4 = new Enemy(20, 20, EnemType.Boss);
             enemies = new List<Enemy> { enemy1, enemy2, enemy3, enemy4};
-            hud = new HUD(player, enemies );
+            hud = new HUD(player, enemies);
             Player.hud = hud;
         }
         public void GameLoop()
@@ -50,6 +50,7 @@ namespace TextBasedRPG_OOP_WillB
                 player.PlayerPOSMove(enemies);
                 Console.ResetColor();
             }
+            GameOver();
         }
         public void GameOver()
         {

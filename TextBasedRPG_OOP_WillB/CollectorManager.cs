@@ -15,14 +15,19 @@ namespace TextBasedRPG_OOP_WillB
         public void CollectCoins()
         {
             Coins.Add('*');
+            Inventory();
+            Console.ReadKey();
         }
         public void CollectHealth()
         {
             Health.Add('H');
+            Inventory();
+            Console.ReadKey();
         }
         public void CollectShield()
         {
             Shield.Add('S');
+            Inventory();
             
         }
         public void RemoveCoins()

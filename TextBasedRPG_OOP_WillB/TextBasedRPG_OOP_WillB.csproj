@@ -49,7 +49,6 @@
     <Compile Include="HUD.cs" />
     <Compile Include="Introduction.cs" />
     <Compile Include="Inventory.cs" />
-    <Compile Include="LevelSystem.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Entity.cs" />
