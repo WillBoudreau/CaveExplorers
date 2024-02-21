@@ -15,8 +15,8 @@ namespace TextBasedRPG_OOP_WillB
     {
         public bool Playerturn = true;
         public bool Attacked = false;
-        private HUD hud;
-        public Player(HUD hud)
+        public static HUD hud;
+        public Player()
         {
             score = 0;
             x = 3;
@@ -26,7 +26,6 @@ namespace TextBasedRPG_OOP_WillB
             healthSys.health = 3;
             healthSys.shield = 3;
             damage = 3;
-            this.hud = hud;
         }
         public static char Input()
         {

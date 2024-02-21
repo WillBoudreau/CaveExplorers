@@ -32,17 +32,17 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void RemoveCoins()
         {
-            Coins.Remove(Coins[0]);
+            Coins.Remove('*');
             Inventory();
         }
         public void RemoveHealth()
         {
-            Health.Remove(Health[0]);
+            Health.Remove('H');
             Inventory();
         }
         public void RemoveShield()
         {
-            Shield.Remove(Shield[0]);
+            Shield.Remove('S');
             Inventory();
         }
         public void Inventory()

@@ -10,7 +10,9 @@ namespace TextBasedRPG_OOP_WillB
     {
         Player player;
         List<Enemy> enemies;
-        Enemy LastSeen;
+        string LastSeen;
+        int LastSeenDamage;
+        int LastSeenHealth;
         public HUD(Player player,List<Enemy>enemies)
         {
             this.player = player;
@@ -24,12 +26,14 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Player POS: " + player.x + " " + player.y);
             if(LastSeen != null)
             {
-                Console.WriteLine("Last Enemy encountered: " + LastSeen);
+                Console.WriteLine("Last Enemy encountered: " + LastSeen +"\n" + LastSeen +" Damage "+ LastSeenDamage + "\n" + LastSeen+ " Health "+LastSeenHealth);
             }
         }
         public void lastenemy(Enemy enemy)
         {
-            LastSeen = enemy;
+            LastSeen = enemy.name;
+            LastSeenHealth = enemy.healthSys.health;
+            LastSeenDamage = enemy.enemDamage;
         }
     }
 }

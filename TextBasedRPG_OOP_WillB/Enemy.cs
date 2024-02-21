@@ -13,7 +13,7 @@ namespace TextBasedRPG_OOP_WillB
         Chaser,
         Runner,
     }
-    struct EnemyVals
+     struct EnemyVals
     {
         public int StartX;
         public int StartY;
@@ -26,9 +26,12 @@ namespace TextBasedRPG_OOP_WillB
         public EnemType enemType;
         EnemyVals enemyVals = new EnemyVals();
         public char enemyAvatar { get; set; }
+        public int enemDamage { get; set; }
         Random rnd = new Random();
+        public string name;
         public Enemy(int StartX, int StartY, EnemType enemType)
         {
+            damage = enemyVals.enemDamage;
             x = StartX;
             y = StartY;
             healthSys.health = 2;
@@ -38,12 +41,15 @@ namespace TextBasedRPG_OOP_WillB
             {
                 case EnemType.Grunt:
                     enemyAvatar = 'G';
+                    name = "Grunt";
                     break;
                 case EnemType.Chaser:
                     enemyAvatar = 'C';
+                    name = "Chaser";
                     break;
                 case EnemType.Runner:
                     enemyAvatar = 'R';
+                    name = "Runner";
                     break;
             }
         }
@@ -52,15 +58,15 @@ namespace TextBasedRPG_OOP_WillB
             switch (enemType)
             {
                 case EnemType.Grunt:
-                    enemyVals.enemDamage = 1;
+                    enemDamage = 1;
                     MoveRnd(player);
                     break;
                 case EnemType.Chaser:
-                    enemyVals.enemDamage = 2;
+                    enemDamage = 2;
                     MoveChase(player);
                     break;
                 case EnemType.Runner:
-                    enemyVals.enemDamage = 1;
+                    enemDamage = 1;
                     MoveRun(player);
                     break;
             }
@@ -132,6 +138,14 @@ namespace TextBasedRPG_OOP_WillB
                     this.y -= y;
                     break;
                 case '+':
+                    this.x -= x;
+                    this.y -= y;
+                    break;
+                case '(':
+                    this.x -= x;
+                    this.y -= y;
+                    break;
+                case ')':
                     this.x -= x;
                     this.y -= y;
                     break;
