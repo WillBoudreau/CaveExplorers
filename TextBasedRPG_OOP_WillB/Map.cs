@@ -41,6 +41,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void ShowMap()
         {
+            Console.Clear();
             for (int i = 0; i < MapChar.Length; i++)
             {
                 for (int j = 0; j < MapChar[i].Length; j++)

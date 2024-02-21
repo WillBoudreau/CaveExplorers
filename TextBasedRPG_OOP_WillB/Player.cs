@@ -69,9 +69,8 @@ namespace TextBasedRPG_OOP_WillB
                     case 'd':
                         POS(1, 0, enemies);
                         break;
-                    case 'i':
+                    case 'e':
                         POS(0,0, enemies);
-                        CollectorMan.Inventory();
                         break;
                 }
             }
@@ -114,6 +113,7 @@ namespace TextBasedRPG_OOP_WillB
                 case ')':
                     this.y -= 2;
                     break;
+
             }
             map.UpdateMapTile(this.x, this.y, '.');
             foreach (Enemy enemy in enemies)
