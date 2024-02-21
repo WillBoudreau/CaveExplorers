@@ -16,7 +16,6 @@ namespace TextBasedRPG_OOP_WillB
         {
             GameManager gameManager = new GameManager();
             gameManager.GameLoop();
-
         }
     }
 }

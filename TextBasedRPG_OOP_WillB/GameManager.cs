@@ -8,24 +8,30 @@ namespace TextBasedRPG_OOP_WillB
 {
     internal class GameManager
     {
+        Map map;
+        Player player;
+        Enemy enemy1;
+        Enemy enemy2;
+        Enemy enemy3;
+        List<Enemy> enemies;
+        HUD hud;
         public GameManager() 
         {
-
-            
+            map = new Map();
+            player = new Player();
+            enemy1 = new Enemy(5, 5, EnemType.Grunt);
+            enemy2 = new Enemy(15, 15, EnemType.Chaser);
+            enemy3 = new Enemy(14, 14, EnemType.Runner);
+            enemies = new List<Enemy> { enemy1, enemy2, enemy3 };
+            hud = new HUD(player, enemies);
+            Player.hud = hud;
         }
         public void GameInitialization()
         {
+
         }
         public void GameLoop()
         {
-            Map map = new Map();
-            Player player = new Player();
-            Enemy enemy1 = new Enemy(5, 5, EnemType.Grunt);
-            Enemy enemy2 = new Enemy(15, 15, EnemType.Chaser);
-            Enemy enemy3 = new Enemy(14, 14, EnemType.Runner);
-            List<Enemy> enemies = new List<Enemy> { enemy1, enemy2, enemy3 };
-            HUD hud = new HUD(player, enemies);
-            Player.hud = hud;
             map.MapArray();
             map.ShowMap();
             while (player.healthSys.health > 0)
@@ -45,9 +51,14 @@ namespace TextBasedRPG_OOP_WillB
                 player.PlayerPOSMove(enemies);
                 Console.ResetColor();
             }
+            GameOver();
+        }
+        public void GameOver()
+        {
             Console.Clear();
             Console.WriteLine("Game Over");
             Console.ReadKey();
+
         }
     }
 }

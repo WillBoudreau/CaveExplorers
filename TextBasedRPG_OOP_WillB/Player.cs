@@ -90,7 +90,8 @@ namespace TextBasedRPG_OOP_WillB
                     break;
                 case '+':
                     TakeDamage(1);
-                    break;
+                    map.UpdateMapTile(this.x, this.y, '+');
+                    return;
                 case '*':
                     CollectorMan.CollectCoins();
                     map.UpdateMapTile(this.x, this.y, '.');
@@ -113,7 +114,7 @@ namespace TextBasedRPG_OOP_WillB
                     this.y -= 2;
                     break;
             }
-            map.UpdateMapTile(this.x - x, this.y - y, '.');
+            map.UpdateMapTile(this.x, this.y, '.');
             foreach (Enemy enemy in enemies)
             {
                 if (this.x == enemy.x && this.y == enemy.y)

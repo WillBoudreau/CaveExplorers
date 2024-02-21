@@ -152,7 +152,7 @@ namespace TextBasedRPG_OOP_WillB
             }
             if (this.x == player.x && this.y == player.y)
             {
-                player.TakeDamage(enemyVals.enemDamage);
+                player.TakeDamage(enemDamage);
                 this.x -= x;
                 this.y -= y;
                 return;
