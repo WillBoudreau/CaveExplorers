@@ -24,6 +24,7 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Player Shield: " + player.healthSys.shield);
             Console.WriteLine("Player Score: " + player.score);
             Console.WriteLine("Player POS: " + player.x + " " + player.y);
+            UpdateLog();
             if(LastSeen != null)
             {
                 Console.WriteLine("Last Enemy encountered: " + LastSeen +"\n" + LastSeen +" Damage "+ LastSeenDamage + "\n" + LastSeen+ " Health "+LastSeenHealth);
@@ -34,6 +35,17 @@ namespace TextBasedRPG_OOP_WillB
             LastSeen = enemy.name;
             LastSeenHealth = enemy.healthSys.health;
             LastSeenDamage = enemy.enemDamage;
+        }
+        public void UpdateLog()
+        {
+            if(player.x == player.x - 1)
+            {
+                Console.WriteLine("Player was moved to the Left");
+            }
+            if(player.y == player.y - 1)
+            {
+
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ namespace TextBasedRPG_OOP_WillB
         Enemy enemy1;
         Enemy enemy2;
         Enemy enemy3;
+        Enemy enemy4;
         List<Enemy> enemies;
         HUD hud;
         public GameManager() 
@@ -22,7 +23,8 @@ namespace TextBasedRPG_OOP_WillB
             enemy1 = new Enemy(5, 5, EnemType.Grunt);
             enemy2 = new Enemy(15, 15, EnemType.Chaser);
             enemy3 = new Enemy(14, 14, EnemType.Runner);
-            enemies = new List<Enemy> { enemy1, enemy2, enemy3 };
+            enemy4 = new Enemy(20, 20, EnemType.Boss);
+            enemies = new List<Enemy> { enemy1, enemy2, enemy3, enemy4};
             hud = new HUD(player, enemies);
             Player.hud = hud;
         }

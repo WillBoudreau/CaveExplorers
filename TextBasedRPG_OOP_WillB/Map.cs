@@ -98,6 +98,10 @@ namespace TextBasedRPG_OOP_WillB
             }
             Console.ResetColor();
         }
+        public void LoadNextLevel()
+        {
+
+        }
         public char IsTileValid(int x, int y)
         {
             if (y >= 0 && y < MapChar.Length && x >= 0 && x < MapChar[y].Length)

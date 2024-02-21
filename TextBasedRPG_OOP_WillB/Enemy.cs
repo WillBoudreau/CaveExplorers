@@ -12,6 +12,7 @@ namespace TextBasedRPG_OOP_WillB
         Grunt,
         Chaser,
         Runner,
+        Boss,
     }
      struct EnemyVals
     {
@@ -51,6 +52,10 @@ namespace TextBasedRPG_OOP_WillB
                     enemyAvatar = 'R';
                     name = "Runner";
                     break;
+                case EnemType.Boss:
+                    enemyAvatar = 'B';
+                    name = "Boss";
+                    break;
             }
         }
         public void EnemyMove(Player player)
@@ -69,6 +74,18 @@ namespace TextBasedRPG_OOP_WillB
                     enemDamage = 1;
                     MoveRun(player);
                     break;
+                case EnemType.Boss:
+                    enemDamage = 3;
+                    MoveBoss(player);
+                    break;
+            }
+        }
+        public void MoveBoss(Player player)
+        {
+            int distanceToplayer = Math.Abs(player.x - x) + Math.Abs(player.y - y);
+            if(distanceToplayer <= 3)
+            {
+                MoveChase(player);
             }
         }
         public void MoveRun(Player player)

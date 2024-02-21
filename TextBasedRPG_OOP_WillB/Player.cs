@@ -113,6 +113,7 @@ namespace TextBasedRPG_OOP_WillB
                 case ')':
                     this.y -= 2;
                     break;
+
             }
             map.UpdateMapTile(this.x, this.y, '.');
             foreach (Enemy enemy in enemies)
