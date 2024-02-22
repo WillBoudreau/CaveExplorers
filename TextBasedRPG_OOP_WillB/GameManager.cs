@@ -10,10 +10,6 @@ namespace TextBasedRPG_OOP_WillB
     {
         Map map;
         Player player;
-        Enemy Grunt;
-        Enemy Chaser;
-        Enemy Runner;
-        Enemy Boss;
         List<Enemy> enemies;
         HUD hud;
         public GameManager() 
@@ -26,7 +22,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void GameLoop()
         {
-            Console.Clear();
+            Console.CursorVisible = false;
             map.MapArray();
             map.ShowMap();
             while (player.healthSys.health > 0)
@@ -53,7 +49,6 @@ namespace TextBasedRPG_OOP_WillB
             Console.Clear();
             Console.WriteLine("Game Over");
             Console.ReadKey();
-
         }
     }
 }

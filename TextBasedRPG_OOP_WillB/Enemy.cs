@@ -215,51 +215,23 @@ namespace TextBasedRPG_OOP_WillB
                 this.y -= y;
             }
         }
-        public List<Enemy> DisplayEnemies()
-        {
-            List<Enemy> enemList = new List<Enemy>();
-                enemList.Add(new Enemy(5, 5, EnemType.Grunt));
-                enemList.Add(new Enemy(15,15,EnemType.Chaser));
-                enemList.Add(new Enemy(14,14,EnemType.Runner));
-                return enemList;
-        //    for (int i = 0; i < count; i++)
-        //    {
-        //        //int Gx = 5;
-        //        //int Gy = 5;
-        //        //int Cx = 15;
-        //        //int Cy = 15;
-        //        //int Rx = 14;
-        //        //int Ry = 14;
-        //        //Enemy enemy = null;
-        //        //switch(enemType)
-        //        //{
-        //        //    case EnemType.Grunt:
-        //        //        enemy = new Enemy(Gx,Gy, EnemType.Grunt);
-        //        //        break;
-        //        //    case EnemType.Chaser:
-        //        //        enemy = new Enemy(Cx, Cy, EnemType.Chaser);
-        //        //        break;
-        //        //    case EnemType.Runner:
-        //        //        enemy = new Enemy(Rx,Ry, EnemType.Runner);
-        //        //        break;
-
-        //        //}
-        //    }
-        }
         public static List<Enemy> GenerateEnenmies()
         {
+            int[,] GruntPOS = { { 14, 9 }, { 14, 8 }, { 13, 9 }, { 15, 9 }, {5,5} };
+            int[,] ChaserPOS = { { 15, 15 }, { 14, 14 } };
+            int[,] RunnerPOS = { { 16,16}, { 17,17 } }; 
             List<Enemy> enemies = new List<Enemy>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < GruntPOS.GetLength(0); i++)
             {
-                enemies.Add(new Enemy(14, 9, EnemType.Grunt));
+                enemies.Add(new Enemy(GruntPOS[i, 0], GruntPOS[i,1], EnemType.Grunt));
             }
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < ChaserPOS.GetLength(0); i++)
             {
-                enemies.Add(new Enemy(15, 15, EnemType.Chaser));
+                enemies.Add(new Enemy(ChaserPOS[i,0], ChaserPOS[i,1], EnemType.Chaser));
             }
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < RunnerPOS.GetLength(0); i++)
             {
-                enemies.Add(new Enemy(16, 16, EnemType.Runner));
+                enemies.Add(new Enemy(RunnerPOS[i,0], RunnerPOS[i,1], EnemType.Runner));
             }
             enemies.Add(new Enemy(20, 20, EnemType.Boss));
             return enemies;

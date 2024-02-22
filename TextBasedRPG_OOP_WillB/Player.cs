@@ -118,6 +118,8 @@ namespace TextBasedRPG_OOP_WillB
                     hud.AddEvent("Player collected shield");
                     map.UpdateMapTile(this.x, this.y, '.');
                     healthSys.ShieldUp(1);
+                    this.x -= x;
+                    this.y -= y;
                     break;
                 case 'D':
                     hud.AddEvent("Player collected a damage boost");
@@ -133,10 +135,12 @@ namespace TextBasedRPG_OOP_WillB
                     this.y -= y;
                     ExpirenceMan.LevelUp();
                     break;
-                case '(':
+                case '>':
+                    hud.AddEvent("Player used the Teleporter");
                     this.y += 2;
                     break;
-                case ')':
+                case '<':
+                    hud.AddEvent("Player used the Teleporter");
                     this.y -= 2;
                     break;
 

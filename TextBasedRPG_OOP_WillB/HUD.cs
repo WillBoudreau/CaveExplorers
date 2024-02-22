@@ -30,10 +30,10 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Player Xp: " + player.ExpirenceMan.xp);
             Console.WriteLine("Player POS: " + player.x + " " + player.y);
             DisplayEventLog();
-            Console.WriteLine();
+            Console.WriteLine("\n");
             if(LastSeen != null)
             {
-                Console.WriteLine("Last Enemy encountered: " + LastSeen +"\n" + LastSeen +" Damage "+ LastSeenDamage + "\n" + LastSeen+ " Health "+LastSeenHealth);
+                Console.WriteLine("\nLast Enemy encountered: " + LastSeen +"\n" + LastSeen +" Damage "+ LastSeenDamage + "\n" + LastSeen+ " Health "+LastSeenHealth);
             }
         }
         public void lastenemy(Enemy enemy)
@@ -52,11 +52,13 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void DisplayEventLog()
         {
+            int DisplayEventLogLimit = 3;
             Console.WriteLine("Event Log");
-            if(EventLog.Count > 3)
+            if(EventLog.Count > DisplayEventLogLimit)
             {
                 Console.ResetColor();
                 ClearLog();
+
             }
             foreach(string Log in EventLog)
             {
