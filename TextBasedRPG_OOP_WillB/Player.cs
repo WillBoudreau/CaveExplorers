@@ -59,18 +59,19 @@ namespace TextBasedRPG_OOP_WillB
                 {
                     case 'w':
                         POS(0, -1, enemies);
+                        hud.Playeraction = "Player moved up";
                         break;
                     case 'a':
                         POS(-1, 0, enemies);
+                        hud.Playeraction = "Player moved Left";
                         break;
                     case 's':
                         POS(0, 1, enemies);
+                        hud.Playeraction = "Player moved Down";
                         break;
                     case 'd':
                         POS(1, 0, enemies);
-                        break;
-                    case 'e':
-                        POS(0,0, enemies);
+                        hud.Playeraction = "Player moved Right";
                         break;
                 }
             }
@@ -85,6 +86,7 @@ namespace TextBasedRPG_OOP_WillB
                 case '.':
                     break;
                 case '#':
+                    hud.Playeraction = "The player moved into a wall";
                     this.x -= x;
                     this.y -= y;
                     break;

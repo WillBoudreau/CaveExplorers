@@ -56,7 +56,6 @@ namespace TextBasedRPG_OOP_WillB
         {
             Console.Clear();
             Console.WriteLine("Game Over");
-            hud.EndScreen(enemy);
             Console.ReadKey();
 
         }

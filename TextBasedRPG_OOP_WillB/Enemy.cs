@@ -26,6 +26,7 @@ namespace TextBasedRPG_OOP_WillB
     {
         public EnemType enemType;
         EnemyVals enemyVals = new EnemyVals();
+        public static HUD hud;
         public char enemyAvatar { get; set; }
         public int enemDamage { get; set; }
         Random rnd = new Random();
@@ -87,9 +88,11 @@ namespace TextBasedRPG_OOP_WillB
         public void MoveBoss(Player player)
         {
             int distanceToplayer = Math.Abs(player.x - x) + Math.Abs(player.y - y);
-            if(distanceToplayer <= 3)
+            
+            if(distanceToplayer <= 5)
             {
                 MoveChase(player);
+                
             }
         }
         public void MoveRun(Player player)
@@ -116,15 +119,19 @@ namespace TextBasedRPG_OOP_WillB
             switch (Move)
             {
                 case 1:
+                    
                     dy = -1;
                     break;
                 case 2:
+                    
                     dx = -1;
                     break;
                 case 3:
+                   
                     dy = 1;
                     break;
                 case 4:
+                   
                     dx = 1;
                     break;
             }
@@ -136,11 +143,13 @@ namespace TextBasedRPG_OOP_WillB
             int dy = player.y - y;
             if (Math.Abs(dx) > Math.Abs(dy))
             {
+                
                 dx = Math.Sign(dx);
                 dy = 0;
             }
             else
             {
+                
                 dx = 0;
                 dy = Math.Sign(dy);
             }
