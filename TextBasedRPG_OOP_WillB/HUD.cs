@@ -10,6 +10,7 @@ namespace TextBasedRPG_OOP_WillB
     {
         Player player;
         List<Enemy> enemies;
+        Map map = new Map();
         string LastSeen;
         int LastSeenDamage;
         int LastSeenHealth;
@@ -29,6 +30,7 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Player Xp: " + player.ExpirenceMan.xp);
             Console.WriteLine("Player POS: " + player.x + " " + player.y);
             DisplayEventLog();
+            Console.WriteLine();
             if(LastSeen != null)
             {
                 Console.WriteLine("Last Enemy encountered: " + LastSeen +"\n" + LastSeen +" Damage "+ LastSeenDamage + "\n" + LastSeen+ " Health "+LastSeenHealth);
@@ -53,6 +55,7 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Event Log");
             if(EventLog.Count > 3)
             {
+                Console.ResetColor();
                 ClearLog();
             }
             foreach(string Log in EventLog)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,18 +25,18 @@ namespace TextBasedRPG_OOP_WillB
     }
     internal class Enemy : Entity
     {
-        public int health;
-        public int shield;
+        public char enemyAvatar { get; set; }
+        public int enemDamage { get; set; }
+        int enemHealth;
+        int enemShield;
         public EnemType enemType;
         EnemyVals enemyVals = new EnemyVals();
         public static HUD hud;
-        public char enemyAvatar { get; set; }
-        public int enemDamage { get; set; }
         Random rnd = new Random();
         public string name;
         public Enemy(int StartX, int StartY, EnemType enemType)
         {
-            healthSys = new HealthSys(health, shield);
+            healthSys = new HealthSys(enemHealth, enemShield);
             damage = enemyVals.enemDamage;
             x = StartX;
             y = StartY;
@@ -193,6 +194,10 @@ namespace TextBasedRPG_OOP_WillB
                     this.x -= x;
                     this.y -= y;
                     break;
+                case 'D':
+                    this.x -= x;
+                    this.y -= y;
+                    break;
 
             }
             foreach (Enemy enemy in enemies)
@@ -240,6 +245,24 @@ namespace TextBasedRPG_OOP_WillB
 
         //        //}
         //    }
+        }
+        public static List<Enemy> GenerateEnenmies()
+        {
+            List<Enemy> enemies = new List<Enemy>();
+            for (int i = 0; i < 5; i++)
+            {
+                enemies.Add(new Enemy(14, 9, EnemType.Grunt));
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                enemies.Add(new Enemy(15, 15, EnemType.Chaser));
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                enemies.Add(new Enemy(16, 16, EnemType.Runner));
+            }
+            enemies.Add(new Enemy(20, 20, EnemType.Boss));
+            return enemies;
         }
         public void DisplayEnemy()//Displays the enemies
         {

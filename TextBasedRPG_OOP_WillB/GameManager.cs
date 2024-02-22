@@ -20,23 +20,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             map = new Map();
             player = new Player();
-            enemies = new List<Enemy>();
-            for(int i = 0; i < 5; i++) 
-            {
-                Grunt= new Enemy(5, 5, EnemType.Grunt); 
-                enemies.Add(Grunt);
-            }
-            for(int i = 0; i < 2; i++)
-            {
-                Chaser = new Enemy(15, 15, EnemType.Chaser);
-                enemies.Add(Chaser);
-            }
-            for(int i = 0;i < 3; i++)
-            {
-                Runner = new Enemy(14, 14, EnemType.Runner);
-                enemies.Add(Runner);
-            }
-            Boss = new Enemy(20, 20, EnemType.Boss);
+            enemies = Enemy.GenerateEnenmies();
             hud = new HUD(player, enemies);
             Player.hud = hud;
         }
