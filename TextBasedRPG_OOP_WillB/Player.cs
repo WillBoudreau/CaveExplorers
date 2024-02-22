@@ -143,6 +143,19 @@ namespace TextBasedRPG_OOP_WillB
                     hud.AddEvent("Player used the Teleporter");
                     this.y -= 2;
                     break;
+                case 'T':
+                    map.UpdateMapTile(this.x, this.y, '.');
+                    hud.AddEvent("Player cleared tall grass");
+                    this.y -= y;
+                    this.x -= x;
+                    break;
+                case 'C':
+                    map.UpdateMapTile(this.x, this.y, 'C');
+                    ExpirenceMan.LevelDown();
+                    hud.AddEvent("Player recieved a curse");
+                    this.x -= x;
+                    this.y -= y;
+                    break;
 
             }
             map.UpdateMapTile(this.x, this.y, '.');

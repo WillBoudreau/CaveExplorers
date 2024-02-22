@@ -27,13 +27,13 @@ namespace TextBasedRPG_OOP_WillB
     {
         public char enemyAvatar { get; set; }
         public int enemDamage { get; set; }
+        Random rnd = new Random();
+        EnemyVals enemyVals = new EnemyVals();
+        public EnemType enemType;
+        public static HUD hud;
+        public string name;
         int enemHealth;
         int enemShield;
-        public EnemType enemType;
-        EnemyVals enemyVals = new EnemyVals();
-        public static HUD hud;
-        Random rnd = new Random();
-        public string name;
         public Enemy(int StartX, int StartY, EnemType enemType)
         {
             healthSys = new HealthSys(enemHealth, enemShield);
@@ -198,7 +198,8 @@ namespace TextBasedRPG_OOP_WillB
                     this.x -= x;
                     this.y -= y;
                     break;
-
+                case '~':
+                    break;
             }
             foreach (Enemy enemy in enemies)
             {

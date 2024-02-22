@@ -23,6 +23,8 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void DisplayHUD()
         {
+            Console.WriteLine("\n");
+            Objectives();
             Console.WriteLine("Player Health: " + player.healthSys.health);
             Console.WriteLine("Player Shield: " + player.healthSys.shield);
             Console.WriteLine("Player Score: " + player.score);
@@ -63,6 +65,17 @@ namespace TextBasedRPG_OOP_WillB
             foreach(string Log in EventLog)
             {
                 Console.WriteLine(Log + "\n");
+            }
+        }
+        public void Objectives()
+        {
+            Console.WriteLine("Current Objectives: ");
+            List<string> CurrentObjective = new List<string>();
+            CurrentObjective.Add("Defeat the Boss(B)");
+            CurrentObjective.Add("Collect as many coins as possible");
+            foreach(string objective in CurrentObjective) 
+            {
+                Console.WriteLine(objective);
             }
         }
     }

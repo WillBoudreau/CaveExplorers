@@ -36,5 +36,13 @@ namespace TextBasedRPG_OOP_WillB
                 level = MaxLevel;
             }
         }
+        public void LevelDown()
+        {
+            level -= 1;
+            if(level <+ 0)
+            {
+                level = 0;
+            }
+        }
     }
 }
