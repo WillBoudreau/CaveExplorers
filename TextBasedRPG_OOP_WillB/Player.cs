@@ -16,16 +16,20 @@ namespace TextBasedRPG_OOP_WillB
         public bool Playerturn = true;
         public bool Attacked = false;
         public static HUD hud;
+        public int health;
+        public int shield;
+        public int PlayerDamage = 3;
         public Player()
         {
+
+            ExpirenceMan.level = 0;
+            ExpirenceMan.xp = 0;
             score = 0;
             x = 3;
             y = 3;
-            heal = 1;
-            shieldUp = 1;
-            healthSys.health = 3;
-            healthSys.shield = 3;
-            damage = 3;
+            healthSys = new HealthSys(health, shield);
+            healthSys.Heal(3);
+            healthSys.ShieldUp(3);
         }
         public static char Input()
         {
@@ -91,23 +95,43 @@ namespace TextBasedRPG_OOP_WillB
                     this.y -= y;
                     break;
                 case '+':
-                    TakeDamage(1);
+                    healthSys.TakeDamage(1);
+                    hud.AddEvent("Player moved onto a spike trap");
                     map.UpdateMapTile(this.x, this.y, '+');
                     return;
                 case '*':
-                    CollectorMan.CollectCoins();
+                    //CollectorMan.CollectCoins();
+                    hud.AddEvent("Player collected a coin");
                     map.UpdateMapTile(this.x, this.y, '.');
                     score++;
                     break;
                 case 'H':
-                    CollectorMan.CollectHealth();
+                    //CollectorMan.CollectHealth();
+                    hud.AddEvent("Player collected health");
                     map.UpdateMapTile(this.x, this.y, '.');
-                    healthSys.Heal(heal);
+                    this.x -= x;
+                    this.y -= y;
+                    healthSys.Heal(1);
                     break;
                 case 'S':
-                    CollectorMan.CollectShield();
+                    //CollectorMan.CollectShield();
+                    hud.AddEvent("Player collected shield");
                     map.UpdateMapTile(this.x, this.y, '.');
-                    healthSys.ShieldUp(shieldUp);
+                    healthSys.ShieldUp(1);
+                    break;
+                case 'D':
+                    hud.AddEvent("Player collected a damage boost");
+                    map.UpdateMapTile(this.x, this.y, '.');
+                    this.x -= x;
+                    this.y -= y;
+                    damage++;
+                    break;
+                case '^':
+                    hud.AddEvent("Player collected a Level Up");
+                    map.UpdateMapTile(this.x, this.y, '.');
+                    this.x -= x;
+                    this.y -= y;
+                    ExpirenceMan.LevelUp();
                     break;
                 case '(':
                     this.y += 2;
@@ -122,11 +146,11 @@ namespace TextBasedRPG_OOP_WillB
             {
                 if (this.x == enemy.x && this.y == enemy.y)
                 {
-                    enemy.TakeDamage(1);
-                    hud.lastenemy(enemy);
+                    enemy.healthSys.TakeDamage(PlayerDamage);
                     this.x -= x;
                     this.y -= y;
-                    return;
+                    hud.lastenemy(enemy);
+                    break;
                 }
             }
         }

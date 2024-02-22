@@ -9,21 +9,13 @@ namespace TextBasedRPG_OOP_WillB
 {
     internal class CombatManager
     {
-        public CombatManager() 
-        {
-
-        }
-        public void Combat(Player player,Enemy enemy)
-        {
-            if(player.Playerturn == true)
-            {
-
-                if(player.x == enemy.x && player.y == enemy.y)
-                {
-                    player.Attacked = true;
-                    enemy.TakeDamage(player.damage);
-                }
-            }
-        }
+        //HealthSys healthSys = new HealthSys();
+        //public CombatManager() 
+        //{
+        //}
+        //public void Combat(Player player,Enemy enemy)
+        //{
+        //    healthSys.health -= damage
+        //}
     }
 }

@@ -10,10 +10,14 @@ namespace TextBasedRPG_OOP_WillB
     internal class HealthSys
     {
         public int health;
+        public int maxHealth;
         public int shield;
-        public HealthSys()
+        public int maxShield;
+        public bool IsAlive = true;
+        public HealthSys( int health, int shield)
         {
-            health = 0;
+            health = maxHealth;
+            shield = maxShield;
         }
         public void Heal( int Heal)
         {
@@ -21,6 +25,23 @@ namespace TextBasedRPG_OOP_WillB
             if(health > 5) 
             {
                 health = 5;
+            }
+        }
+        public void TakeDamage(int damage)
+        {
+            if(shield > 0)
+            {
+                shield -= damage;
+            }
+            else if(shield <= 0)
+            {
+                shield = 0;
+                health -= damage;
+                if(health <= 0)
+                {
+                    health = 0;
+                    IsAlive = false;
+                }
             }
         }
         public void ShieldUp( int ShieldUp)

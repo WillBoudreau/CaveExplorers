@@ -88,11 +88,17 @@ namespace TextBasedRPG_OOP_WillB
                             Console.ForegroundColor = ConsoleColor.Blue;
                             Console.Write(MapChar[i][j]);
                             break;
-                        case '@':
-                            Console.BackgroundColor= ConsoleColor.DarkGray;
-                            Console.ForegroundColor= ConsoleColor.Magenta;
+                        case 'D':
+                            Console.BackgroundColor = ConsoleColor.White;
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
                             Console.Write(MapChar[i][j]);
                             break;
+                        case '^':
+                            Console.BackgroundColor = ConsoleColor.White;
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.Write(MapChar[i][j]);
+                            break;
+                                
                     }
                 }
             }

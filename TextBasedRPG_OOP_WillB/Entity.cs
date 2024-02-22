@@ -14,6 +14,7 @@ namespace TextBasedRPG_OOP_WillB
         public HealthSys healthSys;
         public CombatManager CombatMan;
         public CollectorManager CollectorMan;
+        public ExpirenceManager ExpirenceMan;
         public int x;
         public int y;
         public int heal;
@@ -26,8 +27,7 @@ namespace TextBasedRPG_OOP_WillB
             this.CombatMan = new CombatManager();
             this.CollectorMan = new CollectorManager();
             this.map = new Map();
-            this.healthSys = new HealthSys();
-            healthSys.health = 0;
+            this.ExpirenceMan = new ExpirenceManager();
         }
        
     }

@@ -25,6 +25,8 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Player Health: " + player.healthSys.health);
             Console.WriteLine("Player Shield: " + player.healthSys.shield);
             Console.WriteLine("Player Score: " + player.score);
+            Console.WriteLine("Player Level: "+ player.ExpirenceMan.level);
+            Console.WriteLine("Player Xp: " + player.ExpirenceMan.xp);
             Console.WriteLine("Player POS: " + player.x + " " + player.y);
             DisplayEventLog();
             if(LastSeen != null)
@@ -49,13 +51,13 @@ namespace TextBasedRPG_OOP_WillB
         public void DisplayEventLog()
         {
             Console.WriteLine("Event Log");
-            foreach(string Log in EventLog)
-            {
-                Console.WriteLine(Log + "\n");
-            }
             if(EventLog.Count > 3)
             {
                 ClearLog();
+            }
+            foreach(string Log in EventLog)
+            {
+                Console.WriteLine(Log + "\n");
             }
         }
     }

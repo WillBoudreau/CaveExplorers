@@ -10,22 +10,33 @@ namespace TextBasedRPG_OOP_WillB
     {
         Map map;
         Player player;
-        Enemy enemy;
-        Enemy enemy1;
-        Enemy enemy2;
-        Enemy enemy3;
-        Enemy enemy4;
+        Enemy Grunt;
+        Enemy Chaser;
+        Enemy Runner;
+        Enemy Boss;
         List<Enemy> enemies;
         HUD hud;
         public GameManager() 
         {
             map = new Map();
             player = new Player();
-            enemy1 = new Enemy(5, 5, EnemType.Grunt);
-            enemy2 = new Enemy(15, 15, EnemType.Chaser);
-            enemy3 = new Enemy(14, 14, EnemType.Runner);
-            enemy4 = new Enemy(20, 20, EnemType.Boss);
-            enemies = new List<Enemy> { enemy1, enemy2, enemy3, enemy4};
+            enemies = new List<Enemy>();
+            for(int i = 0; i < 5; i++) 
+            {
+                Grunt= new Enemy(5, 5, EnemType.Grunt); 
+                enemies.Add(Grunt);
+            }
+            for(int i = 0; i < 2; i++)
+            {
+                Chaser = new Enemy(15, 15, EnemType.Chaser);
+                enemies.Add(Chaser);
+            }
+            for(int i = 0;i < 3; i++)
+            {
+                Runner = new Enemy(14, 14, EnemType.Runner);
+                enemies.Add(Runner);
+            }
+            Boss = new Enemy(20, 20, EnemType.Boss);
             hud = new HUD(player, enemies);
             Player.hud = hud;
         }
@@ -45,7 +56,7 @@ namespace TextBasedRPG_OOP_WillB
                 foreach (var enemy in enemies)
                 {
                     enemy.DisplayEnemy();
-                    enemy.EnemyMove(player);
+                    enemy.EnemyMove(player,enemies);
                 }
                 player.PlayerPOSMove(enemies);
                 Console.ResetColor();
