@@ -31,6 +31,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void GameLoop()
         {
+            Console.Clear();
             map.MapArray();
             map.ShowMap();
             while (player.healthSys.health > 0)
@@ -38,7 +39,6 @@ namespace TextBasedRPG_OOP_WillB
                 Console.ResetColor();
                 Console.WriteLine("\n");
                 hud.DisplayHUD();
-                Console.WriteLine("----------");
                 player.DisplayPlayer();
 
 
@@ -49,6 +49,7 @@ namespace TextBasedRPG_OOP_WillB
                 }
                 player.PlayerPOSMove(enemies);
                 Console.ResetColor();
+                 
             }
             GameOver();
         }

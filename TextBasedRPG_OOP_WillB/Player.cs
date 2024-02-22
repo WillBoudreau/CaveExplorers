@@ -59,19 +59,19 @@ namespace TextBasedRPG_OOP_WillB
                 {
                     case 'w':
                         POS(0, -1, enemies);
-                        hud.Playeraction = "Player moved up";
+                        hud.AddEvent("Player moved up");
                         break;
                     case 'a':
                         POS(-1, 0, enemies);
-                        hud.Playeraction = "Player moved Left";
+                        hud.AddEvent("Player moved left");
                         break;
                     case 's':
                         POS(0, 1, enemies);
-                        hud.Playeraction = "Player moved Down";
+                        hud.AddEvent("Player moved down");
                         break;
                     case 'd':
                         POS(1, 0, enemies);
-                        hud.Playeraction = "Player moved Right";
+                        hud.AddEvent("Player moved right");
                         break;
                 }
             }
@@ -86,7 +86,7 @@ namespace TextBasedRPG_OOP_WillB
                 case '.':
                     break;
                 case '#':
-                    hud.Playeraction = "The player moved into a wall";
+                    hud.AddEvent("Player moved into a wall");
                     this.x -= x;
                     this.y -= y;
                     break;

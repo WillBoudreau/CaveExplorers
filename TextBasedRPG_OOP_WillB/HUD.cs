@@ -13,19 +13,20 @@ namespace TextBasedRPG_OOP_WillB
         string LastSeen;
         int LastSeenDamage;
         int LastSeenHealth;
-        public string Playeraction;
-        public HUD(Player player,List<Enemy>enemies)
+        public List<string> EventLog {  get; set; }
+       public HUD(Player player,List<Enemy>enemies)
         {
             this.player = player;
             this.enemies = enemies;
+            EventLog = new List<string>();
         }
         public void DisplayHUD()
         {
-            EventLog();
             Console.WriteLine("Player Health: " + player.healthSys.health);
             Console.WriteLine("Player Shield: " + player.healthSys.shield);
             Console.WriteLine("Player Score: " + player.score);
             Console.WriteLine("Player POS: " + player.x + " " + player.y);
+            DisplayEventLog();
             if(LastSeen != null)
             {
                 Console.WriteLine("Last Enemy encountered: " + LastSeen +"\n" + LastSeen +" Damage "+ LastSeenDamage + "\n" + LastSeen+ " Health "+LastSeenHealth);
@@ -37,9 +38,25 @@ namespace TextBasedRPG_OOP_WillB
             LastSeenHealth = enemy.healthSys.health;
             LastSeenDamage = enemy.enemDamage;
         }
-        public void EventLog()
+        public void AddEvent(string log)
         {
-            Console.WriteLine(Playeraction);
+            EventLog.Add(log);
+        }
+        public void ClearLog()
+        {
+            EventLog.Clear();
+        }
+        public void DisplayEventLog()
+        {
+            Console.WriteLine("Event Log");
+            foreach(string Log in EventLog)
+            {
+                Console.WriteLine(Log + "\n");
+            }
+            if(EventLog.Count > 3)
+            {
+                ClearLog();
+            }
         }
     }
 }
