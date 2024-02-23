@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace TextBasedRPG_OOP_WillB
 {
     internal class GameManager
     {
+        private Stopwatch stopwatch = new Stopwatch();
         Map map;
         Player player;
         Enemy enemy;
@@ -22,6 +24,17 @@ namespace TextBasedRPG_OOP_WillB
             enemies = Enemy.GenerateEnenmies();
             hud = new HUD(player, enemies);
             Player.hud = hud;
+        }
+        void StarTimer()
+        {
+            stopwatch.Start();
+        }
+        public void StopTimer()
+        {
+            stopwatch.Stop();
+            TimeSpan timeSpan = stopwatch.Elapsed;
+            string EndTime = String.Format("{0:00}:{1:00}:{2:00}",timeSpan.TotalHours,timeSpan.TotalMinutes,timeSpan.TotalSeconds);
+            Console.WriteLine("Level Completed in: " + EndTime );  
         }
         void Start()
         {
@@ -40,6 +53,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void GameLoop()
         {
+            StarTimer();
             Start();
             Console.CursorVisible = false;
             map.MapArray();
@@ -57,20 +71,17 @@ namespace TextBasedRPG_OOP_WillB
                     if(enemy.enemType == EnemType.Boss && enemy.healthSys.IsAlive == false)
                     {
                         BossDead = true;
+                        Win();
                         break;
                     }
                 }
                 player.DisplayPlayer();
                 player.PlayerPOSMove(enemies);
             }
-                if (BossDead == true)
-                {
-                    Win();
-                }
-                else
-                {
-                    GameOver();
-                }
+            if(player.healthSys.normalHealth < 0)
+            {
+                GameOver();
+            }
         }
         public void GameOver()
         {
@@ -81,6 +92,7 @@ namespace TextBasedRPG_OOP_WillB
         public void Win()
         {
             Console.Clear();
+            StopTimer();
             Console.WriteLine("You have defeated the boss! You win!");
             Console.WriteLine("Press any key to quit");
             Console.ReadKey();
