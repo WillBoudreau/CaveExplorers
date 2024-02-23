@@ -10,10 +10,10 @@ namespace TextBasedRPG_OOP_WillB
     {
         Player player;
         List<Enemy> enemies;
-        Map map = new Map();
         string LastSeen;
         int LastSeenDamage;
         int LastSeenHealth;
+        int LastSeenHealthMax;
         public List<string> EventLog {  get; set; }
        public HUD(Player player,List<Enemy>enemies)
         {
@@ -25,23 +25,32 @@ namespace TextBasedRPG_OOP_WillB
         {
             Console.WriteLine("\n");
             Objectives();
-            Console.WriteLine("Player Health: " + player.healthSys.health);
-            Console.WriteLine("Player Shield: " + player.healthSys.shield);
+            Console.WriteLine("Stats");
+            Console.WriteLine("Player Health: " + player.healthSys.normalHealth);
+            Console.WriteLine("Player Shield: " + player.healthSys.normalShield);
+            Console.WriteLine("Player Attack: " + player.PlayerDamage);
             Console.WriteLine("Player Score: " + player.score);
             Console.WriteLine("Player Level: "+ player.ExpirenceMan.level);
             Console.WriteLine("Player Xp: " + player.ExpirenceMan.xp);
-            Console.WriteLine("Player POS: " + player.x + " " + player.y);
-            DisplayEventLog();
             Console.WriteLine("\n");
+        }
+        public void LastSeenEnemy()
+        {
             if(LastSeen != null)
             {
-                Console.WriteLine("\nLast Enemy encountered: " + LastSeen +"\n" + LastSeen +" Damage "+ LastSeenDamage + "\n" + LastSeen+ " Health "+LastSeenHealth);
+                Console.WriteLine("\nLast Enemy encountered: " + LastSeen +"\n" + LastSeen +" Damage "+ LastSeenDamage + "\n" +LastSeen+" Max Health "+LastSeenHealthMax+ "\n" + LastSeen+ " Current Health "+LastSeenHealth);    
             }
+
+        }
+        public void Legend()
+        {
+            Console.WriteLine("P = Player\nG = Grunt\nC = Chaser\nR = Runner\nB = Boss");
         }
         public void lastenemy(Enemy enemy)
         {
             LastSeen = enemy.name;
-            LastSeenHealth = enemy.healthSys.health;
+            LastSeenHealth = enemy.healthSys.normalHealth;
+            LastSeenHealthMax = enemy.healthSys.maxHealth;
             LastSeenDamage = enemy.enemDamage;
         }
         public void AddEvent(string log)
@@ -56,16 +65,17 @@ namespace TextBasedRPG_OOP_WillB
         {
             int DisplayEventLogLimit = 3;
             Console.WriteLine("Event Log");
-            if(EventLog.Count > DisplayEventLogLimit)
-            {
-                Console.ResetColor();
-                ClearLog();
-
-            }
+            int LogCount = 0;
             foreach(string Log in EventLog)
             {
-                Console.WriteLine(Log + "\n");
+                if(LogCount > DisplayEventLogLimit)
+                {
+                    break;
+                }
+                Console.WriteLine(Log);
+                LogCount++;
             }
+            EventLog.Clear();
         }
         public void Objectives()
         {

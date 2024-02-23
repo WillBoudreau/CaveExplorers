@@ -27,9 +27,9 @@ namespace TextBasedRPG_OOP_WillB
             score = 0;
             x = 3;
             y = 3;
+            health = 3;
+            shield = 3;
             healthSys = new HealthSys(health, shield);
-            healthSys.Heal(3);
-            healthSys.ShieldUp(3);
         }
         public static char Input()
         {
@@ -95,7 +95,7 @@ namespace TextBasedRPG_OOP_WillB
                     this.y -= y;
                     break;
                 case '+':
-                    healthSys.TakeDamage(1);
+                    healthSys.TakeDamage(2);
                     hud.AddEvent("Player moved onto a spike trap");
                     map.UpdateMapTile(this.x, this.y, '+');
                     return;
@@ -103,6 +103,8 @@ namespace TextBasedRPG_OOP_WillB
                     //CollectorMan.CollectCoins();
                     hud.AddEvent("Player collected a coin");
                     map.UpdateMapTile(this.x, this.y, '.');
+                    this.x -= x;
+                    this.y -= y;
                     score++;
                     break;
                 case 'H':
@@ -126,7 +128,7 @@ namespace TextBasedRPG_OOP_WillB
                     map.UpdateMapTile(this.x, this.y, '.');
                     this.x -= x;
                     this.y -= y;
-                    damage++;
+                    PlayerDamage++;
                     break;
                 case '^':
                     hud.AddEvent("Player collected a Level Up");
@@ -173,20 +175,20 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void TakeDamage(int damage)
         {
-            if(healthSys.shield > 0)
+            if(healthSys.normalShield > 0)
             {
-                healthSys.shield -= damage;
-                if(healthSys.shield < 0)
+                healthSys.normalShield -= damage;
+                if(healthSys.normalShield < 0)
                 {
-                    healthSys.shield = 0;
+                    healthSys.normalShield = 0;
                 }
             }
             else
             {
-                healthSys.health -= damage;
-                if (healthSys.health <= 0)
+                healthSys.normalHealth -= damage;
+                if (healthSys.normalHealth <= 0)
                 {
-                    healthSys.health = 0;
+                    healthSys.normalHealth = 0;
                 }
             }
         }

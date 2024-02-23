@@ -47,22 +47,22 @@ namespace TextBasedRPG_OOP_WillB
                 case EnemType.Grunt:
                     enemyAvatar = 'G';
                     name = "Grunt";
-                    healthSys.Heal(1);
+                    healthSys.maxHealth = 1;
                     break;
                 case EnemType.Chaser:
                     enemyAvatar = 'C';
                     name = "Chaser";
-                    healthSys.Heal(2);
+                    healthSys.maxHealth = 2;
                     break;
                 case EnemType.Runner:
                     enemyAvatar = 'R';
                     name = "Runner";
-                    healthSys.Heal(1);
+                    healthSys.maxHealth = 1;
                     break;
                 case EnemType.Boss:
                     enemyAvatar = 'B';
                     name = "Boss";
-                    healthSys.Heal(4);
+                    healthSys.maxHealth = 4;
                     break;
             }
         }
@@ -198,7 +198,9 @@ namespace TextBasedRPG_OOP_WillB
                     this.x -= x;
                     this.y -= y;
                     break;
-                case '~':
+                case 'T':
+                    this.x -= x;
+                    this.y -= y;
                     break;
             }
             foreach (Enemy enemy in enemies)
@@ -208,12 +210,12 @@ namespace TextBasedRPG_OOP_WillB
                     this.x -= x;
                     this.y -= y;
                 }
-            }
-            if (this.x == player.x && this.y == player.y)
-            {
-                player.healthSys.TakeDamage(enemDamage);
-                this.x -= x;
-                this.y -= y;
+                if (this.x == player.x && this.y == player.y)
+                {
+                    player.healthSys.TakeDamage(enemDamage);
+                    this.x -= x;
+                    this.y -= y;
+                }
             }
         }
         public static List<Enemy> GenerateEnenmies()
