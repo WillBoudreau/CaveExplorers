@@ -5,6 +5,7 @@ using System.Net.Mime;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Schema;
 
@@ -15,6 +16,7 @@ namespace TextBasedRPG_OOP_WillB
     {
         public bool Playerturn = true;
         public bool Attacked = false;
+        public bool IsSlowed = false;
         public static HUD hud;
         public int health;
         public int shield;
@@ -57,27 +59,50 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void PlayerPOSMove(List<Enemy> enemies)
         {
-            if (Playerturn == true && Attacked == false)
+            if (Playerturn == true && Attacked == false && IsSlowed == false)
             {
-                switch (Input())
+                if(!IsSlowed)
+                {
+                    switch (Input())
+                    {
+                        case 'w':
+                            POS(0, -1, enemies);
+                            hud.AddEvent("Player moved up");
+                            break;
+                        case 'a':
+                            POS(-1, 0, enemies);
+                            hud.AddEvent("Player moved left");
+                            break;
+                        case 's':
+                            POS(0, 1, enemies);
+                            hud.AddEvent("Player moved down");
+                            break;
+                        case 'd':
+                            POS(1, 0, enemies);
+                            hud.AddEvent("Player moved right");
+                            break;
+                    }
+
+                }
+            }
+            else if(IsSlowed == true)
+            {
+                switch(Input())
                 {
                     case 'w':
-                        POS(0, -1, enemies);
-                        hud.AddEvent("Player moved up");
+                        POS(0,0,enemies);
                         break;
                     case 'a':
-                        POS(-1, 0, enemies);
-                        hud.AddEvent("Player moved left");
+                        POS(0,0, enemies);
                         break;
                     case 's':
-                        POS(0, 1, enemies);
-                        hud.AddEvent("Player moved down");
+                        POS(0,0, enemies);
                         break;
                     case 'd':
-                        POS(1, 0, enemies);
-                        hud.AddEvent("Player moved right");
+                        POS(0,0, enemies);
                         break;
                 }
+                IsSlowed = false;
             }
             Attacked = false;
         }
@@ -88,6 +113,7 @@ namespace TextBasedRPG_OOP_WillB
             switch (map.IsTileValid(this.x, this.y))
             {
                 case '.':
+                    IsSlowed = false;
                     break;
                 case '#':
                     hud.AddEvent("Player moved into a wall");
@@ -145,11 +171,9 @@ namespace TextBasedRPG_OOP_WillB
                     hud.AddEvent("Player used the Teleporter");
                     this.y -= 2;
                     break;
-                case 'T':
-                    map.UpdateMapTile(this.x, this.y, '.');
-                    hud.AddEvent("Player cleared tall grass");
-                    this.y -= y;
-                    this.x -= x;
+                case '~':
+                    IsSlowed = true;
+                    hud.AddEvent("Player moved in water");
                     break;
                 case 'C':
                     map.UpdateMapTile(this.x, this.y, 'C');
@@ -160,7 +184,14 @@ namespace TextBasedRPG_OOP_WillB
                     break;
 
             }
-            map.UpdateMapTile(this.x, this.y, '.');
+            if (IsSlowed == true)
+            {
+                map.UpdateMapTile(this.x, this.y, '~');
+            }
+            else
+            {
+                map.UpdateMapTile(this.x, this.y, '.');
+            }
             foreach (Enemy enemy in enemies)
             {
                 if (this.x == enemy.x && this.y == enemy.y)

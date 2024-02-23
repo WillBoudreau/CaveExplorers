@@ -98,9 +98,9 @@ namespace TextBasedRPG_OOP_WillB
                             Console.ForegroundColor = ConsoleColor.Magenta;
                             Console.Write(MapChar[i][j]);
                             break;
-                        case 'T':
-                            Console.BackgroundColor = ConsoleColor.Green;
-                            Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        case '~':
+                            Console.BackgroundColor = ConsoleColor.DarkBlue;
+                            Console.ForegroundColor = ConsoleColor.Blue;
                             Console.WriteLine(MapChar[i][j]);
                             break;
                         case 'C':

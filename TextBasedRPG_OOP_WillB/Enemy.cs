@@ -198,7 +198,7 @@ namespace TextBasedRPG_OOP_WillB
                     this.x -= x;
                     this.y -= y;
                     break;
-                case 'T':
+                case '~':
                     this.x -= x;
                     this.y -= y;
                     break;
