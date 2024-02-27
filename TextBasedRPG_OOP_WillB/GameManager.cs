@@ -64,6 +64,8 @@ namespace TextBasedRPG_OOP_WillB
                 Console.WriteLine("\n");
                 hud.DisplayHUD();
                 hud.LastSeenEnemy();
+                player.DisplayPlayer();
+                player.PlayerPOSMove(enemies);
                 foreach (var enemy in enemies)
                 {
                     enemy.DisplayEnemy();
@@ -75,8 +77,6 @@ namespace TextBasedRPG_OOP_WillB
                         break;
                     }
                 }
-                player.DisplayPlayer();
-                player.PlayerPOSMove(enemies);
             }
             if(player.healthSys.normalHealth < 0)
             {
