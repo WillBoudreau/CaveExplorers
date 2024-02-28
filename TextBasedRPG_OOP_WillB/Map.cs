@@ -108,6 +108,16 @@ namespace TextBasedRPG_OOP_WillB
                             Console.ForegroundColor = ConsoleColor.Magenta;
                             Console.WriteLine(MapChar[i][j]);
                             break;
+                        case '@':
+                            Console.BackgroundColor = ConsoleColor.DarkGray;
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.WriteLine(MapChar[i][j]);
+                            break;
+                        case '{':
+                            Console.BackgroundColor = ConsoleColor.Gray;
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                            Console.WriteLine(MapChar[i][j]);
+                            break;
                     }
                 }
             }
@@ -115,7 +125,16 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void LoadNextLevel()
         {
-
+            path = @"Level2.txt";
+            Mapstr = File.ReadAllLines(path);
+            int MapX = Mapstr.Length;
+            int MapY = Mapstr[0].Length;
+            MapChar = new char[MapX][] ;
+            for (int i = 0; i < MapX; i++)
+            {
+                MapChar[i] = Mapstr[i].ToCharArray();
+            }
+            ShowMap();
         }
         public char IsTileValid(int x, int y)
         {

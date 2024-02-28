@@ -182,7 +182,10 @@ namespace TextBasedRPG_OOP_WillB
                     this.x -= x;
                     this.y -= y;
                     break;
-
+                case '@':
+                    Console.Clear();
+                    map.LoadNextLevel();
+                    break;
             }
             if (IsSlowed == true)
             {

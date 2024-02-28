@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Media;
+using System.IO;
 
 namespace TextBasedRPG_OOP_WillB
 {
     internal class GameManager
     {
         private Stopwatch stopwatch = new Stopwatch();
+        public SoundPlayer soundplayer;
         Map map;
         Player player;
         Enemy enemy;
@@ -21,13 +24,39 @@ namespace TextBasedRPG_OOP_WillB
         {
             map = new Map();
             player = new Player();
-            enemies = Enemy.GenerateEnenmies();
+            soundplayer = new SoundPlayer();
+            enemies = Enemy.GenerateEnenmies(5,2,2,1,map);
             hud = new HUD(player, enemies);
             Player.hud = hud;
+        }
+        public void PlayMusic(string musicPath)
+        {
+            if(File.Exists(musicPath))
+            {
+                soundplayer.SoundLocation = musicPath;
+                soundplayer.Load();
+                soundplayer.PlayLooping();
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine(musicPath + "not found");
+            }
         }
         void StarTimer()
         {
             stopwatch.Start();
+        }
+        void GenerateLlevel(int level)
+        {
+            if(level ==  1)
+            {
+                string musicPath = AppDomain.CurrentDomain.BaseDirectory + "kingdom-of-fantasy-version-60s-10817.wav";
+                PlayMusic(musicPath);
+                Console.CursorVisible = false;
+                map.MapArray();
+                map.ShowMap();
+            }
         }
         public void StopTimer()
         {
@@ -55,15 +84,9 @@ namespace TextBasedRPG_OOP_WillB
         {
             StarTimer();
             Start();
-            Console.CursorVisible = false;
-            map.MapArray();
-            map.ShowMap();
-            while (player.healthSys.normalHealth > 0 && !BossDead)
+            GenerateLlevel(1);
+            while (player.healthSys.normalHealth > 0)
             {
-                Console.ResetColor();
-                Console.WriteLine("\n");
-                hud.DisplayHUD();
-                hud.LastSeenEnemy();
                 player.DisplayPlayer();
                 player.PlayerPOSMove(enemies);
                 foreach (var enemy in enemies)
@@ -77,8 +100,12 @@ namespace TextBasedRPG_OOP_WillB
                         break;
                     }
                 }
+                Console.ResetColor();
+                Console.WriteLine("\n");
+                hud.DisplayHUD();
+                hud.LastSeenEnemy();
             }
-            if(player.healthSys.normalHealth < 0)
+            if(player.healthSys.normalHealth <= 0)
             {
                 GameOver();
             }
@@ -87,6 +114,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             Console.Clear();
             Console.WriteLine("Game Over");
+            Console.WriteLine("You where defeated by: ");
             Console.ReadKey();
         }
         public void Win()

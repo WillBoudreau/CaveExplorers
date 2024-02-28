@@ -218,26 +218,39 @@ namespace TextBasedRPG_OOP_WillB
                 }
             }
         }
-        public static List<Enemy> GenerateEnenmies()
+        public static List<Enemy> GenerateEnenmies( int numGrunts, int numChasers, int numRunners, int numBoss,Map map)
         {
-            int[,] GruntPOS = { { 14, 9 }, { 14, 8 }, { 13, 9 }, { 15, 9 }, {5,5} };
-            int[,] ChaserPOS = { { 15, 15 }, { 14, 14 } };
-            int[,] RunnerPOS = { { 16,16}, { 17,17 } }; 
-            List<Enemy> enemies = new List<Enemy>();
-            for (int i = 0; i < GruntPOS.GetLength(0); i++)
-            {
-                enemies.Add(new Enemy(GruntPOS[i, 0], GruntPOS[i,1], EnemType.Grunt));
-            }
-            for (int i = 0; i < ChaserPOS.GetLength(0); i++)
-            {
-                enemies.Add(new Enemy(ChaserPOS[i,0], ChaserPOS[i,1], EnemType.Chaser));
-            }
-            for (int i = 0; i < RunnerPOS.GetLength(0); i++)
-            {
-                enemies.Add(new Enemy(RunnerPOS[i,0], RunnerPOS[i,1], EnemType.Runner));
-            }
-            enemies.Add(new Enemy(20, 20, EnemType.Boss));
-            return enemies;
+                int[,] ChaserPOS = { { 15, 15 }, { 14, 14 } };
+                int[,] RunnerPOS = { { 16,16}, { 17,17 } }; 
+                List<Enemy> enemies = new List<Enemy>();
+            Random rnd = new Random();
+            char[] obstacles = { '#', 'C', '@', '+', 'H', 'S', '*', 'D', '~' };
+                for (int i = 0; i < numGrunts; i++)
+                {
+                    int x;
+                    int y;
+                    bool ValidSpawn = false;
+                    while(!ValidSpawn)
+                    {
+                        x = rnd.Next(1, map.MapChar[0].Length);
+                        y = rnd.Next(1,map.MapChar.Length);
+                        if(map.IsTileValid(x, y) == '.')
+                        {
+                            enemies.Add(new Enemy(x, y,EnemType.Grunt));
+                            ValidSpawn = true;
+                        }
+                    }
+                }
+                for (int i = 0; i < ChaserPOS.GetLength(0); i++)
+                {
+                    enemies.Add(new Enemy(ChaserPOS[i,0], ChaserPOS[i,1], EnemType.Chaser));
+                }
+                for (int i = 0; i < RunnerPOS.GetLength(0); i++)
+                {
+                    enemies.Add(new Enemy(RunnerPOS[i,0], RunnerPOS[i,1], EnemType.Runner));
+                }
+                enemies.Add(new Enemy(20, 20, EnemType.Boss));
+                return enemies;
         }
         public void DisplayEnemy()//Displays the enemies
         {

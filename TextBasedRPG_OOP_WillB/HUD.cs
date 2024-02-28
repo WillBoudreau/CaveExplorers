@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace TextBasedRPG_OOP_WillB
     {
         Player player;
         List<Enemy> enemies;
+        Map map;
         string LastSeen;
         int LastSeenDamage;
         int LastSeenHealth;
@@ -22,7 +24,7 @@ namespace TextBasedRPG_OOP_WillB
             EventLog = new List<string>();
         }
         public void DisplayHUD()
-        {
+        { 
             Console.WriteLine("\n");
             Objectives();
             Console.WriteLine("Stats");
@@ -81,8 +83,8 @@ namespace TextBasedRPG_OOP_WillB
         {
             Console.WriteLine("Current Objectives: ");
             List<string> CurrentObjective = new List<string>();
-            CurrentObjective.Add("Defeat the Boss(B)");
             CurrentObjective.Add("Collect as many coins as possible");
+            CurrentObjective.Add("Defeat all Enemies(G)(C)(R)");
             foreach(string objective in CurrentObjective) 
             {
                 Console.WriteLine(objective);
