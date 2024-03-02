@@ -54,6 +54,7 @@
     <Compile Include="Entity.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="HealthSystem.cs" />
+    <Compile Include="MusicManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="ExpirenceManager.cs" />
     <Compile Include="Program.cs" />

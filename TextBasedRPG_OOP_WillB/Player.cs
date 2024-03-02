@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Mime;
 using System.Runtime.InteropServices;
@@ -17,6 +18,7 @@ namespace TextBasedRPG_OOP_WillB
         public bool Playerturn = true;
         public bool Attacked = false;
         public bool IsSlowed = false;
+        private Stopwatch stopwatch = new Stopwatch();
         public static HUD hud;
         public int health;
         public int shield;
@@ -226,7 +228,19 @@ namespace TextBasedRPG_OOP_WillB
                 }
             }
         }
-         public void DisplayPlayer()
+        public void StarTimer()
+        {
+            stopwatch.Start();
+        }
+        public void StopTimer()
+        {
+            stopwatch.Stop();
+            TimeSpan timeSpan = stopwatch.Elapsed;
+            string EndTime = String.Format("{0:00}:{1:00}:{2:00}", timeSpan.TotalHours, timeSpan.TotalMinutes, timeSpan.TotalSeconds);
+            Console.WriteLine("Level Completed in: " + EndTime);
+        }
+
+        public void DisplayPlayer()
         {
             Console.SetCursorPosition(this.x, this.y);
             Console.ForegroundColor = ConsoleColor.Magenta;

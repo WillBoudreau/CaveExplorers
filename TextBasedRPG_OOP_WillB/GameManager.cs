@@ -12,60 +12,33 @@ namespace TextBasedRPG_OOP_WillB
 {
     internal class GameManager
     {
-        private Stopwatch stopwatch = new Stopwatch();
-        public SoundPlayer soundplayer;
+        
         Map map;
         Player player;
-        Enemy enemy;
-        bool BossDead = false;
+        MusicManager music;
         List<Enemy> enemies;
         HUD hud;
         public GameManager() 
         {
+            music = new MusicManager();
             map = new Map();
             player = new Player();
-            soundplayer = new SoundPlayer();
             enemies = Enemy.GenerateEnenmies(5,2,2,1,map);
             hud = new HUD(player, enemies);
             Player.hud = hud;
         }
-        public void PlayMusic(string musicPath)
-        {
-            if(File.Exists(musicPath))
-            {
-                soundplayer.SoundLocation = musicPath;
-                soundplayer.Load();
-                soundplayer.PlayLooping();
-            }
-            else
-            {
-                Console.Clear();
-                Console.WriteLine(musicPath + "not found");
-            }
-        }
-        void StarTimer()
-        {
-            stopwatch.Start();
-        }
+        
         void GenerateLlevel(int level)
         {
             if(level ==  1)
             {
-                string musicPath = AppDomain.CurrentDomain.BaseDirectory + "kingdom-of-fantasy-version-60s-10817.wav";
-                PlayMusic(musicPath);
+                music.PlayMusicLevel(level);
                 Console.CursorVisible = false;
                 map.MapArray();
                 map.ShowMap();
             }
         }
-        public void StopTimer()
-        {
-            stopwatch.Stop();
-            TimeSpan timeSpan = stopwatch.Elapsed;
-            string EndTime = String.Format("{0:00}:{1:00}:{2:00}",timeSpan.TotalHours,timeSpan.TotalMinutes,timeSpan.TotalSeconds);
-            Console.WriteLine("Level Completed in: " + EndTime );  
-        }
-        void Start()
+        void Intro()
         {
             Console.Clear();
             Console.WriteLine("Welcome to Cave Explorers!");
@@ -82,8 +55,8 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void GameLoop()
         {
-            StarTimer();
-            Start();
+            player.StarTimer();
+            Intro();
             GenerateLlevel(1);
             while (player.healthSys.normalHealth > 0)
             {
@@ -95,7 +68,7 @@ namespace TextBasedRPG_OOP_WillB
                     enemy.EnemyMove(player,enemies);
                     if(enemy.enemType == EnemType.Boss && enemy.healthSys.IsAlive == false)
                     {
-                        BossDead = true;
+                        enemy.BossDead = true;
                         Win();
                         break;
                     }
@@ -120,7 +93,7 @@ namespace TextBasedRPG_OOP_WillB
         public void Win()
         {
             Console.Clear();
-            StopTimer();
+            player.StopTimer();
             Console.WriteLine("You have defeated the boss! You win!");
             Console.WriteLine("Press any key to quit");
             Console.ReadKey();

@@ -34,6 +34,8 @@ namespace TextBasedRPG_OOP_WillB
         public string name;
         int enemHealth;
         int enemShield;
+         public bool BossDead = false;
+
         public Enemy(int StartX, int StartY, EnemType enemType)
         {
             healthSys = new HealthSys(enemHealth, enemShield);
@@ -66,7 +68,8 @@ namespace TextBasedRPG_OOP_WillB
                     break;
             }
         }
-        public void EnemyMove(Player player,List<Enemy> enemies)
+
+        public virtual void Move(Player player,List<Enemy> enemies)
         {
             switch (enemType)
             {
@@ -88,76 +91,7 @@ namespace TextBasedRPG_OOP_WillB
                     break;
             }
         }
-        public void MoveBoss(Player player,List<Enemy> enemies)
-        {
-            int distanceToplayer = Math.Abs(player.x - x) + Math.Abs(player.y - y);
-            
-            if(distanceToplayer <= 5)
-            {
-                MoveChase(player, enemies);
-                
-            }
-        }
-        public void MoveRun(Player player,List<Enemy>enemies)
-        {
-            int dx = player.x + x;
-            int dy = player.y + y;
-            if (Math.Abs(dx) > Math.Abs(dy))
-            {
-                dx = Math.Sign(dx);
-                dy = 0;
-            }
-            else
-            {
-                dx = 0;
-                dy = Math.Sign(dy);
-            }
-            POS(dx, dy, player,enemies);
-        }
-        public void MoveRnd(Player player,List<Enemy>enemies)
-        {
-            int Move = rnd.Next(1, 5);
-            int dx = 0, 
-                dy = 0;
-            switch (Move)
-            {
-                case 1:
-                    
-                    dy = -1;
-                    break;
-                case 2:
-                    
-                    dx = -1;
-                    break;
-                case 3:
-                   
-                    dy = 1;
-                    break;
-                case 4:
-                   
-                    dx = 1;
-                    break;
-            }
-            POS(dx, dy, player,enemies);
-        }
-        public void MoveChase(Player player,List<Enemy>enemies)
-        {
-            int dx = player.x - x;
-            int dy = player.y - y;
-            if (Math.Abs(dx) > Math.Abs(dy))
-            {
-                
-                dx = Math.Sign(dx);
-                dy = 0;
-            }
-            else
-            {
-                
-                dx = 0;
-                dy = Math.Sign(dy);
-            }
-            POS(dx, dy,player, enemies);
-        }
+        
         public void POS(int x, int y,Player player,List<Enemy> enemies)
         {
             this.x += x;
@@ -218,6 +152,7 @@ namespace TextBasedRPG_OOP_WillB
                 }
             }
         }
+
         public static List<Enemy> GenerateEnenmies( int numGrunts, int numChasers, int numRunners, int numBoss,Map map)
         {
                 int[,] ChaserPOS = { { 15, 15 }, { 14, 14 } };
@@ -252,6 +187,7 @@ namespace TextBasedRPG_OOP_WillB
                 enemies.Add(new Enemy(20, 20, EnemType.Boss));
                 return enemies;
         }
+
         public void DisplayEnemy()//Displays the enemies
         {
             if (healthSys.IsAlive == true)
