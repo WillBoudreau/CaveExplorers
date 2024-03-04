@@ -10,7 +10,7 @@ namespace TextBasedRPG_OOP_WillB
     {
         public int StartX = 5;
         public int StartY = 5;
-        public Chaser(int x, int y, EnemType enemType): base(x, y, enemType)
+        public Chaser(int x, int y, EnemType enemType, int damage, int shield, int hp): base(x, y, enemType, damage, shield, hp)
         {
             this.x = x;
             this.y = y;

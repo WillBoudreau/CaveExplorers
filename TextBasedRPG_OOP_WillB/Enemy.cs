@@ -25,9 +25,7 @@ namespace TextBasedRPG_OOP_WillB
     }
     internal class Enemy : Entity
     {
-        public char enemyAvatar { get; set; }
-        public int enemDamage { get; set; }
-        Random rnd = new Random();
+        Settings settings = new Settings();
         EnemyVals enemyVals = new EnemyVals();
         public EnemType enemType;
         public static HUD hud;
@@ -36,10 +34,9 @@ namespace TextBasedRPG_OOP_WillB
         int enemShield;
          public bool BossDead = false;
 
-        public Enemy(int StartX, int StartY, EnemType enemType)
+        public Enemy(int StartX, int StartY, EnemType enemType, int damage, int shield, int health)
         {
             healthSys = new HealthSys(enemHealth, enemShield);
-            damage = enemyVals.enemDamage;
             x = StartX;
             y = StartY;
             enemyVals.EnemyActive = true;
@@ -47,24 +44,12 @@ namespace TextBasedRPG_OOP_WillB
             switch (enemType)
             {
                 case EnemType.Grunt:
-                    enemyAvatar = 'G';
-                    name = "Grunt";
-                    healthSys.maxHealth = 1;
                     break;
                 case EnemType.Chaser:
-                    enemyAvatar = 'C';
-                    name = "Chaser";
-                    healthSys.maxHealth = 2;
                     break;
                 case EnemType.Runner:
-                    enemyAvatar = 'R';
-                    name = "Runner";
-                    healthSys.maxHealth = 1;
                     break;
                 case EnemType.Boss:
-                    enemyAvatar = 'B';
-                    name = "Boss";
-                    healthSys.maxHealth = 4;
                     break;
             }
         }
@@ -74,20 +59,17 @@ namespace TextBasedRPG_OOP_WillB
             switch (enemType)
             {
                 case EnemType.Grunt:
-                    enemDamage = 1;
-                    MoveRnd(player, enemies);
+                    
+                    Move(player, enemies);
                     break;
                 case EnemType.Chaser:
-                    enemDamage = 2;
-                    MoveChase(player, enemies);
+                    Move(player, enemies);
                     break;
                 case EnemType.Runner:
-                    enemDamage = 1;
-                    MoveRun(player,enemies);
+                    Move(player,enemies);
                     break;
                 case EnemType.Boss:
-                    enemDamage = 3;
-                    MoveBoss(player, enemies);
+                    Move(player, enemies);
                     break;
             }
         }

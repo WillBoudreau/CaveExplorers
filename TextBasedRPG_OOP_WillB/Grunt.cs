@@ -9,9 +9,12 @@ namespace TextBasedRPG_OOP_WillB
     internal class Grunt:Enemy
     {
         Random rnd;
-        public Grunt( int x, int y, EnemType enemType):base(x, y, enemType)
+        Settings settings;
+        public Grunt( int x, int y, EnemType enemType, int damage, int shield, int hp):base(x, y, enemType,damage,shield, hp)
         {
             enemType = EnemType.Grunt;
+            damage = settings.GruntAttack;
+            hp = settings.GruntMaxhp;
         }
         public override void Move(Player player, List<Enemy> enemies)
         {

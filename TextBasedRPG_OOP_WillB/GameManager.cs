@@ -65,7 +65,7 @@ namespace TextBasedRPG_OOP_WillB
                 foreach (var enemy in enemies)
                 {
                     enemy.DisplayEnemy();
-                    enemy.EnemyMove(player,enemies);
+                    enemy.Move(player,enemies);
                     if(enemy.enemType == EnemType.Boss && enemy.healthSys.IsAlive == false)
                     {
                         enemy.BossDead = true;
