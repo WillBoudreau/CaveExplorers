@@ -45,33 +45,23 @@ namespace TextBasedRPG_OOP_WillB
             switch (enemType)
             {
                 case EnemType.Grunt:
+                    enemyAvatar = 'G';
                     break;
                 case EnemType.Chaser:
+                    enemyAvatar = 'C';
                     break;
                 case EnemType.Runner:
+                    enemyAvatar = 'R';
                     break;
                 case EnemType.Boss:
+                    enemyAvatar = 'B';
                     break;
             }
         }
 
-        public virtual void Move(Player player,List<EnemyManager> enemies)
+        public virtual void Move(Player player, List<EnemyManager> enemies)
         {
-            switch (enemType)
-            {
-                case EnemType.Grunt:
-                    Move(player, enemies);
-                    break;
-                case EnemType.Chaser:
-                    Move(player, enemies);
-                    break;
-                case EnemType.Runner:
-                    Move(player,enemies);
-                    break;
-                case EnemType.Boss:
-                    Move(player, enemies);
-                    break;
-            }
+
         }
         
         public void POS(int x, int y,Player player,List<EnemyManager> enemies)
@@ -156,7 +146,7 @@ namespace TextBasedRPG_OOP_WillB
                         y = rnd.Next(1,map.MapChar.Length);
                         if(map.IsTileValid(x, y) == '.')
                         {
-                            enemies.Add(new EnemyManager(x, y,EnemType.Grunt,0,0,0));
+                            enemies.Add(new EnemyManager(x, y,EnemType.Grunt,0,0,3));
                             ValidSpawn = true;
                         }
                     }
@@ -171,6 +161,7 @@ namespace TextBasedRPG_OOP_WillB
                 }
                 enemies.Add(new EnemyManager(20, 20, EnemType.Boss,0,0,0));
                 return enemies;
+            
         }
 
         public void DisplayEnemy()//Displays the enemies

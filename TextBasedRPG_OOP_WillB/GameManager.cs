@@ -62,7 +62,7 @@ namespace TextBasedRPG_OOP_WillB
             {
                 player.DisplayPlayer();
                 player.PlayerPOSMove(enemies);
-                foreach (var enemy in enemies)
+                foreach (EnemyManager enemy in enemies)
                 {
                     enemy.DisplayEnemy();
                     enemy.Move(player,enemies);

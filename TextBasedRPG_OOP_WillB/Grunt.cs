@@ -12,13 +12,17 @@ namespace TextBasedRPG_OOP_WillB
         Settings settings;
         public Grunt( int x, int y, EnemType enemType, int damage, int shield, int hp):base(x, y, enemType,damage,shield, hp)
         {
+            rnd = new Random();
             enemType = EnemType.Grunt;
             damage = settings.GruntAttack;
             hp = settings.GruntMaxhp;
             enemyAvatar = 'G';
         }
-        public override void GruntMove(Player player, List<EnemyManager> enemies)
+        public override void Move(Player player, List<EnemyManager> enemies)
         {
+            Console.Clear();
+            Console.WriteLine("Grunt Move");
+            Console.ReadKey();
             int Move = rnd.Next(1, 5);
             int dx = 0,
                 dy = 0;

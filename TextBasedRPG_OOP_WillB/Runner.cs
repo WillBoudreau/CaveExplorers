@@ -19,8 +19,8 @@ namespace TextBasedRPG_OOP_WillB
 
         public override void Move(Player player, List<EnemyManager> enemies)
         {
-            int dx = player.x + x;
-            int dy = player.y + y;
+            int dx = player.x - x;
+            int dy = player.y - y;
             if (Math.Abs(dx) > Math.Abs(dy))
             {
                 dx = Math.Sign(dx);
