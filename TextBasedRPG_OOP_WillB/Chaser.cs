@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    internal class Chaser:Enemy
+    internal class Chaser:EnemyManager
     {
         public int StartX = 5;
         public int StartY = 5;
@@ -16,7 +16,7 @@ namespace TextBasedRPG_OOP_WillB
             this.y = y;
             enemType = EnemType.Chaser;
         }
-        public override void Move(Player player, List<Enemy> enemies)
+        public override void Move(Player player, List<EnemyManager> enemies)
         {
             int dx = player.x - x;
             int dy = player.y - y;

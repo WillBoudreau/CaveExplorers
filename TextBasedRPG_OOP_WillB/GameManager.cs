@@ -16,14 +16,14 @@ namespace TextBasedRPG_OOP_WillB
         Map map;
         Player player;
         MusicManager music;
-        List<Enemy> enemies;
+        List<EnemyManager> enemies;
         HUD hud;
         public GameManager() 
         {
             music = new MusicManager();
             map = new Map();
             player = new Player();
-            enemies = Enemy.GenerateEnenmies(5,2,2,1,map);
+            enemies = EnemyManager.GenerateEnenmies(5,2,2,1,map);
             hud = new HUD(player, enemies);
             Player.hud = hud;
         }

@@ -17,8 +17,6 @@ namespace TextBasedRPG_OOP_WillB
         public int PlayerAttack = 3;
 
         //Grunt Variables
-        public int GruntMaxShield = 0;
-        public int GruntMinShield = 0;
         public  int GruntMaxhp = 1;
         public  int GruntMinhp = 0;
         public  int GruntAttack = 1;
@@ -27,6 +25,7 @@ namespace TextBasedRPG_OOP_WillB
         public int RunnerMaxhp = 3;
         public int RunnerMinhp = 0;
         public int RunnerAttack = 3;
+        public char enemyAvatar = 'R';
 
         //Chaser Variables
         public int ChaserMaxhp = 2;

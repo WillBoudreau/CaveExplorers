@@ -59,7 +59,7 @@ namespace TextBasedRPG_OOP_WillB
                 return 'e';
             }
         }
-        public void PlayerPOSMove(List<Enemy> enemies)
+        public void PlayerPOSMove(List<EnemyManager> enemies)
         {
             if (Playerturn == true && Attacked == false && IsSlowed == false)
             {
@@ -108,7 +108,7 @@ namespace TextBasedRPG_OOP_WillB
             }
             Attacked = false;
         }
-        public void POS(int x, int y, List<Enemy> enemies)
+        public void POS(int x, int y, List<EnemyManager> enemies)
         {
             this.x += x;
             this.y += y;
@@ -197,7 +197,7 @@ namespace TextBasedRPG_OOP_WillB
             {
                 map.UpdateMapTile(this.x, this.y, '.');
             }
-            foreach (Enemy enemy in enemies)
+            foreach (EnemyManager enemy in enemies)
             {
                 if (this.x == enemy.x && this.y == enemy.y)
                 {

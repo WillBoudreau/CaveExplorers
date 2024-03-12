@@ -10,14 +10,14 @@ namespace TextBasedRPG_OOP_WillB
     internal class HUD
     {
         Player player;
-        List<Enemy> enemies;
+        List<EnemyManager> enemies;
         Map map;
         string LastSeen;
         int LastSeenDamage;
         int LastSeenHealth;
         int LastSeenHealthMax;
         public List<string> EventLog {  get; set; }
-       public HUD(Player player,List<Enemy>enemies)
+       public HUD(Player player,List<EnemyManager>enemies)
         {
             this.player = player;
             this.enemies = enemies;
@@ -48,12 +48,11 @@ namespace TextBasedRPG_OOP_WillB
         {
             Console.WriteLine("P = Player\nG = Grunt\nC = Chaser\nR = Runner\nB = Boss");
         }
-        public void lastenemy(Enemy enemy)
+        public void lastenemy(EnemyManager enemy)
         {
             LastSeen = enemy.name;
             LastSeenHealth = enemy.healthSys.normalHealth;
             LastSeenHealthMax = enemy.healthSys.maxHealth;
-            LastSeenDamage = enemy.enemDamage;
         }
         public void AddEvent(string log)
         {

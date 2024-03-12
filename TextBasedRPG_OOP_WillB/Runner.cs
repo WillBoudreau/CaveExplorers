@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    internal class Runner:Enemy
+    internal class Runner:EnemyManager
     {
         Settings settings;
         public Runner( int x, int y, EnemType enemType, int damage, int shield, int hp): base(x, y, enemType, damage, shield, hp)
@@ -17,7 +17,7 @@ namespace TextBasedRPG_OOP_WillB
             hp = settings.RunnerMaxhp;
         }
 
-        public override void Move(Player player, List<Enemy> enemies)
+        public override void Move(Player player, List<EnemyManager> enemies)
         {
             int dx = player.x + x;
             int dy = player.y + y;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    internal class Grunt:Enemy
+    internal class Grunt:EnemyManager
     {
         Random rnd;
         Settings settings;
@@ -15,8 +15,9 @@ namespace TextBasedRPG_OOP_WillB
             enemType = EnemType.Grunt;
             damage = settings.GruntAttack;
             hp = settings.GruntMaxhp;
+            enemyAvatar = 'G';
         }
-        public override void Move(Player player, List<Enemy> enemies)
+        public override void GruntMove(Player player, List<EnemyManager> enemies)
         {
             int Move = rnd.Next(1, 5);
             int dx = 0,
@@ -24,7 +25,6 @@ namespace TextBasedRPG_OOP_WillB
             switch (Move)
             {
                 case 1:
-
                     dy = -1;
                     break;
                 case 2:
@@ -41,6 +41,15 @@ namespace TextBasedRPG_OOP_WillB
                     break;
             }
             POS(dx, dy, player, enemies);
+        }
+        public override void Attack(Player player, List<EnemyManager> enemies)
+        {
+            if (this.x == player.x && this.y == player.y)
+            {
+                player.healthSys.TakeDamage(settings.GruntAttack);
+                this.x -= x;
+                this.y -= y;
+            }
         }
     }
 }
