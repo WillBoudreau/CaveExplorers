@@ -44,7 +44,7 @@ namespace TextBasedRPG_OOP_WillB
                     dx = 1;
                     break;
             }
-            POS(dx, dy, player, enemies);
+            base.POS(dx, dy, player, enemies);
         }
         public override void Attack(Player player, List<EnemyManager> enemies)
         {
@@ -55,5 +55,7 @@ namespace TextBasedRPG_OOP_WillB
                 this.y -= y;
             }
         }
+        
+
     }
 }

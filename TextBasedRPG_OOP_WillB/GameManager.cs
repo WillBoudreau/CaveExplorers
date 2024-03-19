@@ -23,7 +23,7 @@ namespace TextBasedRPG_OOP_WillB
             music = new MusicManager();
             map = new Map();
             player = new Player();
-            enemies = EnemyManager.GenerateEnenmies(5,2,2,1,map);
+            enemies = EnemyManager.GenerateEnemies(25,2,2,1,map);
             hud = new HUD(player, enemies);
             Player.hud = hud;
         }
@@ -38,6 +38,7 @@ namespace TextBasedRPG_OOP_WillB
                 map.ShowMap();
             }
         }
+        //Intro to game
         void Intro()
         {
             Console.Clear();
@@ -83,6 +84,7 @@ namespace TextBasedRPG_OOP_WillB
                 GameOver();
             }
         }
+        //Game Over to game
         public void GameOver()
         {
             Console.Clear();
@@ -90,6 +92,7 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("You where defeated by: ");
             Console.ReadKey();
         }
+
         public void Win()
         {
             Console.Clear();
