@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
@@ -15,7 +10,7 @@ namespace TextBasedRPG_OOP_WillB
         Runner,
         Boss,
     }
-     struct EnemyVals
+    struct EnemyVals
     {
         public int StartX;
         public int StartY;
@@ -26,14 +21,13 @@ namespace TextBasedRPG_OOP_WillB
     internal class EnemyManager : Entity
     {
         public char enemyAvatar { get; set; }
-        Settings settings = new Settings();
         EnemyVals enemyVals = new EnemyVals();
         public EnemType enemType;
         public static HUD hud;
         public string name;
         int enemHealth;
         int enemShield;
-         public bool BossDead = false;
+        public bool BossDead = false;
 
         public EnemyManager(int StartX, int StartY, EnemType enemType, int damage, int shield, int health)
         {
@@ -61,10 +55,23 @@ namespace TextBasedRPG_OOP_WillB
 
         public virtual void Move(Player player, List<EnemyManager> enemies)
         {
+            int newX = player.x - this.x;
+            int newY = player.y - this.y;
 
+            if (Math.Abs(newX) > Math.Abs(newY))
+            {
+                newX = Math.Sign(newX);
+                newY = 0;
+            }
+            else
+            {
+                newX = 0;
+                newY = Math.Sign(newY);
+            }
+            POS(newX, newY, player, enemies);
         }
-        
-        public void POS(int x, int y,Player player,List<EnemyManager> enemies)
+
+        public void POS(int x, int y, Player player, List<EnemyManager> enemies)
         {
             this.x += x;
             this.y += y;
@@ -109,12 +116,18 @@ namespace TextBasedRPG_OOP_WillB
                     this.y -= y;
                     break;
             }
+            Console.Clear();
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                Console.WriteLine(enemies[i].ToString());
+            }
             foreach (EnemyManager enemy in enemies)
             {
-                if(enemy != this && enemy.x == this.x && enemy.y == this.y)
+                if (enemy != this && enemy.x == this.x && enemy.y == this.y)
                 {
                     this.x -= x;
                     this.y -= y;
+                    break;
                 }
             }
         }
@@ -128,40 +141,40 @@ namespace TextBasedRPG_OOP_WillB
             }
         }
 
-        public static List<EnemyManager> GenerateEnenmies( int numGrunts, int numChasers, int numRunners, int numBoss,Map map)
+        public static List<EnemyManager> GenerateEnenmies(int numGrunts, int numChasers, int numRunners, int numBoss, Map map)
         {
-                int[,] ChaserPOS = { { 15, 15 }, { 14, 14 } };
-                int[,] RunnerPOS = { { 16,16}, { 17,17 } }; 
-                List<EnemyManager> enemies = new List<EnemyManager>();
+            int[,] ChaserPOS = { { 15, 15 }, { 14, 14 } };
+            int[,] RunnerPOS = { { 16, 16 }, { 17, 17 } };
+            List<EnemyManager> enemies = new List<EnemyManager>();
             Random rnd = new Random();
             char[] obstacles = { '#', 'C', '@', '+', 'H', 'S', '*', 'D', '~' };
-                for (int i = 0; i < numGrunts; i++)
+            for (int i = 0; i < numGrunts; i++)
+            {
+                int x;
+                int y;
+                bool ValidSpawn = false;
+                while (!ValidSpawn)
                 {
-                    int x;
-                    int y;
-                    bool ValidSpawn = false;
-                    while(!ValidSpawn)
+                    x = rnd.Next(1, map.MapChar[0].Length);
+                    y = rnd.Next(1, map.MapChar.Length);
+                    if (map.IsTileValid(x, y) == '.')
                     {
-                        x = rnd.Next(1, map.MapChar[0].Length);
-                        y = rnd.Next(1,map.MapChar.Length);
-                        if(map.IsTileValid(x, y) == '.')
-                        {
-                            enemies.Add(new EnemyManager(x, y,EnemType.Grunt,0,0,3));
-                            ValidSpawn = true;
-                        }
+                        enemies.Add(new Grunt(x, y, EnemType.Grunt, 1, 1, 3));
+                        ValidSpawn = true;
                     }
                 }
-                for (int i = 0; i < ChaserPOS.GetLength(0); i++)
-                {
-                    enemies.Add(new EnemyManager(ChaserPOS[i,0], ChaserPOS[i,1], EnemType.Chaser,0,0,0));
-                }
-                for (int i = 0; i < RunnerPOS.GetLength(0); i++)
-                {
-                    enemies.Add(new EnemyManager(RunnerPOS[i,0], RunnerPOS[i,1], EnemType.Runner,0,0,0));
-                }
-                enemies.Add(new EnemyManager(20, 20, EnemType.Boss,0,0,0));
-                return enemies;
-            
+            }
+            //for (int i = 0; i < ChaserPOS.GetLength(0); i++)
+            //{
+            //    enemies.Add(new EnemyManager(ChaserPOS[i,0], ChaserPOS[i,1], EnemType.Chaser,0,0,0));
+            //}
+            //for (int i = 0; i < RunnerPOS.GetLength(0); i++)
+            //{
+            //    enemies.Add(new EnemyManager(RunnerPOS[i,0], RunnerPOS[i,1], EnemType.Runner,0,0,0));
+            //}
+            //enemies.Add(new EnemyManager(20, 20, EnemType.Boss,0,0,0));
+            return enemies;
+
         }
 
         public void DisplayEnemy()//Displays the enemies
