@@ -10,18 +10,22 @@ namespace TextBasedRPG_OOP_WillB
     internal class Runner:EnemyManager
     {
         Settings settings;
+        List<EnemyManager> enemies;
+        Player Player = new Player();
         public Runner( int x, int y, EnemType enemType, int damage, int shield, int hp): base(x, y, enemType, damage, shield, hp)
         {
-            enemType = EnemType.Runner;
-            damage = settings.RunnerAttack;
-            hp = settings.RunnerMaxhp;
+            //enemType = EnemType.Runner;
+            //damage = settings.RunnerAttack;
+            //hp = settings.RunnerMaxhp;
+            enemyAvatar = 'R';
+            Move(Player, enemies);
         }
 
         public override void Move(Player player, List<EnemyManager> enemies)
         {
             int dx = player.x - x;
             int dy = player.y - y;
-            if (Math.Abs(dx) > Math.Abs(dy))
+            if (Math.Abs(dx) < Math.Abs(dy))
             {
                 dx = Math.Sign(dx);
                 dy = 0;
@@ -31,7 +35,7 @@ namespace TextBasedRPG_OOP_WillB
                 dx = 0;
                 dy = Math.Sign(dy);
             }
-            POS(dx, dy, player, enemies);
+            base.POS(dx, dy, player, enemies);
         }
     }
 }

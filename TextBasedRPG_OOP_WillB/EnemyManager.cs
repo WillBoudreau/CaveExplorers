@@ -63,6 +63,7 @@ namespace TextBasedRPG_OOP_WillB
                 Random rnd = new Random();
                 Grunt grunt = new Grunt(0, 0, EnemType.Grunt, 1, 1, 3);
                 Chaser chaser = new Chaser(0, 0, EnemType.Chaser, 1, 1, 3);
+                Runner runner = new Runner(0, 0, EnemType.Runner, 1, 1, 3);
                 Player player = new Player();
                 List<EnemyManager> enemies = new List<EnemyManager>();
                 char[] obstacles = { '#', 'C', '@', '+', 'H', 'S', '*', 'D', '~' };
@@ -94,6 +95,22 @@ namespace TextBasedRPG_OOP_WillB
                     if (map.IsTileValid(x, y) == '.')
                     {
                         enemies.Add(new Chaser(x, y, EnemType.Chaser, 1, 1, 3));
+                        ValidSpawn = true;
+                    }
+                }
+            }
+            for (int i = 0; i < numRunners; i++)
+            {
+                int x;
+                int y;
+                bool ValidSpawn = false;
+                while (!ValidSpawn)
+                {
+                    x = rnd.Next(1, map.MapChar[0].Length);
+                    y = rnd.Next(1, map.MapChar.Length);
+                    if (map.IsTileValid(x, y) == '.')
+                    {
+                        enemies.Add(new Runner(x, y, EnemType.Runner, 1, 1, 3));
                         ValidSpawn = true;
                     }
                 }

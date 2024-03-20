@@ -49,6 +49,7 @@
     <Compile Include="GameManager.cs" />
     <Compile Include="Grunt.cs" />
     <Compile Include="HUD.cs" />
+    <Compile Include="ItemManager.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="EnemyManager.cs" />
     <Compile Include="Entity.cs" />
