@@ -25,6 +25,8 @@ namespace TextBasedRPG_OOP_WillB
         public EnemType enemType;
         public static HUD hud;
         public Grunt grunt;
+        public Chaser Chaser;
+        public Player Player;
         public string name;
         int enemHealth;
         int enemShield;
@@ -60,6 +62,8 @@ namespace TextBasedRPG_OOP_WillB
             //int[,] RunnerPOS = { { 16, 16 }, { 17, 17 } };
                 Random rnd = new Random();
                 Grunt grunt = new Grunt(0, 0, EnemType.Grunt, 1, 1, 3);
+                Chaser chaser = new Chaser(0, 0, EnemType.Chaser, 1, 1, 3);
+                Player player = new Player();
                 List<EnemyManager> enemies = new List<EnemyManager>();
                 char[] obstacles = { '#', 'C', '@', '+', 'H', 'S', '*', 'D', '~' };
                 for (int i = 0; i < numGrunts; i++)
@@ -78,23 +82,23 @@ namespace TextBasedRPG_OOP_WillB
                         }
                     }
                 }
-            //    for (int i = 0; i < numChasers; i++)
-            //{
-            //        int x;
-            //        int y;
-            //        bool ValidSpawn = false;
-            //        while (!ValidSpawn)
-            //    {
-            //            x = rnd.Next(1, map.MapChar[0].Length);
-            //            y = rnd.Next(1, map.MapChar.Length);
-            //            if (map.IsTileValid(x, y) == '.')
-            //        {
-            //                enemies.Add(new Chaser(x, y, EnemType.Chaser, 1, 1, 3));
-            //                ValidSpawn = true;
-            //            }
-            //        }
-            //    }
-                if(enemies == null)
+            for (int i = 0; i < numChasers; i++)
+            {
+                int x;
+                int y;
+                bool ValidSpawn = false;
+                while (!ValidSpawn)
+                {
+                    x = rnd.Next(1, map.MapChar[0].Length);
+                    y = rnd.Next(1, map.MapChar.Length);
+                    if (map.IsTileValid(x, y) == '.')
+                    {
+                        enemies.Add(new Chaser(x, y, EnemType.Chaser, 1, 1, 3));
+                        ValidSpawn = true;
+                    }
+                }
+            }
+            if (enemies == null)
             {
                     Console.Clear();
                     Console.WriteLine("No Enemiessssss");

@@ -11,7 +11,7 @@ namespace TextBasedRPG_OOP_WillB
         public int StartX = 5;
         public int StartY = 5;
         List<EnemyManager> enemies;
-        Player player;
+        Player player = new Player();
         Settings settings;
         public Chaser(int x, int y, EnemType enemType, int damage, int shield, int hp): base(x, y, enemType, damage, shield, hp)
         {
@@ -20,6 +20,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public override void Move(Player player, List<EnemyManager> enemies)
         {
+
             int dx = player.x - x;
             int dy = player.y - y;
             if (Math.Abs(dx) > Math.Abs(dy))
