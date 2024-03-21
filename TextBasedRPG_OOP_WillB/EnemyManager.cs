@@ -23,18 +23,18 @@ namespace TextBasedRPG_OOP_WillB
         public char enemyAvatar { get; set; }
         EnemyVals enemyVals = new EnemyVals();
         public EnemType enemType;
+        //Class calls
         public static HUD hud;
         public Grunt grunt;
         public Chaser Chaser;
         public Player Player;
+        public Settings settings = new Settings();
         public string name;
-        int enemHealth;
-        int enemShield;
         public bool BossDead = false;
 
         public EnemyManager(int StartX, int StartY, EnemType enemType, int damage, int shield, int health)
         {
-            healthSys = new HealthSys(enemHealth, enemShield);
+            healthSys = new HealthSys(health, shield);
             x = StartX;
             y = StartY;
             enemyVals.EnemyActive = true;

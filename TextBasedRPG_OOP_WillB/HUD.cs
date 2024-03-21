@@ -27,7 +27,9 @@ namespace TextBasedRPG_OOP_WillB
         { 
             Console.WriteLine("\n");
             Objectives();
+            Console.WriteLine("\n");
             Console.WriteLine("Stats");
+            Console.WriteLine(player.x +" " + player.y);
             Console.WriteLine("Player Health: " + player.healthSys.normalHealth);
             Console.WriteLine("Player Shield: " + player.healthSys.normalShield);
             Console.WriteLine("Player Attack: " + player.PlayerDamage);

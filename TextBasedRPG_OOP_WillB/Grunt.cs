@@ -9,15 +9,14 @@ namespace TextBasedRPG_OOP_WillB
     internal class Grunt:EnemyManager
     {
         Random rnd;
-        Settings settings;
         List<EnemyManager> enemy;
         Player player;
         public Grunt( int x, int y, EnemType enemType, int damage, int shield, int hp):base(x, y, enemType,damage,shield, hp)
         {
             rnd = new Random();
-            //enemType = EnemType.Grunt;
-            //damage = settings.GruntAttack;
-            //hp = settings.GruntMaxhp;
+            enemType = EnemType.Grunt;
+            damage = settings.GruntAttack;
+            hp = settings.GruntMaxhp;
             enemyAvatar = 'G';
             Move(player, enemy);
         }

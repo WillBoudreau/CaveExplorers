@@ -26,22 +26,34 @@ namespace TextBasedRPG_OOP_WillB
             music = new MusicManager();
             map = new Map();
             player = new Player();
-            enemies = EnemyManager.GenerateEnemies(25,3,3,1,map);
-            itemManager = ItemManager.GenerateItems(25, 0, 0, 0, map);
             hud = new HUD(player, enemies);
             Player.hud = hud;
         }
         
         void GenerateLlevel(int level)
         {
-            if(level ==  1)
+            enemies = new List<EnemyManager>();
+            itemManager = new List<ItemManager>();
+            switch (level)
             {
-                music.PlayMusicLevel(level);
-                Console.CursorVisible = false;
-                map.MapArray();
-                map.ShowMap();
-                itemManager = ItemManager.GenerateItems(25, 0, 0, 0, map);
+                case 1:
+                    music.PlayMusicLevel(level);
+                    Console.CursorVisible = false;
+                    map.MapArray();
+                    map.ShowMap();
+                    enemies = EnemyManager.GenerateEnemies(1, 0, 0, 0, map);
+                    itemManager = ItemManager.GenerateItems(1, 1, 1, 1, map);
+                    break;
+                case 2:
+                    music.PlayMusicLevel(level);
+                    Console.CursorVisible = false;
+                    map.MapArray();
+                    map.ShowMap();
+                    enemies = EnemyManager.GenerateEnemies(5, 2, 2, 1, map);
+                    itemManager = ItemManager.GenerateItems(25, 2, 2, 1, map);
+                    break;
             }
+
         }
         //Intro to game
         void Intro()

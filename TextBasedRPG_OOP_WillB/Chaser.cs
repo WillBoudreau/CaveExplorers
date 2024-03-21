@@ -12,9 +12,11 @@ namespace TextBasedRPG_OOP_WillB
         public int StartY = 5;
         List<EnemyManager> enemies;
         Player player = new Player();
-        Settings settings;
         public Chaser(int x, int y, EnemType enemType, int damage, int shield, int hp): base(x, y, enemType, damage, shield, hp)
         {
+            enemType = EnemType.Chaser;
+            damage = settings.ChaserAttack;
+            hp = settings.ChaserMaxhp;
            enemyAvatar = 'C';
            Move(player, enemies);
         }

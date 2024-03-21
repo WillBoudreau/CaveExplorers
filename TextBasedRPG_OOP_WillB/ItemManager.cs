@@ -48,6 +48,9 @@ namespace TextBasedRPG_OOP_WillB
                     if (map.IsTileValid(x, y) == '.')
                     {
                         Console.SetCursorPosition(x, y);
+                        Console.Clear();
+                        Console.Write(x + " " + y);
+                        Console.ReadKey();
                         map.UpdateMapTile(x, y,'*');
                         itemManagers.Add(new ItemManager('*', x, y, map));
                         Coins.Add('*');
@@ -79,7 +82,6 @@ namespace TextBasedRPG_OOP_WillB
         public void DisplayItems()
         { 
             Console.SetCursorPosition(x, y);
-            Console.Write(ItemAvatar);
             switch(ItemAvatar)
             {
                 case '*':
@@ -91,7 +93,7 @@ namespace TextBasedRPG_OOP_WillB
                     Console.ForegroundColor = ConsoleColor.Red;
                     break;
                 case 'S':
-                    Console.BackgroundColor = ConsoleColor.Blue;
+                    Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.Blue;
                     break;
                 case 'D':
@@ -99,6 +101,8 @@ namespace TextBasedRPG_OOP_WillB
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     break;
             }
+            Console.Write(ItemAvatar);
+            Console.ResetColor();
         }
     }
 }

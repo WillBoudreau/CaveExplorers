@@ -21,20 +21,20 @@ namespace TextBasedRPG_OOP_WillB
         List<EnemyManager> enemies =  new List<EnemyManager>();
         private Stopwatch stopwatch = new Stopwatch();
         public static HUD hud;
-        public int health;
-        public int shield;
+        Settings settings;
         public int PlayerDamage = 3;
         public Player()
         {
-
+            settings = new Settings();
             ExpirenceMan.level = 0;
             ExpirenceMan.xp = 0;
             score = 0;
             x = 3;
             y = 3;
-            health = 3;
-            shield = 3;
-            healthSys = new HealthSys(health, shield);
+            settings.PlayerMaxhp = 3;
+            settings.PlayerAttack = 3;
+            settings.PlayerMaxShield = 3;
+            healthSys = new HealthSys(settings.PlayerMaxhp, settings.PlayerMaxShield);
         }
         public void Init()
         {
@@ -140,37 +140,6 @@ namespace TextBasedRPG_OOP_WillB
                     hud.AddEvent("Player moved onto a spike trap");
                     map.UpdateMapTile(this.x, this.y, '+');
                     return;
-                case '*':
-                    //CollectorMan.CollectCoins();
-                    hud.AddEvent("Player collected a coin");
-                    map.UpdateMapTile(this.x, this.y, '.');
-                    this.x -= x;
-                    this.y -= y;
-                    score++;
-                    break;
-                case 'H':
-                    //CollectorMan.CollectHealth();
-                    hud.AddEvent("Player collected health");
-                    map.UpdateMapTile(this.x, this.y, '.');
-                    this.x -= x;
-                    this.y -= y;
-                    healthSys.Heal(1);
-                    break;
-                case 'S':
-                    //CollectorMan.CollectShield();
-                    hud.AddEvent("Player collected shield");
-                    map.UpdateMapTile(this.x, this.y, '.');
-                    healthSys.ShieldUp(1);
-                    this.x -= x;
-                    this.y -= y;
-                    break;
-                case 'D':
-                    hud.AddEvent("Player collected a damage boost");
-                    map.UpdateMapTile(this.x, this.y, '.');
-                    this.x -= x;
-                    this.y -= y;
-                    PlayerDamage++;
-                    break;
                 case '^':
                     hud.AddEvent("Player collected a Level Up");
                     map.UpdateMapTile(this.x, this.y, '.');
@@ -201,6 +170,21 @@ namespace TextBasedRPG_OOP_WillB
                     Console.Clear();
                     map.LoadNextLevel();
                     break;
+                default:
+                    PlayerItemCheck();
+                    foreach (EnemyManager enemy in enemies)
+                    {
+                        if (this.x == enemy.x && this.y == enemy.y)
+                        {
+                            enemy.healthSys.TakeDamage(PlayerDamage);
+                            this.x -= x;
+                            this.y -= y;
+                            hud.lastenemy(enemy);
+                            break;
+                        }
+                    }
+                    
+                    break;
             }
             if (IsSlowed == true)
             {
@@ -222,24 +206,39 @@ namespace TextBasedRPG_OOP_WillB
                 }
             }
         }
-        public void TakeDamage(int damage)
+        void PlayerItemCheck()
         {
-            if(healthSys.normalShield > 0)
+            List<ItemManager> list = new List<ItemManager>();
+            foreach (ItemManager item in list)
             {
-                healthSys.normalShield -= damage;
-                if(healthSys.normalShield < 0)
+                if (this.x == item.x && this.y == item.y)
                 {
-                    healthSys.normalShield = 0;
+                    if (item.ItemAvatar == '*')
+                    {
+                        score += 1;
+                        this.y -= y;
+                        this.x -= x;
+                        list.Remove(item);
+                    }
+                    if (item.ItemAvatar == 'H')
+                    {
+                        healthSys.normalHealth += 1;
+                        list.Remove(item);
+                    }
+                    if (item.ItemAvatar == 'S')
+                    {
+                        healthSys.normalShield += 1;
+                        list.Remove(item);
+                    }
+                    if (item.ItemAvatar == 'D')
+                    {
+                        PlayerDamage += 1;
+                        list.Remove(item);
+                    }
+                    list.Remove(item);
                 }
             }
-            else
-            {
-                healthSys.normalHealth -= damage;
-                if (healthSys.normalHealth <= 0)
-                {
-                    healthSys.normalHealth = 0;
-                }
-            }
+
         }
         public void StartTimer()
         {

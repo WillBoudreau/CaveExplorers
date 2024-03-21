@@ -9,14 +9,13 @@ namespace TextBasedRPG_OOP_WillB
 {
     internal class Runner:EnemyManager
     {
-        Settings settings;
         List<EnemyManager> enemies;
         Player Player = new Player();
         public Runner( int x, int y, EnemType enemType, int damage, int shield, int hp): base(x, y, enemType, damage, shield, hp)
         {
-            //enemType = EnemType.Runner;
-            //damage = settings.RunnerAttack;
-            //hp = settings.RunnerMaxhp;
+            enemType = EnemType.Runner;
+            damage = settings.RunnerAttack;
+            hp = settings.RunnerMaxhp;
             enemyAvatar = 'R';
             Move(Player, enemies);
         }
