@@ -19,6 +19,7 @@ namespace TextBasedRPG_OOP_WillB
         Player player;
         MusicManager music;
         List<EnemyManager> enemies;
+        List<ItemManager> items;
         HUD hud;
         List <ItemManager> itemManager;
         public GameManager() 
@@ -41,7 +42,7 @@ namespace TextBasedRPG_OOP_WillB
                     Console.CursorVisible = false;
                     map.MapArray();
                     map.ShowMap();
-                    enemies = EnemyManager.GenerateEnemies(1, 0, 0, 0, map);
+                    enemies = EnemyManager.GenerateEnemies(1, 1, 0, 0, map);
                     itemManager = ItemManager.GenerateItems(1, 1, 1, 1, map);
                     break;
                 case 2:
@@ -81,10 +82,10 @@ namespace TextBasedRPG_OOP_WillB
             {
                 foreach (ItemManager item in itemManager)
                 {
-                    item.DisplayItems();
+                    item.DisplayItems(map);
                 }
-                player.Draw();
-                player.Update();
+                player.DisplayPlayer();
+                player.PlayerPOSMove(enemies,items);
                 foreach (EnemyManager enemy in enemies)
                 {
                     enemy.DisplayEnemy();

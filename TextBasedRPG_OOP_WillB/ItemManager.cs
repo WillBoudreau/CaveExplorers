@@ -19,12 +19,10 @@ namespace TextBasedRPG_OOP_WillB
         public char ItemAvatar {get; set;}
         public int x { get; set; }
         public int y { get; set; }
+        List<char> Coins;
+        List<char> Health;
         public ItemManager( char itemAvatar, int x, int y, Map map)
         {
-            List<char> Coins = new List<char>();
-            List<char> Health = new List<char>();
-            List<char> Shield = new List<char>();
-            List<char> Damage = new List<char>();
             ItemAvatar = itemAvatar;
             this.x = x;
             this.y = y;
@@ -32,8 +30,6 @@ namespace TextBasedRPG_OOP_WillB
         
         public static List<ItemManager> GenerateItems(int numCoins, int numHealth, int numShield, int numDamage,Map map)
         {
-            List<char>Coins = new List<char>();
-            List<char>Health = new List<char>();
             List<ItemManager> itemManagers = new List<ItemManager>();
             Random rnd = new Random();
             for (int i = 0; i < numCoins; i++)
@@ -48,12 +44,8 @@ namespace TextBasedRPG_OOP_WillB
                     if (map.IsTileValid(x, y) == '.')
                     {
                         Console.SetCursorPosition(x, y);
-                        Console.Clear();
-                        Console.Write(x + " " + y);
-                        Console.ReadKey();
                         map.UpdateMapTile(x, y,'*');
                         itemManagers.Add(new ItemManager('*', x, y, map));
-                        Coins.Add('*');
                         ValidSpawn = true;
                     }
                 }
@@ -72,14 +64,13 @@ namespace TextBasedRPG_OOP_WillB
                         Console.SetCursorPosition(x, y);
                         map.UpdateMapTile(x, y, 'H');
                         itemManagers.Add(new ItemManager('H', x, y, map));
-                        Health.Add('H');
                         ValidSpawn = true;
                     }
                 }
             }
             return itemManagers;
         }
-        public void DisplayItems()
+        public void DisplayItems(Map map)
         { 
             Console.SetCursorPosition(x, y);
             switch(ItemAvatar)
