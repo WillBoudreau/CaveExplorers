@@ -58,8 +58,6 @@ namespace TextBasedRPG_OOP_WillB
         //Generate Enemies
         public static List<EnemyManager> GenerateEnemies(int numGrunts, int numChasers, int numRunners, int numBoss, Map map)
         {
-            //int[,] ChaserPOS = { { 15, 15 }, { 14, 14 } };
-            //int[,] RunnerPOS = { { 16, 16 }, { 17, 17 } };
                 Random rnd = new Random();
                 Grunt grunt = new Grunt(0, 0, EnemType.Grunt, 1, 1, 3);
                 Chaser chaser = new Chaser(0, 0, EnemType.Chaser, 1, 1, 3);
@@ -121,15 +119,6 @@ namespace TextBasedRPG_OOP_WillB
                     Console.WriteLine("No Enemiessssss");
                     Console.ReadKey();
                 }
-            //for (int i = 0; i < ChaserPOS.GetLength(0); i++)
-            //{
-            //    enemies.Add(new EnemyManager(ChaserPOS[i, 0], ChaserPOS[i, 1], EnemType.Chaser, 0, 0, 0));
-            //}
-            //for (int i = 0; i < RunnerPOS.GetLength(0); i++)
-            //{
-            //    enemies.Add(new EnemyManager(RunnerPOS[i, 0], RunnerPOS[i, 1], EnemType.Runner, 0, 0, 0));
-            //}
-            //enemies.Add(new EnemyManager(20, 20, EnemType.Boss, 0, 0, 0));
             return enemies;
 
         }
@@ -155,11 +144,6 @@ namespace TextBasedRPG_OOP_WillB
         public void POS(int x, int y, Player player, List<EnemyManager> enemies)
         {
                 enemies = new List<EnemyManager>();
-            //if(enemies == null)
-            //{ 
-            //    Console.WriteLine("No Enemies2");
-            //    Console.ReadKey();
-            //}
             this.x += x;
             this.y += y;
             switch (map.IsTileValid(this.x, this.y))

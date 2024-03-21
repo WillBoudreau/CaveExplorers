@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
     internal class Map
     {
-            public string path;
-             string[] Mapstr;
-            public char[][] MapChar;
+        public string path;
+        string[] Mapstr;
+        public char[][] MapChar;
+        List<ItemManager> Items = new List<ItemManager>();
         public Map()
         {
             MapArray();
@@ -32,11 +28,12 @@ namespace TextBasedRPG_OOP_WillB
             int Mapx = Mapstr.Length;
             int Mapy = Mapstr[0].Length;
             MapChar = new char[Mapx][];
+
             for (int i = 0; i < Mapx; i++)
             {
                 MapChar[i] = Mapstr[i].ToCharArray();
             }
-            
+
             ShowMap();
         }
         public void ShowMap()
@@ -45,7 +42,9 @@ namespace TextBasedRPG_OOP_WillB
             {
                 for (int j = 0; j < MapChar[i].Length; j++)
                 {
+
                     Console.SetCursorPosition(j, i);
+
                     switch (MapChar[i][j])
                     {
                         case '#':
@@ -129,7 +128,7 @@ namespace TextBasedRPG_OOP_WillB
             Mapstr = File.ReadAllLines(path);
             int MapX = Mapstr.Length;
             int MapY = Mapstr[0].Length;
-            MapChar = new char[MapX][] ;
+            MapChar = new char[MapX][];
             for (int i = 0; i < MapX; i++)
             {
                 MapChar[i] = Mapstr[i].ToCharArray();

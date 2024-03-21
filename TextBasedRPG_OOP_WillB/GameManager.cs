@@ -11,6 +11,7 @@ using System.Data;
 
 namespace TextBasedRPG_OOP_WillB
 {
+    
     internal class GameManager
     {
         
@@ -19,12 +20,14 @@ namespace TextBasedRPG_OOP_WillB
         MusicManager music;
         List<EnemyManager> enemies;
         HUD hud;
+        List <ItemManager> itemManager;
         public GameManager() 
         {
             music = new MusicManager();
             map = new Map();
             player = new Player();
-            enemies = EnemyManager.GenerateEnemies(25,2,2,1,map);
+            enemies = EnemyManager.GenerateEnemies(25,3,3,1,map);
+            itemManager = ItemManager.GenerateItems(25, 0, 0, 0, map);
             hud = new HUD(player, enemies);
             Player.hud = hud;
         }
@@ -37,6 +40,7 @@ namespace TextBasedRPG_OOP_WillB
                 Console.CursorVisible = false;
                 map.MapArray();
                 map.ShowMap();
+                itemManager = ItemManager.GenerateItems(25, 0, 0, 0, map);
             }
         }
         //Intro to game
@@ -58,13 +62,17 @@ namespace TextBasedRPG_OOP_WillB
         public void GameLoop()
         {
             //player.Init(player, enemies, map, hud, music, enemies);
-            player.StarTimer();
+            player.Init();
             Intro();
             GenerateLlevel(1);
             while (player.healthSys.normalHealth > 0)
             {
-                player.DisplayPlayer();
-                player.PlayerPOSMove(enemies);
+                foreach (ItemManager item in itemManager)
+                {
+                    item.DisplayItems();
+                }
+                player.Draw();
+                player.Update();
                 foreach (EnemyManager enemy in enemies)
                 {
                     enemy.DisplayEnemy();

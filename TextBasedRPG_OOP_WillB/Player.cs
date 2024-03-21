@@ -18,6 +18,7 @@ namespace TextBasedRPG_OOP_WillB
         public bool Playerturn = true;
         public bool Attacked = false;
         public bool IsSlowed = false;
+        List<EnemyManager> enemies =  new List<EnemyManager>();
         private Stopwatch stopwatch = new Stopwatch();
         public static HUD hud;
         public int health;
@@ -34,6 +35,18 @@ namespace TextBasedRPG_OOP_WillB
             health = 3;
             shield = 3;
             healthSys = new HealthSys(health, shield);
+        }
+        public void Init()
+        {
+            StartTimer();
+        }
+        public void Update()
+        {
+            PlayerPOSMove(enemies);
+        }
+        public void Draw()
+        {
+            DisplayPlayer();
         }
         public static char Input()
         {
@@ -228,7 +241,7 @@ namespace TextBasedRPG_OOP_WillB
                 }
             }
         }
-        public void StarTimer()
+        public void StartTimer()
         {
             stopwatch.Start();
         }
