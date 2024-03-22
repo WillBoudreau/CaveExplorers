@@ -25,7 +25,6 @@ namespace TextBasedRPG_OOP_WillB
         public int RunnerMaxhp = 3;
         public int RunnerMinhp = 0;
         public int RunnerAttack = 3;
-        public char enemyAvatar = 'R';
 
         //Chaser Variables
         public int ChaserMaxhp = 2;

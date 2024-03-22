@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 
 namespace TextBasedRPG_OOP_WillB
@@ -9,10 +10,21 @@ namespace TextBasedRPG_OOP_WillB
         public string path;
         string[] Mapstr;
         public char[][] MapChar;
-        List<ItemManager> Items = new List<ItemManager>();
         public Map()
         {
             MapArray();
+        }
+        public void Init()
+        {
+            MapArray();
+        }
+        public void Update( int x, int y,char tile)
+        {
+            
+        }
+        public void Draw()
+        {
+            ShowMap();
         }
         public void UpdateMapTile(int x, int y, char tile)
         {
@@ -33,8 +45,7 @@ namespace TextBasedRPG_OOP_WillB
             {
                 MapChar[i] = Mapstr[i].ToCharArray();
             }
-
-            ShowMap();
+            Draw();
         }
         public void ShowMap()
         {
@@ -133,7 +144,8 @@ namespace TextBasedRPG_OOP_WillB
             {
                 MapChar[i] = Mapstr[i].ToCharArray();
             }
-            ShowMap();
+            Draw();
+
         }
         public char IsTileValid(int x, int y)
         {

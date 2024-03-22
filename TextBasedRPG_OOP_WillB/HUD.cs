@@ -11,6 +11,7 @@ namespace TextBasedRPG_OOP_WillB
     {
         Player player;
         List<EnemyManager> enemies;
+        EnemyManager enemy;
         Map map;
         string LastSeen;
         int LastSeenDamage;
@@ -23,20 +24,24 @@ namespace TextBasedRPG_OOP_WillB
             this.enemies = enemies;
             EventLog = new List<string>();
         }
-        public void DisplayHUD()
-        { 
+        public void Update(List<EnemyManager>enemies)
+        {
+            DisplayHUD(enemies);
+            LastSeenEnemy();
+        }
+        public void DisplayHUD(List<EnemyManager> enemies)
+        {
             Console.WriteLine("\n");
             Objectives();
             Console.WriteLine("\n");
             Console.WriteLine("Stats");
-            Console.WriteLine(player.x +" " + player.y);
+            Console.WriteLine(player.x + " " + player.y);
             Console.WriteLine("Player Health: " + player.healthSys.normalHealth);
             Console.WriteLine("Player Shield: " + player.healthSys.normalShield);
             Console.WriteLine("Player Attack: " + player.PlayerDamage);
             Console.WriteLine("Player Score: " + player.score);
-            Console.WriteLine("Player Level: "+ player.ExpirenceMan.level);
+            Console.WriteLine("Player Level: " + player.ExpirenceMan.level);
             Console.WriteLine("Player Xp: " + player.ExpirenceMan.xp);
-            Console.WriteLine("\n");
         }
         public void LastSeenEnemy()
         {

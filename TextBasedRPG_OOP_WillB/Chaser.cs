@@ -22,9 +22,14 @@ namespace TextBasedRPG_OOP_WillB
         }
         public override void Move(Player player, List<EnemyManager> enemies)
         {
-
+            IsAttacked = false;
             int dx = player.x - x;
             int dy = player.y - y;
+            if(IsAttacked == true)
+            {
+                dx = 0;
+                dy = 0;
+            }
             if (Math.Abs(dx) > Math.Abs(dy))
             {
                 dx = Math.Sign(dx);
@@ -36,6 +41,31 @@ namespace TextBasedRPG_OOP_WillB
                 dy = Math.Sign(dy);
             }
             base.POS(dx, dy, player, enemies);
+        }
+        public override void Attack(Player player, List<EnemyManager> enemies)
+        {
+            if (x == player.x && y == player.y)
+            {
+                player.healthSys.TakeDamage(settings.ChaserAttack);
+                this.x -= x;
+                this.y -= y;
+            }
+        }
+        public override void DisplayEnemy()
+        {
+            if(healthSys.IsAlive)
+            {
+                Console.SetCursorPosition(this.x, this.y);
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.Write(enemyAvatar);
+                Console.ResetColor();
+            }
+            else
+            {
+                this.x = 0;
+                this.y = 0;
+            }
         }
     }
 }

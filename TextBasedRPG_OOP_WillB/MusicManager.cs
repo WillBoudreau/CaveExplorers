@@ -17,6 +17,14 @@ namespace TextBasedRPG_OOP_WillB
         {
             soundplayer = new SoundPlayer();
         }
+        public void Init()
+        {
+            PlayMusicLevel(0);
+        }
+        public void Update( int lvl)
+        {
+            PlayMusicLevel(lvl);
+        }
         public void PlayMusicLevel( int level)
         {
             switch(level)

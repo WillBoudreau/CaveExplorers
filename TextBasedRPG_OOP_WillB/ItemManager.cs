@@ -15,8 +15,8 @@ namespace TextBasedRPG_OOP_WillB
     }
     internal class ItemManager
     {
-        ItemType itemType = new ItemType();
         public char ItemAvatar {get; set;}
+        public bool IsPickedUp { get; set; }
         public int x { get; set; }
         public int y { get; set; }
         List<char> Coins;
@@ -73,24 +73,32 @@ namespace TextBasedRPG_OOP_WillB
         public void DisplayItems(Map map)
         { 
             Console.SetCursorPosition(x, y);
-            switch(ItemAvatar)
+            if(!IsPickedUp)
             {
-                case '*':
-                    Console.BackgroundColor = ConsoleColor.DarkYellow;
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    break;
-                case 'H':
-                    Console.BackgroundColor = ConsoleColor.White;
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    break;
-                case 'S':
-                    Console.BackgroundColor = ConsoleColor.White;
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    break;
-                case 'D':
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    break;
+                switch(ItemAvatar)
+                {
+                    case '*':
+                        Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        break;
+                    case 'H':
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        break;
+                    case 'S':
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        break;
+                    case 'D':
+                        Console.BackgroundColor = ConsoleColor.DarkRed;
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        break;
+                }
+
+            }
+            else if(IsPickedUp)
+            {
+                ItemAvatar = '.';
             }
             Console.Write(ItemAvatar);
             Console.ResetColor();

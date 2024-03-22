@@ -11,18 +11,22 @@ using System.Data;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    
+
     internal class GameManager
     {
-        
+
         Map map;
         Player player;
+        Chaser chaser;
+        Grunt grunt;
+        Runner runner;
         MusicManager music;
+        EnemyManager enemy;
         List<EnemyManager> enemies;
         List<ItemManager> items;
         HUD hud;
-        List <ItemManager> itemManager;
-        public GameManager() 
+        List<ItemManager> itemManager;
+        public GameManager()
         {
             music = new MusicManager();
             map = new Map();
@@ -30,7 +34,6 @@ namespace TextBasedRPG_OOP_WillB
             hud = new HUD(player, enemies);
             Player.hud = hud;
         }
-        
         void GenerateLlevel(int level)
         {
             enemies = new List<EnemyManager>();
@@ -42,8 +45,8 @@ namespace TextBasedRPG_OOP_WillB
                     Console.CursorVisible = false;
                     map.MapArray();
                     map.ShowMap();
-                    enemies = EnemyManager.GenerateEnemies(1, 1, 0, 0, map);
-                    itemManager = ItemManager.GenerateItems(1, 1, 1, 1, map);
+                    enemies = EnemyManager.GenerateEnemies(25, 1, 0, 0, map);
+                    itemManager = ItemManager.GenerateItems(25, 1, 1, 1, map);
                     break;
                 case 2:
                     music.PlayMusicLevel(level);
@@ -55,6 +58,13 @@ namespace TextBasedRPG_OOP_WillB
                     break;
             }
 
+        }
+        void GameInitialize()
+        {
+            player.Init();
+            Intro();
+            GenerateLlevel(1);
+            player.Draw();
         }
         //Intro to game
         void Intro()
@@ -75,31 +85,22 @@ namespace TextBasedRPG_OOP_WillB
         public void GameLoop()
         {
             //player.Init(player, enemies, map, hud, music, enemies);
-            player.Init();
-            Intro();
-            GenerateLlevel(1);
+            GameInitialize();
             while (player.healthSys.normalHealth > 0)
             {
                 foreach (ItemManager item in itemManager)
                 {
                     item.DisplayItems(map);
                 }
-                player.DisplayPlayer();
-                player.PlayerPOSMove(enemies,items);
+                player.Update(enemies, itemManager, chaser,runner,grunt);
                 foreach (EnemyManager enemy in enemies)
                 {
-                    enemy.DisplayEnemy();
-                    enemy.Move(player,enemies);
-                    if(enemy.enemType == EnemType.Boss && enemy.healthSys.IsAlive == false)
-                    {
-                        enemy.BossDead = true;
-                        Win();
-                        break;
-                    }
+                    enemy.Update(player, enemies);
+                    enemy.Draw();
                 }
                 Console.ResetColor();
                 Console.WriteLine("\n");
-                hud.DisplayHUD();
+                hud.DisplayHUD(enemies);
                 hud.LastSeenEnemy();
             }
             if(player.healthSys.normalHealth <= 0)

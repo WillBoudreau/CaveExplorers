@@ -31,10 +31,12 @@ namespace TextBasedRPG_OOP_WillB
         public Settings settings = new Settings();
         public string name;
         public bool BossDead = false;
+        public bool IsAttacked;
 
-        public EnemyManager(int StartX, int StartY, EnemType enemType, int damage, int shield, int health)
+        public EnemyManager(int StartX, int StartY, EnemType enemType, int damage, int shield, int health,Player player)
         {
             healthSys = new HealthSys(health, shield);
+            Player = player;
             x = StartX;
             y = StartY;
             enemyVals.EnemyActive = true;
@@ -55,6 +57,18 @@ namespace TextBasedRPG_OOP_WillB
                     break;
             }
         }
+        public void Init()
+        {
+            
+        }
+        public void Update(Player player, List<EnemyManager> enemies)
+        {
+            Move(player, enemies);
+        }
+        public void Draw()
+        {
+            DisplayEnemy();
+        }
         //Generate Enemies
         public static List<EnemyManager> GenerateEnemies(int numGrunts, int numChasers, int numRunners, int numBoss, Map map)
         {
@@ -62,7 +76,6 @@ namespace TextBasedRPG_OOP_WillB
                 Grunt grunt = new Grunt(0, 0, EnemType.Grunt, 1, 1, 3);
                 Chaser chaser = new Chaser(0, 0, EnemType.Chaser, 1, 1, 3);
                 Runner runner = new Runner(0, 0, EnemType.Runner, 1, 1, 3);
-                Player player = new Player();
                 List<EnemyManager> enemies = new List<EnemyManager>();
                 char[] obstacles = { '#', 'C', '@', '+', 'H', 'S', '*', 'D', '~' };
                 for (int i = 0; i < numGrunts; i++)
@@ -143,9 +156,15 @@ namespace TextBasedRPG_OOP_WillB
         //Position of enemy
         public void POS(int x, int y, Player player, List<EnemyManager> enemies)
         {
-                enemies = new List<EnemyManager>();
+            enemies = new List<EnemyManager>();
             this.x += x;
             this.y += y;
+            if (this.x == player.x && this.y == player.y)
+            {
+                player.healthSys.TakeDamage(1);
+                this.x -= x;
+                this.y -= y;
+            }
             switch (map.IsTileValid(this.x, this.y))
             {
                 case '.':
@@ -208,14 +227,14 @@ namespace TextBasedRPG_OOP_WillB
         {
             if (this.x == player.x && this.y == player.y)
             {
-                player.healthSys.TakeDamage(0);
+                player.healthSys.TakeDamage(1);
                 this.x -= x;
                 this.y -= y;
             }
         }
 
         //Display Enemy
-        public void DisplayEnemy()//Displays the enemies
+        public virtual void DisplayEnemy()//Displays the enemies
         {
             if (healthSys.IsAlive == true)
             {

@@ -36,5 +36,30 @@ namespace TextBasedRPG_OOP_WillB
             }
             base.POS(dx, dy, player, enemies);
         }
+        public override void Attack(Player player, List<EnemyManager> enemies)
+        {
+            if (this.x == player.x && this.y == player.y)
+            {
+                player.healthSys.TakeDamage(settings.RunnerAttack);
+                this.x -= x;
+                this.y -= y;
+            }
+        }
+        public override void DisplayEnemy()
+        {
+            if (healthSys.IsAlive)
+            {
+                Console.SetCursorPosition(this.x, this.y);
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write(enemyAvatar);
+                Console.ResetColor();
+            }
+            else
+            {
+                this.x = 0;
+                this.y = 0;
+            }
+        }
     }
 }

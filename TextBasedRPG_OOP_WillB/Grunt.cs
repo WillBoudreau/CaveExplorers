@@ -11,7 +11,7 @@ namespace TextBasedRPG_OOP_WillB
         Random rnd;
         List<EnemyManager> enemy;
         Player player;
-        public Grunt( int x, int y, EnemType enemType, int damage, int shield, int hp):base(x, y, enemType,damage,shield, hp)
+        public Grunt( int x, int y, EnemType enemType, int damage, int shield, int hp,Player player):base(x, y, enemType,damage,shield, hp,player)
         {
             rnd = new Random();
             enemType = EnemType.Grunt;
@@ -54,7 +54,22 @@ namespace TextBasedRPG_OOP_WillB
                 this.y -= y;
             }
         }
-        
+        public override void DisplayEnemy()
+        {
+            if (healthSys.IsAlive)
+            {
+                Console.SetCursorPosition(this.x, this.y);
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write(enemyAvatar);
+                Console.ResetColor();
+            }
+            else
+            {
+                this.x = 0;
+                this.y = 0;
+            }
+        }
 
     }
 }
