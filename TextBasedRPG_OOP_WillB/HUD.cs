@@ -32,6 +32,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             DisplayHUD(enemies,map); 
             LastSeenEnemy();
+            Legend();
             //WriteAchievment("First Blood","Kill your first enemy");
         }
         public void DisplayHUD(List<EnemyManager> enemies,Map map)
@@ -59,7 +60,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void Legend()
         {
-            Console.WriteLine("P = Player\nG = Grunt\nC = Chaser\nR = Runner\nB = Boss");
+            Console.WriteLine("P = Player" + " "+ "G = Grunt" + " "+ "C = Chaser" +" "+ "R = Runner" + "  " + "B = Boss");
         }
         public void lastenemy(EnemyManager enemy)
         {
@@ -97,7 +98,7 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Current Objectives: ");
             List<string> CurrentObjective = new List<string>();
             CurrentObjective.Add("Collect as many coins as possible");
-            CurrentObjective.Add("Defeat all Enemies(G)(C)(R)");
+            CurrentObjective.Add("Defeat the Boss (B)");
             foreach(string objective in CurrentObjective) 
             {
                 Console.WriteLine(objective);
