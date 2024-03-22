@@ -11,8 +11,7 @@ namespace TextBasedRPG_OOP_WillB
         public int StartX = 5;
         public int StartY = 5;
         List<EnemyManager> enemies;
-        Player player = new Player();
-        public Chaser(int x, int y, EnemType enemType, int damage, int shield, int hp): base(x, y, enemType, damage, shield, hp)
+        public Chaser(int x, int y, EnemType enemType, int damage, int shield, int hp, Player player,List<ItemManager>items): base(x, y, enemType, damage, shield,hp,player,items)
         {
             enemType = EnemType.Chaser;
             damage = settings.ChaserAttack;

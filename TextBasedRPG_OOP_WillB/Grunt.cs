@@ -11,7 +11,7 @@ namespace TextBasedRPG_OOP_WillB
         Random rnd;
         List<EnemyManager> enemy;
         Player player;
-        public Grunt( int x, int y, EnemType enemType, int damage, int shield, int hp,Player player):base(x, y, enemType,damage,shield, hp,player)
+        public Grunt( int x, int y, EnemType enemType, int damage, int shield, int hp, Player player,List<ItemManager>items):base(x, y, enemType,damage,shield, hp, player,items)
         {
             rnd = new Random();
             enemType = EnemType.Grunt;

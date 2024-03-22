@@ -28,7 +28,7 @@ namespace TextBasedRPG_OOP_WillB
         public static HUD hud;
         Settings settings;
         public int PlayerDamage;
-        public Player()
+        public Player(List<ItemManager>items)
         {
             settings = new Settings();
             ExpirenceMan.level = 0;
@@ -82,7 +82,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void PlayerPOSMove(List<EnemyManager> enemies,List<ItemManager> items,Chaser chaser, Runner runner, Grunt grunt)
         {
-            items = new List<ItemManager>();
+            //items = new List<ItemManager>();
             if (items == null)
             {
                 Console.WriteLine("No Items1");
@@ -141,8 +141,8 @@ namespace TextBasedRPG_OOP_WillB
             }
             Attacked = false;
         }
-        public void POS(int x, int y, List<EnemyManager> enemies, List<ItemManager> items, Chaser chaser,Grunt grunt)
-        { 
+        public void POS(int x, int y, List<EnemyManager> enemies, List<ItemManager> items, Chaser chaser, Grunt grunt)
+        {
             this.x += x;
             this.y += y;
             foreach (EnemyManager enemy in enemies)
@@ -154,7 +154,7 @@ namespace TextBasedRPG_OOP_WillB
                     enemy.IsAttacked = true;
                     enemy.healthSys.TakeDamage(PlayerDamage);
                     hud.lastenemy(enemy);
-                    if(enemy.healthSys.IsAlive == false)
+                    if (enemy.healthSys.IsAlive == false)
                     {
                         enemies.Remove(enemy);
                         score += 1;
@@ -164,17 +164,25 @@ namespace TextBasedRPG_OOP_WillB
             }
             foreach (ItemManager item in items)
             {
-                if (x == item.x && y == item.y)
+                if (this.x == item.x && this.y == item.y)
                 {
-                    if (item.ItemAvatar == '*')
-                    {
-                        score += 1;
                         this.y -= y;
                         this.x -= x;
-                        items.Remove(item);
-                        map.UpdateMapTile(this.x, this.y, '.');
-                        return;
+                    switch(item.itemType)
+                    {
+                        case ItemType.Coin:
+                            hud.AddEvent("Player collected a coin");
+                            map.UpdateMapTile(this.x, this.y, '.');
+                            score += 1;
+                            break;
+                        case ItemType.Health:
+                            hud.AddEvent("Player collected a health potion");
+                            map.UpdateMapTile(this.x, this.y, '.');
+                            healthSys.Heal(1);
+                            break;
                     }
+                    items.Remove(item);
+                    break;
                 }
             }
             switch (map.IsTileValid(this.x, this.y))
@@ -232,32 +240,6 @@ namespace TextBasedRPG_OOP_WillB
                 map.UpdateMapTile(this.x, this.y, '.');
             }
         }
-                    //if(itemMan.ItemAvatar == '*')
-                    //{
-                    //    score += 1;
-                    //    this.y -= y;
-                    //    this.x -= x;
-                    //    items.Remove(itemMan);
-                    //    map.UpdateMapTile(this.x, this.y, '.');
-                    //    return;
-                    //}
-                    //if(itemMan.ItemAvatar == 'H')
-                    //{
-                    //    healthSys.normalHealth += 1;
-                    //    items.Remove(itemMan);
-                    //}
-                    //if(itemMan.ItemAvatar == 'S')
-                    //{
-                    //    healthSys.normalShield += 1;
-                    //    items.Remove(itemMan);
-                    //}
-                    //if(itemMan.ItemAvatar == 'D')
-                    //{
-                    //    PlayerDamage += 1;
-                    //    items.Remove(itemMan);
-                    //}
-                    //items.Remove(itemMan);
-                    //return;
         public void StartTimer()
         {
             stopwatch.Start();

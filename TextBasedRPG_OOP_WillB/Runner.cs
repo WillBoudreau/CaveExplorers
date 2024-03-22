@@ -10,14 +10,13 @@ namespace TextBasedRPG_OOP_WillB
     internal class Runner:EnemyManager
     {
         List<EnemyManager> enemies;
-        Player Player = new Player();
-        public Runner( int x, int y, EnemType enemType, int damage, int shield, int hp): base(x, y, enemType, damage, shield, hp)
+        public Runner( int x, int y, EnemType enemType, int damage, int shield, int hp,Player player, List<ItemManager> items): base(x, y, enemType, damage, shield, hp, player, items)
         {
             enemType = EnemType.Runner;
             damage = settings.RunnerAttack;
             hp = settings.RunnerMaxhp;
             enemyAvatar = 'R';
-            Move(Player, enemies);
+            Move(player, enemies);
         }
 
         public override void Move(Player player, List<EnemyManager> enemies)

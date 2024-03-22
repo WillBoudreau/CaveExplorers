@@ -27,16 +27,15 @@ namespace TextBasedRPG_OOP_WillB
         public static HUD hud;
         public Grunt grunt;
         public Chaser Chaser;
-        public Player Player;
         public Settings settings = new Settings();
         public string name;
         public bool BossDead = false;
         public bool IsAttacked;
 
-        public EnemyManager(int StartX, int StartY, EnemType enemType, int damage, int shield, int health,Player player)
+        public EnemyManager(int StartX, int StartY, EnemType enemType, int damage, int shield, int health,Player player,List<ItemManager> item)
         {
             healthSys = new HealthSys(health, shield);
-            Player = player;
+            player = new Player(item);
             x = StartX;
             y = StartY;
             enemyVals.EnemyActive = true;
@@ -70,12 +69,12 @@ namespace TextBasedRPG_OOP_WillB
             DisplayEnemy();
         }
         //Generate Enemies
-        public static List<EnemyManager> GenerateEnemies(int numGrunts, int numChasers, int numRunners, int numBoss, Map map)
+        public static List<EnemyManager> GenerateEnemies(int numGrunts, int numChasers, int numRunners, int numBoss, Map map,Player player,List<ItemManager>items)
         {
                 Random rnd = new Random();
-                Grunt grunt = new Grunt(0, 0, EnemType.Grunt, 1, 1, 3);
-                Chaser chaser = new Chaser(0, 0, EnemType.Chaser, 1, 1, 3);
-                Runner runner = new Runner(0, 0, EnemType.Runner, 1, 1, 3);
+                Grunt grunt = new Grunt(0, 0, EnemType.Grunt, 1, 1, 3,player, items);
+                Chaser chaser = new Chaser(0, 0, EnemType.Chaser, 1, 1, 3, player,items);
+                Runner runner = new Runner(0, 0, EnemType.Runner, 1, 1, 3,player, items);
                 List<EnemyManager> enemies = new List<EnemyManager>();
                 char[] obstacles = { '#', 'C', '@', '+', 'H', 'S', '*', 'D', '~' };
                 for (int i = 0; i < numGrunts; i++)
@@ -89,7 +88,7 @@ namespace TextBasedRPG_OOP_WillB
                         y = rnd.Next(1, map.MapChar.Length);
                         if (map.IsTileValid(x, y) == '.')
                         {
-                            enemies.Add(new Grunt(x, y, EnemType.Grunt, 1, 1, 3));
+                            enemies.Add(new Grunt(x, y, EnemType.Grunt, 1, 1, 3, player, items));
                             ValidSpawn = true;
                         }
                     }
@@ -105,7 +104,7 @@ namespace TextBasedRPG_OOP_WillB
                     y = rnd.Next(1, map.MapChar.Length);
                     if (map.IsTileValid(x, y) == '.')
                     {
-                        enemies.Add(new Chaser(x, y, EnemType.Chaser, 1, 1, 3));
+                        enemies.Add(new Chaser(x, y, EnemType.Chaser, 1, 1, 3, player,items));
                         ValidSpawn = true;
                     }
                 }
@@ -121,7 +120,7 @@ namespace TextBasedRPG_OOP_WillB
                     y = rnd.Next(1, map.MapChar.Length);
                     if (map.IsTileValid(x, y) == '.')
                     {
-                        enemies.Add(new Runner(x, y, EnemType.Runner, 1, 1, 3));
+                        enemies.Add(new Runner(x, y, EnemType.Runner, 1, 1, 3,player,items));
                         ValidSpawn = true;
                     }
                 }

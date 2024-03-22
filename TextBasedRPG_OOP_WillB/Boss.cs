@@ -8,7 +8,7 @@ namespace TextBasedRPG_OOP_WillB
 {
     internal class Boss:EnemyManager
     {
-        public Boss(int x, int y,EnemType enemType, int damage, int shield, int hp):base(x, y, enemType, damage, shield, hp) 
+        public Boss(int x, int y,EnemType enemType, int damage, int shield, int hp,Player player, List<ItemManager>items):base(x, y, enemType, damage, shield, hp,player,items) 
         {
             enemType = EnemType.Boss;
         }

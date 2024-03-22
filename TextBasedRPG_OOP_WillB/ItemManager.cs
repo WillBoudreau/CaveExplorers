@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    enum ItemType
+    public enum ItemType
     {
         Coin,
         Health,
@@ -17,6 +17,7 @@ namespace TextBasedRPG_OOP_WillB
     {
         public char ItemAvatar {get; set;}
         public bool IsPickedUp { get; set; }
+        public ItemType itemType { get; set; }
         public int x { get; set; }
         public int y { get; set; }
         List<char> Coins;
@@ -45,7 +46,7 @@ namespace TextBasedRPG_OOP_WillB
                     {
                         Console.SetCursorPosition(x, y);
                         map.UpdateMapTile(x, y,'*');
-                        itemManagers.Add(new ItemManager('*', x, y, map));
+                        itemManagers.Add(new ItemManager('*', x, y, map) {itemType = ItemType.Coin});
                         ValidSpawn = true;
                     }
                 }
@@ -63,7 +64,7 @@ namespace TextBasedRPG_OOP_WillB
                     {
                         Console.SetCursorPosition(x, y);
                         map.UpdateMapTile(x, y, 'H');
-                        itemManagers.Add(new ItemManager('H', x, y, map));
+                        itemManagers.Add(new ItemManager('H', x, y, map) { itemType = ItemType.Health});
                         ValidSpawn = true;
                     }
                 }

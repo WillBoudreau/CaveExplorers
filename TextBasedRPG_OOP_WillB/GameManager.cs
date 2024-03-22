@@ -30,7 +30,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             music = new MusicManager();
             map = new Map();
-            player = new Player();
+            player = new Player(items);
             hud = new HUD(player, enemies);
             Player.hud = hud;
         }
@@ -45,7 +45,7 @@ namespace TextBasedRPG_OOP_WillB
                     Console.CursorVisible = false;
                     map.MapArray();
                     map.ShowMap();
-                    enemies = EnemyManager.GenerateEnemies(25, 1, 0, 0, map);
+                    enemies = EnemyManager.GenerateEnemies(25, 1, 0, 0, map,player, items);
                     itemManager = ItemManager.GenerateItems(25, 1, 1, 1, map);
                     break;
                 case 2:
@@ -53,7 +53,7 @@ namespace TextBasedRPG_OOP_WillB
                     Console.CursorVisible = false;
                     map.MapArray();
                     map.ShowMap();
-                    enemies = EnemyManager.GenerateEnemies(5, 2, 2, 1, map);
+                    enemies = EnemyManager.GenerateEnemies(5, 2, 2, 1, map,player,items);
                     itemManager = ItemManager.GenerateItems(25, 2, 2, 1, map);
                     break;
             }
