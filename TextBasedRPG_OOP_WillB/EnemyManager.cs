@@ -63,10 +63,11 @@ namespace TextBasedRPG_OOP_WillB
         public void Update(Player player, List<EnemyManager> enemies)
         {
             Move(player, enemies);
+            Attack(player, enemies);
         }
-        public void Draw()
+        public void Draw(Player player)
         {
-            DisplayEnemy();
+            DisplayEnemy(player);
         }
         //Generate Enemies
         public static List<EnemyManager> GenerateEnemies(int numGrunts, int numChasers, int numRunners, int numBoss, Map map,Player player,List<ItemManager>items)
@@ -233,7 +234,7 @@ namespace TextBasedRPG_OOP_WillB
         }
 
         //Display Enemy
-        public virtual void DisplayEnemy()//Displays the enemies
+        public virtual void DisplayEnemy(Player player)
         {
             if (healthSys.IsAlive == true)
             {

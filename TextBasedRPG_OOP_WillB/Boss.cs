@@ -11,6 +11,7 @@ namespace TextBasedRPG_OOP_WillB
         public Boss(int x, int y,EnemType enemType, int damage, int shield, int hp,Player player, List<ItemManager>items):base(x, y, enemType, damage, shield, hp,player,items) 
         {
             enemType = EnemType.Boss;
+            name = "Boss";
         }
         public override void Move(Player player, List<EnemyManager> enemies)
         {

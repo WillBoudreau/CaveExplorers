@@ -44,7 +44,7 @@ namespace TextBasedRPG_OOP_WillB
                 this.y -= y;
             }
         }
-        public override void DisplayEnemy()
+        public override void DisplayEnemy(Player player)
         {
             if (healthSys.IsAlive)
             {
@@ -56,6 +56,7 @@ namespace TextBasedRPG_OOP_WillB
             }
             else
             {
+                player.killCount++;
                 this.x = 0;
                 this.y = 0;
             }

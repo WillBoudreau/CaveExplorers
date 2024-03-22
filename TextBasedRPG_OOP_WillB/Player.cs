@@ -24,10 +24,11 @@ namespace TextBasedRPG_OOP_WillB
         Grunt Grunt;
         List<EnemyManager> enemies =  new List<EnemyManager>();
         List<ItemManager> items;
-        private Stopwatch stopwatch = new Stopwatch();
+        public Stopwatch stopwatch = new Stopwatch();
         public static HUD hud;
         Settings settings;
         public int PlayerDamage;
+        public int killCount;
         public Player(List<ItemManager>items)
         {
             settings = new Settings();
@@ -42,20 +43,25 @@ namespace TextBasedRPG_OOP_WillB
             settings.PlayerMaxShield = 3;
             healthSys = new HealthSys(settings.PlayerMaxhp, settings.PlayerMaxShield);
         }
+
         public void Init()
         {
             StartTimer();
             DisplayPlayer();
         }
+
         public void Update(List<EnemyManager> enemies,List<ItemManager>items,Chaser chaser,Runner runner,Grunt grunt)
         {
             PlayerPOSMove(enemies, items,chaser,runner,grunt);
             DisplayPlayer();
         }
+
         public void Draw()
         {
             DisplayPlayer();
         }
+
+        //Takes input from the player
         public static char Input()
         {
             ConsoleKeyInfo key = Console.ReadKey(true);
@@ -80,6 +86,8 @@ namespace TextBasedRPG_OOP_WillB
                 return 'e';
             }
         }
+
+        //Player Movement   
         public void PlayerPOSMove(List<EnemyManager> enemies,List<ItemManager> items,Chaser chaser, Runner runner, Grunt grunt)
         {
             //items = new List<ItemManager>();
@@ -141,6 +149,8 @@ namespace TextBasedRPG_OOP_WillB
             }
             Attacked = false;
         }
+
+        //Player Position
         public void POS(int x, int y, List<EnemyManager> enemies, List<ItemManager> items, Chaser chaser, Grunt grunt)
         {
             this.x += x;
@@ -157,7 +167,7 @@ namespace TextBasedRPG_OOP_WillB
                     if (enemy.healthSys.IsAlive == false)
                     {
                         enemies.Remove(enemy);
-                        score += 1;
+                        killCount++;
                     }
                     break;
                 }
@@ -173,12 +183,22 @@ namespace TextBasedRPG_OOP_WillB
                         case ItemType.Coin:
                             hud.AddEvent("Player collected a coin");
                             map.UpdateMapTile(this.x, this.y, '.');
-                            score += 1;
+                            ExpirenceMan.XpUp();
                             break;
                         case ItemType.Health:
                             hud.AddEvent("Player collected a health potion");
                             map.UpdateMapTile(this.x, this.y, '.');
                             healthSys.Heal(1);
+                            break;
+                        case ItemType.Shield:
+                            hud.AddEvent("Player collected a shield potion");
+                            map.UpdateMapTile(this.x, this.y, '.');
+                            healthSys.ShieldUp(1);
+                            break;
+                        case ItemType.Damage:
+                            hud.AddEvent("Player collected a damage potion");
+                            map.UpdateMapTile(this.x, this.y, '.');
+                            PlayerDamage += 1;
                             break;
                     }
                     items.Remove(item);
@@ -240,6 +260,8 @@ namespace TextBasedRPG_OOP_WillB
                 map.UpdateMapTile(this.x, this.y, '.');
             }
         }
+
+        //Starts the timer for the player
         public void StartTimer()
         {
             stopwatch.Start();
@@ -252,6 +274,7 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Level Completed in: " + EndTime);
         }
 
+        //Displays the player
         public void DisplayPlayer()
         {
             Console.SetCursorPosition(this.x, this.y);

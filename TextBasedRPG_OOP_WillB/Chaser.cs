@@ -17,6 +17,7 @@ namespace TextBasedRPG_OOP_WillB
             damage = settings.ChaserAttack;
             hp = settings.ChaserMaxhp;
            enemyAvatar = 'C';
+            name = "Chaser";
            Move(player, enemies);
         }
         public override void Move(Player player, List<EnemyManager> enemies)
@@ -50,7 +51,7 @@ namespace TextBasedRPG_OOP_WillB
                 this.y -= y;
             }
         }
-        public override void DisplayEnemy()
+        public override void DisplayEnemy(Player player)
         {
             if(healthSys.IsAlive)
             {
@@ -62,6 +63,7 @@ namespace TextBasedRPG_OOP_WillB
             }
             else
             {
+                player.killCount++;
                 this.x = 0;
                 this.y = 0;
             }

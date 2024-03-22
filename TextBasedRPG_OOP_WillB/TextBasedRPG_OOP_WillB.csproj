@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Achievements.cs" />
     <Compile Include="Boss.cs" />
     <Compile Include="Chaser.cs" />
     <Compile Include="Coin.cs" />
@@ -68,6 +69,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Achievements.txt" />
     <Content Include="kingdom-of-fantasy-version-60s-10817.wav" />
     <Content Include="Level2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

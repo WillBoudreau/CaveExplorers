@@ -17,9 +17,11 @@ namespace TextBasedRPG_OOP_WillB
         int LastSeenDamage;
         int LastSeenHealth;
         int LastSeenHealthMax;
+        public List<string> UnlockedAchievements { get; private set; }
         public List<string> EventLog {  get; set; }
        public HUD(Player player,List<EnemyManager>enemies)
         {
+            UnlockedAchievements = new List<string>();
             this.player = player;
             this.enemies = enemies;
             EventLog = new List<string>();
@@ -29,8 +31,13 @@ namespace TextBasedRPG_OOP_WillB
             DisplayHUD(enemies);
             LastSeenEnemy();
         }
+        public void Draw(List<EnemyManager>enemies)
+        {
+            
+        }
         public void DisplayHUD(List<EnemyManager> enemies)
         {
+            Console.WriteLine();
             Console.WriteLine("\n");
             Objectives();
             Console.WriteLine("\n");
@@ -42,12 +49,37 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Player Score: " + player.score);
             Console.WriteLine("Player Level: " + player.ExpirenceMan.level);
             Console.WriteLine("Player Xp: " + player.ExpirenceMan.xp);
+            Console.WriteLine("Player Kills: " + player.killCount);
+            Console.WriteLine("\n");
         }
         public void LastSeenEnemy()
         {
             if(LastSeen != null)
             {
-                Console.WriteLine("\nLast Enemy encountered: " + LastSeen +"\n" + LastSeen +" Damage "+ LastSeenDamage + "\n" +LastSeen+" Max Health "+LastSeenHealthMax+ "\n" + LastSeen+ " Current Health "+LastSeenHealth);    
+                Console.WriteLine("\nLast Enemy encountered: " + LastSeen + "\n" +LastSeen+" Max Health "+LastSeenHealthMax+ "\n" + LastSeen+ " Current Health "+LastSeenHealth);    
+            }
+            else
+            {
+                Random random = new Random();
+                switch(random.Next(1, 5))
+                {
+                    case 1:
+                    Console.WriteLine("Go find some friends");
+                    break;
+                    case 2:
+                    Console.WriteLine("You are alone");
+                    break;
+                    case 3:
+                    Console.WriteLine("Stop being Chill like Will");
+                    break;
+                    case 4:
+                    Console.WriteLine("You been on for a while... maybe you should go outside");
+                    break;
+                    case 5:
+                    Console.WriteLine("You are the only one left");
+                    break;
+                }
+
             }
 
         }
@@ -87,6 +119,8 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void Objectives()
         {
+            Console.WriteLine();
+            Console.WriteLine("\n");
             Console.WriteLine("Current Objectives: ");
             List<string> CurrentObjective = new List<string>();
             CurrentObjective.Add("Collect as many coins as possible");
@@ -96,5 +130,16 @@ namespace TextBasedRPG_OOP_WillB
                 Console.WriteLine(objective);
             }
         }
+        //public void WriteAchievment(string name,string Description)
+        //{
+        //    Console.WriteLine("Achievments");
+            
+        //    playerAchievements.Add(name);
+        //    playerAchievements.Add(Description);
+        //    foreach(string achievement in playerAchievements)
+        //    {
+        //        Console.WriteLine(achievement);
+        //    }
+        //}
     }
 }

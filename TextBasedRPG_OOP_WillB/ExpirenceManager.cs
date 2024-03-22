@@ -31,6 +31,7 @@ namespace TextBasedRPG_OOP_WillB
         public void LevelUp()
         {
             level += 1;
+            //player.damage += 1;
             if(level >= MaxLevel)
             {
                 level = MaxLevel;

@@ -28,7 +28,10 @@ namespace TextBasedRPG_OOP_WillB
             this.x = x;
             this.y = y;
         }
-        
+        public void Update(Map map)
+        {
+            DisplayItems(map);
+        }
         public static List<ItemManager> GenerateItems(int numCoins, int numHealth, int numShield, int numDamage,Map map)
         {
             List<ItemManager> itemManagers = new List<ItemManager>();
@@ -65,6 +68,42 @@ namespace TextBasedRPG_OOP_WillB
                         Console.SetCursorPosition(x, y);
                         map.UpdateMapTile(x, y, 'H');
                         itemManagers.Add(new ItemManager('H', x, y, map) { itemType = ItemType.Health});
+                        ValidSpawn = true;
+                    }
+                }
+            }
+            for(int i= 0; i < numShield; i++)
+            {
+                int x;
+                int y;
+                bool ValidSpawn = false;
+                while (!ValidSpawn)
+                {
+                    x = rnd.Next(1, map.MapChar[0].Length);
+                    y = rnd.Next(1, map.MapChar.Length);
+                    if (map.IsTileValid(x, y) == '.')
+                    {
+                        Console.SetCursorPosition(x, y);
+                        map.UpdateMapTile(x, y, 'S');
+                        itemManagers.Add(new ItemManager('S', x, y, map) { itemType = ItemType.Shield });
+                        ValidSpawn = true;
+                    }
+                }
+            }
+            for(int i = 0; i < numDamage; i++)
+            {
+                int x;
+                int y;
+                bool ValidSpawn = false;
+                while (!ValidSpawn)
+                {
+                    x = rnd.Next(1, map.MapChar[0].Length);
+                    y = rnd.Next(1, map.MapChar.Length);
+                    if (map.IsTileValid(x, y) == '.')
+                    {
+                        Console.SetCursorPosition(x, y);
+                        map.UpdateMapTile(x, y, 'D');
+                        itemManagers.Add(new ItemManager('D', x, y, map) { itemType = ItemType.Damage });
                         ValidSpawn = true;
                     }
                 }
