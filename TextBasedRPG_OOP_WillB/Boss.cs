@@ -13,13 +13,13 @@ namespace TextBasedRPG_OOP_WillB
             enemType = EnemType.Boss;
             name = "Boss";
         }
-        public override void Move(Player player, List<EnemyManager> enemies)
+        public override void Move(Player player, List<EnemyManager> enemies,List<ItemManager>items)
         {
             int distanceToplayer = Math.Abs(player.x - x) + Math.Abs(player.y - y);
 
             if (distanceToplayer <= 5)
             {
-                Move(player, enemies);
+                Move(player, enemies, items);
 
             }
         }

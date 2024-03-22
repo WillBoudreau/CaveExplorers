@@ -18,9 +18,9 @@ namespace TextBasedRPG_OOP_WillB
             hp = settings.ChaserMaxhp;
            enemyAvatar = 'C';
             name = "Chaser";
-           Move(player, enemies);
+           Move(player, enemies, items);
         }
-        public override void Move(Player player, List<EnemyManager> enemies)
+        public override void Move(Player player, List<EnemyManager> enemies,List<ItemManager>items)
         {
             IsAttacked = false;
             int dx = player.x - x;
@@ -40,7 +40,7 @@ namespace TextBasedRPG_OOP_WillB
                 dx = 0;
                 dy = Math.Sign(dy);
             }
-            base.POS(dx, dy, player, enemies);
+            base.POS(dx, dy, player, enemies, items);
         }
         public override void Attack(Player player, List<EnemyManager> enemies)
         {

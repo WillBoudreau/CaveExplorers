@@ -19,24 +19,22 @@ namespace TextBasedRPG_OOP_WillB
         int LastSeenHealthMax;
         public List<string> UnlockedAchievements { get; private set; }
         public List<string> EventLog {  get; set; }
-       public HUD(Player player,List<EnemyManager>enemies)
+       public HUD(Player player,List<EnemyManager>enemies,Map map)
         {
             UnlockedAchievements = new List<string>();
             this.player = player;
             this.enemies = enemies;
+            this.map = map;
             EventLog = new List<string>();
         }
         public void Update(List<EnemyManager>enemies)
         {
-            DisplayHUD(enemies);
+            DisplayHUD(enemies,map);
             LastSeenEnemy();
         }
-        public void Draw(List<EnemyManager>enemies)
+        public void DisplayHUD(List<EnemyManager> enemies,Map map)
         {
-            
-        }
-        public void DisplayHUD(List<EnemyManager> enemies)
-        {
+            Console.SetCursorPosition(0,map.MapChar.Length);
             Console.WriteLine();
             Console.WriteLine("\n");
             Objectives();
@@ -58,30 +56,6 @@ namespace TextBasedRPG_OOP_WillB
             {
                 Console.WriteLine("\nLast Enemy encountered: " + LastSeen + "\n" +LastSeen+" Max Health "+LastSeenHealthMax+ "\n" + LastSeen+ " Current Health "+LastSeenHealth);    
             }
-            else
-            {
-                Random random = new Random();
-                switch(random.Next(1, 5))
-                {
-                    case 1:
-                    Console.WriteLine("Go find some friends");
-                    break;
-                    case 2:
-                    Console.WriteLine("You are alone");
-                    break;
-                    case 3:
-                    Console.WriteLine("Stop being Chill like Will");
-                    break;
-                    case 4:
-                    Console.WriteLine("You been on for a while... maybe you should go outside");
-                    break;
-                    case 5:
-                    Console.WriteLine("You are the only one left");
-                    break;
-                }
-
-            }
-
         }
         public void Legend()
         {

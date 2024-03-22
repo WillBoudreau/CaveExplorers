@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    internal class Coin:ItemManager
+    internal class HealthPickup : ItemManager
     {
-        List<ItemManager> Coins;
+        List<ItemManager> Health;
 
-        public Coin(char itemAvatar, int x, int y, Map map,ItemType itemtype) : base(itemAvatar, x, y, map)
+        public HealthPickup(char itemAvatar, int x, int y, Map map) : base(itemAvatar, x, y, map)
         {
-            itemType = ItemType.Coin;
-            ItemAvatar = '*';
+            itemType = ItemType.Health;
+            ItemAvatar = 'H';
             this.x = x;
             this.y = y;
         }
@@ -24,10 +24,11 @@ namespace TextBasedRPG_OOP_WillB
         public override void DisplayItems(Map map)
         {
             Console.SetCursorPosition(x, y);
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(ItemAvatar);
         }
 
-    }   
+    }
 }
+

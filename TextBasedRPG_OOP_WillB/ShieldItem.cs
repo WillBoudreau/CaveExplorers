@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    internal class Coin:ItemManager
+    internal class ShieldItem:ItemManager
     {
-        List<ItemManager> Coins;
-
-        public Coin(char itemAvatar, int x, int y, Map map,ItemType itemtype) : base(itemAvatar, x, y, map)
+        public ShieldItem(char itemAvatar, int x, int y, Map map) : base(itemAvatar, x, y, map)
         {
-            itemType = ItemType.Coin;
-            ItemAvatar = '*';
+            itemType = ItemType.Shield;
+            ItemAvatar = 'S';
             this.x = x;
             this.y = y;
         }
@@ -24,10 +22,9 @@ namespace TextBasedRPG_OOP_WillB
         public override void DisplayItems(Map map)
         {
             Console.SetCursorPosition(x, y);
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write(ItemAvatar);
         }
-
-    }   
+    }
 }

@@ -1,15 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Net.Mime;
-using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml.Schema;
 
 namespace TextBasedRPG_OOP_WillB
 {
@@ -22,14 +13,14 @@ namespace TextBasedRPG_OOP_WillB
         Chaser Chaser;
         Runner Runner;
         Grunt Grunt;
-        List<EnemyManager> enemies =  new List<EnemyManager>();
+        List<EnemyManager> enemies = new List<EnemyManager>();
         List<ItemManager> items;
         public Stopwatch stopwatch = new Stopwatch();
         public static HUD hud;
         Settings settings;
         public int PlayerDamage;
         public int killCount;
-        public Player(List<ItemManager>items)
+        public Player(List<ItemManager> items)
         {
             settings = new Settings();
             ExpirenceMan.level = 0;
@@ -50,9 +41,9 @@ namespace TextBasedRPG_OOP_WillB
             DisplayPlayer();
         }
 
-        public void Update(List<EnemyManager> enemies,List<ItemManager>items,Chaser chaser,Runner runner,Grunt grunt)
+        public void Update(List<EnemyManager> enemies, List<ItemManager> items, Chaser chaser, Runner runner, Grunt grunt)
         {
-            PlayerPOSMove(enemies, items,chaser,runner,grunt);
+            PlayerPOSMove(enemies, items, chaser, runner, grunt);
             DisplayPlayer();
         }
 
@@ -88,14 +79,14 @@ namespace TextBasedRPG_OOP_WillB
         }
 
         //Player Movement   
-        public void PlayerPOSMove(List<EnemyManager> enemies,List<ItemManager> items,Chaser chaser, Runner runner, Grunt grunt)
+        public void PlayerPOSMove(List<EnemyManager> enemies, List<ItemManager> items, Chaser chaser, Runner runner, Grunt grunt)
         {
             //items = new List<ItemManager>();
             if (items == null)
             {
                 Console.WriteLine("No Items1");
                 Console.ReadKey();
-                if(items.Count == 0)
+                if (items.Count == 0)
                 {
                     Console.Clear();
                     Console.WriteLine("No Items2");
@@ -104,45 +95,45 @@ namespace TextBasedRPG_OOP_WillB
             }
             if (Playerturn == true && Attacked == false && IsSlowed == false)
             {
-                if(!IsSlowed)
+                if (!IsSlowed)
                 {
                     switch (Input())
                     {
                         case 'w':
-                            POS(0, -1, enemies, items, chaser,grunt);
+                            POS(0, -1, enemies, items, chaser, grunt);
                             hud.AddEvent("Player moved up");
                             break;
                         case 'a':
-                            POS(-1, 0, enemies, items, chaser,grunt);
+                            POS(-1, 0, enemies, items, chaser, grunt);
                             hud.AddEvent("Player moved left");
                             break;
                         case 's':
-                            POS(0, 1, enemies, items, chaser,grunt);
+                            POS(0, 1, enemies, items, chaser, grunt);
                             hud.AddEvent("Player moved down");
                             break;
                         case 'd':
-                            POS(1, 0, enemies, items, chaser,grunt);
+                            POS(1, 0, enemies, items, chaser, grunt);
                             hud.AddEvent("Player moved right");
                             break;
                     }
 
                 }
             }
-            else if(IsSlowed == true)
+            else if (IsSlowed == true)
             {
-                switch(Input())
+                switch (Input())
                 {
                     case 'w':
-                        POS(0,0,enemies, items,chaser,grunt);
+                        POS(0, 0, enemies, items, chaser, grunt);
                         break;
                     case 'a':
-                        POS(0,0, enemies, items, chaser,grunt);
+                        POS(0, 0, enemies, items, chaser, grunt);
                         break;
                     case 's':
-                        POS(0,0, enemies, items, chaser,grunt);
+                        POS(0, 0, enemies, items, chaser, grunt);
                         break;
                     case 'd':
-                        POS(0,0, enemies,items,chaser,grunt);
+                        POS(0, 0, enemies, items, chaser, grunt);
                         break;
                 }
                 IsSlowed = false;
@@ -167,7 +158,12 @@ namespace TextBasedRPG_OOP_WillB
                     if (enemy.healthSys.IsAlive == false)
                     {
                         enemies.Remove(enemy);
+                        score += 10 * ExpirenceMan.level;
                         killCount++;
+                        if(enemy.healthSys.IsAlive == false && enemy.enemType == EnemType.Boss)
+                        {
+                            Win();
+                        }
                     }
                     break;
                 }
@@ -176,9 +172,9 @@ namespace TextBasedRPG_OOP_WillB
             {
                 if (this.x == item.x && this.y == item.y)
                 {
-                        this.y -= y;
-                        this.x -= x;
-                    switch(item.itemType)
+                    this.y -= y;
+                    this.x -= x;
+                    switch (item.itemType)
                     {
                         case ItemType.Coin:
                             hud.AddEvent("Player collected a coin");
@@ -260,7 +256,18 @@ namespace TextBasedRPG_OOP_WillB
                 map.UpdateMapTile(this.x, this.y, '.');
             }
         }
-
+        //Player win condition
+        public void Win()
+        {
+                StopTimer();
+                Console.Clear();
+                Console.WriteLine("You Win");
+                Console.WriteLine("Score: " + score);
+                Console.WriteLine("Kills: " + killCount);
+                Console.WriteLine("Time: " + stopwatch.Elapsed);
+                Console.ReadKey();
+                Environment.Exit(0);
+        }
         //Starts the timer for the player
         public void StartTimer()
         {

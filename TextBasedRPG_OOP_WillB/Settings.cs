@@ -20,16 +20,19 @@ namespace TextBasedRPG_OOP_WillB
         public  int GruntMaxhp = 1;
         public  int GruntMinhp = 0;
         public  int GruntAttack = 1;
+        public int numGrunt;
 
         //Runner Variables
         public int RunnerMaxhp = 3;
         public int RunnerMinhp = 0;
         public int RunnerAttack = 3;
+        public int numRunner;
 
         //Chaser Variables
         public int ChaserMaxhp = 2;
         public int ChaserMinhp = 0;
         public int ChaserAttack = 2;
+        public int numChaser;
 
         //Boss Variables
         public int BossMaxhp = 4;
@@ -37,6 +40,7 @@ namespace TextBasedRPG_OOP_WillB
         public int BossMaxShield = 2;
         public int BossMinShield = 0;
         public int BossAttack = 3;
+        public int numBoss;
         public Settings() 
         {
 

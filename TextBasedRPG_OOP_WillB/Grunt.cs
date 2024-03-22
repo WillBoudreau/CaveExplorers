@@ -19,9 +19,9 @@ namespace TextBasedRPG_OOP_WillB
             hp = settings.GruntMaxhp;
             enemyAvatar = 'G';
             name = "Grunt";
-            Move(player, enemy);
+            Move(player, enemy, items);
         }
-        public override void Move(Player player, List<EnemyManager> enemies)
+        public override void Move(Player player, List<EnemyManager> enemies,List<ItemManager>items)
         {
             int Move = rnd.Next(1, 5);
             int dx = 0,
@@ -44,7 +44,7 @@ namespace TextBasedRPG_OOP_WillB
                     dx = 1;
                     break;
             }
-            base.POS(dx, dy, player, enemies);
+            base.POS(dx, dy, player, enemies,items);
         }
         public override void Attack(Player player, List<EnemyManager> enemies)
         {

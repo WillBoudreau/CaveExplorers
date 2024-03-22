@@ -16,10 +16,10 @@ namespace TextBasedRPG_OOP_WillB
             damage = settings.RunnerAttack;
             hp = settings.RunnerMaxhp;
             enemyAvatar = 'R';
-            Move(player, enemies);
+            Move(player, enemies, items);
         }
 
-        public override void Move(Player player, List<EnemyManager> enemies)
+        public override void Move(Player player, List<EnemyManager> enemies,List<ItemManager>items)
         {
             int dx = player.x - x;
             int dy = player.y - y;
@@ -33,7 +33,7 @@ namespace TextBasedRPG_OOP_WillB
                 dx = 0;
                 dy = Math.Sign(dy);
             }
-            base.POS(dx, dy, player, enemies);
+            base.POS(dx, dy, player, enemies, items);
         }
         public override void Attack(Player player, List<EnemyManager> enemies)
         {

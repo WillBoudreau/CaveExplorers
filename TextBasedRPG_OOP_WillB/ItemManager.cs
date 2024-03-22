@@ -22,18 +22,24 @@ namespace TextBasedRPG_OOP_WillB
         public int y { get; set; }
         List<char> Coins;
         List<char> Health;
+        List<char> Shield;
+        List<char> Damage;
         public ItemManager( char itemAvatar, int x, int y, Map map)
         {
             ItemAvatar = itemAvatar;
             this.x = x;
             this.y = y;
         }
-        public void Update(Map map)
+        public virtual void Update(Map map)
         {
             DisplayItems(map);
         }
         public static List<ItemManager> GenerateItems(int numCoins, int numHealth, int numShield, int numDamage,Map map)
         {
+            List<ItemManager> Damage = new List<ItemManager>();
+            List<ItemManager> Shield = new List<ItemManager>();
+            List<ItemManager> Health = new List<ItemManager>();
+            List<ItemManager> Coins = new List<ItemManager>();
             List<ItemManager> itemManagers = new List<ItemManager>();
             Random rnd = new Random();
             for (int i = 0; i < numCoins; i++)
@@ -49,7 +55,7 @@ namespace TextBasedRPG_OOP_WillB
                     {
                         Console.SetCursorPosition(x, y);
                         map.UpdateMapTile(x, y,'*');
-                        itemManagers.Add(new ItemManager('*', x, y, map) {itemType = ItemType.Coin});
+                        itemManagers.Add(new Coin('*', x, y, map,ItemType.Coin) {itemType = ItemType.Coin});
                         ValidSpawn = true;
                     }
                 }
@@ -67,7 +73,7 @@ namespace TextBasedRPG_OOP_WillB
                     {
                         Console.SetCursorPosition(x, y);
                         map.UpdateMapTile(x, y, 'H');
-                        itemManagers.Add(new ItemManager('H', x, y, map) { itemType = ItemType.Health});
+                        itemManagers.Add(new HealthPickup('H', x, y, map) { itemType = ItemType.Health});
                         ValidSpawn = true;
                     }
                 }
@@ -85,7 +91,7 @@ namespace TextBasedRPG_OOP_WillB
                     {
                         Console.SetCursorPosition(x, y);
                         map.UpdateMapTile(x, y, 'S');
-                        itemManagers.Add(new ItemManager('S', x, y, map) { itemType = ItemType.Shield });
+                        itemManagers.Add(new ShieldItem('S', x, y, map) { itemType = ItemType.Shield });
                         ValidSpawn = true;
                     }
                 }
@@ -103,14 +109,22 @@ namespace TextBasedRPG_OOP_WillB
                     {
                         Console.SetCursorPosition(x, y);
                         map.UpdateMapTile(x, y, 'D');
-                        itemManagers.Add(new ItemManager('D', x, y, map) { itemType = ItemType.Damage });
+                        itemManagers.Add(new DamageItem('D', x, y, map) { itemType = ItemType.Damage });
                         ValidSpawn = true;
                     }
                 }
             }
             return itemManagers;
         }
-        public void DisplayItems(Map map)
+        public bool IsitematPos(int x, int y)
+        {
+            if (this.x == x && this.y == y)
+            {
+                return true;
+            }
+            return false;
+        }
+        public virtual void DisplayItems(Map map)
         { 
             Console.SetCursorPosition(x, y);
             if(!IsPickedUp)

@@ -31,11 +31,13 @@ namespace TextBasedRPG_OOP_WillB
         public string name;
         public bool BossDead = false;
         public bool IsAttacked;
-
+        public Player player;
+        private ItemManager itemManager;
         public EnemyManager(int StartX, int StartY, EnemType enemType, int damage, int shield, int health,Player player,List<ItemManager> item)
         {
+
             healthSys = new HealthSys(health, shield);
-            player = new Player(item);
+            this.player = player;
             x = StartX;
             y = StartY;
             enemyVals.EnemyActive = true;
@@ -60,9 +62,9 @@ namespace TextBasedRPG_OOP_WillB
         {
             
         }
-        public void Update(Player player, List<EnemyManager> enemies)
+        public void Update(Player player, List<EnemyManager> enemies, List<ItemManager> items)
         {
-            Move(player, enemies);
+            Move(player, enemies,items);
             Attack(player, enemies);
         }
         public void Draw(Player player)
@@ -136,7 +138,7 @@ namespace TextBasedRPG_OOP_WillB
 
         }
         //move enemy
-        public virtual void Move(Player player, List<EnemyManager> enemies)
+        public virtual void Move(Player player, List<EnemyManager> enemies,List<ItemManager>items)
         {
             int newX = player.x - this.x;
             int newY = player.y - this.y;
@@ -151,16 +153,24 @@ namespace TextBasedRPG_OOP_WillB
                 newX = 0;
                 newY = Math.Sign(newY);
             }
-            POS(newX, newY, player, enemies);
+            POS(newX, newY, player, enemies, items);
         }
         //Position of enemy
-        public void POS(int x, int y, Player player, List<EnemyManager> enemies)
+        public void POS(int x, int y, Player player, List<EnemyManager> enemies,List<ItemManager>items)
         {
             enemies = new List<EnemyManager>();
+            items = new List<ItemManager>();
             this.x += x;
             this.y += y;
+            if (player == null) 
+            {
+                Console.Clear();
+                Console.WriteLine("Player is null");
+                Console.ReadKey();
+            }
             if (this.x == player.x && this.y == player.y)
             {
+                
                 player.healthSys.TakeDamage(1);
                 this.x -= x;
                 this.y -= y;
@@ -215,6 +225,15 @@ namespace TextBasedRPG_OOP_WillB
             foreach (EnemyManager enemy in enemies)
             {
                 if (enemy != this && enemy.x == this.x && enemy.y == this.y)
+                {
+                    this.x -= x;
+                    this.y -= y;
+                    break;
+                }
+            }
+            foreach (ItemManager item in items)
+            {
+                if (item.x == this.x && item.y == this.y)
                 {
                     this.x -= x;
                     this.y -= y;

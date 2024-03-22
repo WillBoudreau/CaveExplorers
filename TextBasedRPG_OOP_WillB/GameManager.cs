@@ -26,54 +26,65 @@ namespace TextBasedRPG_OOP_WillB
         List<ItemManager> items;
         HUD hud;
         List<ItemManager> itemManager;
+        LevelGeneration levelGeneration;
         //Achievements achievements;
         public GameManager()
         {
+            levelGeneration = new LevelGeneration();
             music = new MusicManager();
             map = new Map();
+            enemies = new List<EnemyManager>();
+            items = new List<ItemManager>();
+            itemManager = new List<ItemManager>();
             player = new Player(items);
-            hud = new HUD(player, enemies);
+            hud = new HUD(player, enemies,map);
             Player.hud = hud;
             //achievements = new Achievements(player, enemies, itemManager);
         }
-        void GenerateLlevel(int level)
-        {
-            enemies = new List<EnemyManager>();
-            itemManager = new List<ItemManager>();
-            if(enemies != null)
-            {
-                enemies.Clear();
-            }   
-            if(itemManager != null)
-            {
-                itemManager.Clear();
-            }
-            switch (level)
-            {
-                case 1:
-                    music.PlayMusicLevel(level);
-                    Console.CursorVisible = false;
-                    map.MapArray();
-                    map.ShowMap();
-                    enemies = EnemyManager.GenerateEnemies(25, 3, 5, 1, map,player, items);
-                    itemManager = ItemManager.GenerateItems(25, 10, 5, 3, map);
-                    break;
-                case 2:
-                    music.PlayMusicLevel(level);
-                    Console.CursorVisible = false;
-                    map.MapArray();
-                    map.ShowMap();
-                    enemies = EnemyManager.GenerateEnemies(5, 2, 2, 1, map,player,items);
-                    itemManager = ItemManager.GenerateItems(25, 2, 2, 1, map);
-                    break;
-            }
+        //void GenerateLlevel(int level)
+        //{
+        //    if(player == null)
+        //    {
+        //        Console.Clear();
+        //        Console.WriteLine("Player is null");
+        //        Console.ReadKey();
+        //    }
+        //    enemies = new List<EnemyManager>();
+        //    itemManager = new List<ItemManager>();
+        //    if(enemies != null)
+        //    {
+        //        enemies.Clear();
+        //    }   
+        //    if(itemManager != null)
+        //    {
+        //        itemManager.Clear();
+        //    }
+        //    switch (level)
+        //    {
+        //        case 1:
+        //            music.PlayMusicLevel(level);
+        //            Console.CursorVisible = false;
+        //            map.MapArray();
+        //            map.ShowMap();
+        //            enemies = EnemyManager.GenerateEnemies(25, 3, 5, 1, map,player, items);
+        //            itemManager = ItemManager.GenerateItems(25, 10, 5, 3, map);
+        //            break;
+        //        case 2:
+        //            music.PlayMusicLevel(level);
+        //            Console.CursorVisible = false;
+        //            map.MapArray();
+        //            map.ShowMap();
+        //            enemies = EnemyManager.GenerateEnemies(5, 2, 2, 1, map,player,items);
+        //            itemManager = ItemManager.GenerateItems(25, 2, 2, 1, map);
+        //            break;
+        //    }
 
-        }
+        //}
         void GameInitialize()
         {
             player.Init();
             Intro();
-            GenerateLlevel(1);
+            levelGeneration.Init();
             player.Draw();
         }
         //Intro to game
@@ -94,7 +105,6 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void GameLoop()
         {
-            //player.Init(player, enemies, map, hud, music, enemies);
             GameInitialize();
             while (player.healthSys.normalHealth > 0)
             {
@@ -106,7 +116,7 @@ namespace TextBasedRPG_OOP_WillB
                 player.Draw();
                 foreach (EnemyManager enemy in enemies)
                 {
-                    enemy.Update(player, enemies);
+                    enemy.Update(player, enemies, items);
                     enemy.Draw(player);
                 }
                 Console.ResetColor();
@@ -127,13 +137,5 @@ namespace TextBasedRPG_OOP_WillB
             Console.ReadKey();
         }
 
-        public void Win()
-        {
-            Console.Clear();
-            player.StopTimer();
-            Console.WriteLine("You have defeated the boss! You win!");
-            Console.WriteLine("Press any key to quit");
-            Console.ReadKey();
-        }
     }
 }
