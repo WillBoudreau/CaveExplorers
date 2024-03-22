@@ -81,7 +81,6 @@ namespace TextBasedRPG_OOP_WillB
         //Player Movement   
         public void PlayerPOSMove(List<EnemyManager> enemies, List<ItemManager> items, Chaser chaser, Runner runner, Grunt grunt)
         {
-            //items = new List<ItemManager>();
             if (items == null)
             {
                 Console.WriteLine("No Items1");
@@ -144,6 +143,7 @@ namespace TextBasedRPG_OOP_WillB
         //Player Position
         public void POS(int x, int y, List<EnemyManager> enemies, List<ItemManager> items, Chaser chaser, Grunt grunt)
         {
+            //enemies = new List<EnemyManager>();
             this.x += x;
             this.y += y;
             foreach (EnemyManager enemy in enemies)

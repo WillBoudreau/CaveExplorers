@@ -26,10 +26,10 @@ namespace TextBasedRPG_OOP_WillB
         {
             GenerateLlevel(1);
         }
-        public void Update()
-        {
-            GenerateLlevel(1);
-        }
+        //public void Update()
+        //{
+        //    GenerateLlevel(1);
+        //}
         void GenerateLlevel(int level)
         {
             enemies = new List<EnemyManager>();

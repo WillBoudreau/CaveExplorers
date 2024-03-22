@@ -41,50 +41,51 @@ namespace TextBasedRPG_OOP_WillB
             Player.hud = hud;
             //achievements = new Achievements(player, enemies, itemManager);
         }
-        //void GenerateLlevel(int level)
-        //{
-        //    if(player == null)
-        //    {
-        //        Console.Clear();
-        //        Console.WriteLine("Player is null");
-        //        Console.ReadKey();
-        //    }
-        //    enemies = new List<EnemyManager>();
-        //    itemManager = new List<ItemManager>();
-        //    if(enemies != null)
-        //    {
-        //        enemies.Clear();
-        //    }   
-        //    if(itemManager != null)
-        //    {
-        //        itemManager.Clear();
-        //    }
-        //    switch (level)
-        //    {
-        //        case 1:
-        //            music.PlayMusicLevel(level);
-        //            Console.CursorVisible = false;
-        //            map.MapArray();
-        //            map.ShowMap();
-        //            enemies = EnemyManager.GenerateEnemies(25, 3, 5, 1, map,player, items);
-        //            itemManager = ItemManager.GenerateItems(25, 10, 5, 3, map);
-        //            break;
-        //        case 2:
-        //            music.PlayMusicLevel(level);
-        //            Console.CursorVisible = false;
-        //            map.MapArray();
-        //            map.ShowMap();
-        //            enemies = EnemyManager.GenerateEnemies(5, 2, 2, 1, map,player,items);
-        //            itemManager = ItemManager.GenerateItems(25, 2, 2, 1, map);
-        //            break;
-        //    }
+        void GenerateLlevel(int level)
+        {
+            if (player == null)
+            {
+                Console.Clear();
+                Console.WriteLine("Player is null");
+                Console.ReadKey();
+            }
+            enemies = new List<EnemyManager>();
+            itemManager = new List<ItemManager>();
+            if (enemies != null)
+            {
+                enemies.Clear();
+            }
+            if (itemManager != null)
+            {
+                itemManager.Clear();
+            }
+            switch (level)
+            {
+                case 1:
+                    music.PlayMusicLevel(level);
+                    Console.CursorVisible = false;
+                    map.MapArray();
+                    map.ShowMap();
+                    enemies = EnemyManager.GenerateEnemies(25, 3, 5, 1, map, player, items);
+                    itemManager = ItemManager.GenerateItems(25, 10, 5, 3, map);
+                    break;
+                case 2:
+                    music.PlayMusicLevel(level);
+                    Console.CursorVisible = false;
+                    map.MapArray();
+                    map.ShowMap();
+                    enemies = EnemyManager.GenerateEnemies(5, 2, 2, 1, map, player, items);
+                    itemManager = ItemManager.GenerateItems(25, 2, 2, 1, map);
+                    break;
+            }
 
-        //}
+        }
         void GameInitialize()
         {
             player.Init();
             Intro();
             levelGeneration.Init();
+            GenerateLlevel(1);
             player.Draw();
         }
         //Intro to game
