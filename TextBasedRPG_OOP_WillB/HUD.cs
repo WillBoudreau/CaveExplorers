@@ -19,6 +19,7 @@ namespace TextBasedRPG_OOP_WillB
         int LastSeenHealthMax;
         public List<string> UnlockedAchievements { get; private set; }
         public List<string> EventLog {  get; set; }
+        public List<string> playerAchievements = new List<string>();
        public HUD(Player player,List<EnemyManager>enemies,Map map)
         {
             UnlockedAchievements = new List<string>();
@@ -29,14 +30,13 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void Update(List<EnemyManager>enemies)
         {
-            DisplayHUD(enemies,map);
+            DisplayHUD(enemies,map); 
             LastSeenEnemy();
+            //WriteAchievment("First Blood","Kill your first enemy");
         }
         public void DisplayHUD(List<EnemyManager> enemies,Map map)
         {
             Console.SetCursorPosition(0,map.MapChar.Length);
-            Console.WriteLine();
-            Console.WriteLine("\n");
             Objectives();
             Console.WriteLine("\n");
             Console.WriteLine("Stats");
@@ -92,8 +92,7 @@ namespace TextBasedRPG_OOP_WillB
             EventLog.Clear();
         }
         public void Objectives()
-        {
-            Console.WriteLine();
+        { 
             Console.WriteLine("\n");
             Console.WriteLine("Current Objectives: ");
             List<string> CurrentObjective = new List<string>();
@@ -104,15 +103,19 @@ namespace TextBasedRPG_OOP_WillB
                 Console.WriteLine(objective);
             }
         }
-        //public void WriteAchievment(string name,string Description)
+        //public void WriteAchievment(string name, string Description)
         //{
         //    Console.WriteLine("Achievments");
-            
+
         //    playerAchievements.Add(name);
         //    playerAchievements.Add(Description);
-        //    foreach(string achievement in playerAchievements)
+        //    foreach (string achievement in playerAchievements)
         //    {
         //        Console.WriteLine(achievement);
+        //        if(playerAchievements.Count > 2)
+        //        {
+        //            playerAchievements.Clear();
+        //        }
         //    }
         //}
     }

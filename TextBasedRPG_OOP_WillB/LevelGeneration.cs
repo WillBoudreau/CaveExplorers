@@ -8,11 +8,16 @@ namespace TextBasedRPG_OOP_WillB
     {
         Map map;
         Player player;
-        List<ItemManager> items;
-        MusicManager music;
-        List<ItemManager> itemManager;
-        List<EnemyManager> enemies;
+        Chaser chaser;
+        Grunt grunt;
+        Runner runner;
         Settings settings;
+        MusicManager music;
+        EnemyManager enemyMan;
+        List<EnemyManager> enemies;
+        List<ItemManager> items;
+        HUD hud;
+        List<ItemManager> itemManager;
         public LevelGeneration()
         {
             settings = new Settings();
@@ -26,20 +31,10 @@ namespace TextBasedRPG_OOP_WillB
         {
             GenerateLlevel(1);
         }
-        //public void Update()
-        //{
-        //    GenerateLlevel(1);
-        //}
-        void GenerateLlevel(int level)
+        public void GenerateLlevel(int level)
         {
-            enemies = new List<EnemyManager>();
-            itemManager = new List<ItemManager>();
-            if(player == null)
-            {
-                Console.Clear();
-                Console.WriteLine("Player is null");
-                Console.ReadKey();
-            }
+            //enemies = new List<EnemyManager>();
+            //itemManager = new List<ItemManager>();
             if (enemies != null)
             {
                 enemies.Clear();
@@ -55,21 +50,9 @@ namespace TextBasedRPG_OOP_WillB
                     Console.CursorVisible = false;
                     map.MapArray();
                     map.ShowMap();
-                    settings.numGrunt = 25;
-                    settings.numChaser = 5;
-                    settings.numRunner = 5;
-                    settings.numBoss = 1;
-                    enemies = EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, items);
+                    enemies = EnemyManager.GenerateEnemies(25,10,5,3, map, player, items,settings);
                     itemManager = ItemManager.GenerateItems(25, 10, 5, 3, map);
                     break;
-                //case 2:
-                //    music.PlayMusicLevel(level);
-                //    Console.CursorVisible = false;
-                //    map.MapArray();
-                //    map.ShowMap();
-                //    enemies = EnemyManager.GenerateEnemies(5, 2, 2, 1, map, player, items);
-                //    itemManager = ItemManager.GenerateItems(25, 2, 2, 1, map);
-                //    break;
             }
 
         }

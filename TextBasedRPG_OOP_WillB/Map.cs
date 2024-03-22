@@ -18,9 +18,10 @@ namespace TextBasedRPG_OOP_WillB
         {
             MapArray();
         }
-        public void Update( int x, int y,char tile)
+        public void Update()
         {
-            
+            MapArray();
+            ShowMap();
         }
         public void Draw()
         {

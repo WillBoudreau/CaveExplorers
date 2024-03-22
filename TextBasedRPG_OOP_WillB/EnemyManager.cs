@@ -27,6 +27,7 @@ namespace TextBasedRPG_OOP_WillB
         public static HUD hud;
         public Grunt grunt;
         public Chaser Chaser;
+        public Runner runner;
         public Settings settings = new Settings();
         public string name;
         public bool BossDead = false;
@@ -72,9 +73,10 @@ namespace TextBasedRPG_OOP_WillB
             DisplayEnemy(player);
         }
         //Generate Enemies
-        public static List<EnemyManager> GenerateEnemies(int numGrunts, int numChasers, int numRunners, int numBoss, Map map,Player player,List<ItemManager>items)
+        public static List<EnemyManager> GenerateEnemies(int numGrunts, int numChasers, int numRunners, int numBoss, Map map,Player player,List<ItemManager>items,Settings settings)
         {
                 Random rnd = new Random();
+                Boss boss = new Boss(0, 0, EnemType.Boss, 1,1,3, player, items);
                 Grunt grunt = new Grunt(0, 0, EnemType.Grunt, 1, 1, 3,player, items);
                 Chaser chaser = new Chaser(0, 0, EnemType.Chaser, 1, 1, 3, player,items);
                 Runner runner = new Runner(0, 0, EnemType.Runner, 1, 1, 3,player, items);
@@ -124,6 +126,22 @@ namespace TextBasedRPG_OOP_WillB
                     if (map.IsTileValid(x, y) == '.')
                     {
                         enemies.Add(new Runner(x, y, EnemType.Runner, 1, 1, 3,player,items));
+                        ValidSpawn = true;
+                    }
+                }
+            }
+            for(int i = 0; i < numBoss; i++)
+            {
+                int x;
+                int y;
+                bool ValidSpawn = false;
+                while (!ValidSpawn)
+                {
+                    x = rnd.Next(1, map.MapChar[0].Length);
+                    y = rnd.Next(1, map.MapChar.Length);
+                    if (map.IsTileValid(x, y) == '.')
+                    {
+                        enemies.Add(new Boss(x, y, EnemType.Boss, 1, 1, 3,player,items));
                         ValidSpawn = true;
                     }
                 }
