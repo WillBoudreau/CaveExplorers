@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
@@ -15,7 +12,7 @@ namespace TextBasedRPG_OOP_WillB
     }
     internal class ItemManager
     {
-        public char ItemAvatar {get; set;}
+        public char ItemAvatar { get; set; }
         public bool IsPickedUp { get; set; }
         public ItemType itemType { get; set; }
         public int x { get; set; }
@@ -24,7 +21,7 @@ namespace TextBasedRPG_OOP_WillB
         List<char> Health;
         List<char> Shield;
         List<char> Damage;
-        public ItemManager( char itemAvatar, int x, int y, Map map)
+        public ItemManager(char itemAvatar, int x, int y, Map map)
         {
             ItemAvatar = itemAvatar;
             this.x = x;
@@ -34,7 +31,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             DisplayItems(map);
         }
-        public static List<ItemManager> GenerateItems(int numCoins, int numHealth, int numShield, int numDamage,Map map)
+        public static List<ItemManager> GenerateItems(int numCoins, int numHealth, int numShield, int numDamage, Map map)
         {
             List<ItemManager> Damage = new List<ItemManager>();
             List<ItemManager> Shield = new List<ItemManager>();
@@ -54,8 +51,8 @@ namespace TextBasedRPG_OOP_WillB
                     if (map.IsTileValid(x, y) == '.')
                     {
                         Console.SetCursorPosition(x, y);
-                        map.UpdateMapTile(x, y,'*');
-                        itemManagers.Add(new Coin('*', x, y, map,ItemType.Coin) {itemType = ItemType.Coin});
+                        map.UpdateMapTile(x, y, '*');
+                        itemManagers.Add(new Coin('*', x, y, map, ItemType.Coin) { itemType = ItemType.Coin });
                         ValidSpawn = true;
                     }
                 }
@@ -73,12 +70,12 @@ namespace TextBasedRPG_OOP_WillB
                     {
                         Console.SetCursorPosition(x, y);
                         map.UpdateMapTile(x, y, 'H');
-                        itemManagers.Add(new HealthPickup('H', x, y, map) { itemType = ItemType.Health});
+                        itemManagers.Add(new HealthPickup('H', x, y, map) { itemType = ItemType.Health });
                         ValidSpawn = true;
                     }
                 }
             }
-            for(int i= 0; i < numShield; i++)
+            for (int i = 0; i < numShield; i++)
             {
                 int x;
                 int y;
@@ -96,7 +93,7 @@ namespace TextBasedRPG_OOP_WillB
                     }
                 }
             }
-            for(int i = 0; i < numDamage; i++)
+            for (int i = 0; i < numDamage; i++)
             {
                 int x;
                 int y;
@@ -125,11 +122,11 @@ namespace TextBasedRPG_OOP_WillB
             return false;
         }
         public virtual void DisplayItems(Map map)
-        { 
+        {
             Console.SetCursorPosition(x, y);
-            if(!IsPickedUp)
+            if (!IsPickedUp)
             {
-                switch(ItemAvatar)
+                switch (ItemAvatar)
                 {
                     case '*':
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -150,7 +147,7 @@ namespace TextBasedRPG_OOP_WillB
                 }
 
             }
-            else if(IsPickedUp)
+            else if (IsPickedUp)
             {
                 ItemAvatar = '.';
             }
