@@ -43,41 +43,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Achievements.cs" />
-    <Compile Include="Boss.cs" />
-    <Compile Include="Chaser.cs" />
-    <Compile Include="Coin.cs" />
-    <Compile Include="CollectorManager.cs" />
-    <Compile Include="DamageItem.cs" />
+    <Compile Include="Extras\Achievements.cs" />
+    <Compile Include="Entities\Enemies\Boss.cs" />
+    <Compile Include="Entities\Enemies\Chaser.cs" />
+    <Compile Include="Items\Coin.cs" />
+    <Compile Include="Items\CollectorManager.cs" />
+    <Compile Include="Items\DamageItem.cs" />
     <Compile Include="GameManager.cs" />
-    <Compile Include="Grunt.cs" />
-    <Compile Include="HealthPickup.cs" />
-    <Compile Include="HUD.cs" />
-    <Compile Include="ItemManager.cs" />
-    <Compile Include="LevelGeneration.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="EnemyManager.cs" />
-    <Compile Include="Entity.cs" />
+    <Compile Include="Entities\Enemies\Grunt.cs" />
+    <Compile Include="Items\HealthPickup.cs" />
+    <Compile Include="Entities\Player\HUD.cs" />
+    <Compile Include="Items\ItemManager.cs" />
+    <Compile Include="Maps\LevelGeneration.cs" />
+    <Compile Include="Maps\Map.cs" />
+    <Compile Include="Entities\Enemies\EnemyManager.cs" />
+    <Compile Include="Entities\Entity.cs" />
     <Compile Include="HealthSystem.cs" />
-    <Compile Include="MusicManager.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="ExpirenceManager.cs" />
+    <Compile Include="Extras\MusicManager.cs" />
+    <Compile Include="Entities\Player\Player.cs" />
+    <Compile Include="Extras\ExpirenceManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Runner.cs" />
+    <Compile Include="Entities\Enemies\Runner.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="ShieldItem.cs" />
+    <Compile Include="Items\ShieldItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Achievements.txt" />
+    <Content Include="Extras\Achievements.txt" />
     <Content Include="kingdom-of-fantasy-version-60s-10817.wav" />
-    <Content Include="Level2.txt">
+    <Content Include="Maps\Level2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Map.txt">
+    <Content Include="Maps\Map.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

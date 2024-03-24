@@ -34,6 +34,7 @@ namespace TextBasedRPG_OOP_WillB
         public bool IsAttacked;
         public Player player;
         private ItemManager itemManager;
+        private List<ItemManager> items;
         public EnemyManager(int StartX, int StartY, EnemType enemType, int damage, int shield, int health,Player player,List<ItemManager> item)
         {
 
@@ -61,12 +62,13 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void Init()
         {
-            
+            GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss,map,player,items,settings);
         }
         public void Update(Player player, List<EnemyManager> enemies, List<ItemManager> items)
         {
             Move(player, enemies,items);
             Attack(player, enemies);
+
         }
         public void Draw(Player player)
         {
@@ -177,7 +179,7 @@ namespace TextBasedRPG_OOP_WillB
         public void POS(int x, int y, Player player, List<EnemyManager> enemies,List<ItemManager>items)
         {
             enemies = new List<EnemyManager>();
-            items = new List<ItemManager>();
+            //items = new List<ItemManager>();
             this.x += x;
             this.y += y;
             if (player == null) 
@@ -235,10 +237,10 @@ namespace TextBasedRPG_OOP_WillB
                     break;
             }
             //Enemy List Check
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                Console.WriteLine(enemies[i].ToString());
-            }
+            //for (int i = 0; i < enemies.Count; i++)
+            //{
+            //    Console.WriteLine(enemies[i].ToString());
+            //}
             //Checks if the enemy is on the same tile as player
             foreach (EnemyManager enemy in enemies)
             {

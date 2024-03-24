@@ -142,8 +142,7 @@ namespace TextBasedRPG_OOP_WillB
 
         //Player Position
         public void POS(int x, int y, List<EnemyManager> enemies, List<ItemManager> items, Chaser chaser, Grunt grunt)
-        {
-            //enemies = new List<EnemyManager>();
+        { 
             this.x += x;
             this.y += y;
             foreach (EnemyManager enemy in enemies)
@@ -155,16 +154,16 @@ namespace TextBasedRPG_OOP_WillB
                     enemy.IsAttacked = true;
                     enemy.healthSys.TakeDamage(PlayerDamage);
                     hud.lastenemy(enemy);
-                    if (enemy.healthSys.IsAlive == false)
-                    {
-                        enemies.Remove(enemy);
-                        score += 10 * ExpirenceMan.level;
-                        killCount++;
-                        if(enemy.healthSys.IsAlive == false && enemy.enemType == EnemType.Boss)
-                        {
-                            Win();
-                        }
-                    }
+                    //if (enemy.healthSys.IsAlive == false)
+                    //{
+                    //    enemies.Remove(enemy);
+                    //    score += 10 * ExpirenceMan.level;
+                    //    killCount++;
+                    //    if(enemy.healthSys.IsAlive == false && enemy.enemType == EnemType.Boss)
+                    //    {
+                    //        Win();
+                    //    }
+                    //}
                     break;
                 }
             }
