@@ -26,7 +26,9 @@ namespace TextBasedRPG_OOP_WillB
         List<EnemyManager> enemies;
         List<ItemManager> items;
         HUD hud;
+        EnemyManager enemy;
         List<ItemManager> itemManager;
+        ItemManager item;
         LevelGeneration levelGeneration;
         //Achievements achievements;
         public GameManager()
@@ -46,8 +48,8 @@ namespace TextBasedRPG_OOP_WillB
  
             void GameInitialize()
             {
-                enemies = EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss,map, player, items, settings);
-                //items.Init();
+                //enemy.Init();
+                item.Init();
                 player.Init();
                 Intro();
                 levelGeneration.GenerateLlevel(1);
