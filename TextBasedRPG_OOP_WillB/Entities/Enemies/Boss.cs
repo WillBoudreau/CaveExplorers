@@ -8,6 +8,8 @@ namespace TextBasedRPG_OOP_WillB
 {
     internal class Boss:EnemyManager
     {
+        private bool chase = false;
+        private int chaseDist= 5;
         public Boss(int x, int y,EnemType enemType, int damage, int shield, int hp,Player player, List<ItemManager>items):base(x, y, enemType, damage, shield, hp,player,items) 
         {
             enemType = EnemType.Boss;
@@ -15,12 +17,25 @@ namespace TextBasedRPG_OOP_WillB
         }
         public override void Move(Player player, List<EnemyManager> enemies,List<ItemManager>items)
         {
-            int distanceToplayer = Math.Abs(player.x - x) + Math.Abs(player.y - y);
-
-            if (distanceToplayer <= 5)
+            int dist = Math.Abs(x - player.x) + Math.Abs(y - player.y);
+            if(dist <= chaseDist)
             {
-                Move(player, enemies, items);
-
+                if(player.x > x)
+                {
+                    x++;
+                }
+                else if(player.x < x)
+                {
+                    x--;
+                }
+                if(player.y > y)
+                {
+                    y++;
+                }
+                else if(player.y < y)
+                {
+                    y--;
+                }
             }
         }
         public override void Attack(Player player, List<EnemyManager> enemies)

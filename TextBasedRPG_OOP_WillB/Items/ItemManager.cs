@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime;
 
 namespace TextBasedRPG_OOP_WillB
 {
@@ -21,11 +22,17 @@ namespace TextBasedRPG_OOP_WillB
         List<char> Health;
         List<char> Shield;
         List<char> Damage;
+        Settings settings = new Settings();
+        Map map = new Map();
         public ItemManager(char itemAvatar, int x, int y, Map map)
         {
             ItemAvatar = itemAvatar;
             this.x = x;
             this.y = y;
+        }
+        public void Init()
+        {
+            GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map);
         }
         public virtual void Update(Map map)
         {
