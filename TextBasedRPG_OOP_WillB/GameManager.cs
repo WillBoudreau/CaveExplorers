@@ -46,12 +46,11 @@ namespace TextBasedRPG_OOP_WillB
  
             void GameInitialize()
             {
-                enemyMan.Init();
-                items = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage,map);
+                enemies = EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss,map, player, items, settings);
+                //items.Init();
                 player.Init();
                 Intro();
                 levelGeneration.GenerateLlevel(1);
-                //GenerateLlevel(1);
                 player.Draw();
             }
             //Intro to game
@@ -75,10 +74,9 @@ namespace TextBasedRPG_OOP_WillB
                 GameInitialize();
                 while (player.healthSys.normalHealth > 0)
                 {
-                    foreach (ItemManager item in itemManager)
+                    foreach (ItemManager item in items)
                     {
                         item.Update(map);
-                    Console.WriteLine(item);
                     }
                     player.Update(enemies, itemManager, chaser, runner, grunt);
                     player.Draw();
@@ -86,11 +84,6 @@ namespace TextBasedRPG_OOP_WillB
                     {
                         enemy.Update(player, enemies, items);
                         enemy.Draw(player);
-                    //for (int i = 0; i < enemies.Count; i++)
-                    //{
-                    //   enemy.Update(player, enemies, items);
-                    //   enemy.Draw(player);
-                    //}
                     }
                     Console.ResetColor();
                     Console.WriteLine("\n");
