@@ -28,7 +28,7 @@ namespace TextBasedRPG_OOP_WillB
         public void Init()
         {
             Enemies.AddRange(EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, Items, settings));
-            Items.AddRange(ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map));
+            Items = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map);
             NPCs = NPCManager.GenerateNPCS(settings.numVillager, map);
             Enemies.AddRange(Enemies);
             Items.AddRange(Items);

@@ -174,8 +174,20 @@ namespace TextBasedRPG_OOP_WillB
                 this.y -= y;
                 npc.Talk("Villager");
             }
+            if(items == null)
+            {
+                Console.Clear();
+                Console.WriteLine("No Items");
+                Console.ReadKey();
+            }
             foreach (ItemManager item in items)
             {
+                if (items == null)
+                {
+                    Console.Clear();
+                    Console.WriteLine("No Items");
+                    Console.ReadKey();
+                }
                 if (this.x == item.x && this.y == item.y)
                 {
                     this.y -= y;

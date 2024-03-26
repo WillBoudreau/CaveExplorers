@@ -55,15 +55,16 @@ namespace TextBasedRPG_OOP_WillB
             { 
                 
                 //generation.Init();
+                generation.Init();
                 player.Init();
                 //map.Init();
                 Intro();
             }
             void GameInitializeLVL2() 
             {
-                enemies = EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, items, settings);
-                items = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map);
-                player.Init();
+                //enemies = EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, items, settings);
+                //items = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map);
+                //player.Init();
             }
             //Intro to game
             void Intro()
@@ -84,11 +85,8 @@ namespace TextBasedRPG_OOP_WillB
             public void GameLoop()
             {
                 GameInitialize();
-                //generation.Init();
-                generation.Init();
                 while (player.healthSys.IsAlive)
                 {
-                    generation.Update();
                     UpdateGame();
                     DrawGame();
                 }
@@ -99,12 +97,13 @@ namespace TextBasedRPG_OOP_WillB
             }
         private void UpdateGame()
         {
+            generation.Update();
             player.Update(enemies, itemManager, chaser, runner, grunt);
             enemy.Update(player, enemies, items);
-            foreach (ItemManager item in items)
-            {
-                item.Update(map);
-            }
+            //foreach (ItemManager item in items)
+            //{
+            //    item.Update(map);
+            //}
             hud.Update(enemies);
         }
         private void DrawGame()
