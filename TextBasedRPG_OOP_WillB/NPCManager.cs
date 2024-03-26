@@ -56,12 +56,12 @@ namespace TextBasedRPG_OOP_WillB
                 {
                     x = rnd.Next(1, map.MapChar[0].Length);
                     y = rnd.Next(1, map.MapChar.Length);
-                    if (map.MapChar[y][x] == map.MapChar[1][17])
+                    if (map.MapChar[y][x] == 'N')
                     {
                         List<string> message = new List<string>{};
 
                         npcManagers.Add(new Villager('V', x, y, "Villager", NPCType.Villager,message));
-                        map.UpdateMapTile(17,1, 'V');
+                        map.UpdateMapTile(x,y, 'V');
                         ValidSpawn = true;
                     }
                 }

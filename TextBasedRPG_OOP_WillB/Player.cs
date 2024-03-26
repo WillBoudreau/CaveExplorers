@@ -93,6 +93,7 @@ namespace TextBasedRPG_OOP_WillB
                     Console.ReadKey();
                 }
             }
+           
             if (Playerturn == true && Attacked == false && IsSlowed == false)
             {
                 if (!IsSlowed)
@@ -148,6 +149,9 @@ namespace TextBasedRPG_OOP_WillB
             this.y += y;
             foreach (EnemyManager enemy in enemies)
             {
+                Console.Clear();
+                Console.WriteLine(enemy.x + " " + enemy.y);
+                Console.ReadKey();
                 if (this.x == enemy.x && this.y == enemy.y)
                 {
                     this.x -= x;
@@ -188,6 +192,9 @@ namespace TextBasedRPG_OOP_WillB
                     Console.WriteLine("No Items");
                     Console.ReadKey();
                 }
+                Console.Clear();
+                Console.WriteLine(item.x + " " + item.y);
+                Console.ReadKey();
                 if (this.x == item.x && this.y == item.y)
                 {
                     this.y -= y;
@@ -270,6 +277,10 @@ namespace TextBasedRPG_OOP_WillB
                 case 'V':
                     npc.Talk("Villager");
                     this.x -= x;
+                    this.y -= y;
+                    break;
+                case 'H':
+                    this.x -=x ; 
                     this.y -= y;
                     break;
             }
