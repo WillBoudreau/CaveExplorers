@@ -15,14 +15,17 @@ namespace TextBasedRPG_OOP_WillB
         Grunt Grunt;
         List<EnemyManager> enemies = new List<EnemyManager>();
         List<ItemManager> items;
+        NPCManager npc;
         public Stopwatch stopwatch = new Stopwatch();
         public static HUD hud;
         Settings settings;
         public int PlayerDamage;
         public int killCount;
-        public Player(List<ItemManager> items)
+        public Player(List<ItemManager> items, Map map)
         {
+            this.map = map;
             settings = new Settings();
+            npc = new NPCManager(settings, this, map);
             ExpirenceMan.level = 0;
             ExpirenceMan.xp = 0;
             score = 0;
@@ -38,13 +41,11 @@ namespace TextBasedRPG_OOP_WillB
         public void Init()
         {
             StartTimer();
-            DisplayPlayer();
         }
 
         public void Update(List<EnemyManager> enemies, List<ItemManager> items, Chaser chaser, Runner runner, Grunt grunt)
         {
             PlayerPOSMove(enemies, items, chaser, runner, grunt);
-            DisplayPlayer();
         }
 
         public void Draw()
@@ -154,18 +155,24 @@ namespace TextBasedRPG_OOP_WillB
                     enemy.IsAttacked = true;
                     enemy.healthSys.TakeDamage(PlayerDamage);
                     hud.lastenemy(enemy);
-                    //if (enemy.healthSys.IsAlive == false)
-                    //{
-                    //    enemies.Remove(enemy);
-                    //    score += 10 * ExpirenceMan.level;
-                    //    killCount++;
-                    //    if(enemy.healthSys.IsAlive == false && enemy.enemType == EnemType.Boss)
-                    //    {
-                    //        Win();
-                    //    }
-                    //}
+                    if (enemy.healthSys.IsAlive == false)
+                    {
+                        enemies.Remove(enemy);
+                        score += 10 * ExpirenceMan.level;
+                        killCount++;
+                        if (enemy.healthSys.IsAlive == false && enemy.enemType == EnemType.Boss)
+                        {
+                            Win();
+                        }
+                    }
                     break;
                 }
+            }
+            if (this.x == npc.x && this.y == npc.y)
+            {
+                this.x -= x;
+                this.y -= y;
+                npc.Talk("Villager");
             }
             foreach (ItemManager item in items)
             {
@@ -244,6 +251,14 @@ namespace TextBasedRPG_OOP_WillB
                 case '@':
                     Console.Clear();
                     map.LoadNextLevel();
+                    break;
+                case '!':
+                    Win();
+                    break;
+                case 'V':
+                    npc.Talk("Villager");
+                    this.x -= x;
+                    this.y -= y;
                     break;
             }
             if (IsSlowed == true)

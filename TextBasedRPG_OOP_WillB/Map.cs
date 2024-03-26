@@ -10,13 +10,20 @@ namespace TextBasedRPG_OOP_WillB
         public string path;
         string[] Mapstr;
         public char[][] MapChar;
+        private MusicManager music;
+        public List<EnemyManager> enemies;
+        public List<ItemManager> itemManager;
+        public Settings settings = new Settings();
         public Map()
         {
+            music = new MusicManager();
+            enemies = new List<EnemyManager>();
+            itemManager = new List<ItemManager>();
             MapArray();
         }
         public void Init()
         {
-            MapArray();
+            GenerateLlevel(0);
         }
         public void Update()
         {
@@ -36,12 +43,11 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void MapArray()
         {
-            path = @"Map.txt";
+            path = @"Tutorial.txt";
             Mapstr = File.ReadAllLines(path);
             int Mapx = Mapstr.Length;
             int Mapy = Mapstr[0].Length;
             MapChar = new char[Mapx][];
-
             for (int i = 0; i < Mapx; i++)
             {
                 MapChar[i] = Mapstr[i].ToCharArray();
@@ -129,6 +135,26 @@ namespace TextBasedRPG_OOP_WillB
                             Console.ForegroundColor = ConsoleColor.Gray;
                             Console.WriteLine(MapChar[i][j]);
                             break;
+                        case '!':
+                            Console.BackgroundColor = ConsoleColor.DarkYellow;
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            Console.WriteLine(MapChar[i][j]);
+                            break;
+                        case '|':
+                                Console.BackgroundColor = ConsoleColor.DarkGreen;
+                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                            Console.Write(MapChar[i][j]);
+                            break;
+                        case 'V':
+                            Console.BackgroundColor = ConsoleColor.DarkMagenta;
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.Write(MapChar[i][j]);
+                            break;
+                        case ')':
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.ForegroundColor = ConsoleColor.DarkBlue;
+                            Console.Write(MapChar[i][j]);
+                            break;
                     }
                 }
             }
@@ -136,7 +162,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void LoadNextLevel()
         {
-            path = @"Level2.txt";
+            path = @"Map.txt";
             Mapstr = File.ReadAllLines(path);
             int MapX = Mapstr.Length;
             int MapY = Mapstr[0].Length;
@@ -159,6 +185,46 @@ namespace TextBasedRPG_OOP_WillB
                 return ' ';
             }
         }
+        public void GenerateLlevel(int level)
+        {
+            ClearLists();
+            switch (level)
+            {
+                case 0:
+                    itemManager = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, this);
 
+                    music.PlayMusicLevel(level);
+                    Console.CursorVisible = false;
+                    Update();
+                    break;
+                case 1:
+                    music.PlayMusicLevel(level);
+                    Console.CursorVisible = false;
+                    Console.Clear();
+                    Console.WriteLine(enemies.Count);
+                    Console.ReadKey();
+                    Update();
+                    break;
+                case 2:
+                    music.PlayMusicLevel(level);
+                    Console.CursorVisible = false;
+                    Console.Clear();
+                    Console.WriteLine(enemies.Count);
+                    Console.ReadKey();
+                    Update();
+                    break;
+            }
+        }
+        void ClearLists()
+        {
+            if (enemies != null)
+            {
+                enemies.Clear();
+            }
+            if (itemManager != null)
+            {
+                itemManager.Clear();
+            }
+        }
     }
 }

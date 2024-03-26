@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    internal class Grunt:EnemyManager
+    internal class Grunt : EnemyManager
     {
         Random rnd;
         List<EnemyManager> enemy;
         Player player;
-        public Grunt( int x, int y, EnemType enemType, int damage, int shield, int hp, Player player,List<ItemManager>items):base(x, y, enemType,damage,shield, hp, player,items)
+        MusicManager sound;
+        public Grunt(int x, int y, EnemType enemType, int damage, int shield, int hp, Player player, List<ItemManager> items) : base(x, y, enemType, damage, shield, hp, player, items)
         {
             rnd = new Random();
+            sound = new MusicManager();
             enemType = EnemType.Grunt;
             damage = settings.GruntAttack;
             hp = settings.GruntMaxhp;
@@ -21,7 +20,7 @@ namespace TextBasedRPG_OOP_WillB
             name = "Grunt";
             Move(player, enemy, items);
         }
-        public override void Move(Player player, List<EnemyManager> enemies,List<ItemManager>items)
+        public override void Move(Player player, List<EnemyManager> enemies, List<ItemManager> items)
         {
             int Move = rnd.Next(1, 5);
             int dx = 0,
@@ -44,7 +43,7 @@ namespace TextBasedRPG_OOP_WillB
                     dx = 1;
                     break;
             }
-            base.POS(dx, dy, player, enemies,items);
+            base.POS(dx, dy, player, enemies, items);
         }
         public override void Attack(Player player, List<EnemyManager> enemies)
         {
@@ -67,7 +66,6 @@ namespace TextBasedRPG_OOP_WillB
             }
             else
             {
-                player.killCount++;
                 this.x = 0;
                 this.y = 0;
             }
