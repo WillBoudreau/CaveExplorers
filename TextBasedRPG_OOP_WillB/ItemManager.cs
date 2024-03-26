@@ -62,6 +62,9 @@ namespace TextBasedRPG_OOP_WillB
                     if (map.IsTileValid(x, y) == '.')
                     {
                         Console.SetCursorPosition(x, y);
+                        Console.Clear();
+                        Console.WriteLine(x + " " + y);
+                        Console.ReadKey();
                         map.UpdateMapTile(x, y, '*');
                         itemManagers.Add(new Coin('*', x, y, map, ItemType.Coin) { itemType = ItemType.Coin });
                         ValidSpawn = true;

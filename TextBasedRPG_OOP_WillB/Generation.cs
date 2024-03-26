@@ -29,10 +29,8 @@ namespace TextBasedRPG_OOP_WillB
         {
             Enemies.AddRange(EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, Items, settings));
             Items = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map);
-            NPCs = NPCManager.GenerateNPCS(settings.numVillager, map);
             Enemies.AddRange(Enemies);
             Items.AddRange(Items);
-            NPCs.AddRange(NPCs);
         }
         public void Update()
         {
@@ -43,10 +41,6 @@ namespace TextBasedRPG_OOP_WillB
             foreach (var item in Items)
             {
                 item.Update(map);
-            }
-            foreach (var npc in NPCs)
-            {
-                npc.Update(map);
             }
         }
     }
