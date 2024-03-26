@@ -23,12 +23,12 @@ namespace TextBasedRPG_OOP_WillB
             Enemies = new List<EnemyManager>();
             NPCs = new List<NPCManager>();
             settings = new Settings();
-            player = new Player(Items,map);
+            player = new Player(Items,map,Enemies);
         }
         public void Init()
         {
             Enemies.AddRange(EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, Items, settings));
-            Items = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map);
+            Items.AddRange(ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map));
             Enemies.AddRange(Enemies);
             Items.AddRange(Items);
         }

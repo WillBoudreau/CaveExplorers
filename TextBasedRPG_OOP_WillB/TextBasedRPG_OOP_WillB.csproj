@@ -60,7 +60,7 @@
     <Compile Include="EnemyManager.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="HealthSystem.cs" />
-    <Compile Include="MusicManager.cs" />
+    <Compile Include="MusicGenereator.cs" />
     <Compile Include="NPCManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="ExpirenceManager.cs" />

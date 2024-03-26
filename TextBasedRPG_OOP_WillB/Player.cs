@@ -13,7 +13,7 @@ namespace TextBasedRPG_OOP_WillB
         Chaser Chaser;
         Runner Runner;
         Grunt Grunt;
-        List<EnemyManager> enemies = new List<EnemyManager>();
+        List<EnemyManager> enemies;
         List<ItemManager> items;
         NPCManager npc;
         public Stopwatch stopwatch = new Stopwatch();
@@ -21,8 +21,10 @@ namespace TextBasedRPG_OOP_WillB
         Settings settings;
         public int PlayerDamage;
         public int killCount;
-        public Player(List<ItemManager> items, Map map)
+        public Player(List<ItemManager> items, Map map, List<EnemyManager> enemies)
         {
+            this.items = items;
+            this.enemies = enemies;
             this.map = map;
             settings = new Settings();
             npc = new NPCManager(settings, this, map);
@@ -149,9 +151,6 @@ namespace TextBasedRPG_OOP_WillB
             this.y += y;
             foreach (EnemyManager enemy in enemies)
             {
-                Console.Clear();
-                Console.WriteLine(enemy.x + " " + enemy.y);
-                Console.ReadKey();
                 if (this.x == enemy.x && this.y == enemy.y)
                 {
                     this.x -= x;
@@ -192,9 +191,6 @@ namespace TextBasedRPG_OOP_WillB
                     Console.WriteLine("No Items");
                     Console.ReadKey();
                 }
-                Console.Clear();
-                Console.WriteLine(item.x + " " + item.y);
-                Console.ReadKey();
                 if (this.x == item.x && this.y == item.y)
                 {
                     this.y -= y;
@@ -277,10 +273,6 @@ namespace TextBasedRPG_OOP_WillB
                 case 'V':
                     npc.Talk("Villager");
                     this.x -= x;
-                    this.y -= y;
-                    break;
-                case 'H':
-                    this.x -=x ; 
                     this.y -= y;
                     break;
             }

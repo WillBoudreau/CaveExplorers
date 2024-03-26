@@ -18,15 +18,16 @@ namespace TextBasedRPG_OOP_WillB
         public ItemType itemType { get; set; }
         public int x { get; set; }
         public int y { get; set; }
+        Settings settings = new Settings();
         List<char> Coins;
         List<char> Health;
         List<char> Shield;
         List<char> Damage;
-        Settings settings = new Settings();
+        //Settings settings
         Map map = new Map();
         public ItemManager()
         {
-
+            //settings = new Settings();
         }
         public ItemManager(char itemAvatar, int x, int y, Map map)
         {
@@ -41,9 +42,11 @@ namespace TextBasedRPG_OOP_WillB
         public virtual void Update(Map map)
         {
             DisplayItems(map);
+            
         }
         public static List<ItemManager> GenerateItems(int numCoins, int numHealth, int numShield, int numDamage, Map map)
         {
+
             List<ItemManager> Damage = new List<ItemManager>();
             List<ItemManager> Shield = new List<ItemManager>();
             List<ItemManager> Health = new List<ItemManager>();
@@ -62,9 +65,6 @@ namespace TextBasedRPG_OOP_WillB
                     if (map.IsTileValid(x, y) == '.')
                     {
                         Console.SetCursorPosition(x, y);
-                        Console.Clear();
-                        Console.WriteLine(x + " " + y);
-                        Console.ReadKey();
                         map.UpdateMapTile(x, y, '*');
                         itemManagers.Add(new Coin('*', x, y, map, ItemType.Coin) { itemType = ItemType.Coin });
                         ValidSpawn = true;

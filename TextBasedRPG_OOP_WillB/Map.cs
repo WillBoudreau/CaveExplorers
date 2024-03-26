@@ -10,13 +10,11 @@ namespace TextBasedRPG_OOP_WillB
         public string path;
         string[] Mapstr;
         public char[][] MapChar;
-        private MusicManager music;
         public List<EnemyManager> enemies;
         public List<ItemManager> itemManager;
         public Settings settings = new Settings();
         public Map()
         {
-            music = new MusicManager();
             enemies = new List<EnemyManager>();
             itemManager = new List<ItemManager>();
             MapArray();
@@ -172,7 +170,8 @@ namespace TextBasedRPG_OOP_WillB
                 MapChar[i] = Mapstr[i].ToCharArray();
             }
             Draw();
-
+            Console.Clear();
+            GenerateLlevel(1);
         }
         public char IsTileValid(int x, int y)
         {
@@ -191,27 +190,20 @@ namespace TextBasedRPG_OOP_WillB
             switch (level)
             {
                 case 0:
+                    Console.Clear();
                     itemManager = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, this);
-
-                    music.PlayMusicLevel(level);
                     Console.CursorVisible = false;
-                    Update();
+                    //Update();
                     break;
                 case 1:
-                    music.PlayMusicLevel(level);
-                    Console.CursorVisible = false;
                     Console.Clear();
-                    Console.WriteLine(enemies.Count);
-                    Console.ReadKey();
-                    Update();
+                    itemManager = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, this);
+                    Console.CursorVisible = false;
+                    //Update();
                     break;
                 case 2:
-                    music.PlayMusicLevel(level);
                     Console.CursorVisible = false;
-                    Console.Clear();
-                    Console.WriteLine(enemies.Count);
-                    Console.ReadKey();
-                    Update();
+                    //Update();
                     break;
             }
         }

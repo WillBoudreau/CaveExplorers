@@ -35,7 +35,6 @@ namespace TextBasedRPG_OOP_WillB
         public Player player;
         private ItemManager itemManager;
         private List<ItemManager> items;
-        private MusicManager sound;
         public EnemyManager(Settings settings, Player player, List<ItemManager> items, Map map)
         {
             this.player = player;
@@ -61,7 +60,6 @@ namespace TextBasedRPG_OOP_WillB
         }
         public EnemyManager(int StartX, int StartY, EnemType enemType, int damage, int shield, int health, Player player, List<ItemManager> item)
         {
-            sound = new MusicManager();
             healthSys = new HealthSys(health, shield);
             this.player = player;
             x = StartX;
@@ -316,7 +314,6 @@ namespace TextBasedRPG_OOP_WillB
             }
             else
             {
-                sound.PlaySound("EnemyDeath");
                 this.x = 0;
                 this.y = 0;
             }
