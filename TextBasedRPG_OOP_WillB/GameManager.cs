@@ -22,38 +22,48 @@ namespace TextBasedRPG_OOP_WillB
         Runner runner;
         Settings settings;
         MusicManager music;
-        EnemyManager enemyMan;
         List<EnemyManager> enemies;
         List<ItemManager> items;
         HUD hud;
         EnemyManager enemy;
         List<ItemManager> itemManager;
         ItemManager item;
-        LevelGeneration levelGeneration;
+        NPCManager npc;
+        List<NPCManager> npcs;
+        Generation generation;
         //Achievements achievements;
         public GameManager()
         {
+            generation = new Generation();
+            item = new ItemManager();
             music = new MusicManager();
             map = new Map();
             enemies = new List<EnemyManager>();
             items = new List<ItemManager>();
             itemManager = new List<ItemManager>();
-            player = new Player(items);
+            player = new Player(items, map);
             hud = new HUD(player, enemies, map);
             Player.hud = hud;
+            enemy = new EnemyManager(settings,player,items,map);
             settings = new Settings();
-            levelGeneration = new LevelGeneration(map,player, enemies, items, music, settings);
+            npc = new NPCManager(settings, player, map);
+            npcs = new List<NPCManager>();
             //achievements = new Achievements(player, enemies, itemManager);
         }
- 
-            void GameInitialize()
-            {
-                //enemy.Init();
-                item.Init();
+
+             void GameInitialize()
+            { 
+                
+                //generation.Init();
                 player.Init();
+                //map.Init();
                 Intro();
-                levelGeneration.GenerateLlevel(1);
-                player.Draw();
+            }
+            void GameInitializeLVL2() 
+            {
+                enemies = EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, items, settings);
+                items = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map);
+                player.Init();
             }
             //Intro to game
             void Intro()
@@ -74,28 +84,36 @@ namespace TextBasedRPG_OOP_WillB
             public void GameLoop()
             {
                 GameInitialize();
-                while (player.healthSys.normalHealth > 0)
+                //generation.Init();
+                generation.Init();
+                while (player.healthSys.IsAlive)
                 {
-                    foreach (ItemManager item in items)
-                    {
-                        item.Update(map);
-                    }
-                    player.Update(enemies, itemManager, chaser, runner, grunt);
-                    player.Draw();
-                    foreach (EnemyManager enemy in enemies)
-                    {
-                        enemy.Update(player, enemies, items);
-                        enemy.Draw(player);
-                    }
-                    Console.ResetColor();
-                    Console.WriteLine("\n");
-                    hud.Update(enemies);
+                    generation.Update();
+                    UpdateGame();
+                    DrawGame();
                 }
-                if (player.healthSys.normalHealth <= 0)
+                if (player.healthSys.IsAlive ==false)
                 {
                     GameOver();
                 }
             }
+        private void UpdateGame()
+        {
+            player.Update(enemies, itemManager, chaser, runner, grunt);
+            enemy.Update(player, enemies, items);
+            foreach (ItemManager item in items)
+            {
+                item.Update(map);
+            }
+            hud.Update(enemies);
+        }
+        private void DrawGame()
+        {
+            map.Draw();
+            player.Draw();
+            enemy.Draw(player,enemies,items);
+            
+        }
             //Game Over to game
             public void GameOver()
             {

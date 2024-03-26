@@ -49,17 +49,19 @@
     <Compile Include="Coin.cs" />
     <Compile Include="CollectorManager.cs" />
     <Compile Include="DamageItem.cs" />
+    <Compile Include="Dialogue.cs" />
     <Compile Include="GameManager.cs" />
+    <Compile Include="Generation.cs" />
     <Compile Include="Grunt.cs" />
     <Compile Include="HealthPickup.cs" />
     <Compile Include="HUD.cs" />
     <Compile Include="ItemManager.cs" />
-    <Compile Include="LevelGeneration.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="EnemyManager.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="HealthSystem.cs" />
     <Compile Include="MusicManager.cs" />
+    <Compile Include="NPCManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="ExpirenceManager.cs" />
     <Compile Include="Program.cs" />
@@ -67,17 +69,23 @@
     <Compile Include="Runner.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="ShieldItem.cs" />
+    <Compile Include="Villager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Achievements.txt" />
+    <None Include="Achievements.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="kingdom-of-fantasy-version-60s-10817.wav" />
     <Content Include="Level2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Map.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Tutorial.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

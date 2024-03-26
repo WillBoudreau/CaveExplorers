@@ -33,7 +33,7 @@ namespace TextBasedRPG_OOP_WillB
             DisplayHUD(enemies,map); 
             LastSeenEnemy();
             Legend();
-            //WriteAchievment("First Blood","Kill your first enemy");
+            WriteAchievment("First Blood", "Kill your first enemy");
         }
         public void DisplayHUD(List<EnemyManager> enemies,Map map)
         {
@@ -55,7 +55,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             if(LastSeen != null)
             {
-                Console.WriteLine("\nLast Enemy encountered: " + LastSeen + "\n" +LastSeen+" Max Health "+LastSeenHealthMax+ "\n" + LastSeen+ " Current Health "+LastSeenHealth);    
+                Console.WriteLine("\nLast Enemy encountered: " + LastSeen + " | " +LastSeen+" Max Health "+LastSeenHealthMax+ " | " + LastSeen+ " Current Health "+LastSeenHealth);    
             }
         }
         public void Legend()
@@ -104,20 +104,14 @@ namespace TextBasedRPG_OOP_WillB
                 Console.WriteLine(objective);
             }
         }
-        //public void WriteAchievment(string name, string Description)
-        //{
-        //    Console.WriteLine("Achievments");
-
-        //    playerAchievements.Add(name);
-        //    playerAchievements.Add(Description);
-        //    foreach (string achievement in playerAchievements)
-        //    {
-        //        Console.WriteLine(achievement);
-        //        if(playerAchievements.Count > 2)
-        //        {
-        //            playerAchievements.Clear();
-        //        }
-        //    }
-        //}
+        public void WriteAchievment(string name, string Description)
+        {
+            Console.SetCursorPosition(map.MapChar.GetLength(0) + 50, 10);
+            Console.Write("Achievments " + name);
+            foreach(string achievement in playerAchievements)
+            {
+                Console.WriteLine(achievement);
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace TextBasedRPG_OOP_WillB
     internal class MusicManager
     {
         public string musicPath;
+        public string soundPath;
         public SoundPlayer soundplayer;
         public MusicManager()
         {
@@ -60,5 +61,28 @@ namespace TextBasedRPG_OOP_WillB
 
             }
         }
+    public void PlaySound(string sound)
+    {
+        switch(sound)
+        {
+            case "Enemy Hit":
+                {
+                    soundPath = AppDomain.CurrentDomain.BaseDirectory + "DeathSound3.wav";
+                    if (File.Exists(soundPath))
+                    {
+                        soundplayer.SoundLocation = soundPath;
+                        soundplayer.Load();
+                        soundplayer.Play();
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine(soundPath + "not found");
+                    }
+                    break;
+                }
+        }
+        
+    }
     }
 }

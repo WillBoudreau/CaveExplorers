@@ -24,6 +24,10 @@ namespace TextBasedRPG_OOP_WillB
         List<char> Damage;
         Settings settings = new Settings();
         Map map = new Map();
+        public ItemManager()
+        {
+
+        }
         public ItemManager(char itemAvatar, int x, int y, Map map)
         {
             ItemAvatar = itemAvatar;

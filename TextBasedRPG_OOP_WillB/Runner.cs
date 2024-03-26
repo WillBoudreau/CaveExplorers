@@ -15,6 +15,7 @@ namespace TextBasedRPG_OOP_WillB
             enemType = EnemType.Runner;
             damage = settings.RunnerAttack;
             hp = settings.RunnerMaxhp;
+            name = "Runner";
             enemyAvatar = 'R';
             Move(player, enemies, items);
         }
@@ -56,7 +57,6 @@ namespace TextBasedRPG_OOP_WillB
             }
             else
             {
-                player.killCount++;
                 this.x = 0;
                 this.y = 0;
             }
