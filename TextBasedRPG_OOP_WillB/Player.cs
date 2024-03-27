@@ -13,7 +13,8 @@ namespace TextBasedRPG_OOP_WillB
         Chaser Chaser;
         Runner Runner;
         Grunt Grunt;
-        List<EnemyManager> enemies = new List<EnemyManager>();
+        Generation generation;
+        public List<EnemyManager> enemies = new List<EnemyManager>();
         List<ItemManager> items;
         NPCManager npc;
         public Stopwatch stopwatch = new Stopwatch();
@@ -147,13 +148,14 @@ namespace TextBasedRPG_OOP_WillB
         { 
             this.x += x;
             this.y += y;
+
             foreach (EnemyManager enemy in enemies)
             {
                 Console.Clear();
                 Console.WriteLine(enemy.x + " " + enemy.y);
                 Console.ReadKey();
                 if (this.x == enemy.x && this.y == enemy.y)
-                {
+                { 
                     this.x -= x;
                     this.y -= y;
                     enemy.IsAttacked = true;
@@ -269,18 +271,41 @@ namespace TextBasedRPG_OOP_WillB
                     break;
                 case '@':
                     Console.Clear();
-                    map.LoadNextLevel();
+                    //map.LoadNextLevel();
                     break;
                 case '!':
                     Win();
                     break;
-                case 'V':
-                    npc.Talk("Villager");
+                case 'G':
+                    hud.AddEvent("Player moved into a Grunt");
+                    healthSys.TakeDamage(1);
                     this.x -= x;
                     this.y -= y;
                     break;
                 case 'H':
-                    this.x -=x ; 
+                    hud.AddEvent("Player moved into a Health Pickup");
+                    healthSys.Heal(1);
+                    map.UpdateMapTile(this.x, this.y, '.');
+                    this.x -= x;
+                    this.y -= y;
+                    break;
+                case '*':
+                    hud.AddEvent("Player moved into a Coin");
+                    score += 10;
+                    map.UpdateMapTile(this.x, this.y, '.');
+                    this.x -= x;
+                    this.y -= y;
+                    break;
+                case 'S':
+                    hud.AddEvent("Player moved into a Shield Pickup");
+                    healthSys.ShieldUp(1);
+                    map.UpdateMapTile(this.x, this.y, '.');
+                    this.x -= x;
+                    this.y -= y;
+                    break;
+                case 'V':
+                    npc.Talk("Villager");
+                    this.x -= x;
                     this.y -= y;
                     break;
             }

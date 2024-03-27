@@ -178,7 +178,7 @@ namespace TextBasedRPG_OOP_WillB
                     }
                 }
             }
-            if (enemies == null)
+            for (int i = 0; i < numBoss; i++)
             {
                 Console.Clear();
                 Console.WriteLine("No Enemiessssss");

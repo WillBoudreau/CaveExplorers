@@ -18,11 +18,11 @@ namespace TextBasedRPG_OOP_WillB
         public ItemType itemType { get; set; }
         public int x { get; set; }
         public int y { get; set; }
+        Settings settings = new Settings();
         List<char> Coins;
         List<char> Health;
         List<char> Shield;
         List<char> Damage;
-        Settings settings = new Settings();
         Map map = new Map();
         public ItemManager()
         {
@@ -41,9 +41,11 @@ namespace TextBasedRPG_OOP_WillB
         public virtual void Update(Map map)
         {
             DisplayItems(map);
+            
         }
         public static List<ItemManager> GenerateItems(int numCoins, int numHealth, int numShield, int numDamage, Map map)
         {
+
             List<ItemManager> Damage = new List<ItemManager>();
             List<ItemManager> Shield = new List<ItemManager>();
             List<ItemManager> Health = new List<ItemManager>();
