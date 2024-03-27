@@ -24,20 +24,16 @@ namespace TextBasedRPG_OOP_WillB
         EnemyVals enemyVals = new EnemyVals();
         public EnemType enemType;
         //Class calls
-        public static HUD hud;
-        public Grunt grunt;
-        public Chaser Chaser;
-        public Runner runner;
         public Settings settings = new Settings();
-        public string name;
         public List<EnemyManager> enemies= new List<EnemyManager>();
-        public bool BossDead = false;
-        public bool IsAttacked;
         public Player player;
         private ItemManager itemManager;
-        public List<EnemyManager> enemManagers;
         private List<ItemManager> items;
         private Map map = new Map();
+        //Variables
+        public bool BossDead = false;
+        public bool IsAttacked;
+        public string name;
         public EnemyManager(Settings settings, Player player, List<ItemManager> items, Map map,List<EnemyManager>enemies)
         {
             map = new Map();
