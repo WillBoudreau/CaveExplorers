@@ -207,8 +207,8 @@ namespace TextBasedRPG_OOP_WillB
         public void POS(int x, int y, Player player, List<EnemyManager> enemies, List<ItemManager> items)
         {
 
-            //enemies = new List<EnemyManager>();
-            //items = new List<ItemManager>();
+            enemies = new List<EnemyManager>();
+            items = new List<ItemManager>();
             this.x += x;
             this.y += y;
             if (player == null)

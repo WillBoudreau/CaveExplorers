@@ -151,6 +151,7 @@ namespace TextBasedRPG_OOP_WillB
             this.y += y;
             foreach (EnemyManager enemy in enemies)
             {
+                Console.WriteLine("Hello world!");
                 if (this.x == enemy.x && this.y == enemy.y)
                 {
                     this.x -= x;

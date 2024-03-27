@@ -28,9 +28,7 @@ namespace TextBasedRPG_OOP_WillB
         public void Init()
         {
             Enemies.AddRange(EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, Items, settings));
-            Items.AddRange(ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map));
-            Enemies.AddRange(Enemies);
-            Items.AddRange(Items);
+            //Items.AddRange(ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map));
         }
         public void Update()
         {
@@ -38,9 +36,12 @@ namespace TextBasedRPG_OOP_WillB
             {
                 enemy.Update(player,Enemies,Items);
             }
-            foreach (var item in Items)
+        }
+        public void Draw()
+        {
+            foreach (var enemy in Enemies)
             {
-                item.Update(map);
+                enemy.Draw(player,Enemies,Items);
             }
         }
     }
