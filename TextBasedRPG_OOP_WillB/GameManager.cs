@@ -57,7 +57,7 @@ namespace TextBasedRPG_OOP_WillB
             }
             void Update()
             {
-                generation.Update();
+                //generation.Update();
                 player.Update(enemies,items,chaser,runner,grunt);
                 hud.Update(enemies);
                 enemyMan.Update(player, enemies, items);
