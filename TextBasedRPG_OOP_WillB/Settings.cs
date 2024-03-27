@@ -41,6 +41,12 @@ namespace TextBasedRPG_OOP_WillB
         public int BossMinShield = 0;
         public int BossAttack = 3;
         public int numBoss = 1;
+        //Item Variables
+        public int numCoins = 25;
+        public int numHealth = 10;
+        public int numShield = 10;
+        public int numDamage = 10;
+
         public Settings() 
         {
 

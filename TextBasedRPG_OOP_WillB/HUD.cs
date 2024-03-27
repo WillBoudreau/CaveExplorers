@@ -104,20 +104,20 @@ namespace TextBasedRPG_OOP_WillB
                 Console.WriteLine(objective);
             }
         }
-        //public void WriteAchievment(string name, string Description)
-        //{
-        //    Console.WriteLine("Achievments");
+        public void WriteAchievment(string name, string Description)
+        {
+            Console.WriteLine("Achievments");
 
-        //    playerAchievements.Add(name);
-        //    playerAchievements.Add(Description);
-        //    foreach (string achievement in playerAchievements)
-        //    {
-        //        Console.WriteLine(achievement);
-        //        if(playerAchievements.Count > 2)
-        //        {
-        //            playerAchievements.Clear();
-        //        }
-        //    }
-        //}
+            playerAchievements.Add(name);
+            playerAchievements.Add(Description);
+            foreach (string achievement in playerAchievements)
+            {
+                Console.WriteLine(achievement);
+                if (playerAchievements.Count > 2)
+                {
+                    playerAchievements.Clear();
+                }
+            }
+        }
     }
 }

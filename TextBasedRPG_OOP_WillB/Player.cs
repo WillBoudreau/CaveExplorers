@@ -267,7 +267,7 @@ namespace TextBasedRPG_OOP_WillB
                     break;
                 case '@':
                     Console.Clear();
-                    map.LoadNextLevel();
+                    //map.LoadNextLevel();
                     break;
                 case '!':
                     Win();

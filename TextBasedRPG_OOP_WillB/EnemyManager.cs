@@ -36,8 +36,10 @@ namespace TextBasedRPG_OOP_WillB
         private ItemManager itemManager;
         public List<EnemyManager> enemManagers;
         private List<ItemManager> items;
+        private Map map = new Map();
         public EnemyManager(Settings settings, Player player, List<ItemManager> items, Map map)
         {
+            map = new Map();
             this.player = player;
             this.items = items;
             this.map = map;
@@ -89,14 +91,8 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void Update(Player player, List<EnemyManager> enemies, List<ItemManager> items)
         {
-            //foreach (EnemyManager enemy in enemies)
-            //{
-            //    enemy.Move(player, enemies, items);
-            //    enemy.Attack(player, enemies);
-            //}
             Move(player, enemies, items);
             Attack(player, enemies);
-
         }
         public void Draw(Player player,List<EnemyManager>enemies, List<ItemManager>items)
         {

@@ -21,62 +21,46 @@ namespace TextBasedRPG_OOP_WillB
         Grunt grunt;
         Runner runner;
         Settings settings;
-        MusicManager music;
         EnemyManager enemyMan;
         List<EnemyManager> enemies;
         List<ItemManager> items;
         HUD hud;
+        Generation generation;
         List<ItemManager> itemManager;
-        LevelGeneration levelGeneration;
         //Achievements achievements;
         public GameManager()
         {
-            levelGeneration = new LevelGeneration();
-            music = new MusicManager();
             map = new Map();
             enemies = new List<EnemyManager>();
             items = new List<ItemManager>();
             itemManager = new List<ItemManager>();
-            player = new Player(items);
+            player = new Player(items,map,enemies);
             hud = new HUD(player, enemies, map);
+            generation = new Generation();  
+            enemyMan = new EnemyManager(settings,player,items,map);
             Player.hud = hud;
             //achievements = new Achievements(player, enemies, itemManager);
         }
-        void GenerateLlevel(int level)
-        {
-            if (player == null)
-            {
-                Console.Clear();
-                Console.WriteLine("Player is null");
-                Console.ReadKey();
-            }
-            enemies = new List<EnemyManager>();
-            itemManager = new List<ItemManager>();
-            if (enemies != null)
-            {
-                enemies.Clear();
-            }
-            if (itemManager != null)
-            {
-                itemManager.Clear();
-            }
-            switch (level)
-            {
-                case 1:
-                    music.PlayMusicLevel(level);
-                    Console.CursorVisible = false;
-                    map.Update();
-                    enemies = EnemyManager.GenerateEnemies(25, 3, 5, 1, map, player, items, settings);
-                    itemManager = ItemManager.GenerateItems(25, 10, 5, 3, map);
-                    break;
-            }
-        }
+        
+        
             void GameInitialize()
             {
+                map.Init();
                 player.Init();
                 Intro();
-                //levelGeneration.GenerateLlevel(1);
-                GenerateLlevel(1);
+                generation.Init();
+                player.Draw();
+            }
+            void Update()
+            {
+                generation.Update();
+                player.Update(enemies,items,chaser,runner,grunt);
+                hud.Update(enemies);
+                enemyMan.Update(player, enemies, items);
+            }
+            void Draw()
+            {
+                generation.Draw();
                 player.Draw();
             }
             //Intro to game
@@ -100,20 +84,8 @@ namespace TextBasedRPG_OOP_WillB
                 GameInitialize();
                 while (player.healthSys.normalHealth > 0)
                 {
-                    foreach (ItemManager item in itemManager)
-                    {
-                        item.Update(map);
-                    }
-                    player.Update(enemies, itemManager, chaser, runner, grunt);
-                    player.Draw();
-                    foreach (EnemyManager enemy in enemies)
-                    {
-                        enemy.Update(player, enemies, items);
-                        enemy.Draw(player);
-                    }
-                    Console.ResetColor();
-                    Console.WriteLine("\n");
-                    hud.Update(enemies);
+                   Update();
+                   Draw();
                 }
                 if (player.healthSys.normalHealth <= 0)
                 {

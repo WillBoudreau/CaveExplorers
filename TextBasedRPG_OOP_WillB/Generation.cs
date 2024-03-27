@@ -50,9 +50,9 @@ namespace TextBasedRPG_OOP_WillB
             switch(level)
             {
                 case 0:
+                    Enemies.AddRange( EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, Items, settings));
                     break;
                 case 1:
-                    Enemies.AddRange( EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, Items, settings));
                     break;
             }
         }
