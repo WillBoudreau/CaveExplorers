@@ -23,7 +23,7 @@ namespace TextBasedRPG_OOP_WillB
             Enemies = new List<EnemyManager>();
             NPCs = new List<NPCManager>();
             settings = new Settings();
-            player = new Player(Items,map,Enemies);
+            player = new Player(Items,map);
         }
         public void Init()
         {

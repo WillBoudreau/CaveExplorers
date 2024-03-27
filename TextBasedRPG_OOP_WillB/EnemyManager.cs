@@ -30,6 +30,7 @@ namespace TextBasedRPG_OOP_WillB
         public Runner runner;
         public Settings settings = new Settings();
         public string name;
+        public List<EnemyManager> enemies= new List<EnemyManager>();
         public bool BossDead = false;
         public bool IsAttacked;
         public Player player;
@@ -37,13 +38,14 @@ namespace TextBasedRPG_OOP_WillB
         public List<EnemyManager> enemManagers;
         private List<ItemManager> items;
         private Map map = new Map();
-        public EnemyManager(Settings settings, Player player, List<ItemManager> items, Map map)
+        public EnemyManager(Settings settings, Player player, List<ItemManager> items, Map map,List<EnemyManager>enemies)
         {
             map = new Map();
             this.player = player;
             this.items = items;
             this.map = map;
             this.map = map;
+            this.enemies = enemies;
             enemyVals.EnemyActive = true;
             switch (enemType)
             {
@@ -119,7 +121,6 @@ namespace TextBasedRPG_OOP_WillB
                     if (map.IsTileValid(x, y) == '.')
                     {
                         enemies.Add(new Grunt(x, y, EnemType.Grunt, 1, 1, 3, player, items));
-                        map.UpdateMapTile(x, y, 'G');
                         ValidSpawn = true;
                     }
                 }
@@ -168,7 +169,6 @@ namespace TextBasedRPG_OOP_WillB
                     if (map.IsTileValid(x, y) == '.')
                     {
                         enemies.Add(new Boss(x, y, EnemType.Boss, 1, 1, 3, player, items));
-                        map.UpdateMapTile(x, y, 'B');
                         ValidSpawn = true;
                     }
                 }
@@ -197,7 +197,7 @@ namespace TextBasedRPG_OOP_WillB
         //Position of enemy
         public void POS(int x, int y, Player player, List<EnemyManager> enemies, List<ItemManager> items)
         {
-            enemies = new List<EnemyManager>();
+            //enemies = new List<EnemyManager>();
             //items = new List<ItemManager>();
             this.x += x;
             this.y += y;
@@ -250,10 +250,10 @@ namespace TextBasedRPG_OOP_WillB
                     break;
             }
             //Enemy List Check
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                Console.WriteLine(enemies[i]);
-            }
+            //for (int i = 0; i < enemies.Count; i++)
+            //{
+            //    Console.WriteLine(enemies[i]);
+            //}
             //Checks if the enemy is on the same tile as player
             //foreach (EnemyManager enemy in enemies)
             //{
@@ -298,7 +298,6 @@ namespace TextBasedRPG_OOP_WillB
             }
             else
             {
-                sound.PlaySound("EnemyDeath");
                 this.x = 0;
                 this.y = 0;
             }

@@ -33,6 +33,7 @@ namespace TextBasedRPG_OOP_WillB
             DisplayHUD(enemies,map); 
             LastSeenEnemy();
             Legend();
+            DisplayEventLog();
             //WriteAchievment("First Blood","Kill your first enemy");
         }
         public void DisplayHUD(List<EnemyManager> enemies,Map map)
@@ -85,6 +86,7 @@ namespace TextBasedRPG_OOP_WillB
             {
                 if(LogCount > DisplayEventLogLimit)
                 {
+                    ClearLog();
                     break;
                 }
                 Console.WriteLine(Log);

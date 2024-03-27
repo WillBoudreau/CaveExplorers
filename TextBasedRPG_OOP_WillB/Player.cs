@@ -14,7 +14,6 @@ namespace TextBasedRPG_OOP_WillB
         Runner Runner;
         Grunt Grunt;
         Generation generation;
-        public List<EnemyManager> enemies = new List<EnemyManager>();
         List<ItemManager> items;
         NPCManager npc;
         public Stopwatch stopwatch = new Stopwatch();
@@ -22,11 +21,10 @@ namespace TextBasedRPG_OOP_WillB
         Settings settings;
         public int PlayerDamage;
         public int killCount;
-        public Player(List<ItemManager> items, Map map, List<EnemyManager> enemies)
+        public Player(List<ItemManager> items, Map map)
         {
             this.items = items;
             this.map = map;
-            this.enemies = enemies;
             settings = new Settings();
             npc = new NPCManager(settings, this, map);
             ExpirenceMan.level = 0;
@@ -46,9 +44,9 @@ namespace TextBasedRPG_OOP_WillB
             StartTimer();
         }
 
-        public void Update(List<EnemyManager> enemies, List<ItemManager> items, Chaser chaser, Runner runner, Grunt grunt)
+        public void Update(List<EnemyManager>enemies, List<ItemManager> items, Chaser chaser, Runner runner, Grunt grunt)
         {
-            PlayerPOSMove(this.enemies, items, chaser, runner, grunt);
+            PlayerPOSMove(enemies, items, chaser, runner, grunt);
         }
 
         public void Draw()
@@ -150,43 +148,21 @@ namespace TextBasedRPG_OOP_WillB
         { 
             this.x += x;
             this.y += y;
-
-            foreach (EnemyManager enemy in enemies)
+            checkforEnems(enemies);
+            for (int i = 0; i < enemies.Count; i++)
             {
-                Console.Clear();
-                Console.WriteLine(enemy.x + " " + enemy.y);
-                Console.ReadKey();
-                if (this.x == enemy.x && this.y == enemy.y)
-                { 
+                if(this.x == enemies[i].x && this.y == enemies[i].y)
+                {
                     this.x -= x;
-                    this.y -= y;
-                    enemy.IsAttacked = true;
-                    enemy.healthSys.TakeDamage(PlayerDamage);
-                    hud.lastenemy(enemy);
-                    if (enemy.healthSys.IsAlive == false)
-                    {
-                        enemies.Remove(enemy);
-                        score += 10 * ExpirenceMan.level;
-                        killCount++;
-                        if (enemy.healthSys.IsAlive == false && enemy.enemType == EnemType.Boss)
-                        {
-                            Win();
-                        }
-                    }
-                    break;
+                    this.y -=y;
                 }
+
             }
             if (this.x == npc.x && this.y == npc.y)
             {
                 this.x -= x;
                 this.y -= y;
                 npc.Talk("Villager");
-            }
-            if(items == null)
-            {
-                Console.Clear();
-                Console.WriteLine("No Items");
-                Console.ReadKey();
             }
             foreach (ItemManager item in items)
             {
@@ -270,7 +246,7 @@ namespace TextBasedRPG_OOP_WillB
                     break;
                 case '@':
                     Console.Clear();
-                    //map.LoadNextLevel();
+                    map.LoadNextLevel();
                     break;
                 case '!':
                     Win();
@@ -315,6 +291,31 @@ namespace TextBasedRPG_OOP_WillB
             else
             {
                 map.UpdateMapTile(this.x, this.y, '.');
+            }
+        }
+        void checkforEnems(List<EnemyManager>enemies)
+        {
+            foreach (EnemyManager enemy in enemies)
+            {
+                if(this.x == enemy.x  && this.y == enemy.y)
+                {
+                    this.x -= x;
+                    this.y -= y;
+                    enemy.IsAttacked = true;
+                    enemy.healthSys.TakeDamage(PlayerDamage);
+                    hud.lastenemy(enemy);
+                    if (enemy.healthSys.IsAlive == false)
+                    {
+                        enemies.Remove(enemy);
+                        score += 10 * ExpirenceMan.level;
+                        killCount++;
+                        if (enemy.healthSys.IsAlive == false && enemy.enemType == EnemType.Boss)
+                        {
+                            Win();
+                        }
+                    }
+                    break;
+                }
             }
         }
         //Player win condition

@@ -23,6 +23,7 @@ namespace TextBasedRPG_OOP_WillB
         Settings settings;
         EnemyManager enemyMan;
         List<EnemyManager> enemies;
+        EnemyManager enemyManager;
         List<ItemManager> items;
         HUD hud;
         Generation generation;
@@ -34,15 +35,12 @@ namespace TextBasedRPG_OOP_WillB
             enemies = new List<EnemyManager>();
             items = new List<ItemManager>();
             itemManager = new List<ItemManager>();
-            player = new Player(items,map,enemies);
+            player = new Player(items,map);
             hud = new HUD(player, enemies, map);
             generation = new Generation();  
-            enemyMan = new EnemyManager(settings,player,items,map);
+            enemyMan = new EnemyManager(settings,player,items,map,enemies);
             Player.hud = hud;
-            enemy = new EnemyManager(settings,player,items,map);
             settings = new Settings();
-            npc = new NPCManager(settings, player, map);
-            npcs = new List<NPCManager>();
             //achievements = new Achievements(player, enemies, itemManager);
         }
         
@@ -51,8 +49,9 @@ namespace TextBasedRPG_OOP_WillB
             {
                 map.Init();
                 player.Init();
-                Intro();
                 generation.Init();
+                Intro();
+                //enemyMan.Init();
                 player.Draw();
             }
             void Update()

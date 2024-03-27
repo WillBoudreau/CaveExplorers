@@ -11,10 +11,12 @@ namespace TextBasedRPG_OOP_WillB
         string[] Mapstr;
         public char[][] MapChar;
         public List<ItemManager> itemManager;
+        public List<EnemyManager> enemies;
         public Settings settings = new Settings();
         public Map()
         {
             itemManager = new List<ItemManager>();
+            enemies = new List<EnemyManager>();
             MapArray();
         }
         public void Init()
@@ -39,7 +41,7 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void MapArray()
         {
-            path = @"Tutorial.txt";
+            path = @"Map.txt";
             Mapstr = File.ReadAllLines(path);
             int Mapx = Mapstr.Length;
             int Mapy = Mapstr[0].Length;
@@ -156,21 +158,21 @@ namespace TextBasedRPG_OOP_WillB
             }
             Console.ResetColor();
         }
-        //public void LoadNextLevel()
-        //{
-        //    //path = @"Map.txt";
-        //    //Mapstr = File.ReadAllLines(path);
-        //    //int MapX = Mapstr.Length;
-        //    //int MapY = Mapstr[0].Length;
-        //    //MapChar = new char[MapX][];
-        //    //for (int i = 0; i < MapX; i++)
-        //    //{
-        //    //    MapChar[i] = Mapstr[i].ToCharArray();
-        //    //}
-        //    //Draw();
-        //    //Console.Clear();
-        //    //GenerateLlevel(1);
-        //}
+        public void LoadNextLevel()
+        {
+            path = @"Level2.txt";
+            Mapstr = File.ReadAllLines(path);
+            int MapX = Mapstr.Length;
+            int MapY = Mapstr[0].Length;
+            MapChar = new char[MapX][];
+            for (int i = 0; i < MapX; i++)
+            {
+                MapChar[i] = Mapstr[i].ToCharArray();
+            }
+            Draw();
+            Console.Clear();
+            GenerateLlevel(1);
+        }
         public char IsTileValid(int x, int y)
         {
             if (y >= 0 && y < MapChar.Length && x >= 0 && x < MapChar[y].Length)
@@ -190,6 +192,7 @@ namespace TextBasedRPG_OOP_WillB
                 case 0:
                     Console.Clear();
                     itemManager = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, this);
+
                     Console.CursorVisible = false;
                     //Update();
                     break;

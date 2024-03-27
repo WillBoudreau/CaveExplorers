@@ -34,6 +34,12 @@ namespace TextBasedRPG_OOP_WillB
                 dx = 0;
                 dy = Math.Sign(dy);
             }
+            if(map.IsTileValid(dx, dy) == '.')
+            {
+                x += dx;
+                y += dy;
+
+            }
             base.POS(dx, dy, player, enemies, items);
         }
         public override void Attack(Player player, List<EnemyManager> enemies)

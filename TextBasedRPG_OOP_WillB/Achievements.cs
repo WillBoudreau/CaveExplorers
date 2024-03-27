@@ -13,7 +13,7 @@ namespace TextBasedRPG_OOP_WillB
         public Achievements(Player player, List<EnemyManager> enemyManager, List<ItemManager> itemManager, Map map)
         {
             this.hud = new HUD(player, enemyManager, map);
-            player = new Player(itemManager, map,enemyManager);
+            player = new Player(itemManager, map);
             this.player = player;
             this.enemyManager = enemyManager;
             this.itemManager = itemManager;

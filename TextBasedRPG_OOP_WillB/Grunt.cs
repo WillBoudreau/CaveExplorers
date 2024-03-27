@@ -11,7 +11,6 @@ namespace TextBasedRPG_OOP_WillB
         public Grunt(int x, int y, EnemType enemType, int damage, int shield, int hp, Player player, List<ItemManager> items) : base(x, y, enemType, damage, shield, hp, player, items)
         {
             rnd = new Random();
-            sound = new MusicManager();
             enemType = EnemType.Grunt;
             damage = settings.GruntAttack;
             hp = settings.GruntMaxhp;
