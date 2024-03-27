@@ -28,9 +28,11 @@ namespace TextBasedRPG_OOP_WillB
         HUD hud;
         Generation generation;
         List<ItemManager> itemManager;
+        MusicManager soundManager;
         //Achievements achievements;
         public GameManager()
         {
+            soundManager = new MusicManager();
             map = new Map();
             enemies = new List<EnemyManager>();
             items = new List<ItemManager>();
@@ -47,6 +49,7 @@ namespace TextBasedRPG_OOP_WillB
         
             void GameInitialize()
             {
+                soundManager.Init();
                 map.Init();
                 player.Init();
                 generation.Init();
