@@ -43,21 +43,6 @@ namespace TextBasedRPG_OOP_WillB
             this.map = map;
             this.enemies = enemies;
             enemyVals.EnemyActive = true;
-            switch (enemType)
-            {
-                case EnemType.Grunt:
-                    enemyAvatar = 'G';
-                    break;
-                case EnemType.Chaser:
-                    enemyAvatar = 'C';
-                    break;
-                case EnemType.Runner:
-                    enemyAvatar = 'R';
-                    break;
-                case EnemType.Boss:
-                    enemyAvatar = 'B';
-                    break;
-            }
         }
         public EnemyManager(int StartX, int StartY, EnemType enemType, int damage, int shield, int health, Player player, List<ItemManager> item)
         {
@@ -67,21 +52,6 @@ namespace TextBasedRPG_OOP_WillB
             y = StartY;
             enemyVals.EnemyActive = true;
             this.enemType = enemType;
-            switch (enemType)
-            {
-                case EnemType.Grunt:
-                    enemyAvatar = 'G';
-                    break;
-                case EnemType.Chaser:
-                    enemyAvatar = 'C';
-                    break;
-                case EnemType.Runner:
-                    enemyAvatar = 'R';
-                    break;
-                case EnemType.Boss:
-                    enemyAvatar = 'B';
-                    break;
-            }
         }
         public void Init()
         {

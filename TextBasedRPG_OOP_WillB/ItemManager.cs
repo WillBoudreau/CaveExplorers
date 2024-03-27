@@ -19,10 +19,6 @@ namespace TextBasedRPG_OOP_WillB
         public int x { get; set; }
         public int y { get; set; }
         Settings settings = new Settings();
-        List<char> Coins;
-        List<char> Health;
-        List<char> Shield;
-        List<char> Damage;
         //Settings settings
         Map map = new Map();
         public ItemManager()
