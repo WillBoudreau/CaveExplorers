@@ -23,14 +23,13 @@ namespace TextBasedRPG_OOP_WillB
             Enemies = new List<EnemyManager>();
             NPCs = new List<NPCManager>();
             settings = new Settings();
-            player = new Player(Items,map);
+            player = new Player(Items,map,Enemies);
         }
         public void Init()
         {
-            Enemies.AddRange(EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, Items, settings));
-            Items = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map);
-            Enemies.AddRange(Enemies);
-            Items.AddRange(Items);
+            generateLevel(0);
+            //Enemies.AddRange(EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, Items, settings));
+            //Items.AddRange(ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map));
         }
         public void Update()
         {
@@ -38,10 +37,30 @@ namespace TextBasedRPG_OOP_WillB
             {
                 enemy.Update(player,Enemies,Items);
             }
-            foreach (var item in Items)
+        }
+        public void Draw()
+        {
+            foreach (var enemy in Enemies)
             {
-                item.Update(map);
+                enemy.Draw(player,Enemies,Items);
             }
+        }
+        public void generateLevel(int level)
+        {
+            switch(level)
+            {
+                case 0:
+                    Enemies.AddRange( EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, Items, settings));
+                    break;
+                case 1:
+                    break;
+            }
+        }
+        void ClearLists()
+        {
+            Enemies.Clear();
+            Items.Clear();
+            NPCs.Clear();
         }
     }
 }

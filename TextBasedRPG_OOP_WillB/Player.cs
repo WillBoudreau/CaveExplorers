@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -22,9 +22,11 @@ namespace TextBasedRPG_OOP_WillB
         Settings settings;
         public int PlayerDamage;
         public int killCount;
-        public Player(List<ItemManager> items, Map map)
+        public Player(List<ItemManager> items, Map map, List<EnemyManager> enemies)
         {
+            this.items = items;
             this.map = map;
+            this.enemies = enemies;
             settings = new Settings();
             npc = new NPCManager(settings, this, map);
             ExpirenceMan.level = 0;
@@ -46,7 +48,7 @@ namespace TextBasedRPG_OOP_WillB
 
         public void Update(List<EnemyManager> enemies, List<ItemManager> items, Chaser chaser, Runner runner, Grunt grunt)
         {
-            PlayerPOSMove(enemies, items, chaser, runner, grunt);
+            PlayerPOSMove(this.enemies, items, chaser, runner, grunt);
         }
 
         public void Draw()
@@ -194,9 +196,6 @@ namespace TextBasedRPG_OOP_WillB
                     Console.WriteLine("No Items");
                     Console.ReadKey();
                 }
-                Console.Clear();
-                Console.WriteLine(item.x + " " + item.y);
-                Console.ReadKey();
                 if (this.x == item.x && this.y == item.y)
                 {
                     this.y -= y;

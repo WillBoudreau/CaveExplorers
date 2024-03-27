@@ -33,7 +33,7 @@ namespace TextBasedRPG_OOP_WillB
             DisplayHUD(enemies,map); 
             LastSeenEnemy();
             Legend();
-            WriteAchievment("First Blood", "Kill your first enemy");
+            //WriteAchievment("First Blood","Kill your first enemy");
         }
         public void DisplayHUD(List<EnemyManager> enemies,Map map)
         {
@@ -106,11 +106,17 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void WriteAchievment(string name, string Description)
         {
-            Console.SetCursorPosition(map.MapChar.GetLength(0) + 50, 10);
-            Console.Write("Achievments " + name);
-            foreach(string achievement in playerAchievements)
+            Console.WriteLine("Achievments");
+
+            playerAchievements.Add(name);
+            playerAchievements.Add(Description);
+            foreach (string achievement in playerAchievements)
             {
                 Console.WriteLine(achievement);
+                if (playerAchievements.Count > 2)
+                {
+                    playerAchievements.Clear();
+                }
             }
         }
     }

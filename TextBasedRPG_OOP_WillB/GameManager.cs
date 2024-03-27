@@ -21,28 +21,23 @@ namespace TextBasedRPG_OOP_WillB
         Grunt grunt;
         Runner runner;
         Settings settings;
-        MusicManager music;
+        EnemyManager enemyMan;
         List<EnemyManager> enemies;
         List<ItemManager> items;
         HUD hud;
-        EnemyManager enemy;
-        List<ItemManager> itemManager;
-        ItemManager item;
-        NPCManager npc;
-        List<NPCManager> npcs;
         Generation generation;
+        List<ItemManager> itemManager;
         //Achievements achievements;
         public GameManager()
         {
-            generation = new Generation();
-            item = new ItemManager();
-            music = new MusicManager();
             map = new Map();
             enemies = new List<EnemyManager>();
             items = new List<ItemManager>();
             itemManager = new List<ItemManager>();
-            player = new Player(items, map);
+            player = new Player(items,map,enemies);
             hud = new HUD(player, enemies, map);
+            generation = new Generation();  
+            enemyMan = new EnemyManager(settings,player,items,map);
             Player.hud = hud;
             enemy = new EnemyManager(settings,player,items,map);
             settings = new Settings();
@@ -50,21 +45,27 @@ namespace TextBasedRPG_OOP_WillB
             npcs = new List<NPCManager>();
             //achievements = new Achievements(player, enemies, itemManager);
         }
-
-             void GameInitialize()
-            { 
-                
-                //generation.Init();
-                generation.Init();
-                player.Init();
-                //map.Init();
-                Intro();
-            }
-            void GameInitializeLVL2() 
+        
+        
+            void GameInitialize()
             {
-                //enemies = EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, items, settings);
-                //items = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map);
-                //player.Init();
+                map.Init();
+                player.Init();
+                Intro();
+                generation.Init();
+                player.Draw();
+            }
+            void Update()
+            {
+                generation.Update();
+                player.Update(enemies,items,chaser,runner,grunt);
+                hud.Update(enemies);
+                enemyMan.Update(player, enemies, items);
+            }
+            void Draw()
+            {
+                generation.Draw();
+                player.Draw();
             }
             //Intro to game
             void Intro()
@@ -85,34 +86,16 @@ namespace TextBasedRPG_OOP_WillB
             public void GameLoop()
             {
                 GameInitialize();
-                while (player.healthSys.IsAlive)
+                while (player.healthSys.normalHealth > 0)
                 {
-                    UpdateGame();
-                    DrawGame();
+                   Update();
+                   Draw();
                 }
-                if (player.healthSys.IsAlive ==false)
+                if (player.healthSys.normalHealth <= 0)
                 {
                     GameOver();
                 }
             }
-        private void UpdateGame()
-        {
-            generation.Update();
-            player.Update(enemies, itemManager, chaser, runner, grunt);
-            enemy.Update(player, enemies, items);
-            //foreach (ItemManager item in items)
-            //{
-            //    item.Update(map);
-            //}
-            hud.Update(enemies);
-        }
-        private void DrawGame()
-        {
-            map.Draw();
-            player.Draw();
-            enemy.Draw(player,enemies,items);
-            
-        }
             //Game Over to game
             public void GameOver()
             {

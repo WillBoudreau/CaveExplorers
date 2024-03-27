@@ -47,8 +47,6 @@ namespace TextBasedRPG_OOP_WillB
         public int numShield = 10;
         public int numDamage = 10;
 
-        //NPC Variables
-        public int numVillager = 1;
         public Settings() 
         {
 
