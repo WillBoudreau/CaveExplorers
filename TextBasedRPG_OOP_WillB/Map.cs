@@ -10,12 +10,10 @@ namespace TextBasedRPG_OOP_WillB
         public string path;
         string[] Mapstr;
         public char[][] MapChar;
-        public List<EnemyManager> enemies;
         public List<ItemManager> itemManager;
         public Settings settings = new Settings();
         public Map()
         {
-            enemies = new List<EnemyManager>();
             itemManager = new List<ItemManager>();
             MapArray();
         }
@@ -209,10 +207,10 @@ namespace TextBasedRPG_OOP_WillB
         }
         void ClearLists()
         {
-            if (enemies != null)
-            {
-                enemies.Clear();
-            }
+            //if (enemies != null)
+            //{
+            //    enemies.Clear();
+            //}
             if (itemManager != null)
             {
                 itemManager.Clear();

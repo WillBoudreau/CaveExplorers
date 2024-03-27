@@ -27,7 +27,8 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void Init()
         {
-            Enemies.AddRange(EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, Items, settings));
+            generateLevel(0);
+            //Enemies.AddRange(EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, Items, settings));
             //Items.AddRange(ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map));
         }
         public void Update()
@@ -43,6 +44,23 @@ namespace TextBasedRPG_OOP_WillB
             {
                 enemy.Draw(player,Enemies,Items);
             }
+        }
+        public void generateLevel(int level)
+        {
+            switch(level)
+            {
+                case 0:
+                    break;
+                case 1:
+                    Enemies.AddRange( EnemyManager.GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, Items, settings));
+                    break;
+            }
+        }
+        void ClearLists()
+        {
+            Enemies.Clear();
+            Items.Clear();
+            NPCs.Clear();
         }
     }
 }

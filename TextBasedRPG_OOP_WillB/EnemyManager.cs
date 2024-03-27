@@ -34,6 +34,7 @@ namespace TextBasedRPG_OOP_WillB
         public bool IsAttacked;
         public Player player;
         private ItemManager itemManager;
+        public List<EnemyManager> enemManagers;
         private List<ItemManager> items;
         public EnemyManager(Settings settings, Player player, List<ItemManager> items, Map map)
         {
@@ -88,13 +89,13 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void Update(Player player, List<EnemyManager> enemies, List<ItemManager> items)
         {
-            foreach (EnemyManager enemy in enemies)
-            {
-                enemy.Move(player, enemies, items);
-                enemy.Attack(player, enemies);
-            }
-            //Move(player, enemies, items);
-            //Attack(player, enemies);
+            //foreach (EnemyManager enemy in enemies)
+            //{
+            //    enemy.Move(player, enemies, items);
+            //    enemy.Attack(player, enemies);
+            //}
+            Move(player, enemies, items);
+            Attack(player, enemies);
 
         }
         public void Draw(Player player,List<EnemyManager>enemies, List<ItemManager>items)
@@ -176,12 +177,6 @@ namespace TextBasedRPG_OOP_WillB
                     }
                 }
             }
-            if (enemies == null)
-            {
-                Console.Clear();
-                Console.WriteLine("No Enemiessssss");
-                Console.ReadKey();
-            }
             return enemies;
             
         }
@@ -206,17 +201,10 @@ namespace TextBasedRPG_OOP_WillB
         //Position of enemy
         public void POS(int x, int y, Player player, List<EnemyManager> enemies, List<ItemManager> items)
         {
-
             enemies = new List<EnemyManager>();
-            items = new List<ItemManager>();
+            //items = new List<ItemManager>();
             this.x += x;
             this.y += y;
-            if (player == null)
-            {
-                Console.Clear();
-                Console.WriteLine("Player is null");
-                Console.ReadKey();
-            }
             if (this.x == player.x && this.y == player.y)
             {
 
@@ -266,20 +254,20 @@ namespace TextBasedRPG_OOP_WillB
                     break;
             }
             //Enemy List Check
-            //for (int i = 0; i < enemies.Count; i++)
-            //{
-            //    Console.WriteLine(enemies[i].ToString());
-            //}
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                Console.WriteLine(enemies[i]);
+            }
             //Checks if the enemy is on the same tile as player
-            //foreach (EnemyManager enemy in enemies)
-            //{
-            //    if (enemy != this && enemy.x == this.x && enemy.y == this.y)
-            //    {
-            //        this.x -= x;
-            //        this.y -= y;
-            //        break;
-            //    }
-            //}
+            foreach (EnemyManager enemy in enemies)
+            {
+                if (enemy != this && enemy.x == this.x && enemy.y == this.y)
+                {
+                    this.x -= x;
+                    this.y -= y;
+                    break;
+                }
+            }
             foreach (ItemManager item in items)
             {
                 if (item.x == this.x && item.y == this.y)
