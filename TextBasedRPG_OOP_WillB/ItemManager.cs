@@ -31,10 +31,6 @@ namespace TextBasedRPG_OOP_WillB
             this.x = x;
             this.y = y;
         }
-        public void Init()
-        {
-            GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, map);
-        }
         public virtual void Update(Map map)
         {
             DisplayItems(map);

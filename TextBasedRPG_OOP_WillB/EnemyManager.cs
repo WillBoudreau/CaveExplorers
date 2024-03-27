@@ -53,15 +53,19 @@ namespace TextBasedRPG_OOP_WillB
             enemyVals.EnemyActive = true;
             this.enemType = enemType;
         }
+
+        //Init
         public void Init()
         {
             GenerateEnemies(settings.numGrunt, settings.numChaser, settings.numRunner, settings.numBoss, map, player, items, settings);
         }
+        //Update
         public void Update(Player player, List<EnemyManager> enemies, List<ItemManager> items)
         {
             Move(player, enemies, items);
             Attack(player, enemies);
         }
+        //Draw
         public void Draw(Player player,List<EnemyManager>enemies, List<ItemManager>items)
         {
             foreach (EnemyManager enemy in enemies)
