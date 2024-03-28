@@ -60,11 +60,8 @@
     <Compile Include="EnemyManager.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="HealthSystem.cs" />
-<<<<<<< HEAD
     <Compile Include="MusicGenereator.cs" />
     <Compile Include="NPCManager.cs" />
-=======
->>>>>>> parent of 655fd0b (Began work Polymorphing the enemies)
     <Compile Include="Player.cs" />
     <Compile Include="ExpirenceManager.cs" />
     <Compile Include="Program.cs" />
