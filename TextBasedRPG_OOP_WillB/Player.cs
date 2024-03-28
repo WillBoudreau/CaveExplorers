@@ -1,6 +1,17 @@
 using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
 using System.Diagnostics;
+=======
+using System.Linq;
+using System.Net.Mime;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Xml.Schema;
+>>>>>>> parent of 655fd0b (Began work Polymorphing the enemies)
 
 namespace TextBasedRPG_OOP_WillB
 {
@@ -10,6 +21,7 @@ namespace TextBasedRPG_OOP_WillB
         public bool Playerturn = true;
         public bool Attacked = false;
         public bool IsSlowed = false;
+<<<<<<< HEAD
         Chaser Chaser;
         Runner Runner;
         Grunt Grunt;
@@ -17,6 +29,8 @@ namespace TextBasedRPG_OOP_WillB
         List<ItemManager> items;
         NPCManager npc;
         public Stopwatch stopwatch = new Stopwatch();
+=======
+>>>>>>> parent of 655fd0b (Began work Polymorphing the enemies)
         public static HUD hud;
         Settings settings;
         public int PlayerDamage;
@@ -330,6 +344,7 @@ namespace TextBasedRPG_OOP_WillB
                 Console.ReadKey();
                 Environment.Exit(0);
         }
+<<<<<<< HEAD
         //Starts the timer for the player
         public void StartTimer()
         {
@@ -345,6 +360,9 @@ namespace TextBasedRPG_OOP_WillB
 
         //Displays the player
         public void DisplayPlayer()
+=======
+         public void DisplayPlayer()
+>>>>>>> parent of 655fd0b (Began work Polymorphing the enemies)
         {
             Console.SetCursorPosition(this.x, this.y);
             Console.ForegroundColor = ConsoleColor.Magenta;
