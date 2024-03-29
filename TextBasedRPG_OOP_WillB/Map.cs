@@ -11,11 +11,9 @@ namespace TextBasedRPG_OOP_WillB
         string[] Mapstr;
         public char[][] MapChar;
         public List<ItemManager> itemManager;
-        private List<Enemy> enemies;
         public Settings settings = new Settings();
         public Map()
         {
-            enemies = new List<Enemy>();
             itemManager = new List<ItemManager>();
             MapArray();
         }
@@ -41,8 +39,6 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void MapArray()
         {
-            Console.ReadKey();
-            Console.WriteLine(enemies.Count);
             path = @"Map.txt";
             Mapstr = File.ReadAllLines(path);
             int Mapx = Mapstr.Length;
@@ -54,6 +50,10 @@ namespace TextBasedRPG_OOP_WillB
             }
             Draw();
         }
+        //public void SetEnemies(List<Enemy> enemies)
+        //{
+        //    this.enemies = enemies;
+        //}
         public void ShowMap()
         {
             for (int i = 0; i < MapChar.Length; i++)
@@ -159,11 +159,6 @@ namespace TextBasedRPG_OOP_WillB
                 }
             }
             Console.ResetColor();
-            foreach (var enemy in enemies)
-            {
-                Console.WriteLine(enemy);
-                enemy.DisplayEnemy();
-            }
         }
         public void LoadNextLevel()
         {

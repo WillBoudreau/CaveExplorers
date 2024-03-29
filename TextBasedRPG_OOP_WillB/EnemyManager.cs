@@ -11,6 +11,7 @@ namespace TextBasedRPG_OOP_WillB
         public List<ItemManager> itemManager;
         public List<Enemy> enemies;
         public Map map;
+        public Enemy enemy;
         //Variables
         public bool BossDead = false;
         public bool IsAttacked;
@@ -26,19 +27,25 @@ namespace TextBasedRPG_OOP_WillB
         //Init
         public void Init()
         {
-            GenerateEnemies(settings.numGrunt);
+            GenerateEnemies(map,settings.numGrunt);
         }
         //Update
         public void Update(Player player, List<Enemy> enemies)
         {
-
+            foreach (var enemy in enemies)
+            {
+                enemy.Move(player);
+            }
         }
         //Draw
         public void Draw(Player player, List<Enemy> enemies)
         {
-
+            foreach (var enemy in enemies)
+            {
+                enemy.DisplayEnemy();
+            }
         }
-        public void GenerateEnemies(int numGrunts)
+        public void GenerateEnemies(Map map,int numGrunts)
         {
             //List<Enemy> enemies = new List<Enemy>();    
             int x;
@@ -53,6 +60,10 @@ namespace TextBasedRPG_OOP_WillB
                     if (map.IsTileValid(x,y)== '.')
                     {
                         enemies.Add(new Grunt(x, y, settings.GruntAttack, settings.GruntShield, settings.GruntMaxhp, player));
+                        foreach(var grunt in enemies)
+                        {
+                            grunt.DisplayEnemy();
+                        }
                         ValidLocation = true;
                     }
                 }
@@ -60,6 +71,7 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Enemies: " + enemies.Count);
             foreach (var enemy in enemies)
             {
+                enemy.DisplayEnemy();
                 Console.WriteLine(enemies.Count);
                 Console.WriteLine("Enemy " + enemy);
                 Console.WriteLine(enemy);

@@ -56,11 +56,11 @@ namespace TextBasedRPG_OOP_WillB
                 //generation.Update();
                 player.Update(enemies,items);
                 //hud.Update(enemies);
-                //enemyMan.Update(player, enemies, items);
+                enemyMan.Update(player, enemies);
             }
             void Draw()
             {
-                //enemyMan.Draw(player,enemies,items);
+                enemyMan.Draw(player,enemies);
                 //generation.Draw();
                 player.Draw();
             }

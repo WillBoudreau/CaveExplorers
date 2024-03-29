@@ -22,6 +22,7 @@ namespace TextBasedRPG_OOP_WillB
         public int GruntShield = 0;
         public  int GruntAttack = 1;
         public int numGrunt = 25;
+        public char GruntAvatar = 'G';
 
         //Runner Variables
         public int RunnerMaxhp = 3;

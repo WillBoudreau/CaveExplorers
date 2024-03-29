@@ -11,6 +11,8 @@ namespace TextBasedRPG_OOP_WillB
         {
             rnd = new Random();
             healthSys = new HealthSystem(hp, shield);
+            this.x = x;
+            this.y = y;
         }
         public override void Move(Player player)
         {
@@ -49,7 +51,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             if (healthSys.IsAlive)
             {
-                Console.SetCursorPosition(x, y);
+                Console.SetCursorPosition(this.x, this.y);
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write('G');
