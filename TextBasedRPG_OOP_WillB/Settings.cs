@@ -19,6 +19,7 @@ namespace TextBasedRPG_OOP_WillB
         //Grunt Variables
         public  int GruntMaxhp = 1;
         public  int GruntMinhp = 0;
+        public int GruntShield = 0;
         public  int GruntAttack = 1;
         public int numGrunt = 25;
 

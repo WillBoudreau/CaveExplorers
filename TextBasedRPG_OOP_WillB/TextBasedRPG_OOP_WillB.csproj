@@ -50,6 +50,7 @@
     <Compile Include="CollectorManager.cs" />
     <Compile Include="DamageItem.cs" />
     <Compile Include="Dialogue.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="Generation.cs" />
     <Compile Include="Grunt.cs" />

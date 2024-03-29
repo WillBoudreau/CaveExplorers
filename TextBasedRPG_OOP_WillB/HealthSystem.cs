@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    internal class HealthSys
+    internal class HealthSystem
     {
         public int normalHealth;
         public int maxHealth;
         public int normalShield;
         public int maxShield;
         public bool IsAlive = true;
-        public HealthSys( int maxHealth, int maxShield)
+        public HealthSystem( int maxHealth, int maxShield)
         {
             normalHealth = maxHealth;
             normalShield = maxShield;

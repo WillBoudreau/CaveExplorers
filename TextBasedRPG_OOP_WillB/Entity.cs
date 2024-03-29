@@ -10,9 +10,7 @@ namespace TextBasedRPG_OOP_WillB
 {
     internal class Entity
     {
-        public Map map;
-        public HealthSys healthSys;
-        public CollectorManager CollectorMan;
+        public HealthSystem healthSys;
         public ExpirenceManager ExpirenceMan;
         public int x;
         public int y;
@@ -23,8 +21,6 @@ namespace TextBasedRPG_OOP_WillB
         public Entity()
         {
             
-            this.CollectorMan = new CollectorManager();
-            this.map = new Map();
             this.ExpirenceMan = new ExpirenceManager();
         }
        

@@ -17,29 +17,25 @@ namespace TextBasedRPG_OOP_WillB
 
         Map map;
         Player player;
-        Chaser chaser;
-        Grunt grunt;
-        Runner runner;
         Settings settings;
         EnemyManager enemyMan;
-        List<EnemyManager> enemies;
+        List<Enemy> enemies;
         EnemyManager enemyManager;
         List<ItemManager> items;
         HUD hud;
-        Generation generation;
         List<ItemManager> itemManager;
         MusicManager soundManager;
         //Achievements achievements;
         public GameManager()
         {
+            enemyMan = new EnemyManager();
             soundManager = new MusicManager();
+            enemies = new List<Enemy>();
             map = new Map();
-            enemies = new List<EnemyManager>();
             items = new List<ItemManager>();
-            player = new Player(items,map);
-            hud = new HUD(player, enemies, map);
-            generation = new Generation();  
-            enemyMan = new EnemyManager(settings,player,items,map,enemies);
+            player = new Player(map);
+            //hud = new HUD(player, enemies, map);
+            //enemyMan = new EnemyManager(settings,player,items,map,enemies);
             Player.hud = hud;
             settings = new Settings();
             //achievements = new Achievements(player, enemies, itemManager);
@@ -48,23 +44,23 @@ namespace TextBasedRPG_OOP_WillB
         
             void GameInitialize()
             {
+                enemyMan.Init();
                 soundManager.Init();
-                map.Init();
                 player.Init();
+                map.Init();
                 //generation.Init();
                 Intro();
-                enemyMan.Init();
             }
             void Update()
             {
                 //generation.Update();
-                player.Update(enemies,items,chaser,runner,grunt);
-                hud.Update(enemies);
-                enemyMan.Update(player, enemies, items);
+                player.Update(enemies,items);
+                //hud.Update(enemies);
+                //enemyMan.Update(player, enemies, items);
             }
             void Draw()
             {
-                enemyMan.Draw(player,enemies,items);
+                //enemyMan.Draw(player,enemies,items);
                 //generation.Draw();
                 player.Draw();
             }

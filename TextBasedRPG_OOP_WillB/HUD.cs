@@ -63,12 +63,12 @@ namespace TextBasedRPG_OOP_WillB
         {
             Console.WriteLine("P = Player" + " "+ "G = Grunt" + " "+ "C = Chaser" +" "+ "R = Runner" + "  " + "B = Boss");
         }
-        public void lastenemy(EnemyManager enemy)
-        {
-            LastSeen = enemy.name;
-            LastSeenHealth = enemy.healthSys.normalHealth;
-            LastSeenHealthMax = enemy.healthSys.maxHealth;
-        }
+        //public void lastenemy(EnemyManager enemy)
+        //{
+        //    LastSeen = enemy.name;
+        //    LastSeenHealth = enemy.healthSys.normalHealth;
+        //    LastSeenHealthMax = enemy.healthSys.maxHealth;
+        //}
         public void AddEvent(string log)
         {
             EventLog.Add(log);

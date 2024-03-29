@@ -3,22 +3,16 @@ using System.Collections.Generic;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    internal class Grunt : EnemyManager
+    internal class Grunt : Enemy
     {
         Random rnd;
-        List<EnemyManager> enemy;
         Player player;
-        public Grunt(int x, int y, EnemType enemType, int damage, int shield, int hp, Player player, List<ItemManager> items) : base(x, y, enemType, damage, shield, hp, player, items)
+        public Grunt(int x, int y, int damage, int shield, int hp, Player player)
         {
             rnd = new Random();
-            enemType = EnemType.Grunt;
-            damage = settings.GruntAttack;
-            hp = settings.GruntMaxhp;
-            enemyAvatar = 'G';
-            name = "Grunt";
-            Move(player, enemy, items);
+            healthSys = new HealthSystem(hp, shield);
         }
-        public override void Move(Player player, List<EnemyManager> enemies, List<ItemManager> items)
+        public override void Move(Player player)
         {
             int Move = rnd.Next(1, 5);
             int dx = 0,
@@ -41,25 +35,24 @@ namespace TextBasedRPG_OOP_WillB
                     dx = 1;
                     break;
             }
-            base.POS(dx, dy, player, enemies, items);
         }
-        public override void Attack(Player player, List<EnemyManager> enemies)
+        public override void Attack(Player player)
         {
-            if (this.x == player.x && this.y == player.y)
+            if (x == player.x && y == player.y)
             {
                 player.healthSys.TakeDamage(settings.GruntAttack);
                 this.x -= x;
                 this.y -= y;
             }
         }
-        public override void DisplayEnemy(Player player)
+        public override void DisplayEnemy()
         {
             if (healthSys.IsAlive)
             {
-                Console.SetCursorPosition(this.x, this.y);
+                Console.SetCursorPosition(x, y);
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.Write(enemyAvatar);
+                Console.Write('G');
                 Console.ResetColor();
             }
             else
@@ -67,6 +60,7 @@ namespace TextBasedRPG_OOP_WillB
                 this.x = 0;
                 this.y = 0;
             }
+            return;
         }
 
     }

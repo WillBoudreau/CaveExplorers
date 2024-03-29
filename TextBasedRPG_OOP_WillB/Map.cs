@@ -11,17 +11,17 @@ namespace TextBasedRPG_OOP_WillB
         string[] Mapstr;
         public char[][] MapChar;
         public List<ItemManager> itemManager;
-        public List<EnemyManager> enemies;
+        private List<Enemy> enemies;
         public Settings settings = new Settings();
         public Map()
         {
+            enemies = new List<Enemy>();
             itemManager = new List<ItemManager>();
-            enemies = new List<EnemyManager>();
             MapArray();
         }
         public void Init()
         {
-            GenerateLlevel(0);
+            //GenerateLlevel(0);
         }
         public void Update()
         {
@@ -41,6 +41,8 @@ namespace TextBasedRPG_OOP_WillB
         }
         public void MapArray()
         {
+            Console.ReadKey();
+            Console.WriteLine(enemies.Count);
             path = @"Map.txt";
             Mapstr = File.ReadAllLines(path);
             int Mapx = Mapstr.Length;
@@ -157,6 +159,11 @@ namespace TextBasedRPG_OOP_WillB
                 }
             }
             Console.ResetColor();
+            foreach (var enemy in enemies)
+            {
+                Console.WriteLine(enemy);
+                enemy.DisplayEnemy();
+            }
         }
         public void LoadNextLevel()
         {
@@ -171,7 +178,7 @@ namespace TextBasedRPG_OOP_WillB
             }
             Draw();
             Console.Clear();
-            GenerateLlevel(1);
+            //GenerateLlevel(1);
         }
         public char IsTileValid(int x, int y)
         {
@@ -184,40 +191,40 @@ namespace TextBasedRPG_OOP_WillB
                 return ' ';
             }
         }
-        public void GenerateLlevel(int level)
-        {
-            ClearLists();
-            switch (level)
-            {
-                case 0:
-                    Console.Clear();
-                    itemManager = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, this);
+        //public void GenerateLlevel(int level)
+        //{
+        //    ClearLists();
+        //    switch (level)
+        //    {
+        //        case 0:
+        //            Console.Clear();
+        //            itemManager = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, this);
 
-                    Console.CursorVisible = false;
-                    //Update();
-                    break;
-                case 1:
-                    Console.Clear();
-                    itemManager = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, this);
-                    Console.CursorVisible = false;
-                    //Update();
-                    break;
-                case 2:
-                    Console.CursorVisible = false;
-                    //Update();
-                    break;
-            }
-        }
-        void ClearLists()
-        {
-            //if (enemies != null)
-            //{
-            //    enemies.Clear();
-            //}
-            if (itemManager != null)
-            {
-                itemManager.Clear();
-            }
-        }
+        //            Console.CursorVisible = false;
+        //            //Update();
+        //            break;
+        //        case 1:
+        //            Console.Clear();
+        //            itemManager = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, this);
+        //            Console.CursorVisible = false;
+        //            //Update();
+        //            break;
+        //        case 2:
+        //            Console.CursorVisible = false;
+        //            //Update();
+        //            break;
+        //    }
+        //}
+        //void ClearLists()
+        //{
+        //    //if (enemies != null)
+        //    //{
+        //    //    enemies.Clear();
+        //    //}
+        //    if (itemManager != null)
+        //    {
+        //        itemManager.Clear();
+        //    }
+        //}
     }
 }

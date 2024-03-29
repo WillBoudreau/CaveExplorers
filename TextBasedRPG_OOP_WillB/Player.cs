@@ -10,23 +10,15 @@ namespace TextBasedRPG_OOP_WillB
         public bool Playerturn = true;
         public bool Attacked = false;
         public bool IsSlowed = false;
-        Chaser Chaser;
-        Runner Runner;
-        Grunt Grunt;
-        Generation generation;
-        List<ItemManager> items;
-        NPCManager npc;
+        Map map = new Map();   
         public Stopwatch stopwatch = new Stopwatch();
         public static HUD hud;
         Settings settings;
         public int PlayerDamage;
         public int killCount;
-        public Player(List<ItemManager> items, Map map)
+        public Player(Map map)
         {
-            this.items = items;
-            this.map = map;
             settings = new Settings();
-            npc = new NPCManager(settings, this, map);
             ExpirenceMan.level = 0;
             ExpirenceMan.xp = 0;
             score = 0;
@@ -36,7 +28,7 @@ namespace TextBasedRPG_OOP_WillB
             settings.PlayerMaxhp = 3;
             settings.PlayerAttack = 3;
             settings.PlayerMaxShield = 3;
-            healthSys = new HealthSys(settings.PlayerMaxhp, settings.PlayerMaxShield);
+            healthSys = new HealthSystem(settings.PlayerMaxhp, settings.PlayerMaxShield);
         }
 
         public void Init()
@@ -44,9 +36,9 @@ namespace TextBasedRPG_OOP_WillB
             StartTimer();
         }
 
-        public void Update(List<EnemyManager>enemies, List<ItemManager> items, Chaser chaser, Runner runner, Grunt grunt)
+        public void Update(List<Enemy>enemies, List<ItemManager> items)
         {
-            PlayerPOSMove(enemies, items, chaser, runner, grunt);
+            PlayerPOSMove(enemies, items);
         }
 
         public void Draw()
@@ -81,7 +73,7 @@ namespace TextBasedRPG_OOP_WillB
         }
 
         //Player Movement   
-        public void PlayerPOSMove(List<EnemyManager> enemies, List<ItemManager> items, Chaser chaser, Runner runner, Grunt grunt)
+        public void PlayerPOSMove(List<Enemy> enemies, List<ItemManager> items)
         {
             if (items == null)
             {
@@ -102,20 +94,20 @@ namespace TextBasedRPG_OOP_WillB
                     switch (Input())
                     {
                         case 'w':
-                            POS(0, -1, enemies, items, chaser, grunt);
-                            hud.AddEvent("Player moved up");
+                            POS(0, -1, enemies, items);
+                            //hud.AddEvent("Player moved up");
                             break;
                         case 'a':
-                            POS(-1, 0, enemies, items, chaser, grunt);
-                            hud.AddEvent("Player moved left");
+                            POS(-1, 0, enemies, items);
+                            //hud.AddEvent("Player moved left");
                             break;
                         case 's':
-                            POS(0, 1, enemies, items, chaser, grunt);
-                            hud.AddEvent("Player moved down");
+                            POS(0, 1, enemies, items);
+                            //hud.AddEvent("Player moved down");
                             break;
                         case 'd':
-                            POS(1, 0, enemies, items, chaser, grunt);
-                            hud.AddEvent("Player moved right");
+                            POS(1, 0, enemies, items);
+                            //hud.AddEvent("Player moved right");
                             break;
                     }
 
@@ -126,16 +118,16 @@ namespace TextBasedRPG_OOP_WillB
                 switch (Input())
                 {
                     case 'w':
-                        POS(0, 0, enemies, items, chaser, grunt);
+                        POS(0, 0, enemies, items);
                         break;
                     case 'a':
-                        POS(0, 0, enemies, items, chaser, grunt);
+                        POS(0, 0, enemies, items);
                         break;
                     case 's':
-                        POS(0, 0, enemies, items, chaser, grunt);
+                        POS(0, 0, enemies, items);
                         break;
                     case 'd':
-                        POS(0, 0, enemies, items, chaser, grunt);
+                        POS(0, 0, enemies, items);
                         break;
                 }
                 IsSlowed = false;
@@ -144,65 +136,65 @@ namespace TextBasedRPG_OOP_WillB
         }
 
         //Player Position
-        public void POS(int x, int y, List<EnemyManager> enemies, List<ItemManager> items, Chaser chaser, Grunt grunt)
+        public void POS(int x, int y, List<Enemy> enemies, List<ItemManager> items)
         { 
             this.x += x;
             this.y += y;
-            checkforEnems(enemies);
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                if(this.x == enemies[i].x && this.y == enemies[i].y)
-                {
-                    this.x -= x;
-                    this.y -=y;
-                }
+            //checkforEnems(enemies);
+            //for (int i = 0; i < enemies.Count; i++)
+            //{
+            //    if(this.x == enemies[i].x && this.y == enemies[i].y)
+            //    {
+            //        this.x -= x;
+            //        this.y -=y;
+            //    }
 
-            }
-            if (this.x == npc.x && this.y == npc.y)
-            {
-                this.x -= x;
-                this.y -= y;
-                npc.Talk("Villager");
-            }
+            //}
+            //if (this.x == npc.x && this.y == npc.y)
+            //{
+            //    this.x -= x;
+            //    this.y -= y;
+            //    npc.Talk("Villager");
+            //}
             foreach (ItemManager item in items)
-            {
-                if (items == null)
-                {
-                    Console.Clear();
-                    Console.WriteLine("No Items");
-                    Console.ReadKey();
-                }
-                if (this.x == item.x && this.y == item.y)
-                {
-                    this.y -= y;
-                    this.x -= x;
-                    switch (item.itemType)
-                    {
-                        case ItemType.Coin:
-                            hud.AddEvent("Player collected a coin");
-                            map.UpdateMapTile(this.x, this.y, '.');
-                            ExpirenceMan.XpUp();
-                            break;
-                        case ItemType.Health:
-                            hud.AddEvent("Player collected a health potion");
-                            map.UpdateMapTile(this.x, this.y, '.');
-                            healthSys.Heal(1);
-                            break;
-                        case ItemType.Shield:
-                            hud.AddEvent("Player collected a shield potion");
-                            map.UpdateMapTile(this.x, this.y, '.');
-                            healthSys.ShieldUp(1);
-                            break;
-                        case ItemType.Damage:
-                            hud.AddEvent("Player collected a damage potion");
-                            map.UpdateMapTile(this.x, this.y, '.');
-                            PlayerDamage += 1;
-                            break;
-                    }
-                    items.Remove(item);
-                    break;
-                }
-            }
+            //{
+            //    if (items == null)
+            //    {
+            //        Console.Clear();
+            //        Console.WriteLine("No Items");
+            //        Console.ReadKey();
+            //    }
+            //    if (this.x == item.x && this.y == item.y)
+            //    {
+            //        this.y -= y;
+            //        this.x -= x;
+            //        switch (item.itemType)
+            //        {
+            //            case ItemType.Coin:
+            //                hud.AddEvent("Player collected a coin");
+            //                map.UpdateMapTile(this.x, this.y, '.');
+            //                ExpirenceMan.XpUp();
+            //                break;
+            //            case ItemType.Health:
+            //                hud.AddEvent("Player collected a health potion");
+            //                map.UpdateMapTile(this.x, this.y, '.');
+            //                healthSys.Heal(1);
+            //                break;
+            //            case ItemType.Shield:
+            //                hud.AddEvent("Player collected a shield potion");
+            //                map.UpdateMapTile(this.x, this.y, '.');
+            //                healthSys.ShieldUp(1);
+            //                break;
+            //            case ItemType.Damage:
+            //                hud.AddEvent("Player collected a damage potion");
+            //                map.UpdateMapTile(this.x, this.y, '.');
+            //                PlayerDamage += 1;
+            //                break;
+            //        }
+            //        items.Remove(item);
+            //        break;
+            //    }
+            //}
             switch (map.IsTileValid(this.x, this.y))
             {
                 case '.':
@@ -279,7 +271,7 @@ namespace TextBasedRPG_OOP_WillB
                     this.y -= y;
                     break;
                 case 'V':
-                    npc.Talk("Villager");
+                    //npc.Talk("Villager");
                     this.x -= x;
                     this.y -= y;
                     break;
@@ -293,31 +285,31 @@ namespace TextBasedRPG_OOP_WillB
                 map.UpdateMapTile(this.x, this.y, '.');
             }
         }
-        void checkforEnems(List<EnemyManager>enemies)
-        {
-            foreach (EnemyManager enemy in enemies)
-            {
-                if(this.x == enemy.x  && this.y == enemy.y)
-                {
-                    this.x -= x;
-                    this.y -= y;
-                    enemy.IsAttacked = true;
-                    enemy.healthSys.TakeDamage(PlayerDamage);
-                    hud.lastenemy(enemy);
-                    if (enemy.healthSys.IsAlive == false)
-                    {
-                        enemies.Remove(enemy);
-                        score += 10 * ExpirenceMan.level;
-                        killCount++;
-                        if (enemy.healthSys.IsAlive == false && enemy.enemType == EnemType.Boss)
-                        {
-                            Win();
-                        }
-                    }
-                    break;
-                }
-            }
-        }
+        //void checkforEnems(List<EnemyManager>enemies)
+        //{
+        //    foreach (EnemyManager enemy in enemies)
+        //    {
+        //        if(this.x == enemy.x  && this.y == enemy.y)
+        //        {
+        //            this.x -= x;
+        //            this.y -= y;
+        //            enemy.IsAttacked = true;
+        //            enemy.healthSys.TakeDamage(PlayerDamage);
+        //            hud.lastenemy(enemy);
+        //            if (enemy.healthSys.IsAlive == false)
+        //            {
+        //                enemies.Remove(enemy);
+        //                score += 10 * ExpirenceMan.level;
+        //                killCount++;
+        //                if (enemy.healthSys.IsAlive == false && enemy.enemType == EnemType.Boss)
+        //                {
+        //                    Win();
+        //                }
+        //            }
+        //            break;
+        //        }
+        //    }
+        //}
         //Player win condition
         public void Win()
         {
