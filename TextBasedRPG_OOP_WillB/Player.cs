@@ -10,14 +10,14 @@ namespace TextBasedRPG_OOP_WillB
         public bool Playerturn = true;
         public bool Attacked = false;
         public bool IsSlowed = false;
-        Map map = new Map();   
+        Map map = new Map();
         public Stopwatch stopwatch = new Stopwatch();
         public static HUD hud;
         Settings settings;
         public int PlayerDamage;
         public int killCount;
         public Player(Map map)
-        {
+        {   
             settings = new Settings();
             ExpirenceMan.level = 0;
             ExpirenceMan.xp = 0;
@@ -140,99 +140,60 @@ namespace TextBasedRPG_OOP_WillB
         { 
             this.x += x;
             this.y += y;
-            //checkforEnems(enemies);
-            //for (int i = 0; i < enemies.Count; i++)
-            //{
-            //    if(this.x == enemies[i].x && this.y == enemies[i].y)
-            //    {
-            //        this.x -= x;
-            //        this.y -=y;
-            //    }
+            Console.Clear();
+            Console.WriteLine("Player X: " + this.x);
+            Console.WriteLine("Player Y: " + this.y);
+            Console.ReadKey();
+            foreach(Enemy enemy in enemies)
+            {
 
-            //}
-            //if (this.x == npc.x && this.y == npc.y)
-            //{
-            //    this.x -= x;
-            //    this.y -= y;
-            //    npc.Talk("Villager");
-            //}
-            foreach (ItemManager item in items)
-            //{
-            //    if (items == null)
-            //    {
-            //        Console.Clear();
-            //        Console.WriteLine("No Items");
-            //        Console.ReadKey();
-            //    }
-            //    if (this.x == item.x && this.y == item.y)
-            //    {
-            //        this.y -= y;
-            //        this.x -= x;
-            //        switch (item.itemType)
-            //        {
-            //            case ItemType.Coin:
-            //                hud.AddEvent("Player collected a coin");
-            //                map.UpdateMapTile(this.x, this.y, '.');
-            //                ExpirenceMan.XpUp();
-            //                break;
-            //            case ItemType.Health:
-            //                hud.AddEvent("Player collected a health potion");
-            //                map.UpdateMapTile(this.x, this.y, '.');
-            //                healthSys.Heal(1);
-            //                break;
-            //            case ItemType.Shield:
-            //                hud.AddEvent("Player collected a shield potion");
-            //                map.UpdateMapTile(this.x, this.y, '.');
-            //                healthSys.ShieldUp(1);
-            //                break;
-            //            case ItemType.Damage:
-            //                hud.AddEvent("Player collected a damage potion");
-            //                map.UpdateMapTile(this.x, this.y, '.');
-            //                PlayerDamage += 1;
-            //                break;
-            //        }
-            //        items.Remove(item);
-            //        break;
-            //    }
-            //}
+                if (this.x == enemy.x && this.y == enemy.y)
+                {
+                    this.y -= y;
+                    this.x -= x;
+                    enemy.isAttacked = true;
+                    enemy.healthSys.TakeDamage(PlayerDamage);
+                }
+            }
             switch (map.IsTileValid(this.x, this.y))
             {
+                
                 case '.':
                     IsSlowed = false;
                     break;
                 case '#':
-                    hud.AddEvent("Player moved into a wall");
+                    //hud.AddEvent("Player moved into a wall");
                     this.x -= x;
                     this.y -= y;
                     break;
                 case '+':
                     healthSys.TakeDamage(2);
-                    hud.AddEvent("Player moved onto a spike trap");
+                    //hud.AddEvent("Player moved onto a spike trap");
                     map.UpdateMapTile(this.x, this.y, '+');
                     return;
                 case '^':
-                    hud.AddEvent("Player collected a Level Up");
+                    //hud.AddEvent("Player collected a Level Up");
                     map.UpdateMapTile(this.x, this.y, '.');
                     this.x -= x;
                     this.y -= y;
                     ExpirenceMan.LevelUp();
                     break;
                 case '>':
-                    hud.AddEvent("Player used the Teleporter");
+                    //hud.AddEvent("Player used the Teleporter");
                     this.y += 2;
                     break;
                 case '<':
-                    hud.AddEvent("Player used the Teleporter");
+                    //hud.AddEvent("Player used the Teleporter");
                     this.y -= 2;
                     break;
                 case '~':
                     IsSlowed = true;
-                    hud.AddEvent("Player moved in water");
+                    //hud.AddEvent("Player moved in water");
                     break;
                 case 'C':
                     map.UpdateMapTile(this.x, this.y, 'C');
                     ExpirenceMan.LevelDown();
-                    hud.AddEvent("Player recieved a curse");
+                    //hud.AddEvent("Player recieved a curse");
                     this.x -= x;
                     this.y -= y;
                     break;
@@ -244,13 +205,13 @@ namespace TextBasedRPG_OOP_WillB
                     Win();
                     break;
                 case 'G':
-                    hud.AddEvent("Player moved into a Grunt");
+                    //hud.AddEvent("Player moved into a Grunt");
                     healthSys.TakeDamage(1);
                     this.x -= x;
                     this.y -= y;
                     break;
                 case 'H':
-                    hud.AddEvent("Player moved into a Health Pickup");
+                    //hud.AddEvent("Player moved into a Health Pickup");
                     healthSys.Heal(1);
                     map.UpdateMapTile(this.x, this.y, '.');
                     this.x -= x;
@@ -285,31 +246,12 @@ namespace TextBasedRPG_OOP_WillB
                 map.UpdateMapTile(this.x, this.y, '.');
             }
         }
-        //void checkforEnems(List<EnemyManager>enemies)
-        //{
-        //    foreach (EnemyManager enemy in enemies)
-        //    {
-        //        if(this.x == enemy.x  && this.y == enemy.y)
-        //        {
-        //            this.x -= x;
-        //            this.y -= y;
-        //            enemy.IsAttacked = true;
-        //            enemy.healthSys.TakeDamage(PlayerDamage);
-        //            hud.lastenemy(enemy);
-        //            if (enemy.healthSys.IsAlive == false)
-        //            {
-        //                enemies.Remove(enemy);
-        //                score += 10 * ExpirenceMan.level;
-        //                killCount++;
-        //                if (enemy.healthSys.IsAlive == false && enemy.enemType == EnemType.Boss)
-        //                {
-        //                    Win();
-        //                }
-        //            }
-        //            break;
-        //        }
-        //    }
-        //}
+        void checkforEnems()
+        {
+            Console.Clear();
+            Console.WriteLine("You have encountered an enemy");
+            Console.WriteLine("Press any key to continue");
+        }
         //Player win condition
         public void Win()
         {

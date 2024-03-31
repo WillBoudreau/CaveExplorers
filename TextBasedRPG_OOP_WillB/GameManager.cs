@@ -19,11 +19,10 @@ namespace TextBasedRPG_OOP_WillB
         Player player;
         Settings settings;
         EnemyManager enemyMan;
-        List<Enemy> enemies;
+        public List<Enemy> enemies;
         EnemyManager enemyManager;
         List<ItemManager> items;
         HUD hud;
-        List<ItemManager> itemManager;
         MusicManager soundManager;
         //Achievements achievements;
         public GameManager()
@@ -35,7 +34,6 @@ namespace TextBasedRPG_OOP_WillB
             items = new List<ItemManager>();
             player = new Player(map);
             //hud = new HUD(player, enemies, map);
-            //enemyMan = new EnemyManager(settings,player,items,map,enemies);
             Player.hud = hud;
             settings = new Settings();
             //achievements = new Achievements(player, enemies, itemManager);
@@ -44,25 +42,29 @@ namespace TextBasedRPG_OOP_WillB
         
             void GameInitialize()
             {
-                enemyMan.Init();
-                soundManager.Init();
-                player.Init();
                 map.Init();
+                //enemyMan.GenerateEnemies(map, settings.numGrunt);
+                soundManager.Init();
+                enemyMan.Init();
+                player.Init();
                 //generation.Init();
                 Intro();
             }
             void Update()
             {
+                //enemyMan.GenerateEnemies(map, settings.numGrunt);
                 //generation.Update();
                 player.Update(enemies,items);
+                enemyMan.Update(player);
+                //map.Update();
                 //hud.Update(enemies);
-                enemyMan.Update(player, enemies);
             }
             void Draw()
             {
-                enemyMan.Draw(player,enemies);
-                //generation.Draw();
+                enemyMan.Draw(enemies);
                 player.Draw();
+                //generation.Draw();
+                //map.Draw();
             }
             //Intro to game
             void Intro()

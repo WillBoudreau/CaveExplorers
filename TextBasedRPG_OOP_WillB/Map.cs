@@ -11,9 +11,11 @@ namespace TextBasedRPG_OOP_WillB
         string[] Mapstr;
         public char[][] MapChar;
         public List<ItemManager> itemManager;
+        public List<Enemy> enemies;
         public Settings settings = new Settings();
         public Map()
         {
+            enemies = new List<Enemy>();
             itemManager = new List<ItemManager>();
             MapArray();
         }
@@ -30,7 +32,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             ShowMap();
         }
-        public void UpdateMapTile(int x, int y, char tile)
+        public void UpdateMapTile(int x, int y, char tile) 
         {
             MapChar[y][x] = tile;
             Console.SetCursorPosition(x, y);
@@ -50,10 +52,6 @@ namespace TextBasedRPG_OOP_WillB
             }
             Draw();
         }
-        //public void SetEnemies(List<Enemy> enemies)
-        //{
-        //    this.enemies = enemies;
-        //}
         public void ShowMap()
         {
             for (int i = 0; i < MapChar.Length; i++)

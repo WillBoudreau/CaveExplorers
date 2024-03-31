@@ -7,9 +7,14 @@ namespace TextBasedRPG_OOP_WillB
     {
         Random rnd;
         Player player;
-        public Grunt(int x, int y, int damage, int shield, int hp, Player player)
+        Map map;
+        public Grunt(char enemAvatar,int x, int y, int damage, int shield, int hp, Player player)
         {
+            healthSys = new HealthSystem(hp, shield);
+            map = new Map();
             rnd = new Random();
+            enemyAvatar = 'G';
+            enemyAvatar = enemAvatar;
             healthSys = new HealthSystem(hp, shield);
             this.x = x;
             this.y = y;
@@ -26,7 +31,7 @@ namespace TextBasedRPG_OOP_WillB
                     break;
                 case 2:
 
-                    dx = -1;
+                    dx = 1;
                     break;
                 case 3:
 
@@ -34,13 +39,19 @@ namespace TextBasedRPG_OOP_WillB
                     break;
                 case 4:
 
-                    dx = 1;
+                    dx = -1;
                     break;
             }
+            if(isAttacked == true)
+            {
+                dy = 0;
+                dx = 0;
+            }
+            base.POS(dx, dy, player);
         }
         public override void Attack(Player player)
         {
-            if (x == player.x && y == player.y)
+            if (this.x == player.x && this.y == player.y)
             {
                 player.healthSys.TakeDamage(settings.GruntAttack);
                 this.x -= x;
@@ -49,20 +60,11 @@ namespace TextBasedRPG_OOP_WillB
         }
         public override void DisplayEnemy()
         {
-            if (healthSys.IsAlive)
-            {
                 Console.SetCursorPosition(this.x, this.y);
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
-                Console.Write('G');
+                Console.Write(enemyAvatar);
                 Console.ResetColor();
-            }
-            else
-            {
-                this.x = 0;
-                this.y = 0;
-            }
-            return;
         }
 
     }

@@ -11,7 +11,6 @@ namespace TextBasedRPG_OOP_WillB
         public List<ItemManager> itemManager;
         public List<Enemy> enemies;
         public Map map;
-        public Enemy enemy;
         //Variables
         public bool BossDead = false;
         public bool IsAttacked;
@@ -24,59 +23,48 @@ namespace TextBasedRPG_OOP_WillB
             map = new Map();
             player = new Player(map);
         }
+        public void GenerateEnemies(Map map,int numGrunts)
+        {
+            //enemies = new List<Enemy>();    
+            int x;
+            int y;
+            bool ValidLocation;
+                for (int i = 0; i < numGrunts; i++)
+                {
+                    ValidLocation = false;
+                    while(!ValidLocation)
+                    {
+                        x = new Random().Next(0, map.MapChar[0].Length);
+                        y = new Random().Next(0, map.MapChar.Length);
+                        if (map.IsTileValid(x, y) == '.')
+                        {
+                            enemies.Add(new Grunt(settings.GruntAvatar,x, y, settings.GruntAttack, settings.GruntShield, settings.GruntMaxhp, player));
+                            ValidLocation = true;
+                        }
+                    }
+                }
+        }
         //Init
         public void Init()
         {
             GenerateEnemies(map,settings.numGrunt);
         }
         //Update
-        public void Update(Player player, List<Enemy> enemies)
+        public void Update(Player player)
         {
-            foreach (var enemy in enemies)
+            foreach (Enemy enemy in enemies)
             {
+                enemy.DisplayEnemy();
                 enemy.Move(player);
             }
         }
         //Draw
-        public void Draw(Player player, List<Enemy> enemies)
+        public void Draw(List<Enemy> enemies)
         {
-            foreach (var enemy in enemies)
+            foreach (Enemy enemy in enemies)
             {
                 enemy.DisplayEnemy();
             }
-        }
-        public void GenerateEnemies(Map map,int numGrunts)
-        {
-            //List<Enemy> enemies = new List<Enemy>();    
-            int x;
-            int y;
-            bool ValidLocation = false;
-            while(!ValidLocation)
-            {
-                for(int i = 0; i < numGrunts; i++)
-                {
-                    x = new Random().Next(0, map.MapChar[0].Length);
-                    y = new Random().Next(0, map.MapChar.Length);
-                    if (map.IsTileValid(x,y)== '.')
-                    {
-                        enemies.Add(new Grunt(x, y, settings.GruntAttack, settings.GruntShield, settings.GruntMaxhp, player));
-                        foreach(var grunt in enemies)
-                        {
-                            grunt.DisplayEnemy();
-                        }
-                        ValidLocation = true;
-                    }
-                }
-            }
-            Console.WriteLine("Enemies: " + enemies.Count);
-            foreach (var enemy in enemies)
-            {
-                enemy.DisplayEnemy();
-                Console.WriteLine(enemies.Count);
-                Console.WriteLine("Enemy " + enemy);
-                Console.WriteLine(enemy);
-            }
-            Console.ReadKey();
         }
     }
 }
