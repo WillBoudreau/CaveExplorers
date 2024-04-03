@@ -10,7 +10,6 @@ namespace TextBasedRPG_OOP_WillB
         public Settings settings;
         public List<ItemManager> itemManager;
         public List<Enemy> enemies;
-        public Map map;
         //Variables
         public bool BossDead = false;
         public bool IsAttacked;
@@ -20,8 +19,6 @@ namespace TextBasedRPG_OOP_WillB
             enemies = new List<Enemy>();
             itemManager = new List<ItemManager>();
             settings = new Settings();
-            map = new Map();
-            player = new Player(map);
         }
         public void GenerateEnemies(Map map,int numGrunts)
         {
@@ -29,7 +26,7 @@ namespace TextBasedRPG_OOP_WillB
             int x;
             int y;
             bool ValidLocation;
-                for (int i = 0; i < numGrunts; i++)
+                for (int i = 0; i < 1; i++)
                 {
                     ValidLocation = false;
                     while(!ValidLocation)
@@ -38,24 +35,24 @@ namespace TextBasedRPG_OOP_WillB
                         y = new Random().Next(0, map.MapChar.Length);
                         if (map.IsTileValid(x, y) == '.')
                         {
-                            enemies.Add(new Grunt(settings.GruntAvatar,x, y, settings.GruntAttack, settings.GruntShield, settings.GruntMaxhp, player));
+                            enemies.Add(new Grunt(settings.GruntAvatar,x, y, settings.GruntAttack, settings.GruntShield, settings.GruntMaxhp));
                             ValidLocation = true;
                         }
                     }
                 }
         }
         //Init
-        public void Init()
+        public void Init(Map map)
         {
             GenerateEnemies(map,settings.numGrunt);
         }
         //Update
-        public void Update(Player player)
+        public void Update(Player player,Map map)
         {
             foreach (Enemy enemy in enemies)
             {
                 enemy.DisplayEnemy();
-                enemy.Move(player);
+                enemy.Move(player,map);
             }
         }
         //Draw

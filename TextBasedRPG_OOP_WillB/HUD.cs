@@ -10,7 +10,7 @@ namespace TextBasedRPG_OOP_WillB
     internal class HUD
     {
         Player player;
-        List<EnemyManager> enemies;
+        List<Enemy> enemies;
         EnemyManager enemy;
         Map map;
         string LastSeen;
@@ -20,7 +20,7 @@ namespace TextBasedRPG_OOP_WillB
         public List<string> UnlockedAchievements { get; private set; }
         public List<string> EventLog {  get; set; }
         public List<string> playerAchievements = new List<string>();
-       public HUD(Player player,List<EnemyManager>enemies,Map map)
+       public HUD(Player player,List<Enemy>enemies,Map map)
         {
             UnlockedAchievements = new List<string>();
             this.player = player;
@@ -28,7 +28,7 @@ namespace TextBasedRPG_OOP_WillB
             this.map = map;
             EventLog = new List<string>();
         }
-        public void Update(List<EnemyManager>enemies)
+        public void Update(List<Enemy>enemies)
         {
             DisplayHUD(enemies,map); 
             LastSeenEnemy();
@@ -36,7 +36,7 @@ namespace TextBasedRPG_OOP_WillB
             DisplayEventLog();
             //WriteAchievment("First Blood","Kill your first enemy");
         }
-        public void DisplayHUD(List<EnemyManager> enemies,Map map)
+        public void DisplayHUD(List<Enemy> enemies,Map map)
         {
             Console.SetCursorPosition(0,map.MapChar.Length);
             Objectives();
@@ -63,12 +63,12 @@ namespace TextBasedRPG_OOP_WillB
         {
             Console.WriteLine("P = Player" + " "+ "G = Grunt" + " "+ "C = Chaser" +" "+ "R = Runner" + "  " + "B = Boss");
         }
-        //public void lastenemy(EnemyManager enemy)
-        //{
-        //    LastSeen = enemy.name;
-        //    LastSeenHealth = enemy.healthSys.normalHealth;
-        //    LastSeenHealthMax = enemy.healthSys.maxHealth;
-        //}
+        public void lastenemy(Enemy enemy)
+        {
+            LastSeen = enemy.name;
+            LastSeenHealth = enemy.healthSys.normalHealth;
+            LastSeenHealthMax = enemy.healthSys.maxHealth;
+        }
         public void AddEvent(string log)
         {
             EventLog.Add(log);
@@ -106,20 +106,20 @@ namespace TextBasedRPG_OOP_WillB
                 Console.WriteLine(objective);
             }
         }
-        public void WriteAchievment(string name, string Description)
-        {
-            Console.WriteLine("Achievments");
+        //public void WriteAchievment(string name, string Description)
+        //{
+        //    Console.WriteLine("Achievments");
 
-            playerAchievements.Add(name);
-            playerAchievements.Add(Description);
-            foreach (string achievement in playerAchievements)
-            {
-                Console.WriteLine(achievement);
-                if (playerAchievements.Count > 2)
-                {
-                    playerAchievements.Clear();
-                }
-            }
-        }
+        //    playerAchievements.Add(name);
+        //    playerAchievements.Add(Description);
+        //    foreach (string achievement in playerAchievements)
+        //    {
+        //        Console.WriteLine(achievement);
+        //        if (playerAchievements.Count > 2)
+        //        {
+        //            playerAchievements.Clear();
+        //        }
+        //    }
+        //}
     }
 }

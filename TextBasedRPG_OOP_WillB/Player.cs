@@ -10,7 +10,6 @@ namespace TextBasedRPG_OOP_WillB
         public bool Playerturn = true;
         public bool Attacked = false;
         public bool IsSlowed = false;
-        Map map = new Map();
         public Stopwatch stopwatch = new Stopwatch();
         public static HUD hud;
         Settings settings;
@@ -36,9 +35,9 @@ namespace TextBasedRPG_OOP_WillB
             StartTimer();
         }
 
-        public void Update(List<Enemy>enemies, List<ItemManager> items)
+        public void Update(List<Enemy>enemies, List<ItemManager> items,Map map)
         {
-            PlayerPOSMove(enemies, items);
+            PlayerPOSMove(enemies, items,map);
         }
 
         public void Draw()
@@ -73,7 +72,7 @@ namespace TextBasedRPG_OOP_WillB
         }
 
         //Player Movement   
-        public void PlayerPOSMove(List<Enemy> enemies, List<ItemManager> items)
+        public void PlayerPOSMove(List<Enemy> enemies, List<ItemManager> items,Map map)
         {
             if (items == null)
             {
@@ -94,19 +93,19 @@ namespace TextBasedRPG_OOP_WillB
                     switch (Input())
                     {
                         case 'w':
-                            POS(0, -1, enemies, items);
+                            POS(0, -1, enemies, items,map);
                             //hud.AddEvent("Player moved up");
                             break;
                         case 'a':
-                            POS(-1, 0, enemies, items);
+                            POS(-1, 0, enemies, items,map);
                             //hud.AddEvent("Player moved left");
                             break;
                         case 's':
-                            POS(0, 1, enemies, items);
+                            POS(0, 1, enemies, items,map);
                             //hud.AddEvent("Player moved down");
                             break;
                         case 'd':
-                            POS(1, 0, enemies, items);
+                            POS(1, 0, enemies, items,map);
                             //hud.AddEvent("Player moved right");
                             break;
                     }
@@ -118,16 +117,16 @@ namespace TextBasedRPG_OOP_WillB
                 switch (Input())
                 {
                     case 'w':
-                        POS(0, 0, enemies, items);
+                        POS(0, 0, enemies, items,map);
                         break;
                     case 'a':
-                        POS(0, 0, enemies, items);
+                        POS(0, 0, enemies, items,map);
                         break;
                     case 's':
-                        POS(0, 0, enemies, items);
+                        POS(0, 0, enemies, items,map);
                         break;
                     case 'd':
-                        POS(0, 0, enemies, items);
+                        POS(0, 0, enemies, items,map);
                         break;
                 }
                 IsSlowed = false;
@@ -136,17 +135,12 @@ namespace TextBasedRPG_OOP_WillB
         }
 
         //Player Position
-        public void POS(int x, int y, List<Enemy> enemies, List<ItemManager> items)
+        public void POS(int x, int y, List<Enemy> enemies, List<ItemManager> items,Map map)
         { 
             this.x += x;
             this.y += y;
-            Console.Clear();
-            Console.WriteLine("Player X: " + this.x);
-            Console.WriteLine("Player Y: " + this.y);
-            Console.ReadKey();
             foreach(Enemy enemy in enemies)
             {
-
                 if (this.x == enemy.x && this.y == enemy.y)
                 {
                     this.y -= y;

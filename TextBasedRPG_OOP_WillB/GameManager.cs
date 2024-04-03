@@ -33,7 +33,7 @@ namespace TextBasedRPG_OOP_WillB
             map = new Map();
             items = new List<ItemManager>();
             player = new Player(map);
-            //hud = new HUD(player, enemies, map);
+            hud = new HUD(player, enemies, map);
             Player.hud = hud;
             settings = new Settings();
             //achievements = new Achievements(player, enemies, itemManager);
@@ -45,26 +45,26 @@ namespace TextBasedRPG_OOP_WillB
                 map.Init();
                 //enemyMan.GenerateEnemies(map, settings.numGrunt);
                 soundManager.Init();
-                enemyMan.Init();
+                enemyMan.Init(map);
                 player.Init();
                 //generation.Init();
                 Intro();
             }
             void Update()
             {
+                //map.Update();
                 //enemyMan.GenerateEnemies(map, settings.numGrunt);
                 //generation.Update();
-                player.Update(enemies,items);
-                enemyMan.Update(player);
-                //map.Update();
-                //hud.Update(enemies);
+                player.Update(enemies,items,map);
+                enemyMan.Update(player,map);
+                hud.Update(enemies);
             }
             void Draw()
             {
+                //map.Draw();
                 enemyMan.Draw(enemies);
                 player.Draw();
                 //generation.Draw();
-                //map.Draw();
             }
             //Intro to game
             void Intro()

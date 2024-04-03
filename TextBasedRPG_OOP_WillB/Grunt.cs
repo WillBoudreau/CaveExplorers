@@ -7,19 +7,18 @@ namespace TextBasedRPG_OOP_WillB
     {
         Random rnd;
         Player player;
-        Map map;
-        public Grunt(char enemAvatar,int x, int y, int damage, int shield, int hp, Player player)
+        public Grunt(char enemAvatar,int x, int y, int damage, int shield, int hp)
         {
             healthSys = new HealthSystem(hp, shield);
-            map = new Map();
             rnd = new Random();
             enemyAvatar = 'G';
             enemyAvatar = enemAvatar;
             healthSys = new HealthSystem(hp, shield);
             this.x = x;
             this.y = y;
+            Console.WriteLine("GruntX: " + x + "GruntY: " + y);
         }
-        public override void Move(Player player)
+        public override void Move(Player player,Map map)
         {
             int Move = rnd.Next(1, 5);
             int dx = 0,
@@ -27,27 +26,34 @@ namespace TextBasedRPG_OOP_WillB
             switch (Move)
             {
                 case 1:
+                    dx = 0;
                     dy = -1;
                     break;
                 case 2:
-
-                    dx = 1;
+                    dy = 0;
+                    dx = -1;
                     break;
                 case 3:
-
+                    dx = 0;
                     dy = 1;
                     break;
                 case 4:
-
-                    dx = -1;
+                    dy = 0;
+                    dx = 1;
+                    break;
+                case 5:
+                    dx = 0;
+                    dy = 0;
                     break;
             }
+            Console.WriteLine("GruntX: " + x + "GruntY: " + y);
+            Console.WriteLine("PlayerX: " + player.x + "PlayerY: " + player.y);
             if(isAttacked == true)
             {
                 dy = 0;
                 dx = 0;
             }
-            base.POS(dx, dy, player);
+            base.POS(dx, dy, player,map);
         }
         public override void Attack(Player player)
         {
