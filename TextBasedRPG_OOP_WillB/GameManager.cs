@@ -43,28 +43,21 @@ namespace TextBasedRPG_OOP_WillB
             void GameInitialize()
             {
                 map.Init();
-                //enemyMan.GenerateEnemies(map, settings.numGrunt);
                 //soundManager.Init();
-                enemyMan.Init(map);
+                enemyMan.Init(map,enemies);
                 player.Init();
-                //generation.Init();
                 Intro();
             }
             void Update()
             {
-                //map.Update();
-                //enemyMan.GenerateEnemies(map, settings.numGrunt);
-                //generation.Update();
                 player.Update(enemies,items,map);
-                enemyMan.Update(player,map);
+                enemyMan.Update(player,map,enemies);
                 hud.Update(enemies);
             }
             void Draw()
             {
-                //map.Draw();
                 enemyMan.Draw(enemies);
                 player.Draw();
-                //generation.Draw();
             }
             //Intro to game
             void Intro()

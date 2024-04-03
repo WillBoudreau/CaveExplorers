@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace TextBasedRPG_OOP_WillB
         int LastSeenDamage;
         int LastSeenHealth;
         int LastSeenHealthMax;
+        Settings settings = new Settings();
         public List<string> UnlockedAchievements { get; private set; }
         public List<string> EventLog {  get; set; }
         public List<string> playerAchievements = new List<string>();
@@ -45,7 +47,7 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine(player.x + " " + player.y);
             Console.WriteLine("Player Health: " + player.healthSys.normalHealth);
             Console.WriteLine("Player Shield: " + player.healthSys.normalShield);
-            Console.WriteLine("Player Attack: " + player.PlayerDamage);
+            Console.WriteLine("Player Attack: " + settings.PlayerAttack);
             Console.WriteLine("Player Score: " + player.score);
             Console.WriteLine("Player Level: " + player.ExpirenceMan.level);
             Console.WriteLine("Player Xp: " + player.ExpirenceMan.xp);

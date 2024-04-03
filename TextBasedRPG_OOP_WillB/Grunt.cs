@@ -10,11 +10,10 @@ namespace TextBasedRPG_OOP_WillB
         {
             healthSys = new HealthSystem(hp, shield);
             rnd = new Random();
-            enemyAvatar = 'G';
-            enemyAvatar = enemAvatar;
-            healthSys = new HealthSystem(hp, shield);
             this.x = x;
             this.y = y;
+            name = "Grunt";
+            this.enemyAvatar = enemAvatar;
         }
         public override void Move(Player player,Map map)
         {
@@ -25,7 +24,7 @@ namespace TextBasedRPG_OOP_WillB
             {
                 case 1:
                     dx = 0;
-                    dy = -1;
+                    dy = 1;
                     break;
                 case 2:
                     dy = 0;
@@ -33,7 +32,7 @@ namespace TextBasedRPG_OOP_WillB
                     break;
                 case 3:
                     dx = 0;
-                    dy = 1;
+                    dy = -1;
                     break;
                 case 4:
                     dy = 0;
@@ -44,6 +43,7 @@ namespace TextBasedRPG_OOP_WillB
                     dy = 0;
                     break;
             }
+            Console.WriteLine("GruntX: " + this.x + " " + "GruntY: " + this.y);
             if(isAttacked == true)
             {
                 dy = 0;

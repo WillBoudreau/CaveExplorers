@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 
 namespace TextBasedRPG_OOP_WillB
@@ -23,7 +24,6 @@ namespace TextBasedRPG_OOP_WillB
             score = 0;
             x = 3;
             y = 3;
-            PlayerDamage = settings.PlayerAttack;
             settings.PlayerMaxhp = 3;
             settings.PlayerAttack = 3;
             settings.PlayerMaxShield = 3;
@@ -93,20 +93,20 @@ namespace TextBasedRPG_OOP_WillB
                     switch (Input())
                     {
                         case 'w':
-                            POS(0, -1, enemies, items,map);
-                            //hud.AddEvent("Player moved up");
+                            POS(0, -1, enemies, items, map);
+                            hud.AddEvent("Player moved up");
                             break;
                         case 'a':
-                            POS(-1, 0, enemies, items,map);
-                            //hud.AddEvent("Player moved left");
+                            POS(-1, 0, enemies, items, map);
+                            hud.AddEvent("Player moved left");
                             break;
                         case 's':
-                            POS(0, 1, enemies, items,map);
-                            //hud.AddEvent("Player moved down");
+                            POS(0, 1, enemies, items, map);
+                            hud.AddEvent("Player moved down");
                             break;
                         case 'd':
-                            POS(1, 0, enemies, items,map);
-                            //hud.AddEvent("Player moved right");
+                            POS(1, 0, enemies, items, map);
+                            hud.AddEvent("Player moved right");
                             break;
                     }
 
@@ -146,48 +146,49 @@ namespace TextBasedRPG_OOP_WillB
                     this.y -= y;
                     this.x -= x;
                     enemy.isAttacked = true;
-                    enemy.healthSys.TakeDamage(PlayerDamage);
+                    enemy.healthSys.TakeDamage(settings.PlayerAttack);
+                    hud.LastSeenEnemy();
                 }
             }
             switch (map.IsTileValid(this.x, this.y))
             {
-                
+
                 case '.':
                     IsSlowed = false;
                     break;
                 case '#':
-                    //hud.AddEvent("Player moved into a wall");
+                    hud.AddEvent("Player moved into a wall");
                     this.x -= x;
                     this.y -= y;
                     break;
                 case '+':
                     healthSys.TakeDamage(2);
-                    //hud.AddEvent("Player moved onto a spike trap");
+                    hud.AddEvent("Player moved onto a spike trap");
                     map.UpdateMapTile(this.x, this.y, '+');
                     return;
                 case '^':
-                    //hud.AddEvent("Player collected a Level Up");
+                    hud.AddEvent("Player collected a Level Up");
                     map.UpdateMapTile(this.x, this.y, '.');
                     this.x -= x;
                     this.y -= y;
                     ExpirenceMan.LevelUp();
                     break;
                 case '>':
-                    //hud.AddEvent("Player used the Teleporter");
+                    hud.AddEvent("Player used the Teleporter");
                     this.y += 2;
                     break;
                 case '<':
-                    //hud.AddEvent("Player used the Teleporter");
+                    hud.AddEvent("Player used the Teleporter");
                     this.y -= 2;
                     break;
                 case '~':
                     IsSlowed = true;
-                    //hud.AddEvent("Player moved in water");
+                    hud.AddEvent("Player moved in water");
                     break;
                 case 'C':
                     map.UpdateMapTile(this.x, this.y, 'C');
                     ExpirenceMan.LevelDown();
-                    //hud.AddEvent("Player recieved a curse");
+                    hud.AddEvent("Player recieved a curse");
                     this.x -= x;
                     this.y -= y;
                     break;
@@ -199,13 +200,13 @@ namespace TextBasedRPG_OOP_WillB
                     Win();
                     break;
                 case 'G':
-                    //hud.AddEvent("Player moved into a Grunt");
+                    hud.AddEvent("Player moved into a Grunt");
                     healthSys.TakeDamage(1);
                     this.x -= x;
                     this.y -= y;
                     break;
                 case 'H':
-                    //hud.AddEvent("Player moved into a Health Pickup");
+                    hud.AddEvent("Player moved into a Health Pickup");
                     healthSys.Heal(1);
                     map.UpdateMapTile(this.x, this.y, '.');
                     this.x -= x;

@@ -10,7 +10,7 @@ namespace TextBasedRPG_OOP_WillB
 {
     internal class Villager:NPCManager
     {
-        public List<string> message = new List<string>();
+        //public List<string> message = new List<string>();
         public Villager(char npcAvatar, int x, int y,string name, NPCType npctype,List<string>message) : base(npcAvatar, x, y,name,npctype,message)
         {
             this.message = message;

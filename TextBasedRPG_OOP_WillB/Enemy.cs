@@ -7,7 +7,7 @@ namespace TextBasedRPG_OOP_WillB
         public Settings settings;
         public bool isAttacked = false;
         public char enemyAvatar { get; set; }
-        public string name { get; }
+        public string name { get; set; }
         public int x { get; set; }
         public int y { get; set; }
 
@@ -21,7 +21,6 @@ namespace TextBasedRPG_OOP_WillB
         {
             this.x += dx;
             this.y += dy;
-            Console.WriteLine("EnemyX: " + x + "EnemyY: " + y);
             switch(map.IsTileValid(this.x,this.y))
             {
                 case '.':
