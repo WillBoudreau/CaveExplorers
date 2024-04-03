@@ -44,7 +44,7 @@ namespace TextBasedRPG_OOP_WillB
             {
                 map.Init();
                 //enemyMan.GenerateEnemies(map, settings.numGrunt);
-                soundManager.Init();
+                //soundManager.Init();
                 enemyMan.Init(map);
                 player.Init();
                 //generation.Init();

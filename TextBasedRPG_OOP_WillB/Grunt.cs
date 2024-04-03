@@ -6,7 +6,6 @@ namespace TextBasedRPG_OOP_WillB
     internal class Grunt : Enemy
     {
         Random rnd;
-        Player player;
         public Grunt(char enemAvatar,int x, int y, int damage, int shield, int hp)
         {
             healthSys = new HealthSystem(hp, shield);
@@ -16,7 +15,6 @@ namespace TextBasedRPG_OOP_WillB
             healthSys = new HealthSystem(hp, shield);
             this.x = x;
             this.y = y;
-            Console.WriteLine("GruntX: " + x + "GruntY: " + y);
         }
         public override void Move(Player player,Map map)
         {
@@ -46,8 +44,6 @@ namespace TextBasedRPG_OOP_WillB
                     dy = 0;
                     break;
             }
-            Console.WriteLine("GruntX: " + x + "GruntY: " + y);
-            Console.WriteLine("PlayerX: " + player.x + "PlayerY: " + player.y);
             if(isAttacked == true)
             {
                 dy = 0;

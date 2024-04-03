@@ -5,7 +5,6 @@ namespace TextBasedRPG_OOP_WillB
     internal abstract class Enemy:Entity
     {
         public Settings settings;
-        HealthSystem healthSys;
         public bool isAttacked = false;
         public char enemyAvatar { get; set; }
         public string name { get; }
@@ -32,8 +31,8 @@ namespace TextBasedRPG_OOP_WillB
                     this.y -= dy;
                     break;
                 case '+':
-                    //this.x -= dx;
-                    //this.y -= dy;
+                    this.x -= dx;
+                    this.y -= dy;
                     break;
             }
             if(this.x == player.x && this.y == player.y)

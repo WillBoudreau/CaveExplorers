@@ -20,31 +20,44 @@ namespace TextBasedRPG_OOP_WillB
             itemManager = new List<ItemManager>();
             settings = new Settings();
         }
-        public void GenerateEnemies(Map map,int numGrunts)
-        {
-            //enemies = new List<Enemy>();    
+        public void GenerateEnemies(Map map,int numGrunts,int numChaser,int numRunner,int numBoss)
+        {   
             int x;
             int y;
-            bool ValidLocation;
-                for (int i = 0; i < 1; i++)
-                {
-                    ValidLocation = false;
+            bool ValidLocation = false;
                     while(!ValidLocation)
                     {
-                        x = new Random().Next(0, map.MapChar[0].Length);
-                        y = new Random().Next(0, map.MapChar.Length);
-                        if (map.IsTileValid(x, y) == '.')
+                        for (int i = 0; i < numGrunts; i++)
                         {
-                            enemies.Add(new Grunt(settings.GruntAvatar,x, y, settings.GruntAttack, settings.GruntShield, settings.GruntMaxhp));
-                            ValidLocation = true;
+                            x = new Random().Next(0, map.MapChar[0].Length);
+                            y = new Random().Next(0, map.MapChar.Length);
+                            if (map.IsTileValid(x, y) == '.')
+                            {
+                                enemies.Add(new Grunt(settings.GruntAvatar,x, y, settings.GruntAttack, settings.GruntShield, settings.GruntMaxhp));
+                                ValidLocation = true;
+                            }
                         }
                     }
-                }
+            //    for (int i = 0; i < numChaser; i++)
+            //{
+            //    bool ValidLocation = false;
+            //    while(!ValidLocation)
+            //    {
+            //        x = new Random().Next(0, map.MapChar[0].Length);
+            //        y = new Random().Next(0,map.MapChar.Length);
+            //        if(map.IsTileValid(x,y) == '.')
+            //        {
+            //            enemies.Add(new Chaser(settings.ChaserAvatar,x,y, settings.ChaserAttack,settings.ChaserShield,settings.ChaserMaxhp));
+            //            ValidLocation = true;
+            //        }
+            //    }
+            //}
+
         }
         //Init
         public void Init(Map map)
         {
-            GenerateEnemies(map,settings.numGrunt);
+            GenerateEnemies(map,settings.numGrunt,settings.numChaser,0,0);
         }
         //Update
         public void Update(Player player,Map map)

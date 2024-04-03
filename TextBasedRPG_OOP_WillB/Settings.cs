@@ -33,8 +33,10 @@ namespace TextBasedRPG_OOP_WillB
         //Chaser Variables
         public int ChaserMaxhp = 2;
         public int ChaserMinhp = 0;
+        public int ChaserShield = 0;
         public int ChaserAttack = 2;
         public int numChaser = 5;
+        public char ChaserAvatar = 'C';
 
         //Boss Variables
         public int BossMaxhp = 4;
