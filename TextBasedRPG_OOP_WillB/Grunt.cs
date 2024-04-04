@@ -43,7 +43,6 @@ namespace TextBasedRPG_OOP_WillB
                     dy = 0;
                     break;
             }
-            Console.WriteLine("GruntX: " + this.x + " " + "GruntY: " + this.y);
             if(isAttacked == true)
             {
                 dy = 0;
@@ -62,11 +61,22 @@ namespace TextBasedRPG_OOP_WillB
         }
         public override void DisplayEnemy()
         {
+            if(healthSys.IsAlive)
+            {
+                Console.Clear();
+                Console.WriteLine("X: " + x + " Y: " + y);
+                Console.ReadKey();
                 Console.SetCursorPosition(this.x, this.y);
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.Write(enemyAvatar);
                 Console.ResetColor();
+            }
+            else
+            {
+                this.x = 0;
+                this.y = 0;
+            }
         }
 
     }

@@ -148,6 +148,9 @@ namespace TextBasedRPG_OOP_WillB
                     enemy.isAttacked = true;
                     enemy.healthSys.TakeDamage(settings.PlayerAttack);
                     hud.LastSeenEnemy();
+                    Console.Clear();
+                    Console.WriteLine(enemy.healthSys.normalHealth);
+                    Console.ReadKey();
                 }
             }
             switch (map.IsTileValid(this.x, this.y))

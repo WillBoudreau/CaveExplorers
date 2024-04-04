@@ -8,7 +8,7 @@ namespace TextBasedRPG_OOP_WillB
         //Class calls
         public Player player;
         public Settings settings;
-        public List<Enemy> enemies = new List<Enemy>();
+        public List<Enemy> enemies { get; set; }
         //Variables
         public bool BossDead = false;
         public bool IsAttacked;
@@ -16,9 +16,11 @@ namespace TextBasedRPG_OOP_WillB
         public EnemyManager()
         {
             settings = new Settings();
+            enemies = new List<Enemy>();
         }
         public void GenerateEnemies(Map map,List<Enemy>enemies,int numGrunts,int numChaser,int numRunner,int numBoss)
         {   
+            Random rnd = new Random();
             for (int i = 0; i < numGrunts; i++)
             {
                 int x;
@@ -26,8 +28,11 @@ namespace TextBasedRPG_OOP_WillB
                 bool ValidLocation = false;
                     while(!ValidLocation)
                     {
-                            x = new Random().Next(0, map.MapChar[0].Length);
-                            y = new Random().Next(0, map.MapChar.Length);
+                            x = rnd.Next(1, map.MapChar[0].Length);
+                            y = rnd.Next(1, map.MapChar.Length);
+                        Console.Clear();
+                        Console.WriteLine("X: " + x + " Y: " + y);
+                        Console.ReadKey();
                             if (map.IsTileValid(x, y) == '.')
                             {
                                 enemies.Add(new Grunt(settings.GruntAvatar,x, y, settings.GruntAttack, settings.GruntShield, settings.GruntMaxhp));
@@ -49,20 +54,14 @@ namespace TextBasedRPG_OOP_WillB
             //        }
             //    }
             //}
-            Console.Clear();
-            foreach(Enemy enemy in enemies)
-            {
-                Console.WriteLine(enemy.name);
-            }
-            Console.ReadKey();  
         }
         //Init
         public void Init(Map map, List<Enemy> enemies)
         {
-            GenerateEnemies(map,enemies,settings.numGrunt,settings.numChaser,0,0);
+            GenerateEnemies(map,enemies,25/*settings.numGrunt*/,settings.numChaser,0,0);
         }
         //Update
-        public void Update(Player player,Map map,List<Enemy>enemies)
+        public void Update(Player player,Map map)
         {
             foreach (Enemy enemy in enemies)
             { 
