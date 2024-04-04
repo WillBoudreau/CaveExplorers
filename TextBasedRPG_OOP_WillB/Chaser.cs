@@ -47,8 +47,8 @@ namespace TextBasedRPG_OOP_WillB
             if (x == player.x && y == player.y)
             {
                 player.healthSys.TakeDamage(settings.ChaserAttack);
-                this.x -= x;
-                this.y -= y;
+                x -= player.x;
+                y -= player.y;
             }
         }
         public override void DisplayEnemy()

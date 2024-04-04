@@ -63,9 +63,6 @@ namespace TextBasedRPG_OOP_WillB
         {
             if(healthSys.IsAlive)
             {
-                Console.Clear();
-                Console.WriteLine("X: " + x + " Y: " + y);
-                Console.ReadKey();
                 Console.SetCursorPosition(this.x, this.y);
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.DarkGreen;

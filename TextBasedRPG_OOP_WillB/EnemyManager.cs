@@ -30,9 +30,6 @@ namespace TextBasedRPG_OOP_WillB
                     {
                             x = rnd.Next(1, map.MapChar[0].Length);
                             y = rnd.Next(1, map.MapChar.Length);
-                        Console.Clear();
-                        Console.WriteLine("X: " + x + " Y: " + y);
-                        Console.ReadKey();
                             if (map.IsTileValid(x, y) == '.')
                             {
                                 enemies.Add(new Grunt(settings.GruntAvatar,x, y, settings.GruntAttack, settings.GruntShield, settings.GruntMaxhp));
@@ -40,37 +37,39 @@ namespace TextBasedRPG_OOP_WillB
                             }
                     }
             }
-            //    for (int i = 0; i < numChaser; i++)
-            //{
-            //    bool ValidLocation = false;
-            //    while(!ValidLocation)
-            //    {
-            //        x = new Random().Next(0, map.MapChar[0].Length);
-            //        y = new Random().Next(0,map.MapChar.Length);
-            //        if(map.IsTileValid(x,y) == '.')
-            //        {
-            //            enemies.Add(new Chaser(settings.ChaserAvatar,x,y, settings.ChaserAttack,settings.ChaserShield,settings.ChaserMaxhp));
-            //            ValidLocation = true;
-            //        }
-            //    }
-            //}
+            for (int i = 0; i < numChaser; i++)
+            {
+                int x;
+                int y;
+                bool ValidLocation = false;
+                    while(!ValidLocation)
+                {
+                            x = rnd.Next(1, map.MapChar[0].Length);
+                            y = rnd.Next(1, map.MapChar.Length);
+                            if (map.IsTileValid(x, y) == '.')
+                    {
+                                enemies.Add(new Chaser(settings.ChaserAvatar,x, y, settings.ChaserAttack, settings.ChaserShield, settings.ChaserMaxhp));
+                                ValidLocation = true;
+                            }
+                    }
+            }
         }
         //Init
-        public void Init(Map map, List<Enemy> enemies)
+        public void Init(Map map)
         {
-            GenerateEnemies(map,enemies,25/*settings.numGrunt*/,settings.numChaser,0,0);
+            GenerateEnemies(map,enemies, settings.numGrunt, settings.numChaser,0,0);
         }
         //Update
         public void Update(Player player,Map map)
         {
             foreach (Enemy enemy in enemies)
-            { 
+            {
                 enemy.DisplayEnemy();
                 enemy.Move(player,map);
             }
         }
         //Draw
-        public void Draw(List<Enemy> enemies)
+        public void Draw()
         {
             foreach (Enemy enemy in enemies)
             {

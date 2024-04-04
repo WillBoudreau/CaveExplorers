@@ -39,7 +39,7 @@ namespace TextBasedRPG_OOP_WillB
             {
                 map.Init();
                 //soundManager.Init();
-                enemyMan.Init(map,enemyMan.enemies);
+                enemyMan.Init(map);
                 player.Init();
                 Intro();
             }
@@ -51,7 +51,7 @@ namespace TextBasedRPG_OOP_WillB
             }
             void Draw()
             {
-                enemyMan.Draw(enemyMan.enemies);
+                //enemyMan.Draw();
                 player.Draw();
             }
             //Intro to game
