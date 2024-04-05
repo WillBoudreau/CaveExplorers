@@ -33,9 +33,9 @@ namespace TextBasedRPG_OOP_WillB
         public void Update(List<Enemy>enemies)
         {
             DisplayHUD(enemies,map); 
-            LastSeenEnemy();
             Legend();
             DisplayEventLog();
+            LastSeenEnemy();
             //WriteAchievment("First Blood","Kill your first enemy");
         }
         public void DisplayHUD(List<Enemy> enemies,Map map)
@@ -52,12 +52,11 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Player Level: " + player.ExpirenceMan.level);
             Console.WriteLine("Player Xp: " + player.ExpirenceMan.xp);
             Console.WriteLine("Player Kills: " + player.killCount);
-            Console.WriteLine("\n");
         }
         public void LastSeenEnemy()
         {
             if(LastSeen != null)
-            {
+            { 
                 Console.WriteLine("\nLast Enemy encountered: " + LastSeen + " | " +LastSeen+" Max Health "+LastSeenHealthMax+ " | " + LastSeen+ " Current Health "+LastSeenHealth);    
             }
         }
@@ -102,7 +101,7 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine("Current Objectives: ");
             List<string> CurrentObjective = new List<string>();
             CurrentObjective.Add("Collect as many coins as possible");
-            CurrentObjective.Add("Defeat the Boss (B)");
+            CurrentObjective.Add("Get to the end of the level (!)");
             foreach(string objective in CurrentObjective) 
             {
                 Console.WriteLine(objective);

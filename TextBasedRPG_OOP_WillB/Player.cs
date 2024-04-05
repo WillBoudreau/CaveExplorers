@@ -148,16 +148,7 @@ namespace TextBasedRPG_OOP_WillB
                     this.x -= x;
                     enemy.isAttacked = true;
                     enemy.healthSys.TakeDamage(settings.PlayerAttack);
-                    hud.LastSeenEnemy();
-                    if(enemy.healthSys.IsAlive == false)
-                    {
-                        killCount++;
-                        score += 10;
-                        if(enemy is Boss)
-                        {
-                            score += 50;
-                        }
-                    }
+                    hud.lastenemy(enemy);
                 }
             }
             foreach (Items item in items)

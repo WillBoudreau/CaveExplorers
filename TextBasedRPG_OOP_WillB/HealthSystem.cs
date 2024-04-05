@@ -18,6 +18,8 @@ namespace TextBasedRPG_OOP_WillB
         {
             normalHealth = maxHealth;
             normalShield = maxShield;
+            this.maxHealth = maxHealth;
+            this.maxShield = maxShield;
         }
         public void Heal( int Heal)
         {
