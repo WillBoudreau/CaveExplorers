@@ -18,16 +18,16 @@ namespace TextBasedRPG_OOP_WillB
         Map map;
         Player player;
         EnemyManager enemyMan;
-        List<ItemManager> items;
+        ItemManager itemManager;
         HUD hud;
         MusicManager soundManager;
         //Achievements achievements;
         public GameManager()
         {
+            itemManager = new ItemManager();
             enemyMan = new EnemyManager();
             soundManager = new MusicManager();
             map = new Map();
-            items = new List<ItemManager>();
             player = new Player(map);
             hud = new HUD(player, enemyMan.enemies, map);
             Player.hud = hud;
@@ -41,18 +41,20 @@ namespace TextBasedRPG_OOP_WillB
                 //soundManager.Init();
                 enemyMan.Init(map);
                 player.Init();
+                itemManager.Init(map);
                 Intro();
             }
             void Update()
             {
-                player.Update(enemyMan.enemies,items,map);
+                player.Update(enemyMan.enemies,itemManager.item,map);
                 enemyMan.Update(player,map);
                 hud.Update(enemyMan.enemies);
             }
             void Draw()
             {
-                //enemyMan.Draw();
                 player.Draw();
+                enemyMan.Draw();
+                itemManager.Draw(map);
             }
             //Intro to game
             void Intro()

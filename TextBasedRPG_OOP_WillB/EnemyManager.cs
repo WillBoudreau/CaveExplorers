@@ -43,12 +43,44 @@ namespace TextBasedRPG_OOP_WillB
                 int y;
                 bool ValidLocation = false;
                     while(!ValidLocation)
+                    {
+                            x = rnd.Next(1, map.MapChar[0].Length);
+                            y = rnd.Next(1, map.MapChar.Length);
+                            if (map.IsTileValid(x, y) == '.')
+                            {
+                                enemies.Add(new Chaser(settings.ChaserAvatar,x, y, settings.ChaserAttack, settings.ChaserShield, settings.ChaserMaxhp));
+                                ValidLocation = true;
+                            }
+                    }
+            }
+            for(int i = 0; i <numRunner; i++)
+            {
+                int x;
+                int y;
+                bool ValidLocation = false;
+                    while(!ValidLocation)
+                    {
+                            x = rnd.Next(1, map.MapChar[0].Length);
+                            y = rnd.Next(1, map.MapChar.Length);
+                            if (map.IsTileValid(x, y) == '.')
+                            {
+                                enemies.Add(new Runner(settings.RunnerAvatar,x, y, settings.RunnerAttack,settings.RunnerShield,settings.RunnerMaxhp));
+                                ValidLocation = true;
+                            }
+                    }
+            }
+            for(int i = 0; i < numBoss; i++)
+            {
+                int x;
+                int y;
+                bool ValidLocation = false;
+                    while(!ValidLocation)
                 {
                             x = rnd.Next(1, map.MapChar[0].Length);
                             y = rnd.Next(1, map.MapChar.Length);
                             if (map.IsTileValid(x, y) == '.')
                     {
-                                enemies.Add(new Chaser(settings.ChaserAvatar,x, y, settings.ChaserAttack, settings.ChaserShield, settings.ChaserMaxhp));
+                                enemies.Add(new Boss(settings.BossAvatar,x, y, settings.BossAttack, settings.BossMaxShield, settings.BossMaxhp));
                                 ValidLocation = true;
                             }
                     }
@@ -57,14 +89,14 @@ namespace TextBasedRPG_OOP_WillB
         //Init
         public void Init(Map map)
         {
-            GenerateEnemies(map,enemies, settings.numGrunt, settings.numChaser,0,0);
+            GenerateEnemies(map,enemies, settings.numGrunt, settings.numChaser,settings.numRunner,settings.numBoss);
         }
         //Update
         public void Update(Player player,Map map)
         {
             foreach (Enemy enemy in enemies)
             {
-                enemy.DisplayEnemy();
+                //enemy.DisplayEnemy();
                 enemy.Move(player,map);
             }
         }

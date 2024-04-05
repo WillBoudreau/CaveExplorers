@@ -47,7 +47,7 @@ namespace TextBasedRPG_OOP_WillB
             Console.WriteLine(player.x + " " + player.y);
             Console.WriteLine("Player Health: " + player.healthSys.normalHealth);
             Console.WriteLine("Player Shield: " + player.healthSys.normalShield);
-            Console.WriteLine("Player Attack: " + settings.PlayerAttack);
+            Console.WriteLine("Player Attack: " + player.Attack);
             Console.WriteLine("Player Score: " + player.score);
             Console.WriteLine("Player Level: " + player.ExpirenceMan.level);
             Console.WriteLine("Player Xp: " + player.ExpirenceMan.xp);

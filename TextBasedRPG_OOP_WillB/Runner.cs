@@ -10,11 +10,15 @@ namespace TextBasedRPG_OOP_WillB
     internal class Runner : Enemy
     {
         HealthSystem _healthSystem;
+        public int Damage { get; set; } 
         public Runner(char enemAvatar, int x, int y, int damage, int shield, int hp)
         {
             healthSys = new HealthSystem(hp, shield);
-            enemyAvatar = 'R';
-            enemyAvatar = enemAvatar;
+            this.x = x;
+            this.y = y;
+            name = "Runner";
+            this.enemyAvatar = enemAvatar;
+            Damage = damage;
         }
         public override void Move(Player player, Map map)
         {
@@ -41,9 +45,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             if (x == player.x && y == player.y)
             {
-                player.healthSys.TakeDamage(settings.ChaserAttack);
-                this.x -= x;
-                this.y -= y;
+                player.healthSys.TakeDamage(Damage);
             }
         }
         public override void DisplayEnemy()

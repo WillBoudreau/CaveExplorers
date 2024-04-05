@@ -14,8 +14,8 @@ namespace TextBasedRPG_OOP_WillB
         public Stopwatch stopwatch = new Stopwatch();
         public static HUD hud;
         Settings settings;
-        public int PlayerDamage;
         public int killCount;
+        public int Attack;
         public Player(Map map)
         {   
             settings = new Settings();
@@ -27,6 +27,7 @@ namespace TextBasedRPG_OOP_WillB
             settings.PlayerMaxhp = 3;
             settings.PlayerAttack = 3;
             settings.PlayerMaxShield = 3;
+            Attack = settings.PlayerAttack;
             healthSys = new HealthSystem(settings.PlayerMaxhp, settings.PlayerMaxShield);
         }
 
@@ -35,7 +36,7 @@ namespace TextBasedRPG_OOP_WillB
             StartTimer();
         }
 
-        public void Update(List<Enemy>enemies, List<ItemManager> items,Map map)
+        public void Update(List<Enemy>enemies, List<Items> items,Map map)
         {
             PlayerPOSMove(enemies, items,map);
         }
@@ -72,7 +73,7 @@ namespace TextBasedRPG_OOP_WillB
         }
 
         //Player Movement   
-        public void PlayerPOSMove(List<Enemy> enemies, List<ItemManager> items,Map map)
+        public void PlayerPOSMove(List<Enemy> enemies, List<Items> items,Map map)
         {
             if (items == null)
             {
@@ -135,7 +136,7 @@ namespace TextBasedRPG_OOP_WillB
         }
 
         //Player Position
-        public void POS(int x, int y, List<Enemy> enemies, List<ItemManager> items,Map map)
+        public void POS(int x, int y, List<Enemy> enemies, List<Items> items,Map map)
         { 
             this.x += x;
             this.y += y;
@@ -148,6 +149,26 @@ namespace TextBasedRPG_OOP_WillB
                     enemy.isAttacked = true;
                     enemy.healthSys.TakeDamage(settings.PlayerAttack);
                     hud.LastSeenEnemy();
+                    if(enemy.healthSys.IsAlive == false)
+                    {
+                        killCount++;
+                        score += 10;
+                        if(enemy is Boss)
+                        {
+                            score += 50;
+                        }
+                    }
+                }
+            }
+            foreach (Items item in items)
+            {
+                if (this.x == item.x && this.y == item.y)
+                {
+                    this.y -= y;
+                    this.x -= x;
+                    item.UseItem(this);
+                    items.Remove(item);
+                    break;
                 }
             }
             switch (map.IsTileValid(this.x, this.y))
@@ -205,27 +226,6 @@ namespace TextBasedRPG_OOP_WillB
                     this.x -= x;
                     this.y -= y;
                     break;
-                case 'H':
-                    hud.AddEvent("Player moved into a Health Pickup");
-                    healthSys.Heal(1);
-                    map.UpdateMapTile(this.x, this.y, '.');
-                    this.x -= x;
-                    this.y -= y;
-                    break;
-                case '*':
-                    hud.AddEvent("Player moved into a Coin");
-                    score += 10;
-                    map.UpdateMapTile(this.x, this.y, '.');
-                    this.x -= x;
-                    this.y -= y;
-                    break;
-                case 'S':
-                    hud.AddEvent("Player moved into a Shield Pickup");
-                    healthSys.ShieldUp(1);
-                    map.UpdateMapTile(this.x, this.y, '.');
-                    this.x -= x;
-                    this.y -= y;
-                    break;
                 case 'V':
                     //npc.Talk("Villager");
                     this.x -= x;
@@ -241,15 +241,15 @@ namespace TextBasedRPG_OOP_WillB
                 map.UpdateMapTile(this.x, this.y, '.');
             }
         }
-        void checkforEnems()
+        public void DamageUp(int damage)
         {
-            Console.Clear();
-            Console.WriteLine("You have encountered an enemy");
-            Console.WriteLine("Press any key to continue");
+            settings.PlayerAttack += damage;
+            Attack = settings.PlayerAttack;
         }
         //Player win condition
         public void Win()
         {
+            Console.ResetColor();
                 StopTimer();
                 Console.Clear();
                 Console.WriteLine("You Win");

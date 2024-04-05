@@ -6,27 +6,24 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    internal class HealthPickup : ItemManager
+    internal class HealthPickup : Items
     {
-        List<ItemManager> Health;
-
-        public HealthPickup(char itemAvatar, int x, int y, Map map) : base(itemAvatar, x, y, map)
+        public HealthPickup(char itemAvatar, int x, int y, Map map)
         {
-            itemType = ItemType.Health;
-            ItemAvatar = 'H';
+            this.itemAvatar = itemAvatar;
             this.x = x;
             this.y = y;
         }
-        public override void Update(Map map)
+        public override void UseItem(Player player)
         {
-            DisplayItems(map);
+            player.healthSys.Heal(1);
         }
-        public override void DisplayItems(Map map)
+        public override void DisplayItem()
         {
             Console.SetCursorPosition(x, y);
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(ItemAvatar);
+            Console.Write(itemAvatar);
         }
 
     }

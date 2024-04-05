@@ -6,27 +6,24 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    internal class Coin:ItemManager
+    internal class Coin:Items
     {
-        List<ItemManager> Coins;
-
-        public Coin(char itemAvatar, int x, int y, Map map,ItemType itemtype) : base(itemAvatar, x, y, map)
+        public Coin(char itemAvatar, int x, int y, Map map)
         {
-            itemType = ItemType.Coin;
-            ItemAvatar = '*';
+            this.itemAvatar = itemAvatar;
             this.x = x;
             this.y = y;
         }
-        public override void Update(Map map)
+        public override void UseItem(Player player)
         {
-            DisplayItems(map);
+            player.score++;
         }
-        public override void DisplayItems(Map map)
+        public override void DisplayItem()
         {
             Console.SetCursorPosition(x, y);
             Console.BackgroundColor = ConsoleColor.DarkYellow;
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(ItemAvatar);
+            Console.Write(itemAvatar);
         }
 
     }   

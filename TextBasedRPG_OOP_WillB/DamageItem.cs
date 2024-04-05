@@ -6,25 +6,24 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    internal class DamageItem:ItemManager
+    internal class DamageItem:Items
     {
-        public DamageItem(char itemAvatar, int x, int y, Map map) : base(itemAvatar, x, y, map)
+        public DamageItem(char itemAvatar, int x, int y, Map map)
         {
-            itemType = ItemType.Damage;
-            ItemAvatar = 'D';
+            this.itemAvatar = itemAvatar;
             this.x = x;
             this.y = y;
         }
-        public override void Update(Map map)
+        public override void UseItem(Player player)
         {
-            DisplayItems(map);
+            player.DamageUp(1);
         }
-        public override void DisplayItems(Map map)
+        public override void DisplayItem()
         {
             Console.SetCursorPosition(x, y);
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(ItemAvatar);
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write(itemAvatar);
         }
     }
 }

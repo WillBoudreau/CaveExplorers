@@ -29,6 +29,8 @@ namespace TextBasedRPG_OOP_WillB
         public int RunnerMinhp = 0;
         public int RunnerAttack = 3;
         public int numRunner = 10;
+        public int RunnerShield = 0;
+        public char RunnerAvatar = 'R';
 
         //Chaser Variables
         public int ChaserMaxhp = 2;
@@ -45,11 +47,16 @@ namespace TextBasedRPG_OOP_WillB
         public int BossMinShield = 0;
         public int BossAttack = 3;
         public int numBoss = 1;
+        public char BossAvatar = 'B';
         //Item Variables
         public int numCoins = 25;
         public int numHealth = 10;
         public int numShield = 10;
         public int numDamage = 10;
+        public char CoinAvatar = 'C';
+        public char HealthAvatar = 'H';
+        public char ShieldAvatar = 'S';
+        public char DamageAvatar = 'D';
 
         public Settings() 
         {

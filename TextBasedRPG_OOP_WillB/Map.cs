@@ -32,7 +32,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             ShowMap();
         }
-        public void UpdateMapTile(int x, int y, char tile) 
+        public void UpdateMapTile(int x, int y, char tile)
         {
             MapChar[y][x] = tile;
             Console.SetCursorPosition(x, y);
@@ -139,8 +139,8 @@ namespace TextBasedRPG_OOP_WillB
                             Console.WriteLine(MapChar[i][j]);
                             break;
                         case '|':
-                                Console.BackgroundColor = ConsoleColor.DarkGreen;
-                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                            Console.BackgroundColor = ConsoleColor.DarkGreen;
+                            Console.ForegroundColor = ConsoleColor.DarkGreen;
                             Console.Write(MapChar[i][j]);
                             break;
                         case 'V':
@@ -184,39 +184,40 @@ namespace TextBasedRPG_OOP_WillB
                 return ' ';
             }
         }
-        //public void GenerateLlevel(int level)
-        //{
-        //    ClearLists();
-        //    switch (level)
+        //    public void GenerateLlevel(int level)
         //    {
-        //        case 0:
-        //            Console.Clear();
-        //            itemManager = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, this);
+        //        ClearLists();
+        //        switch (level)
+        //        {
+        //            case 0:
+        //                Console.Clear();
+        //                itemManager = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, this);
 
-        //            Console.CursorVisible = false;
-        //            //Update();
-        //            break;
-        //        case 1:
-        //            Console.Clear();
-        //            itemManager = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, this);
-        //            Console.CursorVisible = false;
-        //            //Update();
-        //            break;
-        //        case 2:
-        //            Console.CursorVisible = false;
-        //            //Update();
-        //            break;
+        //                Console.CursorVisible = false;
+        //                //Update();
+        //                break;
+        //            case 1:
+        //                Console.Clear();
+        //                itemManager = ItemManager.GenerateItems(settings.numCoins, settings.numHealth, settings.numShield, settings.numDamage, this);
+        //                Console.CursorVisible = false;
+        //                //Update();
+        //                break;
+        //            case 2:
+        //                Console.CursorVisible = false;
+        //                //Update();
+        //                break;
+        //        }
         //    }
-        //}
-        //void ClearLists()
-        //{
-        //    //if (enemies != null)
-        //    //{
-        //    //    enemies.Clear();
-        //    //}
-        //    if (itemManager != null)
+        //    void ClearLists()
         //    {
-        //        itemManager.Clear();
+        //        //if (enemies != null)
+        //        //{
+        //        //    enemies.Clear();
+        //        //}
+        //        if (itemManager != null)
+        //        {
+        //            itemManager.Clear();
+        //        }
         //    }
         //}
     }

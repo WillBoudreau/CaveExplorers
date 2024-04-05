@@ -8,6 +8,7 @@ namespace TextBasedRPG_OOP_WillB
 {
     internal class Chaser : Enemy
     {
+        public int Damage { get; set; } 
         public Chaser(char enemAvatar, int x, int y, int damage, int shield, int hp)
         {
             healthSys = new HealthSystem(hp, shield);
@@ -15,6 +16,9 @@ namespace TextBasedRPG_OOP_WillB
             enemyAvatar = enemAvatar;
             this.x = x;
             this.y = y;
+            name = "Chaser";
+            Damage = damage;
+
         }
         public override void Move(Player player,Map map)
         {
@@ -46,15 +50,18 @@ namespace TextBasedRPG_OOP_WillB
         {
             if (x == player.x && y == player.y)
             {
-                player.healthSys.TakeDamage(settings.ChaserAttack);
-                x -= player.x;
-                y -= player.y;
+                player.healthSys.TakeDamage(Damage);
             }
         }
         public override void DisplayEnemy()
         {
             if (healthSys.IsAlive)
             {
+                if(this.x < 0 || this.y < 0)
+                {
+                    this.x = 0;
+                    this.y = 0;
+                }
                 Console.SetCursorPosition(this.x, this.y);
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.ForegroundColor = ConsoleColor.DarkRed;

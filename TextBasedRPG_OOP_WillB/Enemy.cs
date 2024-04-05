@@ -4,7 +4,6 @@ namespace TextBasedRPG_OOP_WillB
 {
     internal abstract class Enemy:Entity
     {
-        public Settings settings;
         public bool isAttacked = false;
         public char enemyAvatar { get; set; }
         public string name { get; set; }
@@ -33,13 +32,21 @@ namespace TextBasedRPG_OOP_WillB
                     this.x -= dx;
                     this.y -= dy;
                     break;
+                case'>':
+                    this.x -= dx;
+                    this.y -= dy;
+                    break;
+                case'<':
+                    this.x -= dx;
+                    this.y -= dy;
+                    break;
             }
-            if(this.x == player.x && this.y == player.y)
-            {
-                this.x -= dx;
-                this.y -= dy;
-                Attack(player);
-            }
+                if (this.x == player.x && this.y == player.y)
+                {
+                    Attack(player);
+                    this.x -= dx;
+                    this.y -= dy;
+                }
         }
     }
 }
