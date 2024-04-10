@@ -8,64 +8,24 @@ using System.Xml.Linq;
 
 namespace TextBasedRPG_OOP_WillB
 {
-    internal class Villager:NPCManager
+    internal class Villager : NPC
     {
-        //public List<string> message = new List<string>();
-        public Villager(char npcAvatar, int x, int y,string name, NPCType npctype,List<string>message) : base(npcAvatar, x, y,name,npctype,message)
+        public Villager(char npcAvatar, int x, int y, string npcName, List<string> message)
         {
-            this.message = message;
-            npctype = NPCType.Villager;
-            npcAvatar = 'V';
+            this.npcAvatar = npcAvatar;
             this.x = x;
             this.y = y;
-            this.npcName = name;
+            this.npcName = npcName;
+            this.message = message;
         }
-        public override void Update(Map map)
+        public override void Talk()
         {
-            DisplayNPC(map);
+            Console.WriteLine("Hello, I am a villager");
         }
-        public override void Talk(string name)
-        {
-            Console.Clear();
-            int currentIndex = 0;
-            while (true)
-            {
-                Console.Clear();
-                Console.WriteLine(npcName + "1");
-                Console.WriteLine(message.Count);
-                Console.WriteLine(currentIndex);
-                Console.ReadKey();
-                Console.WriteLine(npcName + " says: " + message[currentIndex]);
-                Console.WriteLine("Press Enter to continue");
-                ConsoleKeyInfo key = Console.ReadKey();
-                if (key.Key == ConsoleKey.Enter)
-                {
-                    currentIndex++;
-                    if (currentIndex >= message.Count)
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-        public override void DisplayNPC(Map map)
+        public override void DisplayNPC()
         {
             Console.SetCursorPosition(x, y);
-            Console.BackgroundColor = ConsoleColor.DarkMagenta;
-            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write(npcAvatar);
-            Console.ResetColor();
         }
-        //public void NextSentence()
-        //{
-        //    message = new List<string>();
-        //    message.Add(Dialogue);
-        //    for (int i = 0; i < message.Count; i++)
-        //    {
-        //        Console.Clear();
-        //        Console.WriteLine(npcName + " says: " + message[i]);
-        //        Console.ReadKey();
-        //    }
-        }
-
     }
+}
