@@ -20,6 +20,7 @@ namespace TextBasedRPG_OOP_WillB
             Damage = damage;
 
         }
+        //Chaser moves towards player
         public override void Move(Player player,Map map)
         {
             int dx = player.x - x;

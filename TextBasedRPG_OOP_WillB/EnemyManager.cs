@@ -18,6 +18,7 @@ namespace TextBasedRPG_OOP_WillB
             settings = new Settings();
             enemies = new List<Enemy>();
         }
+        //Generates enemies based on specified variables
         public void GenerateEnemies(Map map,List<Enemy>enemies,int numGrunts,int numChaser,int numRunner)
         {   
             Random rnd = new Random();

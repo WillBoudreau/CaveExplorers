@@ -20,6 +20,7 @@ namespace TextBasedRPG_OOP_WillB
             this.enemyAvatar = enemAvatar;
             Damage = damage;
         }
+        //Runner moves away from player
         public override void Move(Player player, Map map)
         {
             int dx = player.x - x;

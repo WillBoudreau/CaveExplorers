@@ -38,7 +38,7 @@ namespace TextBasedRPG_OOP_WillB
             void GameInitialize()
             {
                 map.Init();
-                //soundManager.Init();
+                soundManager.Init();
                 enemyMan.Init(map);
                 player.Init();
                 itemManager.Init(map);
@@ -59,6 +59,7 @@ namespace TextBasedRPG_OOP_WillB
             //Intro to game
             void Intro()
             {
+               
                 Console.Clear();
                 Console.WriteLine("Welcome to Cave Explorers!");
                 Console.WriteLine("---------------------------");

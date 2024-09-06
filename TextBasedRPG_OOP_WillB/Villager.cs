@@ -20,12 +20,26 @@ namespace TextBasedRPG_OOP_WillB
         }
         public override void Talk()
         {
-            Console.WriteLine("Hello, I am a villager");
+            Console.Clear();
+            message.Add("Hello there!");
+            message.Add("Traveller! Please help!");
+            message.Add("The Village has been overrun by the cave legion!");
+            message.Add("Please help us!");
+
+            foreach (string message in message)
+            {
+                Console.WriteLine(message);
+                Console.WriteLine("Press any key to continue");
+                Console.ReadKey();
+            }
         }
         public override void DisplayNPC()
         {
             Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.BackgroundColor = ConsoleColor.Magenta;
             Console.Write(npcAvatar);
+            Console.ResetColor();
         }
     }
 }

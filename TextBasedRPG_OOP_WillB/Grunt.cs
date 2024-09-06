@@ -17,6 +17,7 @@ namespace TextBasedRPG_OOP_WillB
             Damage = damage;
             this.enemyAvatar = enemAvatar;
         }
+        //Grunt moves randomly
         public override void Move(Player player, Map map)
         {
             if(healthSys.IsAlive == true)

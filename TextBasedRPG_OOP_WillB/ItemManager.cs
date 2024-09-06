@@ -23,6 +23,7 @@ namespace TextBasedRPG_OOP_WillB
                 items.DisplayItem();
             }
         }
+        //Generates items based on specified variables
         public void GenerateItems(List<Items>item,int numCoins, int numHealth, int numShield, int numDamage, Map map)
         {
             Random rnd = new Random();

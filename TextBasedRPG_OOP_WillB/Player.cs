@@ -35,7 +35,7 @@ namespace TextBasedRPG_OOP_WillB
         {
             StartTimer();
         }
-
+        //Update takes in Enemies, Items, and the map
         public void Update(List<Enemy>enemies, List<Items> items,Map map)
         {
             PlayerPOSMove(enemies, items,map);
